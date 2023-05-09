@@ -1,0 +1,609 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>kr.neighbor.datahub</groupId>
+	<artifactId>portal</artifactId>
+	<packaging>war</packaging>
+	<version>1.0.0</version>
+	<name>chungnam-portal</name>
+	<parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.0</version>
+    </parent>
+
+	<properties>
+	    <spring.maven.artifact.version>5.3.20</spring.maven.artifact.version>
+		<org.egovframe.rte.version>4.1.0</org.egovframe.rte.version>
+		<logback.version>1.2.11</logback.version>
+		<maven.compiler.target>11</maven.compiler.target>
+    	<maven.compiler.source>11</maven.compiler.source>
+    	<java.version>11</java.version>
+    	<skipTests>true</skipTests>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.tomcat.embed</groupId>
+		    <artifactId>tomcat-embed-core</artifactId>
+		    <version>9.0.73</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.tomcat.embed</groupId>
+		    <artifactId>tomcat-embed-el</artifactId>
+		    <version>9.0.73</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.tomcat.embed</groupId>
+		    <artifactId>tomcat-embed-jasper</artifactId>
+		    <version>9.0.73</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.tomcat.embed</groupId>
+		    <artifactId>tomcat-embed-websocket</artifactId>
+		    <version>9.0.73</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.tomcat</groupId>
+		    <artifactId>tomcat-annotations-api</artifactId>
+		    <version>9.0.73</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<!-- 표준프레임워크 실행환경 -->
+        <dependency>
+		    <groupId>org.egovframe.rte</groupId>
+		    <artifactId>org.egovframe.rte.ptl.mvc</artifactId>
+		    <version>${org.egovframe.rte.version}</version>
+		    <exclusions>
+		    	<exclusion>
+		    		<artifactId>commons-logging</artifactId>
+		    		<groupId>commons-logging</groupId>
+		    	</exclusion>
+		    </exclusions>
+        </dependency>
+        <dependency>
+		    <groupId>org.egovframe.rte</groupId>
+		    <artifactId>org.egovframe.rte.psl.dataaccess</artifactId>
+		    <version>${org.egovframe.rte.version}</version>
+        </dependency>
+        <dependency>
+			<groupId>org.egovframe.rte</groupId>
+			<artifactId>org.egovframe.rte.fdl.idgnr</artifactId>
+			<version>${org.egovframe.rte.version}</version>
+		</dependency>
+       	<dependency>
+			<groupId>org.egovframe.rte</groupId>
+			<artifactId>org.egovframe.rte.fdl.property</artifactId>
+			<version>${org.egovframe.rte.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.egovframe.rte</groupId>
+			<artifactId>org.egovframe.rte.fdl.string</artifactId>
+			<version>${org.egovframe.rte.version}</version>
+		</dependency>
+		<dependency>
+    		<groupId>org.egovframe.rte</groupId>
+    		<artifactId>org.egovframe.rte.fdl.crypto</artifactId>
+    		<version>${org.egovframe.rte.version}</version>
+		</dependency>
+		
+		<dependency>
+            <groupId>org.egovframe.rte</groupId>
+            <artifactId>org.egovframe.rte.fdl.security</artifactId>
+            <version>${org.egovframe.rte.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.egovframe.rte</groupId>
+            <artifactId>org.egovframe.rte.fdl.excel</artifactId>
+            <version>${org.egovframe.rte.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.jasypt</groupId>
+            <artifactId>jasypt</artifactId>
+            <version>1.9.3</version>
+        </dependency>
+        <dependency>
+		    <groupId>taglibs</groupId>
+		    <artifactId>standard</artifactId>
+		    <version>1.1.2</version>
+        </dependency>
+		<dependency>
+            <groupId>org.antlr</groupId>
+	        <artifactId>antlr</artifactId>
+	        <version>3.5</version>
+        </dependency>
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>2.5.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.24</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- validator -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>7.0.4.Final</version>
+		</dependency>
+
+		
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+        <dependency>
+            <groupId>org.jasypt</groupId>
+            <artifactId>jasypt</artifactId>
+            <version>1.9.3</version>
+        </dependency>
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>3.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-compress</artifactId>
+            <version>1.21</version>
+        </dependency>
+        <dependency>
+            <groupId>xerces</groupId>
+            <artifactId>xercesImpl</artifactId>
+            <version>2.12.2</version>
+            <exclusions>
+            	<exclusion>
+            		<groupId>xml-apis</groupId>
+            		<artifactId>xml-apis</artifactId>
+            	</exclusion>
+            </exclusions>
+        </dependency>
+        
+        <!-- 공통컴포넌트 시작 -->
+
+        <!-- Validation 에서 사용 antlr.TokenStream -->
+        <dependency>
+            <groupId>org.antlr</groupId>
+	        <artifactId>antlr</artifactId>
+	        <version>3.5</version>
+        </dependency>
+
+        <!-- 우편번호를 위한 라이브러리 -->
+        <dependency>
+            <groupId>oro</groupId>
+            <artifactId>oro</artifactId>
+            <version>2.0.8</version>
+        </dependency>
+
+        <!-- 요소기술 달력을 위한 라이브러리 -->
+        <dependency>
+            <groupId>com.ibm.icu</groupId>
+            <artifactId>icu4j</artifactId>
+            <version>71.1</version>
+        </dependency>
+
+        <!-- FTP용 3rd party 라이브러리 -->
+        <dependency>
+            <groupId>commons-net</groupId>
+            <artifactId>commons-net</artifactId>
+            <version>3.8.0</version>
+        </dependency>
+
+        <!-- Email -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-email</artifactId>
+            <version>1.5</version>
+        </dependency>
+        <dependency>
+            <groupId>egovframework.com.ems</groupId>
+            <artifactId>sndng-mail</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <!-- Cross-Site Scripting -->
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>javax.servlet.jsp-api</artifactId>
+            <version>2.3.3</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- LDAP SDK -->
+        <dependency>
+            <groupId>ldapsdk</groupId>
+            <artifactId>ldapsdk</artifactId>
+            <version>4.1</version>
+        </dependency>
+
+        <!-- PDF변환용 라이브러리 -->
+        <!--
+        <dependency>
+            <groupId>com.artofsolving</groupId>
+            <artifactId>jodconverter</artifactId>
+            <version>2.2.1</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>commons-io</artifactId>
+                    <groupId>commons-io</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+		    <groupId>org.openoffice</groupId>
+		    <artifactId>juh</artifactId>
+		    <version>2.4.1</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.openoffice</groupId>
+		    <artifactId>ridl</artifactId>
+		    <version>2.4.1</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.openoffice</groupId>
+		    <artifactId>jurt</artifactId>
+		    <version>2.4.1</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.openoffice</groupId>
+		    <artifactId>unoil</artifactId>
+		    <version>2.4.1</version>
+		</dependency>
+		-->
+        <!-- XML스키마를 자바클래스로 생성하는 라이브러리 
+        <dependency>
+            <groupId>xmlbeans</groupId>
+            <artifactId>xbean</artifactId>
+            <version>2.6.0</version>
+        </dependency>
+-->
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-dbcp2</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-validator</groupId>
+			<artifactId>commons-validator</artifactId>
+			<version>1.7</version>
+		</dependency>
+		<!--
+		<dependency>
+			<groupId>org.springmodules</groupId>
+			<artifactId>spring-modules-validation</artifactId>
+			<version>0.8</version>
+		</dependency>
+		-->
+        <!-- fileupload -->
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.5</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-io</artifactId>
+                    <groupId>commons-io</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        
+
+        <!-- Twitter -->
+        <dependency>
+            <groupId>org.twitter4j</groupId>
+            <artifactId>twitter4j-core</artifactId>
+            <version>4.0.7</version>
+        </dependency>
+
+        <!-- Ajax -->
+        <dependency>
+            <groupId>net.sourceforge.ajaxtags</groupId>
+            <artifactId>ajaxtags-resources</artifactId>
+            <version>1.5.7</version>
+        </dependency>
+
+        <!-- WYSIWYG Editor -->
+        <dependency>
+            <groupId>com.ckeditor</groupId>
+            <artifactId>ckeditor-java-core</artifactId>
+            <version>3.5.3</version>
+        </dependency>
+
+        <!-- xmlParserAPI -->
+        <dependency>
+            <groupId>org.apache.xmlgraphics</groupId>
+            <artifactId>batik-ext</artifactId>
+            <version>1.14</version>
+        </dependency>
+        
+        <!-- facebook 연동시 추가 -->
+        <dependency>
+		    <groupId>org.springframework.social</groupId>
+		    <artifactId>spring-social-facebook</artifactId>
+		    <version>2.0.3.RELEASE</version>
+		    <exclusions>
+            	<exclusion>
+            		<artifactId>spring-web</artifactId>
+            		<groupId>org.springframework</groupId>
+            	</exclusion>
+            	<exclusion>
+            		<artifactId>spring-webmvc</artifactId>
+            		<groupId>org.springframework</groupId>
+            	</exclusion>
+            </exclusions>
+		</dependency>
+        
+        <!-- oauth2 login -->
+	    <dependency>
+              <groupId>com.github.scribejava</groupId>
+              <artifactId>scribejava-apis</artifactId>
+              <version>8.3.1</version>
+        </dependency>
+        <dependency>
+              <groupId>com.github.scribejava</groupId>
+              <artifactId>scribejava-core</artifactId>
+              <version>8.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.13</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-logging</artifactId>
+                    <groupId>commons-logging</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>2.1.212</version>
+        </dependency>
+        -->
+        <!-- WebSocket Messenger -->
+        <dependency>
+            <groupId>javax.websocket</groupId>
+            <artifactId>javax.websocket-api</artifactId>
+            <version>1.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.json</artifactId>
+            <version>1.1.4</version>
+        </dependency>
+        
+        <!-- ajax json -->
+        <!-- social에서 참조 하고 있어 임시 주석 처리 -->
+		<dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.13.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.13.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.13.3</version>
+        </dependency>
+
+        <!-- LDAP조직도관리 관련 라이브러리  -->
+        <dependency>
+            <groupId>org.springframework.ldap</groupId>
+            <artifactId>spring-ldap-core</artifactId>
+            <version>2.4.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-beans</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-tx</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>jcl-over-slf4j</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>  
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.13</version>
+        </dependency>
+        
+        <dependency>
+		    <groupId>org.postgresql</groupId>
+		    <artifactId>postgresql</artifactId>
+		    <version>42.6.0</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.github.javaparser/javaparser-core -->
+		<dependency>
+		    <groupId>com.github.javaparser</groupId>
+		    <artifactId>javaparser-core</artifactId>
+		    <version>3.22.1</version>
+		</dependency>
+        <!-- 3rd party 라이브러리로 별도의 설치 필요 끝 -->
+
+        <!-- 공통컴포넌트 끝 -->
+        
+        <!--  M-Gov (SMS Service API) -->
+         <dependency>
+            <groupId>project</groupId>
+            <artifactId>smeapi</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+    	   
+        <!-- GPKI인증서 로그인처리 라이브러리 -->
+        <dependency>
+            <groupId>project</groupId>
+            <artifactId>gpkisecureweb</artifactId>
+            <version>1.0.4.9</version>
+        </dependency>        
+        <dependency>
+            <groupId>project</groupId>
+            <artifactId>libgpkiapi</artifactId>
+            <version>1.4.0</version>
+        </dependency>
+
+		<!-- 디지털원패스 라이브러리 시작 -->
+		<dependency>
+			<groupId>project</groupId>
+			<artifactId>onepass</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+		<!-- 디지털원패스 라이브러리 끝 -->
+		
+		<!-- 모바일 운전면허증 라이브러리 시작 -->
+		<!-- Omnione Start -->
+		<dependency>
+			<groupId>project</groupId>
+			<artifactId>OmniEntSDKCore</artifactId>
+			<version>1.0.3.5</version>
+		</dependency>
+				
+		<dependency>
+			<groupId>project</groupId>
+			<artifactId>OmniEntSDKServerCore</artifactId>
+			<version>1.0.3.5</version>
+		</dependency>
+				
+		<dependency>
+			<groupId>project</groupId>
+			<artifactId>OmniEntSDKVerifier</artifactId>
+			<version>1.0.3.6</version>
+		</dependency>
+				
+		<dependency>
+			<groupId>project</groupId>
+			<artifactId>RSLicenseSDK</artifactId>
+			<version>1.0.4</version>
+		</dependency>
+		<!-- Omnione End -->
+
+		<!-- Utility for Omnione Start -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.9</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>20.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.madgag.spongycastle</groupId>
+			<artifactId>pkix</artifactId>
+			<version>1.54.0.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk15on</artifactId>
+			<version>1.70</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-lang3</artifactId>
+		    <version>3.12.0</version>
+		</dependency>
+		<!-- Utility for Omnione End -->
+		<!-- 모바일 운전면허증 라이브러리 끝 -->
+	</dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                	<excutable>true</excutable>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    
+	<repositories>
+        <repository>
+            <id>mvn2s</id>
+            <url>https://repo1.maven.org/maven2/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+			<id>egovframe</id>
+			<url>https://maven.egovframe.go.kr/maven/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+		    <id>projectRepository</id> 
+		    <name>Project Repository</name> 
+		    <url>file://${project.basedir}/src/main/webapp/WEB-INF/lib</url>
+		</repository>
+    </repositories>
+</project>
