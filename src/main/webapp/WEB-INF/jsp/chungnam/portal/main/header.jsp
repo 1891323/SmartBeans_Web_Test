@@ -2,13 +2,11 @@
 <%@ taglib prefix="form"   uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="ui"     uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<meta charset="UTF-8">
-
 <header id="header">
   <div class="menubar">
     <div class="menuWrap">
       <h1 class="logo">
-        <a href="" class="logo"><img src="../images/logo@2x.png" alt="pc메인로고"></a>
+        <a href="" class="logo"><img src="images/egovframework/main/images/logo@2x.png" alt="pc메인로고"></a>
       </h1>
       <nav id="gnb">
         <ul>
@@ -78,7 +76,7 @@
       </nav>
       <div class="user">
         <a>
-          <img src="../images/ic_login.svg" alt="로그인">
+          <img src="images/egovframework/main/images/ic_login.svg" alt="로그인">
           <span>xellosslw1</span>
         </a>
       </div>

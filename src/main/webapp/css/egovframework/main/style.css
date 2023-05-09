@@ -1,0 +1,447 @@
+@charset "UTF-8";
+/* header */
+#header {
+  position: relative;
+  z-index: 1000;
+  width: 100%;
+  height: 96px;
+  border-bottom: 1px solid #D0D5DD;
+}
+#header .menubar {
+  position: relative;
+  min-width: 360px;
+  width: 100%;
+  min-height: 96px;
+  text-align: center;
+  z-index: 999;
+  border-bottom: 1px solid #D0D5DD;
+  transition: height 0.2s, background-color 0.2s;
+  background-color: #fff;
+}
+#header .menubar::before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 96px;
+  width: 100%;
+  height: 1px;
+  background-color: #D0D5DD;
+}
+#header .menubar.active {
+  /*mouse event*/
+  border-bottom: 1px solid #D0D5DD;
+  box-shadow: 0 6px 5px 0 rgba(0, 0, 0, 0.16);
+}
+#header .menubar .menuWrap {
+  position: relative;
+  margin: 0 auto;
+  max-width: 1400px;
+  height: 96px;
+}
+#header .menubar .menuWrap .logo {
+  position: absolute;
+  top: 15px;
+  left: 0;
+  -o-object-fit: contain;
+     object-fit: contain;
+  z-index: 1;
+}
+#header .menubar .menuWrap .logo a {
+  display: block;
+}
+#header .menubar .menuWrap .logo a img {
+  width: 286px;
+}
+#header .menubar .menuWrap .user {
+  position: absolute;
+  top: 20px;
+  right: 0;
+}
+#header .menubar .menuWrap .user > a {
+  display: grid;
+  justify-items: center;
+}
+#header .menubar .menuWrap .user > a span {
+  font-size: 14px;
+}
+
+/*	nav gnb	*/
+#gnb {
+  position: relative;
+  width: 100%;
+  height: 96px;
+}
+#gnb ul li a {
+  font-size: 18px;
+}
+#gnb ul li .subMenu {
+  position: absolute;
+  opacity: 0;
+  display: none;
+  text-align: center;
+  transition: opacity 0.3s;
+  margin: 20px 0 0;
+  gap: 19px;
+}
+#gnb ul li .subMenu li a {
+  font-weight: 600;
+  font-size: 18px;
+}
+#gnb ul li .subMenu.admin li .menuList {
+  margin: 12px 0 0 0;
+  width: 132px;
+  border-top: 1px solid;
+  display: grid;
+  gap: 10px;
+}
+#gnb ul li .subMenu.admin li .menuList li:first-child {
+  margin: 14px 0 0;
+}
+#gnb ul li .subMenu.admin li .menuList li a {
+  font-size: 16px;
+  font-weight: 500;
+  color: #667085;
+  border: none;
+}
+#gnb ul li .subMenu.admin li .menuList li a:hover {
+  color: #396AFF;
+}
+#gnb ul li .subMenu.active {
+  opacity: 1;
+  display: grid;
+}
+#gnb > ul {
+  height: 96px;
+}
+#gnb > ul > li {
+  display: inline-block;
+  position: relative;
+  height: 96px;
+}
+#gnb > ul > li:first-child {
+  margin-left: 286px;
+}
+#gnb > ul > li:first-child > a {
+  margin: 0 25px 0 4px;
+}
+#gnb > ul > li:nth-child(2) .subMenu {
+  left: 13%;
+}
+#gnb > ul > li:nth-child(5) .subMenu {
+  left: 22%;
+}
+#gnb > ul > li:nth-child(7) .subMenu {
+  left: 3%;
+}
+#gnb > ul > li:hover > a::after {
+  transform: scaleX(1);
+}
+#gnb > ul > li > a {
+  display: block;
+  position: relative;
+  margin: 0px 25px;
+  line-height: 96px;
+  height: 96px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #101828;
+}
+#gnb > ul > li > a::after {
+  display: block;
+  content: "";
+  margin-top: -2px;
+  margin-left: 2px;
+  border-bottom: solid 3px #396AFF;
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+#footer {
+  width: 100%;
+  background-color: #E4E7EC;
+  height: 101px;
+  transform: inherit;
+  position: relative;
+  /* transform: translateY(-100%); */
+}
+#footer .wrap {
+  margin: 0 auto;
+  width: 342px;
+  display: grid;
+  gap: 13px;
+  color: #73767F;
+}
+#footer .wrap > div {
+  margin: 18px 0 0;
+  display: flex;
+  gap: 10px;
+  font-size: 13px;
+}
+#footer .wrap > div address {
+  font-style: normal;
+  line-height: 20px;
+}
+#footer .wrap p {
+  font-size: 12px;
+}
+
+/* container */
+#container {
+  margin: 0 auto;
+  max-width: 1400px;
+  height: auto;
+  height: calc(100% - 222px);
+}
+
+/* breadCrum */
+.breadCrumb {
+  margin: 24px 0 0;
+}
+.breadCrumb ul {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 50px;
+}
+.breadCrumb ul li {
+  position: relative;
+  display: inline;
+  font-size: 16px;
+}
+.breadCrumb ul li + li:before {
+  position: absolute;
+  top: 2px;
+  left: -26px;
+  color: #101828;
+  content: url("/images/chevron-right.svg");
+}
+.breadCrumb ul li a:hover {
+  color: #396AFF;
+}
+
+/* wrapper */
+.wrapper {
+  margin: 20px 0 0;
+  display: grid;
+  gap: 50px;
+  grid-template-columns: 270px 1fr;
+}
+.wrapper .lnb h3 {
+  font-size: 28px;
+  font-weight: 500;
+  margin: 6px 0 0;
+}
+.wrapper .lnb .lnbList {
+  width: 270px;
+}
+.wrapper .lnb .lnbList > ul {
+  margin: 22px 0 0;
+  border-top: 2px solid #101828;
+}
+.wrapper .lnb .lnbList > ul > li {
+  position: relative;
+}
+.wrapper .lnb .lnbList > ul > li > a {
+  display: block;
+  height: 55px;
+  line-height: 55px;
+  font-size: 20px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.wrapper .lnb .lnbList > ul > li:first-child {
+  margin-top: 0;
+}
+.wrapper .lnb .lnbList > ul > li::after {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid #667085;
+  border-right: 2px solid #667085;
+  transform: rotate(135deg); /* 각도 135 > 315*/
+  transition: all ease 0.2s;
+}
+.wrapper .lnb .lnbList > ul > li.active::after {
+  transform: rotate(315deg);
+}
+.wrapper .lnb .lnbList > ul > li:last-child::after {
+  display: none;
+}
+.wrapper .lnb .lnbList ul ul {
+  display: none;
+}
+.wrapper .lnb .lnbList ul .lnbCnt {
+  padding: 13px 0 13px 26px;
+  position: relative;
+}
+.wrapper .lnb .lnbList ul .lnbCnt a {
+  font-size: 18px;
+  font-weight: 400;
+  color: #667085;
+}
+.wrapper .lnb .lnbList ul .lnbCnt a:hover {
+  color: #396AFF;
+}
+.wrapper .lnb .lnbList ul .lnbCnt a:hover::before {
+  background-color: #396AFF;
+}
+.wrapper .lnb .lnbList ul .lnbCnt a::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 21px;
+  width: 6px;
+  height: 6px;
+  background-color: #667085;
+  border-radius: 50%;
+}
+.wrapper .contents {
+  width: 100%;
+}
+.wrapper .contents h2 {
+  text-align: left;
+  font-size: 34px;
+  font-weight: 500;
+}
+.wrapper .contents .inner {
+  margin: 20px 0 0;
+}
+
+/* checkbox 커스텀 */
+input[type=checkbox] {
+  display: none;
+}
+input[type=checkbox] + label {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background: url("/images/btn_checkbox.svg");
+  background-size: contain;
+  cursor: pointer;
+}
+input[type=checkbox]:checked + label {
+  background: url("/images/btn_checkbox_selected.svg");
+  background-size: contain;
+}
+
+/* basic table */
+table {
+  margin: 20px 0 0 0;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border-top: 2px solid #101828;
+}
+table thead tr {
+  font-weight: 500;
+  vertical-align: middle;
+  font-size: 14px;
+  line-height: 58px;
+  border: none;
+}
+table thead tr:last-child td {
+  border-bottom: none;
+}
+table thead tr th {
+  border-collapse: collapse;
+  border-bottom: 1px solid #d0d5dd;
+  font-weight: 700;
+}
+table tbody {
+  display: table-row-group;
+  border-collapse: collapse;
+  vertical-align: middle;
+  border-bottom: 1px solid #d0d5dd;
+}
+table tbody tr {
+  height: 58px;
+}
+table tbody tr:hover {
+  background-color: #f9fafb;
+}
+table tbody tr td {
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 14px;
+  border: none;
+  border-bottom: 1px solid #d0d5dd;
+  box-sizing: border-box;
+  word-break: break-all;
+  line-height: normal;
+}
+table tbody tr td a {
+  display: block;
+}
+
+/* pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0 25px;
+}
+.pagination li {
+  height: 36px;
+}
+.pagination li a {
+  width: 36px;
+  height: 36px;
+  color: #7E84A3;
+  text-align: center;
+  font-size: 16px;
+  line-height: 36px;
+  display: block;
+}
+.pagination li.on a {
+  color: #101828;
+  background-color: #E4E7EC;
+  border-radius: 4px;
+}
+.pagination li button[type=button] {
+  background-size: contain;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+}
+.pagination li button[type=button].btnPrevend {
+  background: url("/images/btn_prevend.svg");
+}
+.pagination li button[type=button].btnPrev {
+  background: url("/images/btn_prev.svg");
+}
+.pagination li button[type=button].btnNext {
+  background: url("/images/btn_next.svg");
+}
+.pagination li button[type=button].btnNextEnd {
+  background: url("/images/btn_nextend.svg");
+}
+
+/* button 커스텀*/
+.btnArea {
+  margin: 40px 0 0;
+}
+.btnArea ul {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.btnArea ul li {
+  display: inline-block;
+  width: 149px;
+}
+
+button[type=button].dark {
+  height: 48px;
+  max-width: 149px;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+  background-color: #101828;
+  border-radius: 4px;
+}/*# sourceMappingURL=style.css.map */

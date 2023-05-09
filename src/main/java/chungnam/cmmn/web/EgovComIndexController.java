@@ -69,48 +69,25 @@ public class EgovComIndexController {
 		return "main/main_index";
 	}
 
-	@RequestMapping("/EgovTop.do")
-	public String top() {
-		return "cmm/EgovUnitTop";
+	@RequestMapping("/header.do")
+	public String header() {
+		return "main/header";
 	}
 
-	@RequestMapping("/EgovBottom.do")
+	@RequestMapping("/footer.do")
 	public String bottom() {
-		return "cmm/EgovUnitBottom";
+		return "main/footer";
 	}
 
-	@RequestMapping("/EgovContent.do")
+	@RequestMapping("/content.do")
 	public String setContent(ModelMap model) throws Exception {
-
-		// 설정된 비밀번호 유효기간을 가져온다. ex) 180이면 비밀번호 변경후 만료일이 앞으로 180일
-		String propertyExpirePwdDay = EgovProperties.getProperty("Globals.ExpirePwdDay");
-		int expirePwdDay = 0 ;
-		try {
-			expirePwdDay =  Integer.parseInt(propertyExpirePwdDay);
-		} catch (NumberFormatException Nfe) {
-			LOGGER.debug("convert expirePwdDay Err : "+Nfe.getMessage());
-		}
-
-		model.addAttribute("expirePwdDay", expirePwdDay);
-
-		// 비밀번호 설정일로부터 몇일이 지났는지 확인한다. ex) 3이면 비빌번호 설정후 3일 경과
-		LoginVO loginVO = (LoginVO) EgovUserDetailsHelper.getAuthenticatedUser();
-		model.addAttribute("loginVO", loginVO);
-		int passedDayChangePWD = 0;
-		if ( loginVO != null ) {
-			LOGGER.debug("===>>> loginVO.getId() = "+loginVO.getId());
-			LOGGER.debug("===>>> loginVO.getUniqId() = "+loginVO.getUniqId());
-			LOGGER.debug("===>>> loginVO.getUserSe() = "+loginVO.getUserSe());
-			// 비밀번호 변경후 경과한 일수
-			passedDayChangePWD = loginService.selectPassedDayChangePWD(loginVO);
-			LOGGER.debug("===>>> passedDayChangePWD = "+passedDayChangePWD);
-			model.addAttribute("passedDay", passedDayChangePWD);
-		}
-
-		// 만료일자로부터 경과한 일수 => ex)1이면 만료일에서 1일 경과
-		model.addAttribute("elapsedTimeExpiration", passedDayChangePWD - expirePwdDay);
-
-		return "cmm/EgovUnitContent";
+		return "main/content";
+	}
+	
+	// 공지사항 목록
+	@RequestMapping("/AnnouncementListMarster.do")
+	public String AnnouncementListMarster(ModelMap model)  {
+		return "main/AdminNoticeBoard/AnnouncementListMarster";
 	}
 
 	@RequestMapping("/EgovLeft.do")

@@ -15,7 +15,7 @@ public class ScheduleTest2
      * 초(0-59) 분(0-59) 시간(0-23) 일(1-31) 월(1-12) 요일(0-7)
      * 매분 3초마다
      */
-    @Scheduled(cron = "3 * * * * *")
+   // @Scheduled(cron = "3 * * * * *")
     public void scheduleTaskUsingCronExpression()
     {
         long now = System.currentTimeMillis() / 1000;
