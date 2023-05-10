@@ -2,10 +2,11 @@
 <%@ taglib prefix="form"   uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="ui"     uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
 <section id="container">
 <div class="breadCrumb">
   <ul>
-    <li><a href="#"><img src="images/egovframework/main/images/ic_sub_navi_home.svg" alt="메인으로"></a></li>
+    <li><a href="#"><img src="/images/images/ic_sub_navi_home.svg" alt="메인으로"></a></li>
     <li><a href="#">관리자 메뉴</a></li>
     <li><a href="#">게시판 관리</a></li>
     <li><a href="#">공지사항 관리</a></li>
@@ -29,8 +30,8 @@
         </li>
         <li>
           <a href="">사용자 관리</a>
-          <ul>
-            <li class="lnbCnt">
+          <ul style="display:block;">
+            <li class="lnbCnt active">
               <a href="">권한 관리</a>
             </li>
             <li class="lnbCnt">
@@ -67,52 +68,56 @@
     </div>
   </div>
   <div class="contents">
-    <h2>공지사항 목록</h2>
+    <h2>사용자 권한 관리</h2>
     <div class="inner">
       <table>
       <colgroup>
-        <col style="">
-        <col style="">
-        <col style="">
-        <col style="">
-        <col style="">
+        <col style="width: 10%;">
+        <col style="width:35%;">
+        <col style="width:auto;">
       </colgroup>
         <thead>
           <tr>
             <th>NO</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>작성일</th>
-            <th>상단고정</th>
+            <th>아이디</th>
+            <th>권한 여부</th>
           </tr>
         </thead>
         <tbody>
-          <!--공지사항 리스트 목록 -->
           <tr>
             <td>10</td>
-            <td>데이터허브 포털 소개</td>
-            <td>관리자</td>
-            <td>2023.03.08</td>
-            <td><input type="checkbox" name="checkBtn" id='chkBtn'><label for="chkBtn">&nbsp;</label></td>
+            <td>Abc123e</td>
+            <td>
+              <div class="btnWrap">
+                <div class="radioBtnWrap" >
+                  <input type="radio" name="user" id="Radio1" value="Y">
+                  <label for="Radio1" id="Btn1" tabindex="9">&nbsp;</label>
+                  <label for="Radio1">사용자</label>
+                </div> 
+                <div class="radioBtnWrap" >
+                  <input type="radio" name="user" id="Radio2" value="N">
+                  <label for="Radio2" id="Btn2" tabindex="10">&nbsp;</label>
+                  <label for="Radio2">운영자</label>
+                </div>
+                <div class="radioBtnWrap" >
+                  <input type="radio" name="user" id="Radio3" value="N">
+                  <label for="Radio3" id="Btn3" tabindex="10">&nbsp;</label>
+                  <label for="Radio3">관리자</label>
+                </div>
+              </div>
+            </td>
           </tr>
-          <tr>
-            <td>10</td>
-            <td>데이터허브 포털 소개</td>
-            <td>관리자</td>
-            <td>2023.03.08</td>
-            <td><input type="checkbox" name="checkBtn" id='chkBtn'><label for="chkBtn">&nbsp;</label></td>
-          </tr>
-          <!--공지사항 리스트 목록 -->
         </tbody>
       </table>
       <div>
         <ul class="pagination" id = "pagination">
           <li><button type='button' class='btnPrevend'></button></li>
           <li><button type='button' class='btnPrev'></button></li>
-          <!--하단 페이징 구간-->
           <li class="on"><a href="">1</a></li>
           <li><a href= "">2</a></li>
-          <!--하단 페이징 구간-->
+          <li><a href= "">3</a></li>
+          <li><a href= "">4</a></li>
+          <li><a href= "">5</a></li>
           <li><button type='button' class='btnNext'></button></li>
           <li><button  type='button' class='btnNextEnd'></button></li>
         </ul>
@@ -122,12 +127,42 @@
           <li>
             <button type="button" class="dark">저장</button>
           </li>
-          <li>
-            <button type="button" class="dark">신규등록</button>
-          </li>
         </ul>
       </div>
     </div>
   </div>
 </div>
 </section>
+<script>
+  $(function(){
+// radio btn click event 
+  $("#Btn1").on("click", function(){
+    if($("#Radio1").is(":checked")) {
+    $("#Radio2").prop("checked", false);
+    $("#Radio3").prop("checked", false);
+    } else {
+    $("#Radio1").prop("checked", true);
+    }
+  })
+  $("#Btn2").on("click", function(){
+    if($("#Radio2").is(":checked")) {
+    $("#Radio1").prop("checked", false);
+    $("#Radio3").prop("checked", false);
+    } else {
+    $("#Radio2").prop("checked", true);
+    }
+  })
+  $("#Btn3").on("click", function(){
+    if($("#Radio3").is(":checked")) {
+    $("#Radio1").prop("checked", false);
+    $("#Radio2").prop("checked", false);
+    } else {
+    $("#Radio3").prop("checked", true);
+    }
+  })
+ 
+
+});
+
+
+</script>
