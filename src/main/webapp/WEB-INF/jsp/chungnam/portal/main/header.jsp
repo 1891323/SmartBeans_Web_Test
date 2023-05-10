@@ -1,7 +1,8 @@
-<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<%@ taglib prefix="form"   uri="http://www.springframework.org/tags/form" %>
+<%@ page pageEncoding="UTF-8" contentType="text/html; charset=utf-8" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib prefix="ui"     uri="http://egovframework.gov/ctl/ui"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <header id="header">
   <div class="menubar">
     <div class="menuWrap">
@@ -42,7 +43,7 @@
                 <li>
                   <a href="">게시판 관리</a>
                   <ul class="menuList">
-                    <li><a href="">공지사항 관리</a></li>
+                    <li><a href="/AnnouncementList.do">공지사항 관리</a></li>
                     <li><a href="">문의하기 관리</a></li>
                   </ul>
                 </li>

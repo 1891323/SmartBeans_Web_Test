@@ -1,10 +1,11 @@
-<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<%@ taglib prefix="form"   uri="http://www.springframework.org/tags/form" %>
+<%@ page pageEncoding="UTF-8" contentType="text/html; charset=utf-8" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib prefix="ui"     uri="http://egovframework.gov/ctl/ui"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <meta charset="UTF-8">
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" >
 <head>
 <title>충청남도 데이터허브 포털</title>
 <meta charset="utf-8">
@@ -21,14 +22,6 @@
 </head>
 <html>
 <body>
-    <header>
-        <jsp:include page="header.jsp"/>
-    </header>
-    <main>
-        <jsp:include page="content.jsp"/>
-    </main>
-    <footer>
-            <jsp:include page="footer.jsp"/>
-     </footer>
+<tiles:insertAttribute name="header"/>
 </body>
 </html>

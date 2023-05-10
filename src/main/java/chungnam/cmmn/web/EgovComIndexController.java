@@ -42,6 +42,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import chungnam.cmmn.IncludedCompInfoVO;
@@ -73,7 +74,6 @@ public class EgovComIndexController {
 	public String header() {
 		return "main/header";
 	}
-
 	@RequestMapping("/footer.do")
 	public String bottom() {
 		return "main/footer";
@@ -83,12 +83,8 @@ public class EgovComIndexController {
 	public String setContent(ModelMap model) throws Exception {
 		return "main/content";
 	}
-	
-	// 공지사항 목록
-	@RequestMapping("/AnnouncementListMarster.do")
-	public String AnnouncementListMarster(ModelMap model)  {
-		return "main/AdminNoticeBoard/AnnouncementListMarster";
-	}
+
+
 
 	@RequestMapping("/EgovLeft.do")
 	public String setLeftMenu(ModelMap model) {
