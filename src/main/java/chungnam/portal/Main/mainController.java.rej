@@ -1,9 +1,0 @@
-diff a/src/main/java/chungnam/portal/Main/mainController.java b/src/main/java/chungnam/portal/Main/mainController.java	(rejected hunks)
-@@ -5,7 +5,6 @@
- import org.springframework.web.bind.annotation.RequestMapping;
- 
- @Controller
--@RequestMapping("/test")
- public class mainController {
-     
-     @RequestMapping("/index")
