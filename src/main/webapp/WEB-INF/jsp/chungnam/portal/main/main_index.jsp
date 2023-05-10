@@ -23,9 +23,9 @@
 <html>
 <body>
 왔니?
-<%--<tiles:insertAttribute name="header" />--%>
-<tiles:getAsString name="header" />
-<tiles:getAsString name="content" />
-<tiles:getAsString name="footer" />
+<tiles:insertAttribute name="header" />
+<%--<tiles:getAsString name="header" />--%>
+<%--<tiles:getAsString name="content" />--%>
+<%--<tiles:getAsString name="footer" />--%>
 </body>
 </html>
