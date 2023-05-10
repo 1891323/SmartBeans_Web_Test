@@ -22,6 +22,10 @@
 </head>
 <html>
 <body>
-<tiles:insertAttribute name="header"/>
+왔니?
+<%--<tiles:insertAttribute name="header" />--%>
+<tiles:getAsString name="header" />
+<tiles:getAsString name="content" />
+<tiles:getAsString name="footer" />
 </body>
 </html>
