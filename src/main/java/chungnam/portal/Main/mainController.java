@@ -5,7 +5,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/test")
 public class mainController {
     
     @RequestMapping("/index")
