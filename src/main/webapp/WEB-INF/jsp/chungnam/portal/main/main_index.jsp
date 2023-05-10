@@ -13,8 +13,16 @@
 </head>
 <html>
 <body>
+<<<<<<< HEAD
 <tiles:insertAttribute name="header" />
 <tiles:insertAttribute name="content" />
 <tiles:insertAttribute name="footer" />
+=======
+왔니?
+<tiles:insertAttribute name="header" />
+<%--<tiles:getAsString name="header" />--%>
+<%--<tiles:getAsString name="content" />--%>
+<%--<tiles:getAsString name="footer" />--%>
+>>>>>>> 00c1f8754b0e481ffffa1649be45f3b6a92f41c3
 </body>
 </html>
