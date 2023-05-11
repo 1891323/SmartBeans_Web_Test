@@ -61,31 +61,31 @@
     <definition name="*.index" extends=".template-index">
         <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}.jsp" />
     </definition>
-    <definition name="*/*.index" extends=".template-lnb">
+    <definition name="*/*.index" extends=".template-index">
         <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}.jsp" />
     </definition>
-    <definition name="*/*/*.index" extends=".template-lnb">
+    <definition name="*/*/*.index" extends=".template-index">
         <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}.jsp" />
     </definition>
-    <definition name="*/*/*/*.index" extends=".template-lnb">
+    <definition name="*/*/*/*.index" extends=".template-index">
         <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}/{4}.jsp" />
     </definition>
-    <definition name="*/*/*/*/*.index" extends=".template-lnb">
+    <definition name="*/*/*/*/*.index" extends=".template-index">
         <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}/{4}/{5}.jsp" />
     </definition>
-    <definition name="*/*/*/*/*/*.index" extends=".template-lnb">
+    <definition name="*/*/*/*/*/*.index" extends=".template-index">
         <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}/{4}/{5}/{6}.jsp" />
     </definition>
-    <definition name="*/*/*/*/*/*/*.index" extends=".template-lnb">
+    <definition name="*/*/*/*/*/*/*.index" extends=".template-index">
         <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}/{4}/{5}/{6}/{7}.jsp" />
     </definition>
-    <definition name="*/*/*/*/*/*/*/*.index" extends=".template-lnb">
+    <definition name="*/*/*/*/*/*/*/*.index" extends=".template-index">
         <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}/{4}/{5}/{6}/{7}/{8}.jsp" />
     </definition>
-    <definition name="*/*/*/*/*/*/*/*/*.index" extends=".template-lnb">
+    <definition name="*/*/*/*/*/*/*/*/*.index" extends=".template-index">
         <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}/{4}/{5}/{6}/{7}/{8}/{9}.jsp" />
     </definition>
-    <definition name="*/*/*/*/*/*/*/*/*/*.index" extends=".template-lnb">
+    <definition name="*/*/*/*/*/*/*/*/*/*.index" extends=".template-index">
         <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}/{4}/{5}/{6}/{7}/{8}/{9}/{10}.jsp" />
     </definition>
 
