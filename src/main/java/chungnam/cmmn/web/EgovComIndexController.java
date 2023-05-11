@@ -67,7 +67,7 @@ public class EgovComIndexController {
 
 	@RequestMapping("/index.do")
 	public String index(ModelMap model) {
-		return "main/main_index";
+		return "main/main.index";
 	}
 
 	@RequestMapping("/header.do")

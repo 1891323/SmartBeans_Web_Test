@@ -1,24 +1,15 @@
-package chungnam.portal.Main;
+package chungnam.portal.main;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class mainController {
-    
+public class MainController {
+
     @RequestMapping("/index")
-    public String index(ModelMap model){
-        return "main/main_index";
+    public String index(ModelMap model) {
+        return "main/main.index";
     }
 
-    @RequestMapping("/header")
-    public String header(ModelMap model){
-        return "main/header";
-    }
-
-    @RequestMapping("/footer")
-    public String footer(ModelMap model){
-        return "main/footer";
-    }
 }

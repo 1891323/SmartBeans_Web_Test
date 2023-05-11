@@ -1,81 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
 <tiles-definitions>
-        <definition name="index" templateExpression="/WEB-INF/jsp/chungnam/portal/main/main_index.jsp">
-<<<<<<< HEAD
-<<<<<<< HEAD
-                <put-attribute name="js" expression="/WEB-INF/jsp/chungnam/portal/main/js.jsp"/>
-                <put-attribute name="js" expression="/WEB-INF/jsp/chungnam/portal/main/css.jsp"/>
-=======
->>>>>>> 00c1f8754b0e481ffffa1649be45f3b6a92f41c3
-=======
->>>>>>> 00c1f8754b0e481ffffa1649be45f3b6a92f41c3
-                <put-attribute name="header" expression="/WEB-INF/jsp/chungnam/portal/main/header.jsp"/>
-                <put-attribute name="content" value=""/>
-                <put-attribute name="footer" expression="/WEB-INF/jsp/chungnam/portal/main/footer.jsp"/>
-        </definition>
 
-        <definition name="*" extends="index">
-                <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/main/content.jsp"/>
-        </definition>
+    <!-- extends 공통으로 사용할 타일즈 정의 -->
+    <definition name=".extends-commons">
+        <put-attribute name="commons" value="/WEB-INF/jsp/chungnam/portal/layouts/tiles/extends/LayoutGlobals.jsp" />
+    </definition>
 
-        <!--공지사항 ( 리스트 )-->
-        <definition name="*.BNL" extends="Board">
-                <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/main/contents/admin/Board/Notice/List.jsp"/>
-        </definition>
-         <!--공지사항 ( 수정 )-->
-        <definition name="*.BND" extends="Board">
-                <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/main/contents/admin/Board/Notice/Detail.jsp"/>
-        </definition>
-        <!--공지사항 ( 신규 )-->
-        <definition name="*.BNA" extends="Board">
-                <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/main/contents/admin/Board/Notice/Add.jsp"/>
-        </definition>
+    <!-- INDEX(메인) 페이지 -->
+    <!-- INDEX PAGE -->
+    <definition name=".template-index" template="/WEB-INF/jsp/chungnam/portal/layouts/tiles/template/LayoutIndex.jsp" extends=".extends-commons">
+        <put-attribute name="header" 			value="/WEB-INF/jsp/chungnam/portal/layouts/tiles/attribute/com/LayoutHeader.jsp"/>
+        <put-attribute name="footer" 			value="/WEB-INF/jsp/chungnam/portal/layouts/tiles/attribute/com/LayoutFooter.jsp"/>
+        <put-attribute name="content" value="" />
+    </definition>
 
-        <!--문의하기 ( 답변 )-->
-        <definition name="*.BAA" extends="Board">
-                <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/main/contents/admin/Board/Ask/Add.jsp"/>
-        </definition>
+    <!-- SUB PAGE -->
+    <definition name=".template-lnb" template="/WEB-INF/jsp/chungnam/portal/layouts/tiles/template/LayoutLnb.jsp" extends=".extends-commons">
+        <put-attribute name="header" 			value="/WEB-INF/jsp/chungnam/portal/layouts/tiles/attribute/com/LayoutHeader.jsp"/>
+        <put-attribute name="footer" 			value="/WEB-INF/jsp/chungnam/portal/layouts/tiles/attribute/com/LayoutFooter.jsp"/>
+        <put-attribute name="left" 			value="/WEB-INF/jsp/chungnam/portal/layouts/tiles/attribute/com/LayoutLeft.jsp"/>
+        <put-attribute name="content" value="" />
+    </definition>
 
-        <!--문의하기 ( 리스트 )-->
-        <definition name="*.BAL" extends="Board">
-                <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/main/contents/admin/Board/Ask/List.jsp"/>
-        </definition>
+    <!-- ACTION -->
+    <!-- LEFT NAVIGATION -->
+    <definition name="*.lnb" extends=".template-lnb">
+        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}.jsp" />
+    </definition>
+    <definition name="*/*.lnb" extends=".template-lnb">
+        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}.jsp" />
+    </definition>
+    <definition name="*/*/*.lnb" extends=".template-lnb">
+        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}.jsp" />
+    </definition>
+    <definition name="*/*/*/*.lnb" extends=".template-lnb">
+        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}/{4}.jsp" />
+    </definition>
+    <definition name="*/*/*/*/*.lnb" extends=".template-lnb">
+        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}/{4}/{5}.jsp" />
+    </definition>
+    <definition name="*/*/*/*/*/*.lnb" extends=".template-lnb">
+        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}/{4}/{5}/{6}.jsp" />
+    </definition>
+    <definition name="*/*/*/*/*/*/*.lnb" extends=".template-lnb">
+        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}/{4}/{5}/{6}/{7}.jsp" />
+    </definition>
+    <definition name="*/*/*/*/*/*/*/*.lnb" extends=".template-lnb">
+        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}/{4}/{5}/{6}/{7}/{8}.jsp" />
+    </definition>
+    <definition name="*/*/*/*/*/*/*/*/*.lnb" extends=".template-lnb">
+        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}/{4}/{5}/{6}/{7}/{8}/{9}.jsp" />
+    </definition>
+    <definition name="*/*/*/*/*/*/*/*/*/*.lnb" extends=".template-lnb">
+        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}/{4}/{5}/{6}/{7}/{8}/{9}/{10}.jsp" />
+    </definition>
 
-         <!--사용자 관리 ( 메뉴 )-->
-        <definition name="*.UMA" extends="Board">
-                <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/main/contents/admin/User/Menu/Add.jsp"/>
-        </definition>
+    <!-- INDEX -->
+    <definition name="*.index" extends=".template-index">
+        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}.jsp" />
+    </definition>
+    <definition name="*/*.index" extends=".template-lnb">
+        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}.jsp" />
+    </definition>
+    <definition name="*/*/*.index" extends=".template-lnb">
+        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}.jsp" />
+    </definition>
+    <definition name="*/*/*/*.index" extends=".template-lnb">
+        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}/{4}.jsp" />
+    </definition>
+    <definition name="*/*/*/*/*.index" extends=".template-lnb">
+        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}/{4}/{5}.jsp" />
+    </definition>
+    <definition name="*/*/*/*/*/*.index" extends=".template-lnb">
+        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}/{4}/{5}/{6}.jsp" />
+    </definition>
+    <definition name="*/*/*/*/*/*/*.index" extends=".template-lnb">
+        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}/{4}/{5}/{6}/{7}.jsp" />
+    </definition>
+    <definition name="*/*/*/*/*/*/*/*.index" extends=".template-lnb">
+        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}/{4}/{5}/{6}/{7}/{8}.jsp" />
+    </definition>
+    <definition name="*/*/*/*/*/*/*/*/*.index" extends=".template-lnb">
+        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}/{4}/{5}/{6}/{7}/{8}/{9}.jsp" />
+    </definition>
+    <definition name="*/*/*/*/*/*/*/*/*/*.index" extends=".template-lnb">
+        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}/{4}/{5}/{6}/{7}/{8}/{9}/{10}.jsp" />
+    </definition>
 
-        <!--사용자 관리 ( 권한 )-->
-        <definition name="*.UML" extends="Board">
-                <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/main/contents/admin/User/Menu/List.jsp"/>
-        </definition>
 
-        <!--만족도 통계 ( 메뉴 )-->
-        <definition name="*.SM" extends="Board">
-                <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/main/contents/admin/Survay/Menu.jsp"/>
-        </definition>
-
-        <!--만족도 통계 ( 사용자 )-->
-        <definition name="*.SU" extends="Board">
-                <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/main/contents/admin/Survay/User.jsp"/>
-        </definition>
-
-         <!--접속 이력 ( 메뉴 )-->
-        <definition name="*.AM" extends="Board">
-                <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/main/contents/admin/Access/Menu.jsp"/>
-        </definition>
+<!--
+    <definition name="*" extends=".template-index">
+        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/a.jsp" />
+    </definition>-->
 
 
-        <!--접속 이력 ( 사용자 )-->
-        <definition name="*.AU" extends="Board">
-                <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/main/contents/admin/Access/User.jsp"/>
-        </definition>
-
-
-        <!--데이터 관리-->
-        <definition name="*.DDM" extends="index">
-                <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/main/contents/admin/DownData/Menu.jsp"/>
-        </definition>
 </tiles-definitions>
