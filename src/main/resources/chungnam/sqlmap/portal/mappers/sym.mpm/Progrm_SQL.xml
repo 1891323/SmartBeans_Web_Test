@@ -132,7 +132,6 @@
 
 
 	<select id="selectPrgrmListTotCnt" parameterType="chungnam.cmmn.ComDefaultVO" resultType="int">
-
 			SELECT COUNT(*) totcnt
 			FROM PRGRM
 			WHERE 1=1
