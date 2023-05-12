@@ -2,6 +2,7 @@
 <%@ taglib prefix="form"   uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="ui"     uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <section id="container">
 <div class="breadCrumb">
@@ -88,6 +89,8 @@
           </tr>
         </thead>
         <tbody>
+        <!-- 20230512 - sbk -->
+        <!--
           <tr>
             <td>10</td>
             <td>데이터허브 포털 소개</td>
@@ -158,6 +161,18 @@
             <td>2023.03.08</td>
             <td><input type="checkbox" name="checkBtn" id='chkBtn9'><label for="chkBtn9">&nbsp;</label></td>
           </tr>
+        -->
+          <c:forEach items="${resultList}" var="noticeList" varStatus="status">
+          <tr>
+			<td><c:out value='${noticeList.bbs_sn}'/></td>
+			<td>
+				<a href='/detailNoticeBoardPage.do?no=${noticeList.bbs_sn}'><c:out value="${noticeList.sj}"/></a>
+			</td>
+			<td><c:out value='${noticeList.create_id}'/></td>
+			<td><c:out value='${noticeList.reg_dttm}'/></td>
+			<td><c:out value='${noticeList.upend_fixing_yn}'/></td>		
+          </tr>
+          </c:forEach>
         </tbody>
       </table>
       <div>
@@ -179,7 +194,7 @@
             <button type="button" class="dark">저장</button>
           </li>
           <li>
-            <button type="button" class="dark">신규등록</button>
+            <button type="button" class="dark" onClick="location.href='insertNoticeBoardPage.do'">신규등록</button>
           </li>
         </ul>
       </div>

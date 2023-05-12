@@ -68,28 +68,33 @@
   </div>
   <div class="contents">
     <h2>공지사항 신규등록</h2>
+	<form action="insertNoticeBoardOne.do" method="post">
     <div class="inner">
       <div class="inputWrap">
         <div class="gridWrap">
           <div>
             <span>NO</span>
+            <!--
             <input type="text">
+            -->
           </div>
           <div>
             <span>제목</span>
-            <input type="text">
+            <input id="text" value="" name="sj"></input>
           </div>
           <div>
             <span>작성자</span>
-            <input type="text">
+            <input id="text" value="" name="create_id"></input>
           </div>
           <div>
             <span>작성일</span>
+            <!--
             <input type="text">
+            -->
           </div>
           <div>
             <span>내용</span>
-            <textarea class="long"></textarea>
+            <textarea class="long" name="cn" rows="10" cols="40"></textarea>
           </div>
           <div class="file-upload">
             <span>파일첨부</span>
@@ -109,11 +114,12 @@
             <button type="button" class="dark">목록</button>
           </li>
           <li>
-            <button type="button" class="dark">저장</button>
+            <button type="button" class="dark" onClick="location.href='NoticeBoardList.do'">저장</button>
           </li>
         </ul>
       </div>
     </div>
+	</form>
   </div>
 </div>
 </section>
