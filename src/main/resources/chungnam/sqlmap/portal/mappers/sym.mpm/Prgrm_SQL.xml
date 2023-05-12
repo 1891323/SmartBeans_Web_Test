@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="chungnam.portal.sym.mpm.mapper.PrgrmMapper">
 
-	<resultMap id="prgrmVo" type="chungnam.portal.sym.mpm.vo.PrgrmVO">
+	<resultMap id="prgrmVO" type="chungnam.portal.sym.mpm.vo.PrgrmVO">
 		<result property="prgrmSn" column="prgrm_sn"/>
 		<result property="prgrmId" column="prgrm_id"/>
 		<result property="prgrmUrl" column="prgrm_url"/>
@@ -71,7 +71,7 @@
 
 	</delete>
 
-	<select id="selectPrgrm" parameterType="chungnam.portal.sym.mpm.vo.PrgrmVO" resultMap="prgrmVo">
+	<select id="selectPrgrm" parameterType="chungnam.portal.sym.mpm.vo.PrgrmVO" resultMap="prgrmVO">
 		SELECT
 			prgrm_sn, prgrm_id, prgrm_url, prgrm_nm, prgrm_level,
 			prgrm_ordr, up_prgrm_id, RLS_YN, register_id,
