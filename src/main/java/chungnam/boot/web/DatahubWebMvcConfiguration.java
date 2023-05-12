@@ -2,6 +2,7 @@ package chungnam.boot.web;
 
 import chungnam.cmmn.web.EgovBindingInitializer;
 import chungnam.cmmn.web.EgovImgPaginationRenderer;
+import chungnam.config.interceptor.AccessInterceptor;
 import chungnam.portal.sec.security.filter.EgovSpringSecurityLoginFilter;
 import chungnam.portal.sec.security.filter.EgovSpringSecurityLogoutFilter;
 import org.egovframe.rte.ptl.mvc.tags.ui.pagination.DefaultPaginationManager;
@@ -64,6 +65,7 @@ public class DatahubWebMvcConfiguration extends WebMvcConfigurationSupport {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());
+        registry.addInterceptor(new AccessInterceptor());
     }
 
     @Override
