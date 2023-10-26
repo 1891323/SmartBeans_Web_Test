@@ -8,9 +8,10 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <title>충청남도 데이터허브 포털</title>
+    <title>괴산 스마트빈스</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/images/egovframework/main/images/ci-color.svg">
 
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <link rel="stylesheet" href="/css/egovframework/main/font.css">

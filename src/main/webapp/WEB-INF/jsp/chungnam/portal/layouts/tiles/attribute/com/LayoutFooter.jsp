@@ -6,9 +6,9 @@
 
 <footer id="footer">
     <div class="wrap">
-        <div><img src="/images/egovframework/main/images/logo_footer.svg" alt="">
-            <address>32255) 충청남도 홍성군 홍북읍 충남대로 21 충청남도청<br> TEL : 041-120 FAX : 041-635-3000</address>
+        <div><img src="/images/egovframework/main/images/black-logo.svg" alt="">
+            <address>28001 ) 충청북도 괴산군 불정면 한불로 1245-43<br> TEL : 043-833-6007 FAX : 043-833-6007</address>
         </div>
-        <p>COPYRIGHT(C) 충청남도 데이터허브 포털. ALL RIGHTS RESERVED.</p>
+        <p>COPYRIGHT(C) 괴산스마트농업. ALL RIGHTS RESERVED.</p>
     </div>
 </footer>

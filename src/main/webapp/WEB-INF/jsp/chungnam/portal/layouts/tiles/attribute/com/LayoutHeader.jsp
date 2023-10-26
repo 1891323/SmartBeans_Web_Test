@@ -8,7 +8,7 @@
     <div class="menubar">
         <div class="menuWrap">
             <h1 class="logo">
-                <a href="" class="logo"><img src="/images/egovframework/main/images/logo@2x.png" alt="pc메인로고"></a>
+                <a href="" class="logo"><img src="/images/egovframework/main/images/Smartbeans_logo.svg" alt="pc메인로고"></a>
             </h1>
             <nav id="gnb">
                 <ul>
@@ -36,8 +36,9 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="">데이터허브 포털 소개</a>
+                        <a href="">데이터 허브 소개</a>
                     </li>
+
                     <li>
                         <a href="">관리자 메뉴</a>
                         <ul class="subMenu admin">
@@ -79,7 +80,7 @@
             <div class="user">
                 <a>
                     <img src="/images/egovframework/main/images/ic_login.svg" alt="로그인">
-                    <span>xellosslw1</span>
+                    <span></span>
                 </a>
             </div>
         </div>
