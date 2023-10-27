@@ -9,7 +9,7 @@
 	</appender>
 
 	<logger name="java.sql" level="DEBUG" />
-	<logger name="chungnam" level="DEBUG" />
+	<logger name="smartbeans" level="DEBUG" />
 	<logger name="org.egovframe" level="DEBUG" />
 	<logger name="jdbc.sqltiming" level="DEBUG" />
 	<logger name="org.springframework" level="DEBUG" />

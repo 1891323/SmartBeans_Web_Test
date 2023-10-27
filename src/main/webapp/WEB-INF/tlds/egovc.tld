@@ -313,7 +313,7 @@ visibility.
         Like &lt;%= ... &gt;, but for expressions.
     </description> 
     <name>out</name>
-    <tag-class>chungnam.cmm.EgovComCrossSiteHndlr</tag-class>
+    <tag-class>smartbeans.cmm.EgovComCrossSiteHndlr</tag-class>
     <body-content>JSP</body-content>
     <attribute>
         <description>
@@ -552,7 +552,7 @@ body content should be processed.
   <function>
     <description>문자열 암호화 메서드</description>
     <name>encrypt</name>
-    <function-class>chungnam.cmmn.web.EgovFileMngController</function-class>
+    <function-class>smartbeans.cmmn.web.EgovFileMngController</function-class>
     <function-signature>java.lang.String encrypt(java.lang.String)</function-signature>
     <example>
     ${egovc:encrypt(java.lang.String source)}
@@ -562,7 +562,7 @@ body content should be processed.
   <function>
     <description>문자열 및 세션 암호화 메서드</description>
     <name>encryptSession</name>
-    <function-class>chungnam.cmmn.web.EgovFileMngController</function-class>
+    <function-class>smartbeans.cmmn.web.EgovFileMngController</function-class>
     <function-signature>java.lang.String encryptSession(java.lang.String, java.lang.String)</function-signature>
     <example>
     ${egovc:encryptSession(java.lang.String source, java.lang.String sessionId)}
