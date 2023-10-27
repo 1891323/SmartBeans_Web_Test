@@ -6,7 +6,7 @@
 	<artifactId>portal</artifactId>
 	<packaging>war</packaging>
 	<version>1.0.0</version>
-	<name>chungnam-portal</name>
+	<name>smartbeans-portal</name>
 	<parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>

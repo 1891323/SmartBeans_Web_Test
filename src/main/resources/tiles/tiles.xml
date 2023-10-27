@@ -5,94 +5,94 @@
 
     <!-- extends 공통으로 사용할 타일즈 정의 -->
     <definition name=".extends-commons">
-        <put-attribute name="commons" value="/WEB-INF/jsp/chungnam/portal/layouts/tiles/extends/LayoutGlobals.jsp" />
+        <put-attribute name="commons" value="/WEB-INF/jsp/smartbeans/portal/layouts/tiles/extends/LayoutGlobals.jsp" />
     </definition>
 
     <!-- INDEX(메인) 페이지 -->
     <!-- INDEX PAGE -->
-    <definition name=".template-index" template="/WEB-INF/jsp/chungnam/portal/layouts/tiles/template/LayoutIndex.jsp" extends=".extends-commons">
-        <put-attribute name="header" 			value="/WEB-INF/jsp/chungnam/portal/layouts/tiles/attribute/com/LayoutHeader.jsp"/>
-        <put-attribute name="footer" 			value="/WEB-INF/jsp/chungnam/portal/layouts/tiles/attribute/com/LayoutFooter.jsp"/>
+    <definition name=".template-index" template="/WEB-INF/jsp/smartbeans/portal/layouts/tiles/template/LayoutIndex.jsp" extends=".extends-commons">
+        <put-attribute name="header" 			value="/WEB-INF/jsp/smartbeans/portal/layouts/tiles/attribute/com/LayoutHeader.jsp"/>
+        <put-attribute name="footer" 			value="/WEB-INF/jsp/smartbeans/portal/layouts/tiles/attribute/com/LayoutFooter.jsp"/>
         <put-attribute name="content" value="" />
     </definition>
 
     <!-- SUB PAGE -->
-    <definition name=".template-lnb" template="/WEB-INF/jsp/chungnam/portal/layouts/tiles/template/LayoutLnb.jsp" extends=".extends-commons">
-        <put-attribute name="header" 			value="/WEB-INF/jsp/chungnam/portal/layouts/tiles/attribute/com/LayoutHeader.jsp"/>
-        <put-attribute name="footer" 			value="/WEB-INF/jsp/chungnam/portal/layouts/tiles/attribute/com/LayoutFooter.jsp"/>
-        <put-attribute name="left" 			value="/WEB-INF/jsp/chungnam/portal/layouts/tiles/attribute/com/LayoutLeft.jsp"/>
+    <definition name=".template-lnb" template="/WEB-INF/jsp/smartbeans/portal/layouts/tiles/template/LayoutLnb.jsp" extends=".extends-commons">
+        <put-attribute name="header" 			value="/WEB-INF/jsp/smartbeans/portal/layouts/tiles/attribute/com/LayoutHeader.jsp"/>
+        <put-attribute name="footer" 			value="/WEB-INF/jsp/smartbeans/portal/layouts/tiles/attribute/com/LayoutFooter.jsp"/>
+        <put-attribute name="left" 			value="/WEB-INF/jsp/smartbeans/portal/layouts/tiles/attribute/com/LayoutLeft.jsp"/>
         <put-attribute name="content" value="" />
     </definition>
 
     <!-- ACTION -->
     <!-- LEFT NAVIGATION -->
     <definition name="*.lnb" extends=".template-lnb">
-        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}.jsp" />
+        <put-attribute name="content" value="/WEB-INF/jsp/smartbeans/portal/{1}.jsp" />
     </definition>
     <definition name="*/*.lnb" extends=".template-lnb">
-        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}.jsp" />
+        <put-attribute name="content" value="/WEB-INF/jsp/smartbeans/portal/{1}/{2}.jsp" />
     </definition>
     <definition name="*/*/*.lnb" extends=".template-lnb">
-        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}.jsp" />
+        <put-attribute name="content" value="/WEB-INF/jsp/smartbeans/portal/{1}/{2}/{3}.jsp" />
     </definition>
     <definition name="*/*/*/*.lnb" extends=".template-lnb">
-        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}/{4}.jsp" />
+        <put-attribute name="content" value="/WEB-INF/jsp/smartbeans/portal/{1}/{2}/{3}/{4}.jsp" />
     </definition>
     <definition name="*/*/*/*/*.lnb" extends=".template-lnb">
-        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}/{4}/{5}.jsp" />
+        <put-attribute name="content" value="/WEB-INF/jsp/smartbeans/portal/{1}/{2}/{3}/{4}/{5}.jsp" />
     </definition>
     <definition name="*/*/*/*/*/*.lnb" extends=".template-lnb">
-        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}/{4}/{5}/{6}.jsp" />
+        <put-attribute name="content" value="/WEB-INF/jsp/smartbeans/portal/{1}/{2}/{3}/{4}/{5}/{6}.jsp" />
     </definition>
     <definition name="*/*/*/*/*/*/*.lnb" extends=".template-lnb">
-        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}/{4}/{5}/{6}/{7}.jsp" />
+        <put-attribute name="content" value="/WEB-INF/jsp/smartbeans/portal/{1}/{2}/{3}/{4}/{5}/{6}/{7}.jsp" />
     </definition>
     <definition name="*/*/*/*/*/*/*/*.lnb" extends=".template-lnb">
-        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}/{4}/{5}/{6}/{7}/{8}.jsp" />
+        <put-attribute name="content" value="/WEB-INF/jsp/smartbeans/portal/{1}/{2}/{3}/{4}/{5}/{6}/{7}/{8}.jsp" />
     </definition>
     <definition name="*/*/*/*/*/*/*/*/*.lnb" extends=".template-lnb">
-        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}/{4}/{5}/{6}/{7}/{8}/{9}.jsp" />
+        <put-attribute name="content" value="/WEB-INF/jsp/smartbeans/portal/{1}/{2}/{3}/{4}/{5}/{6}/{7}/{8}/{9}.jsp" />
     </definition>
     <definition name="*/*/*/*/*/*/*/*/*/*.lnb" extends=".template-lnb">
-        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}/{4}/{5}/{6}/{7}/{8}/{9}/{10}.jsp" />
+        <put-attribute name="content" value="/WEB-INF/jsp/smartbeans/portal/{1}/{2}/{3}/{4}/{5}/{6}/{7}/{8}/{9}/{10}.jsp" />
     </definition>
 
     <!-- INDEX -->
     <definition name="*.index" extends=".template-index">
-        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}.jsp" />
+        <put-attribute name="content" value="/WEB-INF/jsp/smartbeans/portal/{1}.jsp" />
     </definition>
     <definition name="*/*.index" extends=".template-index">
-        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}.jsp" />
+        <put-attribute name="content" value="/WEB-INF/jsp/smartbeans/portal/{1}/{2}.jsp" />
     </definition>
     <definition name="*/*/*.index" extends=".template-index">
-        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}.jsp" />
+        <put-attribute name="content" value="/WEB-INF/jsp/smartbeans/portal/{1}/{2}/{3}.jsp" />
     </definition>
     <definition name="*/*/*/*.index" extends=".template-index">
-        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}/{4}.jsp" />
+        <put-attribute name="content" value="/WEB-INF/jsp/smartbeans/portal/{1}/{2}/{3}/{4}.jsp" />
     </definition>
     <definition name="*/*/*/*/*.index" extends=".template-index">
-        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}/{4}/{5}.jsp" />
+        <put-attribute name="content" value="/WEB-INF/jsp/smartbeans/portal/{1}/{2}/{3}/{4}/{5}.jsp" />
     </definition>
     <definition name="*/*/*/*/*/*.index" extends=".template-index">
-        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}/{4}/{5}/{6}.jsp" />
+        <put-attribute name="content" value="/WEB-INF/jsp/smartbeans/portal/{1}/{2}/{3}/{4}/{5}/{6}.jsp" />
     </definition>
     <definition name="*/*/*/*/*/*/*.index" extends=".template-index">
-        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}/{4}/{5}/{6}/{7}.jsp" />
+        <put-attribute name="content" value="/WEB-INF/jsp/smartbeans/portal/{1}/{2}/{3}/{4}/{5}/{6}/{7}.jsp" />
     </definition>
     <definition name="*/*/*/*/*/*/*/*.index" extends=".template-index">
-        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}/{4}/{5}/{6}/{7}/{8}.jsp" />
+        <put-attribute name="content" value="/WEB-INF/jsp/smartbeans/portal/{1}/{2}/{3}/{4}/{5}/{6}/{7}/{8}.jsp" />
     </definition>
     <definition name="*/*/*/*/*/*/*/*/*.index" extends=".template-index">
-        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}/{4}/{5}/{6}/{7}/{8}/{9}.jsp" />
+        <put-attribute name="content" value="/WEB-INF/jsp/smartbeans/portal/{1}/{2}/{3}/{4}/{5}/{6}/{7}/{8}/{9}.jsp" />
     </definition>
     <definition name="*/*/*/*/*/*/*/*/*/*.index" extends=".template-index">
-        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/{1}/{2}/{3}/{4}/{5}/{6}/{7}/{8}/{9}/{10}.jsp" />
+        <put-attribute name="content" value="/WEB-INF/jsp/smartbeans/portal/{1}/{2}/{3}/{4}/{5}/{6}/{7}/{8}/{9}/{10}.jsp" />
     </definition>
 
 
 <!--
     <definition name="*" extends=".template-index">
-        <put-attribute name="content" value="/WEB-INF/jsp/chungnam/portal/a.jsp" />
+        <put-attribute name="content" value="/WEB-INF/jsp/smartbeans/portal/a.jsp" />
     </definition>-->
 
 
