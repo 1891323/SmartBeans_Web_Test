@@ -18,8 +18,7 @@ public class MenuController {
         String[] menuNames = new String[]{"사업소개", "단지내 주요 시설물", "농업정보", "알림마당", "센터소개"};
         model.addAttribute("topMenu", menuNames);
 
-        System.out.println(menuService.selectMenuList());
+        System.out.println("hihi "+menuService.selectMenuList());
         return "layouts/common/TopMenu"; // view 반환
     }
-
 }

@@ -15,6 +15,7 @@ public class MenuServiceImpl implements MenuService {
     private MenuMapper menuMapper;
     @Override
     public List<MenuVO> selectMenuList() throws Exception {
+        System.out.println("서비스 테스트");
         return menuMapper.selectMenuList();
     }
 }
