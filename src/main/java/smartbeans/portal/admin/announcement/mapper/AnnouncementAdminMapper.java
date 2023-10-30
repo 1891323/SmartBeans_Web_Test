@@ -1,7 +1,11 @@
-package smart.beans.admin.announcement.mapper;
+package smartbeans.portal.admin.announcement.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import smartbeans.portal.admin.announcement.service.NoticeBoardVO;
+
+import java.util.List;
 
 @Mapper
-public class AnnouncementAdminMapper {
+public interface AnnouncementAdminMapper {
+   public List<NoticeBoardVO> selectAll();
 }
