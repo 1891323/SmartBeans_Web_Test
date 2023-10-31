@@ -13,81 +13,62 @@
 .loginbox dd .f_chk {margin-left: 6px;}
 .loginbox .btn_a {padding: 30px 0 0 177px;}
 .loginbox .btn_a .btn {width: 160px; height: 50px; margin-right: 12px; border-radius: 8px; color: #fff; font-size: 18px; font-weight: 500; text-align: center; line-height: 50px; background: #169bd5;}
-
-.p_main .visual {width: 1400px; margin: 0 auto; padding: 0 50px;}
-.p_main .visual p {height: 320px; padding: 85px 0 0 70px; border-radius: 40px; color: #fff; font-weight: 700; background: url(../images/main_visual.png) no-repeat; box-shadow: 3px 8px 13px #ccc;}
-.p_main .visual p span {display: block;}
-.p_main .visual p .t1 {font-size: 24px;}
-.p_main .visual p .t2 {font-size: 48px;}
-.p_main .visual p .t3 {margin-top: 15px; color: #9cdafe; font-weight: 400;}
-
-.p_main .dash_board .inner {width: 1400px; margin: 70px auto 0; padding: 0 50px 65px 50px;}
-.p_main .dash_board .tab {font-size: 0; text-align: center;}
-.p_main .dash_board .tab li {display: inline-block;}
-.p_main .dash_board .tab li + li {margin-left: 52px;}
-.p_main .dash_board .tab li a {display: block; position: relative; padding-bottom: 24px; color: #ccc; font-size: 30px; font-weight: 700;}
-.p_main .dash_board .tab li a.cur {color: #222;}
-.p_main .dash_board .tab li a.cur::after {content: ""; display: block; position: absolute; left: 0; bottom: 0; width: 100%; height: 4px; background: #004986;}
-.p_main .dash_board .tab_contents {position: relative; margin-top: 50px;}
-.p_main .dash_board .more {display: block; position: absolute; right: 0; top: -60px; width: 60px; height: 60px; font-size: 0; background: url(../images/ico_more.png) no-repeat;}
-.p_main .dash_board .tab_item {display: none;}
-.p_main .dash_board .tab_item:first-child {display: block;}
-.p_main .dash_board .tab_item ul {padding: 0 20px;}
-.p_main .dash_board .tab_item ul::after {content: ""; display: block; clear: both;}
-.p_main .dash_board .tab_item ul li {float: left; width: 33.33%; padding: 0 20px;}
-.p_main .dash_board .tab_item ul li:last-child {width: 33.34%;}
-.p_main .dash_board .tab_item ul li a span {display: block;}
-.p_main .dash_board .tab_item ul li .tit {color: #222; font-size: 24px; font-weight: 500; line-height: 28px;}
-.p_main .dash_board .tab_item ul li .desc {margin-top: 35px; color: #666; font-size: 20px; line-height: 30px;}
-.p_main .dash_board .tab_item ul li .dates {margin-top: 38px; color: #aaa; font-size: 16px;}
-
+/*메인 콘텐츠의 각 항목(시작)*/
 .p_main .g_area {background: #f2f2f2;}
-.p_main .g_area .inner {width: 1400px; margin: 0 auto; padding: 0 50px 60px 50px;}
+.p_main .g_area .inner {width: 1700px; margin: 0 auto; padding: 0 50px 60px 50px;}
 .p_main .g_area .inner::after {content: ""; display: block; clear: both;}
 .p_main .g_area .inner > * {float: left;}
-.p_main .g_area .left_col {width: 740px; margin-right: 20px; padding-top: 60px;}
-.p_main .g_area .faq {position: relative; height: 500px; border-radius: 27px; background: #fff;}
-.p_main .g_area .faq .head {height: 146px; padding: 40px 0 0 50px; border-bottom: 1px solid #e8e8e8;}
-.p_main .g_area .faq .head h2 {color: #222; font-size: 30px; font-weight: 700;}
-.p_main .g_area .faq .head h2 span {color: #004986;}
-.p_main .g_area .faq .head p {margin-top: 6px; color: #888; font-size: 18px;}
-.p_main .g_area .faq dl {margin-top: 30px; padding: 0 50px; font-size: 20px; font-weight: 300;}
-.p_main .g_area .faq dl > * {position: relative; height: 32px; padding: 0 40px; line-height: 32px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;}
-.p_main .g_area .faq dl a {color: #222; font-size: 20px;}
-.p_main .g_area .faq dl .q,
-.p_main .g_area .faq dl .a {display: block; position: absolute; left: 0; top: 0; width: 32px; height: 32px; font-size: 0;}
-.p_main .g_area .faq dl .q {background: url(../images/ico_q.png) no-repeat;}
-.p_main .g_area .faq dl .a {background: url(../images/ico_a.png) no-repeat;}
-.p_main .g_area .faq dl dt + dd {margin-top: 10px;}
-.p_main .g_area .faq dl dd + dt {margin-top: 30px;}
-.p_main .g_area .faq .more {display: block; position: absolute; right: 40px; top: 40px; width: 60px; height: 60px; font-size: 0; background: url(../images/ico_more.png) no-repeat;}
+.p_main .g_area .left_col {width: 640px; margin-right: 20px; padding-top: 60px;}
+.p_main .g_area .farm_info {position: relative; height: 270px; border-radius: 27px; background: #fff;}
+/*.p_main .g_area .farm_info .head {height: 96px; padding: 40px 0 0 50px; border-bottom: 1px solid #e8e8e8;}*/
+.p_main .g_area .farm_info .head {height: 96px; padding: 40px 0 0 50px;}
+.p_main .g_area .farm_info .head h2 {color: #222; font-size: 23px; font-weight: 700;}
+.p_main .g_area .farm_info .head p {margin-top: 6px; color: #888; font-size: 18px;}
+.p_main .g_area .farm_info dl {margin-top: 30px; padding: 0 50px; font-size: 20px; font-weight: 300;}
+.p_main .g_area .farm_info dl > * {position: relative; height: 32px; padding: 0 40px; line-height: 32px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;}
+.p_main .g_area .farm_info dl a {color: #222; font-size: 20px;}
+.p_main .g_area .farm_info dl .q,
+.p_main .g_area .farm_info dl .a {display: block; position: absolute; left: 0; top: 0; width: 32px; height: 32px; font-size: 0;}
+.p_main .g_area .farm_info dl .q {background: url(../images/ico_q.png) no-repeat;}
+.p_main .g_area .farm_info dl .a {background: url(../images/ico_a.png) no-repeat;}
+.p_main .g_area .farm_info dl dt + dd {margin-top: 10px;}
+.p_main .g_area .farm_info dl dd + dt {margin-top: 30px;}
+.p_main .g_area .farm_info .more {display: block; position: absolute; right: 40px; top: 30px; width: 40px; height: 40px; font-size: 0; background: url(../images/main/ico_more.png) no-repeat;}
 
-.p_main .g_area .promotion {position: relative; height: 140px; margin-top: 20px; padding: 56px 50px 0 50px; border-radius: 27px; background: #fff;}
-.p_main .g_area .promotion::after {content: ""; display: block;}
-.p_main .g_area .promotion h2 {float: left; width: 90px; color: #000; font-size: 26px; font-weight: 700; line-height: 26px;}
-.p_main .g_area .promotion p {float: left; width: auto; height: 26px; color: #222; font-size: 20px; font-weight: 300; line-height: 26px;}
-.p_main .g_area .promotion p strong {color: #004986;}
-.p_main .g_area .promotion .more {display: block; position: absolute; right: 40px; top: 40px; width: 60px; height: 60px; font-size: 0; background: url(../images/ico_more.png) no-repeat;}
+.p_main .g_area .pest_info {position: relative; height: 270px; border-radius: 27px; background: #fff; margin-top: 20px;}
+/*.p_main .g_area .pest_info .head {height: 146px; padding: 40px 0 0 50px; border-bottom: 1px solid #e8e8e8;}*/
+.p_main .g_area .pest_info .head {height: 146px; padding: 40px 0 0 50px;}
+.p_main .g_area .pest_info .head h2 {color: #222; font-size: 23px; font-weight: 700;}
+.p_main .g_area .pest_info .head p {margin-top: 6px; color: #888; font-size: 18px;}
+.p_main .g_area .pest_info .more {display: block; position: absolute; right: 40px; top: 30px; width: 40px; height: 40px; font-size: 0; background: url(../images/main/ico_more.png) no-repeat;}
 
-.p_main .g_area .inner .right_col {width: 440px; padding-top: 60px;}
-.p_main .g_area .complaint {position: relative; height: 360px; padding: 42px 40px 0 40px; border-radius: 27px; background: #fff;}
-.p_main .g_area .complaint h2 {color: #222; font-size: 28px; font-weight: 700;}
-.p_main .g_area .complaint h2 span {color: #004986;}
-.p_main .g_area .complaint ul {margin-top: 37px; font-size: 0; text-align: center;}
-.p_main .g_area .complaint ul li {display: inline-block; min-width: 120px; vertical-align: top;}
-.p_main .g_area .complaint ul li + li {margin-left: 60px;}
-.p_main .g_area .complaint ul li a {display: block; padding-top: 137px; color: #333; font-size: 20px; line-height: 30px; background-position: center top;}
-.p_main .g_area .complaint ul li a.tech {background: url(../images/ico_complain01.png) no-repeat;}
-.p_main .g_area .complaint ul li a.buy {background: url(../images/ico_complain02.png) no-repeat;}
-.p_main .g_area .complaint .more {display: block; position: absolute; right: 40px; top: 40px; width: 60px; height: 60px; font-size: 0; background: url(../images/ico_more.png) no-repeat;}
+.p_main .g_area .manual {position: relative; height: 100px; margin-top: 20px; padding: 40px 50px 0 50px; border-radius: 27px; background: #fff;}
+.p_main .g_area .manual::after {content: ""; display: block;}
+.p_main .g_area .manual h2 {float: left; color: #000; font-size: 23px; font-weight: 700; line-height: 26px;}
+.p_main .g_area .manual h2 span {color: #004986;}
+.p_main .g_area .manual .more {display: block; position: absolute; right: 40px; top: 30px; width: 40px; height: 40px; font-size: 0; background: url(../images/main/ico_more.png) no-repeat;}
 
-.p_main .g_area .survey {position: relative; height: 280px; margin-top: 20px; padding: 42px 40px 0 40px; border-radius: 27px; background: #fff;}
-.p_main .g_area .survey h2 {color: #222; font-size: 28px; font-weight: 700;}
-.p_main .g_area .survey h2 span {color: #004986;}
-.p_main .g_area .survey p {margin-top: 16px; color: #333; font-size: 20px; line-height: 30px;}
-.p_main .g_area .survey a {display: block; position: absolute; right: 45px; bottom: 37px; width: 150px; height: 50px; border-radius: 25px; color: #fff; font-size: 20px; text-align: center; line-height: 50px; background: #004986;}
+.p_main .g_area .inner .right_col {width: 940px; padding-top: 60px;}
+.p_main .g_area .weather_info {position: relative; height: 300px; padding: 42px 40px 0 40px; border-radius: 27px; background: #fff;}
+.p_main .g_area .weather_info h2 {color: #222; font-size: 23px; font-weight: 700;}
+.p_main .g_area .weather_info ul {margin-top: 37px; font-size: 0; text-align: center;}
+.p_main .g_area .weather_info ul li {display: inline-block; min-width: 120px; vertical-align: top;}
+.p_main .g_area .weather_info ul li + li {margin-left: 60px;}
+.p_main .g_area .weather_info ul li a {display: block; padding-top: 137px; color: #333; font-size: 20px; line-height: 30px; background-position: center top;}
+.p_main .g_area .weather_info ul li a.tech {background: url(../images/ico_complain01.png) no-repeat;}
+.p_main .g_area .weather_info ul li a.buy {background: url(../images/ico_complain02.png) no-repeat;}
+.p_main .g_area .weather_info .more {display: block; position: absolute; right: 40px; top: 30px; width: 40px; height: 40px; font-size: 0; background: url(../images/main/ico_more.png) no-repeat;}
 
+.p_main .g_area .notification {width: 400px; position: relative; float:left; height: 360px; margin-top: 20px; padding: 42px 40px 0 40px; border-radius: 27px; background: #fff;}
+.p_main .g_area .notification h2 {color: #222; font-size: 23px; font-weight: 700;}
+.p_main .g_area .notification p {margin-top: 16px; color: #333; font-size: 20px; line-height: 30px;}
+.p_main .g_area .notification a {display: block; position: absolute; right: 45px; bottom: 37px; width: 150px; height: 50px; border-radius: 25px; color: #fff; font-size: 20px; text-align: center; line-height: 50px; background: #004986;}
+.p_main .g_area .notification .more {display: block; position: absolute; right: 40px; top: 30px; width: 40px; height: 40px; font-size: 0; background: url(../images/main/ico_more.png) no-repeat;}
 
+.p_main .g_area .price {width: 520px; position: relative; float:right; height: 360px; margin-top: 20px; padding: 42px 40px 0 40px; border-radius: 27px; background: #fff;}
+.p_main .g_area .price h2 {color: #222; font-size: 23px; font-weight: 700;}
+.p_main .g_area .price .more {display: block; position: absolute; right: 40px; top: 30px; width: 40px; height: 40px; font-size: 0; background: url(../images/main/ico_more.png) no-repeat;}
+/*메인 콘텐츠의 각 항목(끝)*/
 .p_contactus .map {margin-top: 43px;}
 .p_contactus .addr {margin-top: 30px; border-top: 2px solid #666;}
 .p_contactus .addr h2 {color: #222; font-size: 20px; font-weight: 500;}

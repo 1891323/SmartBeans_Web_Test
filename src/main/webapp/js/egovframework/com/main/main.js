@@ -8,10 +8,10 @@ $(document).ready(()=>{
     const height = $(this).find('ul.active').height()
     $("#header .menubar").css({ height: height + 140 });
     if($('#gnb > ul > ul').css({height : 0})){
-      $("#header .menubar").css({ height: 200 });  
+      $("#header .menubar").css({ height: 200 });
     };
     if($('.admin').hasClass('active')){
-      $("#header .menubar").css({ height: 618 })
+      $("#header .menubar").css({ height: 518 }) // menu hover 시 높이
     };
   });
 

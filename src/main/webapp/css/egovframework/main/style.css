@@ -72,8 +72,9 @@
   width: 100%;
   height: 96px;
 }
-#gnb ul li a {
+#gnb ul li a { /*주메뉴*/
   font-size: 18px;
+  text-decoration: none;
 }
 #gnb ul li .subMenu {
   position: absolute;
@@ -91,7 +92,6 @@
 #gnb ul li .subMenu.admin li .menuList {
   margin: 12px 0 0 0;
   width: 132px;
-  border-top: 1px solid;
   display: grid;
   gap: 10px;
 }
