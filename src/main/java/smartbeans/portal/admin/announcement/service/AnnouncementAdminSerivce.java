@@ -6,4 +6,6 @@ import java.util.List;
 public interface AnnouncementAdminSerivce {
 
     List<NoticeBoardVO> selectAll();
+
+
 }

@@ -8,4 +8,6 @@ import java.util.List;
 @Mapper
 public interface AnnouncementAdminMapper {
    public List<NoticeBoardVO> selectAll();
+
+
 }

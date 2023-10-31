@@ -6,17 +6,19 @@ import smartbeans.portal.admin.announcement.mapper.AnnouncementAdminMapper;
 import smartbeans.portal.admin.announcement.service.AnnouncementAdminSerivce;
 import smartbeans.portal.admin.announcement.service.NoticeBoardVO;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 
-@Service
+@Service("AnnouncementAdminService")
 public class AnnouncementAdminServiceImpl implements AnnouncementAdminSerivce {
 
-    @Autowired
+    @Resource(name="announcementAdminMapper")
     private AnnouncementAdminMapper announcementAdminMapper;
     @Override
     public List<NoticeBoardVO> selectAll() {
-        System.out.println("목록출력 테스트중 서비스 ===============================================");
         return announcementAdminMapper.selectAll();
     }
+
+
 }

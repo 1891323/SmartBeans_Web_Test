@@ -22,7 +22,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 @SuppressWarnings("serial")
 public class ComDefaultVO implements Serializable {
 	
-	/** 검색조건 */
+	/** 검색조건 (0: 제목, 1:내용, 2:작성자)*/
     private String searchCondition = "";
     
     /** 검색Keyword */

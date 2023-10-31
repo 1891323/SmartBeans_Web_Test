@@ -1,18 +1,19 @@
 package smartbeans.portal.admin.announcement.service;
 
+import lombok.Data;
 import smartbeans.cmmn.ComDefaultVO;
 
 import java.util.Date;
-
+@Data
 public class NoticeBoardVO extends ComDefaultVO {
 
-    // 게시판 번호
+    // 게시글 번호
     private int noticeBoardNo;
 
     // 게시판 타입 (숫자형)
     private int noticeBoardType;
 
-    // 게시판 하위 타입 (숫자형)
+    // 게시판 하위 타입 (숫자형) 4: 공지사항
     private int noticeBoardSubType;
 
     // 마지막 업데이트 일시

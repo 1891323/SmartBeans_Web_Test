@@ -7,6 +7,8 @@ import smartbeans.portal.main.menu.service.MenuService;
 
 import javax.annotation.Resource;
 
+import static com.squareup.okhttp.internal.Internal.logger;
+
 @Controller
 public class MenuController {
 
@@ -19,6 +21,7 @@ public class MenuController {
         model.addAttribute("topMenu", menuNames);
 
         System.out.println("hihi "+menuService.selectMenuList());
+        logger.info("메뉴테스트중=====================:"+ menuService.selectMenuList());
         return "layouts/common/TopMenu"; // view 반환
     }
 }
