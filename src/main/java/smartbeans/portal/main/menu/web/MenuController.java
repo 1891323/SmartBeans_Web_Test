@@ -4,8 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import smartbeans.portal.main.menu.service.MenuService;
+import smartbeans.portal.main.menu.service.MenuVO;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Controller
 public class MenuController {
@@ -14,11 +16,9 @@ public class MenuController {
     private MenuService menuService;
 
     @RequestMapping(value = "/layouts/topMenu.do")
-    public String topMenu(ModelMap model) throws Exception {
-        String[] menuNames = new String[]{"사업소개", "단지내 주요 시설물", "농업정보", "알림마당", "센터소개"};
-        model.addAttribute("topMenu", menuNames);
-
-        System.out.println("hihi "+menuService.selectMenuList());
+    public String topMenu(ModelMap model) {
+        List<MenuVO> menuList = menuService.selectMenuList();
+        model.addAttribute("topMenu", menuList);
         return "layouts/common/TopMenu"; // view 반환
     }
 }
