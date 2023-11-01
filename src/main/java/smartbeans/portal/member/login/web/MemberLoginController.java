@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import smartbeans.cmmn.EgovComponentChecker;
+import smartbeans.cmmn.EgovMessageSource;
 import smartbeans.portal.member.login.service.MemberLoginService;
 import smartbeans.portal.member.login.service.MemberVO;
 
@@ -17,6 +19,9 @@ public class MemberLoginController {
 
     @Resource(name = "MemberLoginService")
     private MemberLoginService memberLoginService;
+
+    @Resource(name = "egovMessageSource")
+    EgovMessageSource egovMessageSource;
 
 
     /**
@@ -36,20 +41,34 @@ public class MemberLoginController {
     }
 
 
-
+    /**
+     * 일반(세션) 로그인을 처리한다
+     * @param memberVO
+     * @param request
+     * @param model
+     * @return 로그인결과(세션정보)
+     * @throws Exception
+     */
     @RequestMapping(value = "/member/login/actionLogin")
-    public String actionMemberLogin(@ModelAttribute("MemberVO") MemberVO memberVO
-            , HttpServletRequest request
-            , ModelMap model) throws Exception {
-        
-        // 임시값 입력(프론트단에서 아직 값을 안 받아오기 때문)
-        memberVO.setUserId("user01");
-        memberVO.setPassword("pass01");
+    public String actionMemberLogin(//@ModelAttribute("MemberVO") MemberVO memberVO
+              HttpServletRequest request
+            , ModelMap model
+            , MemberVO memberVO
+            ) throws Exception {
+
 
         // 로그인 정보로 회원 정보 조회
         MemberVO resultVO = memberLoginService.selectMember(memberVO);
-        System.out.println("출력값 테스트 : " + resultVO);
-        return "layouts/common/TopMenu"; // 메인으로 반환 (이전 페이지로 이동으로 변경할 예정)
+
+        if(resultVO.getUserId() != null && !resultVO.getUserId().isEmpty()) {
+            request.getSession().setAttribute("loginVO", resultVO);
+            request.getSession().setAttribute("accessUser", resultVO.getUserId());
+            System.out.println("세션값 확인 : " + request.getSession().getAttribute("loginVO").toString());
+            return "redirect:/";
+        } else {
+            model.addAttribute("loginMessage", egovMessageSource.getMessage("fail.common.login", request.getLocale()));
+            return "redirect:/";
+        }
     }
 
 
