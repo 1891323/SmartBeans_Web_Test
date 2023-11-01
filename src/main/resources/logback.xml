@@ -8,11 +8,11 @@
 		</encoder>
 	</appender>
 
-	<logger name="java.sql" level="INFO" />
-	<logger name="chungnam" level="INFO" />
-	<logger name="org.egovframe" level="INFO" />
-	<logger name="jdbc.sqltiming" level="INFO" />
-	<logger name="org.springframework" level="INFO" />
+	<logger name="java.sql" level="DEBUG" />
+	<logger name="smartbeans" level="DEBUG" />
+	<logger name="org.egovframe" level="DEBUG" />
+	<logger name="jdbc.sqltiming" level="DEBUG" />
+	<logger name="org.springframework" level="DEBUG" />
 
 	<root level="DEBUG">
 		<appender-ref ref="STDOUT" />

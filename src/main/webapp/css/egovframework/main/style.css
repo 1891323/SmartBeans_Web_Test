@@ -159,15 +159,24 @@
 
 #footer {
   width: 100%;
+<<<<<<< HEAD
   background-color: #E4E7EC;
   height: 130px;
+=======
+  /*background-color: #E4E7EC; 푸터배경*/
+  height: 101px;
+>>>>>>> 956e2ea2eff4baa947d443fcaed18225647ff805
   transform: inherit;
   position: relative;
   /* transform: translateY(-100%); */
 }
 #footer .wrap {
   margin: 0 auto;
+<<<<<<< HEAD
   width: 450px;
+=======
+  width: 380px;
+>>>>>>> 956e2ea2eff4baa947d443fcaed18225647ff805
   display: grid;
   gap: 12px;
   color: #73767F;
