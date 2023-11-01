@@ -17,16 +17,16 @@
 </head>
 <body>
 <noscript><p>자바스크립트를 지원하지 않는 브라우저에서는 일부 기능을 사용하실 수 없습니다.</p></noscript>
-    <div class="container">
+    <div class="container-fluid" style="padding: 0;">
         <div class="p_main">
             <div class="g_area">
                 <div class="inner">
                     <div class="left_col">
-                        <!-- FAQ -->
-                        <div class="faq">
+                        <!-- 주간 농사정보 -->
+                        <div class="farm_info">
                             <div class="head">
-                                <h2>질문<span>FAQ</span></h2>
-                                <p>표준프레임워크 경량화 서비스에 대한 자주하는 질문의 답변들을 볼 수 있습니다.</p>
+                                <h2>주간 농사정보</h2>
+                                <%--<p>표준프레임워크 경량화 서비스에 대한 자주하는 질문의 답변들을 볼 수 있습니다.</p>--%>
                             </div>
 
                             <%--<c:forEach var="result" items="${faqList}" varStatus="status">
@@ -36,34 +36,49 @@
                                 </dl>
                             </c:forEach>--%>
 
-                            <%--<a href="<c:url value='/uss/olh/faq/FaqListInqire.do' />" class="more">더보기</a>--%>
+                            <a href="<%--<c:url value='/uss/olh/faq/FaqListInqire.do' />--%>" class="more">더보기</a>
                         </div>
 
-                        <!-- 홍보물 -->
-                        <div class="promotion">
-                            <h2>홍보물</h2>
-                            <p><strong>발간자료 / 뉴스기사</strong> 등의 홍보자료를 제공하고 있습니다.</p>
+                        <!-- 병해충 발생정보 -->
+                        <div class="pest_info">
+                            <div class="head">
+                                <h2>병해충 발생정보</h2>
+                                <%--<p>표준프레임워크 경량화 서비스에 대한 자주하는 질문의 답변들을 볼 수 있습니다.</p>--%>
+                            </div>
+                            <a href="<%--<c:url value='/uss/olh/faq/FaqListInqire.do' />--%>" class="more">더보기</a>
+                        </div>
+
+                        <!-- 노지 콩 재배 매뉴얼 -->
+                        <div class="manual">
+                            <h2>충북 괴산 노지 콩<span> 재배 매뉴얼</span></h2>
                             <a href="#LINK" class="more">더보기</a>
                         </div>
                     </div>
                     <div class="right_col">
-                        <!-- 한방에 신청하는 민원 -->
-                        <div class="complaint">
-                            <h2>한방에 신청하는 <span>민원</span></h2>
-                            <ul>
+                        <!-- 괴산군 날씨 정보 -->
+                        <div class="weather_info">
+                            <h2>괴산군 날씨 정보</h2>
+                            <%--<ul>
                                 <li><a href="#LINK" class="tech" onclick="javascript:goMenuPage('2000000'); return false;">기술지원 필요시<br>유지보수 민원</a></li>
                                 <li><a href="#LINK" class="buy" onclick="javascript:goMenuPage('2000000'); return false;">구매 제품<br>A/S 민원</a></li>
-                            </ul>
-                            <a href="#LINK" class="more" onclick="javascript:goMenuPage('2000000'); return false;">더보기</a>
+                            </ul>--%>
+                            <a href="#LINK" class="more"<%-- onclick="javascript:goMenuPage('2000000'); return false;"--%>>더보기</a>
                         </div>
 
-                        <!-- 포털 설문 참여 -->
-                        <div class="survey">
-                            <h2>포털 설문 <span>참여</span></h2>
-                            <p>표준프레임워크 경량환경 포털 홈페이지<br>
+                        <!-- 공지사항 -->
+                        <div class="notification">
+                            <h2>공지사항</h2>
+<%--                            <p>표준프레임워크 경량환경 포털 홈페이지<br>
                                 이용에 대해서 사용자 여러분들께<br>
-                                설문조사를 진행합니다.</p>
-                            <a href="<c:url value=''/>">참여하기</a>
+                                설문조사를 진행합니다.</p>--%>
+                           <%-- <a href="<c:url value=''/>">참여하기</a>--%>
+                            <a href="#LINK" class="more">더보기</a>
+                        </div>
+
+                        <%--곡물별 가격 현황--%>
+                        <div class="price">
+                            <h2>곡물별 가격 현황</h2>
+                            <a href="#LINK" class="more">더보기</a>
                         </div>
                     </div>
                 </div>
@@ -78,21 +93,21 @@
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active" data-bs-interval="2000">
-                    <img src="/images/1.jpg" class="d-block w-100 img-fluid" alt="...">
+                    <img src="/images/main/slide01.jpg" class="d-block w-100 img-fluid" alt="...">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>First slide label</h5>
                         <p>Some representative placeholder content for the first slide.</p>
                     </div>
                 </div>
                 <div class="carousel-item" data-bs-interval="2000">
-                    <img src="/images/2.jpg" class="d-block w-100 img-fluid" alt="...">
+                    <img src="/images/main/slide02.jpg" class="d-block w-100 img-fluid" alt="...">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>Second slide label</h5>
                         <p>Some representative placeholder content for the second slide.</p>
                     </div>
                 </div>
                 <div class="carousel-item" data-bs-interval="2000">
-                    <img src="/images/3.jpg" class="d-block w-100 img-fluid" alt="...">
+                    <img src="/images/main/slide03.jpg" class="d-block w-100 img-fluid" alt="...">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>Third slide label</h5>
                         <p>Some representative placeholder content for the third slide.</p>
