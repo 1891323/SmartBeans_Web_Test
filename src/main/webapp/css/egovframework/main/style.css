@@ -56,7 +56,7 @@
 #header .menubar .menuWrap .user {
   position: absolute;
   top: 20px;
-  right: 0;
+  right: -80px;
 }
 #header .menubar .menuWrap .user > a {
   display: grid;
@@ -76,6 +76,9 @@
   font-size: 18px;
   text-decoration: none;
 }
+#gnb ul li .menu_admin { /*주메뉴-관리자*/
+  color: #396AFF;
+}
 #gnb ul li .subMenu {
   position: absolute;
   opacity: 0;
@@ -85,9 +88,15 @@
   margin: 20px 0 0;
   gap: 19px;
 }
-#gnb ul li .subMenu li a {
+#gnb ul li .subMenu li a { /*서브메뉴*/
   font-weight: 600;
   font-size: 18px;
+  color: #101828;
+}
+#gnb ul li .subMenu.admin .sub_admin { /*서브메뉴-관리자*/
+  list-style-type: disc;
+  list-style-position: inside;
+  text-align: left;
 }
 #gnb ul li .subMenu.admin li .menuList {
   margin: 12px 0 0 0;
@@ -119,20 +128,8 @@
   position: relative;
   height: 96px;
 }
-#gnb > ul > li:first-child {
+#gnb > ul > li:first-child { /*주메뉴*/
   margin-left: 286px;
-}
-#gnb > ul > li:first-child > a {
-  margin: 0 25px 0 4px;
-}
-#gnb > ul > li:nth-child(2) .subMenu {
-  left: 13%;
-}
-#gnb > ul > li:nth-child(5) .subMenu {
-  left: 22%;
-}
-#gnb > ul > li:nth-child(7) .subMenu {
-  left: 3%;
 }
 #gnb > ul > li:hover > a::after {
   transform: scaleX(1);
@@ -140,7 +137,7 @@
 #gnb > ul > li > a {
   display: block;
   position: relative;
-  margin: 0px 25px;
+  margin: 0 44px;
   line-height: 96px;
   height: 96px;
   font-size: 18px;

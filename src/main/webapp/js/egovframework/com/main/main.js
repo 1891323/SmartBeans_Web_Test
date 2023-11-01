@@ -11,7 +11,7 @@ $(document).ready(()=>{
       $("#header .menubar").css({ height: 200 });
     };
     if($('.admin').hasClass('active')){
-      $("#header .menubar").css({ height: 518 }) // menu hover 시 높이
+      $("#header .menubar").css({ height: 498 }) // menu hover 시 높이
     };
   });
 
