@@ -10,4 +10,7 @@ public interface AnnouncementAdminMapper {
    public List<NoticeBoardVO> selectAll();
 
 
+   public List<NoticeBoardVO> selectBoardList(NoticeBoardVO searchVO);
+
+   int selectBoardListTotCnt(NoticeBoardVO searchVO);
 }

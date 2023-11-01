@@ -5,6 +5,82 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<script>
+
+  // init
+  document.addEventListener('DOMContentLoaded', function () {
+    setDisabled();
+  });
+
+  var contextPath = "${pageContext.request.contextPath}";
+
+  // function fn_egov_select_noticeList(pageNo) {
+  //   document.frm.pageIndex.value = pageNo;
+  //   document.frm.action = contextPath + "/admin/noti/AnnouncementList.do?pageIndex=" + pageNo;
+  //   document.frm.submit();
+  // }
+
+  function fn_egov_select_noticeList(pageNo) {
+    var newUrl = contextPath + "/admin/noti/AnnouncementList.do?pageIndex=" + pageNo;
+    window.location.href = newUrl;
+  }
+
+
+
+
+  function goEdit(select, bbsSn) {
+    if (select === "insert") {
+      document.bbsNoticeListForm.action = "/admn/bbs/notice/selectAdminEditNoticeBoard.do";
+      document.bbsNoticeListForm.method = 'post';
+      document.bbsNoticeListForm.submit();
+    } else if (select === "save") {
+      let datas = getDummyCheckElements();
+
+      if (datas.length === 0) {
+        alert('변경사항이 없습니다.');
+        return false;
+      }
+      if (!confirm("저장하시겠습니까?")) {
+        return false;
+      }
+
+      $.ajax({
+        url: '/admn/bbs/notice/updateAdminNoticeBoardList.do',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(datas),
+        success: function (response) {
+          if (response.alertMessage) {
+            alert(response.alertMessage);
+          }
+          if (response.status === 'success') {
+            alert('저장되었습니다.');
+            location.reload();
+          }
+        },
+        error: function (xhr, status, error) {
+          console.error('Failed to update the notice board list');
+        }
+      });
+    } else if (select === "detail") {
+      document.bbsNoticeListForm.bbsSn.value = bbsSn;
+      document.bbsNoticeListForm.action = "/admn/bbs/notice/selectAdminDetailNoticeBoard.do";
+      document.bbsNoticeListForm.method = 'get';
+      document.bbsNoticeListForm.submit();
+    }
+  }
+
+  function setDisabled() {
+    // dummy check 해서 변경사항 없을 시 disabled 처리
+    datas = getDummyCheckElements();
+    if (datas.length === 0) {
+      document.querySelector('#btnAreaSaveButton').classList.add('alpha30');
+    } else {
+      document.querySelector('#btnAreaSaveButton').classList.remove('alpha30');
+    }
+  }
+</script>
+
 <section id="container">
 <div class="breadCrumb">
 
@@ -116,9 +192,9 @@
         </thead>
         <tbody>
         <!--공지사항 리스트 목록 -->
-        <c:forEach items="${allNotices}" var="notice">
+        <c:forEach items="${boardList}" var="notice">
           <tr>
-            <td>${notice.noticeBoardNo}</td>
+            <td>${notice.rowNum}</td>
             <td>${notice.noticeTitle}</td>
             <td>${notice.noticeWrtr}</td>
             <td><fmt:formatDate value="${notice.noticeLastUpdtDtm}" pattern="yyyy.MM.dd" /></td>
@@ -131,14 +207,16 @@
       </table>
       <div>
         <ul class="pagination" id = "pagination">
-          <li><button type='button' class='btnPrevend'></button></li>
-          <li><button type='button' class='btnPrev'></button></li>
-          <!--하단 페이징 구간-->
-          <li class="on"><a href="">1</a></li>
-          <li><a href= "">2</a></li>
-          <!--하단 페이징 구간-->
-          <li><button type='button' class='btnNext'></button></li>
-          <li><button  type='button' class='btnNextEnd'></button></li>
+          <ui:pagination paginationInfo="${paginationInfo}" type="renew" jsFunction="fn_egov_select_noticeList" />
+
+<%--          <li><button type='button' class='btnPrevend'></button></li>--%>
+<%--          <li><button type='button' class='btnPrev'></button></li>--%>
+<%--          <!--하단 페이징 구간-->--%>
+<%--          <li class="on"><a href="">1</a></li>--%>
+<%--          <li><a href= "">2</a></li>--%>
+<%--          <!--하단 페이징 구간-->--%>
+<%--          <li><button type='button' class='btnNext'></button></li>--%>
+<%--          <li><button  type='button' class='btnNextEnd'></button></li>--%>
         </ul>
       </div>
     </div>

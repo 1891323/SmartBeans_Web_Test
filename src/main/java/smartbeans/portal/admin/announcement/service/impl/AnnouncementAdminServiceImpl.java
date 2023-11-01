@@ -20,5 +20,11 @@ public class AnnouncementAdminServiceImpl implements AnnouncementAdminSerivce {
         return announcementAdminMapper.selectAll();
     }
 
+    @Override
+    public List<NoticeBoardVO> selectBoardList(NoticeBoardVO searchVO) { return announcementAdminMapper.selectBoardList(searchVO); }
+
+    @Override
+    public int selectBoardListTotCnt(NoticeBoardVO searchVO) { return announcementAdminMapper.selectBoardListTotCnt(searchVO); }
+
 
 }

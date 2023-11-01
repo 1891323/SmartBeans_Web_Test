@@ -6,9 +6,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="smartbeans.portal.admin.announcement.mapper.AnnouncementAdminMapper">
-
-    <resultMap id="NoticeBoard" type="smartbeans.portal.admin.announcement.service.NoticeBoardVO">
+    <!--목록조회용-->
+    <resultMap id="NoticeBoardList" type="smartbeans.portal.admin.announcement.service.NoticeBoardVO">
         <result property="rowNum" column="rownum"/>
+        <result property="noticeBoardNo" column="notice_board_no"/>
+        <result property="noticeBoardType" column="notice_board_type"/>
+        <result property="noticeBoardSubType" column="notice_board_sub_type"/>
+        <result property="noticeFirstRegistDtm" column="notice_first_regis"/>
+        <result property="noticeViewCount" column="notice_view_count"/>
+        <result property="noticeWrtr" column="notice_wrtr"/>
+        <result property="noticeAnsYn" column="notice_ans_yn"/>
+        <result property="noticeCat" column="notice_cat"/>
+        <result property="noticeTitle" column="notice_title"/>
+        <result property="fileNo" column="file_no"/>
+    </resultMap>
+
+    <!--게시글 상세페이지-->
+    <resultMap id="NoticeBoardDetail" type="smartbeans.portal.admin.announcement.service.NoticeBoardVO">
         <result property="noticeBoardNo" column="notice_board_no"/>
         <result property="noticeBoardType" column="notice_board_type"/>
         <result property="noticeBoardSubType" column="notice_board_sub_type"/>
@@ -24,18 +38,77 @@
         <result property="mbrId" column="mbr_id"/>
         <result property="noticeCat" column="notice_cat"/>
         <result property="noticeTitle" column="notice_title"/>
+        <result property="fileNo" column="file_no"/>
     </resultMap>
 
-    <select id="selectAll" resultMap="NoticeBoard">
+    <select id="selectAll" resultMap="NoticeBoardList">
         SELECT *
         FROM tb_notice_board
     </select>
 
-    <select id="selectBoardList" parameterType="ComDefaultVO" resultMap="NoticeBoard">
+    <!--목록 출력 -->
+    <select id="selectBoardList" parameterType="NoticeBoardVO" resultMap="NoticeBoardList">
+        select
+        row_number() over (order by notice_board_no) as rownum,
+        notice_title,
+        to_char(notice_first_regist_dtm, 'YYYY-MM-DD HH24:MI:SS') as noticeFirstRegistDtm,
+        notice_ans_yn,
+        notice_wrtr,
+        notice_view_count,
+        notice_cat
+        from
+        tb_notice_board
+        where notice_del_yn = 'N'
+        and notice_board_type = #{noticeBoardType}
+        and notice_board_sub_type = #{noticeBoardSubType}
+        <choose>
+            <when test="searchCondition == '0'">
+                and notice_title like '%'||#{searchKeyword}||'%'
+            </when>
+            <when test="searchCondition == '1'">
+                and notice_contents like '%'||#{searchKeyword}||'%'
+            </when>
+            <when test="searchCondition == '2'">
+                and notice_wrtr like '%'||#{searchKeyword}||'%'
+            </when>
+            <otherwise>
+                <!-- 아무 조건도 없이 전체 목록을 출력 -->
+            </otherwise>
+        </choose>
 
+        order by
+        notice_board_no DESC
+        limit CAST(#{recordCountPerPage} AS INTEGER) offset CAST(#{firstIndex} AS INTEGER)
 
     </select>
 
+    <!--  글 개수 Count -->
+    <select id="selectBoardListTotCnt" parameterType="NoticeBoardVO" resultType="java.lang.Integer">
+
+        select
+        count(notice_board_no)
+        from
+        tb_notice_board
+        where notice_del_yn = 'N'
+        and notice_board_type = #{noticeBoardType}
+        and notice_board_sub_type = #{noticeBoardSubType}
+        <choose>
+            <when test="searchCondition == '0'">
+                and notice_title like '%'||#{searchKeyword}||'%'
+            </when>
+            <when test="searchCondition == '1'">
+                and notice_contents like '%'||#{searchKeyword}||'%'
+            </when>
+            <when test="searchCondition == '2'">
+                and notice_wrtr like '%'||#{searchKeyword}||'%'
+            </when>
+            <otherwise>
+                <!-- 아무 조건도 없이 전체 목록을 출력 -->
+            </otherwise>
+        </choose>
+
+
+    </select>
 
 
 </mapper>

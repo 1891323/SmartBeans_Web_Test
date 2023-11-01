@@ -2,6 +2,9 @@ package smartbeans.portal.admin.announcement.web;
 
 import org.egovframe.rte.fdl.property.EgovPropertyService;
 import org.egovframe.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
+import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -21,7 +24,10 @@ import static com.squareup.okhttp.internal.Internal.logger;
 
 
 @Controller
+@RequestMapping(value = "/admin/noti")
 public class AnnouncementAdminController {
+
+    private static final Logger logger = LoggerFactory.getLogger(AnnouncementAdminController.class);
 
     @Resource(name = "AnnouncementAdminService")
     private AnnouncementAdminSerivce announcementAdminSerivce;
@@ -29,13 +35,19 @@ public class AnnouncementAdminController {
     @Resource(name = "propertiesService")
     protected EgovPropertyService propertiesService;
 
-    @RequestMapping("AnnouncementList.do")
-    public String selectAminNoticeBoardList(@ModelAttribute("searchVO")ComDefaultVO searchVO, ModelMap model){
+    @RequestMapping("/AnnouncementList.do")
+    public String selectAminNoticeBoardList(@org.jetbrains.annotations.NotNull @ModelAttribute("searchVO") NoticeBoardVO searchVO, @NotNull ModelMap model){
 
-        System.out.println("목록출력 테스트중 ===============================================");
-        List<NoticeBoardVO> allNotices = announcementAdminSerivce.selectAll();
-        model.addAttribute("allNotices", allNotices);
-        logger.info("공지목록리스트 출력 테스트: " + allNotices);
+        searchVO.setPageUnit(propertiesService.getInt("pageUnit"));
+        searchVO.setPageSize(propertiesService.getInt("pageSize"));
+
+        // 게시판 타입과 하위 타입 세팅
+        searchVO.setNoticeBoardType(4); // 알림마당
+        searchVO.setNoticeBoardSubType(1); // 공지사항
+
+        System.out.println(" 공지 사항 목록 테스트 중  ===============================================");
+        System.out.println(" getter getNoticeBoardType~~  ===============================================" + searchVO.getNoticeBoardType());
+        System.out.println(" getter getNoticeBoardSubType~~  ===============================================" + searchVO.getNoticeBoardSubType());
 
         /* pageing setting */
         PaginationInfo paginationInfo = new PaginationInfo();
@@ -46,6 +58,18 @@ public class AnnouncementAdminController {
         searchVO.setFirstIndex(paginationInfo.getFirstRecordIndex());
         searchVO.setLastIndex(paginationInfo.getLastRecordIndex());
         searchVO.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
+
+
+        List<NoticeBoardVO> boardList = announcementAdminSerivce.selectBoardList(searchVO);
+
+        int totCnt = announcementAdminSerivce.selectBoardListTotCnt(searchVO);
+        paginationInfo.setTotalRecordCount(totCnt);
+
+        logger.info("=========================Board List: {}", boardList);
+        System.out.println(" 공지 사항 목록 테스트 중  ===============================================" +boardList);
+
+        model.addAttribute("boardList", boardList);
+        model.addAttribute("paginationInfo", paginationInfo);
 
 
 
