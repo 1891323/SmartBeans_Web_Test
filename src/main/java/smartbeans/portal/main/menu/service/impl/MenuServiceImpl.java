@@ -6,7 +6,9 @@ import smartbeans.portal.main.menu.service.MenuService;
 import smartbeans.portal.main.menu.service.MenuVO;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Service("MenuService")
@@ -15,6 +17,14 @@ public class MenuServiceImpl implements MenuService {
     private MenuMapper menuMapper;
     @Override
     public List<MenuVO> selectMenuList() {
-        return menuMapper.selectMenuList();
+        int value = 6;
+        Map<String, Object> param = new HashMap<>();
+        param.put("no", value);
+        return menuMapper.selectMenuList(param);
+    }
+
+    @Override
+    public List<MenuVO> selectMenuListWithAdmin() {
+        return menuMapper.selectMenuListWithAdmin();
     }
 }
