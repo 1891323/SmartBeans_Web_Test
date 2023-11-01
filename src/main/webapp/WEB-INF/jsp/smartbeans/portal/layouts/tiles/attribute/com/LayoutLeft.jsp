@@ -8,35 +8,28 @@
 <div class="sidebar">
     <ul class="nav flex-column">
         <li class="nav-item">
-            <a class="nav-link active" href="#">게시판관리</a>
+            <a class="nav-link active" href="#">알림 마당</a>
             <ul class="nav flex-column ml-3">
                 <li class="nav-item"><a class="nav-link" href="#">공지사항 관리</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">문의하기 관리</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">게시판 관리</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">자료실 관리</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Q&A 관리</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">FAQ 관리</a></li>
             </ul>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">사용자 관리</a>
+            <a class="nav-link" href="#">농업 정보</a>
             <ul class="nav flex-column ml-3">
-                <li class="nav-item"><a class="nav-link" href="#">권한 관리</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">메뉴 관리</a></li>
-            </ul>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">만족도 통계 관리</a>
-            <ul class="nav flex-column ml-3">
-                <li class="nav-item"><a class="nav-link" href="#">사용자별</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">메뉴별</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">콩 재배 매뉴얼</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">데이터</a></li>
             </ul>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">접속 이력 관리</a>
             <ul class="nav flex-column ml-3">
-                <li class="nav-item"><a class="nav-link" href="#">사용자별</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">메뉴별</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">관리자</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">사용자</a></li>
             </ul>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">데이터 관리</a>
         </li>
     </ul>
 </div>
