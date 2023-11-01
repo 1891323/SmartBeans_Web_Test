@@ -4,11 +4,26 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 
-<footer id="footer">
-    <div class="wrap">
-        <div><img src="/images/egovframework/main/images/black-logo.svg" alt="">
-            <address>28001 ) 충청북도 괴산군 불정면 한불로 1245-43<br> TEL : 043-833-6007 FAX : 043-833-6007</address>
+<div class="footer">
+    <div class="inner">
+        <div class="right_col">
+            <a href="#LINK"><img src="<c:url value='/'/>images/main/banner01.png" alt="행정안전부"></a>
+            <a href="#LINK"><img src="<c:url value='/'/>images/main/banner02.png" alt="NIA 한국지능정보사회진흥원"></a>
+            <a href="#LINK"><img src="<c:url value='/'/>images/main/banner01.png" alt="행정안전부"></a>
+            <a href="#LINK"><img src="<c:url value='/'/>images/main/banner02.png" alt="NIA 한국지능정보사회진흥원"></a>
+            <a href="#LINK"><img src="<c:url value='/'/>images/main/banner01.png" alt="행정안전부"></a>
+            <a href="#LINK"><img src="<c:url value='/'/>images/main/banner02.png" alt="NIA 한국지능정보사회진흥원"></a>
+            <a href="#LINK"><img src="<c:url value='/'/>images/main/banner01.png" alt="행정안전부"></a>
         </div>
-        <p>COPYRIGHT(C) 괴산스마트농업. ALL RIGHTS RESERVED.</p>
+
+        <h1><a href="#LINK"><img src="<c:url value='/'/>images/main/logo_footer.svg" alt="표준프레임워크 포털 eGovFrame"></a></h1>
+
+        <div class="mid">
+            <address>
+                대표문의메일 : egovframesupport@gmail.com  |  대표전화 : 0000-0000 (000-0000-0000)<br>
+                호환성확인 : 000-0000-0000  |  교육문의 : 000-0000-0000
+            </address>
+            <p class="copy">Copyright © 2021 Ministry Of The Interior And Safety. All Rights Reserved.</p>
+        </div>
     </div>
-</footer>
+</div>

@@ -37,10 +37,7 @@ public class MemberLoginServiceImpl implements MemberLoginService {
         } else {
             memberVO = new MemberVO();
         }
-
         return memberVO;
     }
-
-
 
 }

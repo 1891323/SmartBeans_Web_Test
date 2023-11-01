@@ -22,12 +22,20 @@
             <nav id="gnb">
                 <ul>
                     <c:forEach var="menu" items="${topMenu}">
-                        <%--<c:if test="${menu.menu_id <= 5}">--%>
+                        <c:if test="${menu.menu_id <= 6}">
                             <li>
-                                <a>${menu}</a>
+                                <a <c:if test="${menu.menu_id == 6}">class="menu_admin"</c:if>href="${menu.menu_url}">${menu.menu_name}</a> <%--주메뉴--%>
+                                <ul class="subMenu admin">
+                                    <c:forEach var="submenu" items="${topMenu}">
+                                        <c:if test="${submenu.menu_parent_id == menu.menu_id}">
+                                            <li <c:if test="${submenu.menu_admin_parent_id > 0}">class="sub_admin"</c:if>>
+                                                <a href="${submenu.menu_url}">${submenu.menu_name}</a> <%--서브메뉴--%>
+                                            </li>
+                                        </c:if>
+                                    </c:forEach>
+                                </ul>
                             </li>
-                        <%--</c:if>--%>
-                        <%--<a href="${menu.url}">${menu.name}</a>--%>
+                        </c:if>
                     </c:forEach>
                 </ul>
             </nav>
