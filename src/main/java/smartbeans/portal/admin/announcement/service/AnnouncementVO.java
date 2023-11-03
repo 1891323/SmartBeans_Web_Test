@@ -1,4 +1,4 @@
-package smart.beans.admin.announcement.service;
+package smartbeans.portal.admin.announcement.service;
 
 public class AnnouncementVO {
 }

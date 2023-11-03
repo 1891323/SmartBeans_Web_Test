@@ -1,4 +1,4 @@
-package smart.beans.admin.reference.service;
+package smartbeans.portal.admin.reference.service;
 
 
 public class ReferenceAdminVO {

@@ -188,7 +188,7 @@
   margin: 0 auto;
   max-width: 1400px;
   height: auto;
-  height: calc(100% - 222px);
+  /*height: calc(100% - 222px);*/
 }
 
 /* breadCrum */
@@ -316,12 +316,13 @@ input[type=checkbox] + label {
   display: inline-block;
   width: 24px;
   height: 24px;
-  background: url("/images/btn_checkbox.svg");
+  /*background: url("/images/btn_checkbox.svg"); 경로 수정중*/
+  background: url("../../../images/images/btn_checkbox.svg");
   background-size: contain;
   cursor: pointer;
 }
 input[type=checkbox]:checked + label {
-  background: url("/images/btn_checkbox_selected.svg");
+  background: url("../../../images/images/btn_checkbox_selected.svg");
   background-size: contain;
 }
 

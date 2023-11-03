@@ -13,8 +13,10 @@ import java.util.Map;
 
 @Service("MenuService")
 public class MenuServiceImpl implements MenuService {
+
     @Resource(name="menuMapper")
     private MenuMapper menuMapper;
+  
     @Override
     public List<MenuVO> selectMenuList() {
         int value = 6;
@@ -26,5 +28,6 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public List<MenuVO> selectMenuListWithAdmin() {
         return menuMapper.selectMenuListWithAdmin();
+
     }
 }

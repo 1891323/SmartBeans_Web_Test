@@ -1,0 +1,91 @@
+.condition{
+    padding: 25px;
+    border: 1px solid #dde2e5;
+    border-radius: 10px;
+    font-size: 0;
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.condition {
+    padding: 25px;
+    border: 1px solid #dde2e5;
+    border-radius: 10px;
+    font-size: 0;
+    text-align: center;
+}
+
+.condition .item + .item {
+    margin-left: 20px;
+}
+
+.f_select {
+    display: inline-block;
+    position: relative;
+    height: 46px;
+    border: 0;
+    border-radius: 5px;
+    background: #f7f7f7;
+    vertical-align: top;
+}
+
+.f_select::after {
+    content: "";
+    display: block;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 15px;
+    height: 9px;
+    background: url(../../images/admin/ico_arrow_gray_15x9.png) no-repeat;
+
+}
+
+.f_select select {
+    -webkit-appearance: none; /* Safari and Chrome */
+    -moz-appearance: none;    /* Firefox */
+    appearance: none;         /* Modern browsers */
+    width: 100%;
+    height: 100%;
+    padding: 0 45px 0 20px;   /* 오른쪽 패딩값을 아이콘 크기와 맞추어서 텍스트가 아이콘 아래로 들어가지 않게 함 */
+    border: 0;
+    color: #222;
+    font-size: 16px;
+    background: transparent;
+}
+
+
+
+.f_input.w_500 {
+    display: inline-block;
+    position: relative;
+    height: 46px;
+    width: 500px;
+    border: 0;
+    border-radius: 5px;
+    background: #f7f7f7;
+    vertical-align: top;
+}
+
+.f_search .btn {
+    display: block;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 25px;
+    height: 27px;
+    border: 0;
+    font-size: 0;
+    background: url(../../images/admin/ico_search_b.png) no-repeat;
+}
+
+#container{
+    height: max-content;
+}
+
+
+
+
