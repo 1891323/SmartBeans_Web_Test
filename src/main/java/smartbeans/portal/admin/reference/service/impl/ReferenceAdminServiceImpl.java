@@ -1,7 +1,8 @@
-package smart.beans.admin.reference.service.impl;
+package smartbeans.portal.admin.reference.service.impl;
 
 import org.springframework.stereotype.Service;
-import smart.beans.admin.reference.service.ReferenceAdminService;
+import smartbeans.portal.admin.reference.service.ReferenceAdminService;
+
 
 @Service
 public class ReferenceAdminServiceImpl implements ReferenceAdminService {

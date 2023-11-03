@@ -22,10 +22,10 @@ public class NoticeBoardVO extends ComDefaultVO {
     private int noticeBoardSubType;
 
     // 마지막 업데이트 일시
-    private String noticeLastUpdtDtm;
+    private Date noticeLastUpdtDtm;
 
     // 최초 등록 일시
-    private String noticeFirstRegistDtm;
+    private Date noticeFirstRegistDtm;
 
     // 게시판 조회 수
     private int noticeViewCount;
@@ -92,19 +92,19 @@ public class NoticeBoardVO extends ComDefaultVO {
         this.noticeBoardSubType = noticeBoardSubType;
     }
 
-    public String getNoticeLastUpdtDtm() {
+    public Date getNoticeLastUpdtDtm() {
         return noticeLastUpdtDtm;
     }
 
-    public void setNoticeLastUpdtDtm(String noticeLastUpdtDtm) {
+    public void setNoticeLastUpdtDtm(Date noticeLastUpdtDtm) {
         this.noticeLastUpdtDtm = noticeLastUpdtDtm;
     }
 
-    public String getNoticeFirstRegistDtm() {
+    public Date getNoticeFirstRegistDtm() {
         return noticeFirstRegistDtm;
     }
 
-    public void setNoticeFirstRegistDtm(String noticeFirstRegistDtm) {
+    public void setNoticeFirstRegistDtm(Date noticeFirstRegistDtm) {
         this.noticeFirstRegistDtm = noticeFirstRegistDtm;
     }
 

@@ -1,12 +1,12 @@
-package smart.beans.admin.faq.web;
+package smartbeans.portal.admin.faq.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springmodules.validation.commons.DefaultBeanValidator;
-import smart.beans.admin.faq.service.FaqAdminService;
-import smart.beans.admin.faq.service.FaqManagerVO;
+import smartbeans.portal.admin.faq.service.FaqAdminService;
+import smartbeans.portal.admin.faq.service.FaqManagerVO;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,7 +20,7 @@ import egovframework.com.cmm.service.EgovFileMngUtil;
 public class FaqAdminAdminController {
 
     @Autowired
-    private FaqAdminService faqManageService;
+    private FaqAdminService faqAdminService;
 
     @Autowired
     private DefaultBeanValidator beanValidator;

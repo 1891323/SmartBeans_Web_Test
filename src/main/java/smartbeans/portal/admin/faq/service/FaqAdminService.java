@@ -1,4 +1,4 @@
-package smart.beans.admin.faq.service;
+package smartbeans.portal.admin.faq.service;
 /**
  *
  * FAQ를 처리하는 서비스 클래스

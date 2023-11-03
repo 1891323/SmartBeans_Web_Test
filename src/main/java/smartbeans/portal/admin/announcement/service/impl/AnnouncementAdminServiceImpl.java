@@ -26,5 +26,8 @@ public class AnnouncementAdminServiceImpl implements AnnouncementAdminSerivce {
     @Override
     public int selectBoardListTotCnt(NoticeBoardVO searchVO) { return announcementAdminMapper.selectBoardListTotCnt(searchVO); }
 
+    @Override
+    public NoticeBoardVO selectBoardDetail(NoticeBoardVO noticeBoardVO) { return announcementAdminMapper.selectBoardDetail(noticeBoardVO);    }
+
 
 }

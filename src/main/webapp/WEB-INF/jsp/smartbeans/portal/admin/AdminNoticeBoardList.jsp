@@ -14,21 +14,16 @@
 
   var contextPath = "${pageContext.request.contextPath}";
 
-  // function fn_egov_select_noticeList(pageNo) {
-  //   document.frm.pageIndex.value = pageNo;
-  //   document.frm.action = contextPath + "/admin/noti/AnnouncementList.do?pageIndex=" + pageNo;
-  //   document.frm.submit();
-  // }
 
   function fn_egov_select_noticeList(pageNo) {
-    var newUrl = contextPath + "/admin/noti/AnnouncementList.do?pageIndex=" + pageNo;
+    var newUrl = contextPath + "/admin/noti/Announcement.do?pageIndex=" + pageNo;
     window.location.href = newUrl;
   }
 
 
 
 
-  function goEdit(select, bbsSn) {
+  function goEdit(select, noticeBoardNo) {
     if (select === "insert") {
       document.bbsNoticeListForm.action = "/admn/bbs/notice/selectAdminEditNoticeBoard.do";
       document.bbsNoticeListForm.method = 'post';
@@ -63,10 +58,15 @@
         }
       });
     } else if (select === "detail") {
-      document.bbsNoticeListForm.bbsSn.value = bbsSn;
-      document.bbsNoticeListForm.action = "/admn/bbs/notice/selectAdminDetailNoticeBoard.do";
-      document.bbsNoticeListForm.method = 'get';
-      document.bbsNoticeListForm.submit();
+      // document.bbsNoticeListForm.noticeBoardNo.value = noticeBoardNo;
+      // document.bbsNoticeListForm.action = "/admn/bbs/notice/selectAdminDetailNoticeBoard.do";
+      // document.bbsNoticeListForm.method = 'get';
+      // document.bbsNoticeListForm.submit();
+
+      var newUrl = contextPath + "/admin/noti/selectAdminDetailNoticeBoard.do?noticeBoardNo=" + noticeBoardNo;
+      window.location.href = newUrl;
+
+
     }
   }
 
@@ -81,6 +81,8 @@
   }
 </script>
 
+<c:set var="noticeBoardSubType" value="${noticeBoardSubType}" />
+
 <section id="container">
 <div class="breadCrumb">
 
@@ -88,10 +90,11 @@
   <!-- Location -->
   <div class="location">
     <ul>
-      <li><a href="#"><img src="images/egovframework/main/images/ic_sub_navi_home.svg" alt="메인으로"></a></li>
+      <li><a href="#"><img src="${pageContext.request.contextPath}/images/egovframework/main/images/ic_sub_navi_home.svg"
+                           alt="메인으로"  style="position: relative; top: -5px;">
+      </a></li>
       <li><a href="#">관리자 메뉴</a></li>
-      <li><a href="#">게시판 관리</a></li>
-      <li><a href="#">공지사항 관리</a></li>
+      <li><a href="#">${pageTitle} 관리</a></li>
     </ul>
   </div>
   <!--// Location -->
@@ -107,7 +110,19 @@
               <a href="">공지사항 관리</a>
             </li>
             <li class="lnbCnt">
-              <a href="">문의하기 관리</a>
+              <a href="">자료실 관리</a>
+            </li>
+            <li class="lnbCnt">
+              <a href="">FAQ 관리</a>
+            </li>
+            <li class="lnbCnt">
+              <a href="">QnA 관리</a>
+            </li>
+            <li class="lnbCnt">
+              <a href="">게시판 관리</a>
+            </li>
+            <li class="lnbCnt">
+              <a href="">콩 재배 메뉴얼 관리</a>
             </li>
           </ul>
         </li>
@@ -119,17 +134,6 @@
             </li>
             <li class="lnbCnt">
               <a href="">메뉴 관리</a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a href="">만족도 통계 관리</a>
-          <ul>
-            <li class="lnbCnt">
-              <a href="">사용자별</a>
-            </li>
-            <li class="lnbCnt">
-              <a href="">메뉴별</a>
             </li>
           </ul>
         </li>
@@ -151,7 +155,7 @@
     </div>
   </div>
   <div class="contents">
-    <h2 name ="">공지사항 관리 </h2>
+    <h2 name ="">${pageTitle} 관리 </h2>
     <!-- 검색조건 -->
     <div class="condition">
 
@@ -179,7 +183,7 @@
         <col style="">
         <col style="">
         <col style="">
-        <col style="">
+<%--        <col style="">--%>
       </colgroup>
         <thead>
           <tr>
@@ -187,18 +191,23 @@
             <th>제목</th>
             <th>작성자</th>
             <th>작성일</th>
-            <th>상단고정</th>
+            <c:if test="${noticeBoardSubType == 1}"> <!-- 공지사항인 경우에만 상단고정 기능 출력 -->
+              <th>상단고정</th>
+            </c:if>
           </tr>
         </thead>
+
         <tbody>
         <!--공지사항 리스트 목록 -->
         <c:forEach items="${boardList}" var="notice">
           <tr>
             <td>${notice.rowNum}</td>
-            <td>${notice.noticeTitle}</td>
+            <td> <a href="#" onclick="goEdit('detail', '${notice.noticeBoardNo}')"> <c:out value="${notice.noticeTitle}" /></a></td>
             <td>${notice.noticeWrtr}</td>
-            <td><fmt:formatDate value="${notice.noticeLastUpdtDtm}" pattern="yyyy.MM.dd" /></td>
-            <td><input type="checkbox" name="checkBtn" id='chkBtn'><label for="chkBtn">&nbsp;</label></td>
+            <td><fmt:formatDate value="${notice.noticeFirstRegistDtm}" pattern="yyyy.MM.dd" /></td>
+            <c:if test="${notice.noticeBoardSubType == 1}"> <!-- 공지사항의 하위 타입이 1인 경우에만 상단고정 체크박스를 표시 -->
+              <td><input type="checkbox" name="checkBtn" id='chkBtn${notice.noticeBoardNo}'><label for="chkBtn${notice.noticeBoardNo}">&nbsp;</label></td>
+            </c:if>
           </tr>
         </c:forEach>
         <!--공지사항 리스트 목록 -->

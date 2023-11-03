@@ -18,6 +18,7 @@
     <link rel="stylesheet" type="text/css"
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css"/>
     <link rel="stylesheet" href="/css/egovframework/main/style.css">
+    <link rel="stylesheet" href="/css/layout.css">
 
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>

@@ -1,4 +1,4 @@
-package smart.beans.admin.faq.service;
+package smartbeans.portal.admin.faq.service;
 
 /*
 * FAQ관리를 위한 VO 클래스

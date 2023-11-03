@@ -16,7 +16,8 @@ import smartbeans.portal.admin.announcement.service.AnnouncementAdminSerivce;
 import smartbeans.portal.admin.announcement.service.NoticeBoardVO;
 
 import javax.annotation.Resource;
-import javax.xml.ws.RequestWrapper;
+import javax.servlet.http.HttpServletRequest;
+
 
 import java.util.List;
 
@@ -35,15 +36,36 @@ public class AnnouncementAdminController {
     @Resource(name = "propertiesService")
     protected EgovPropertyService propertiesService;
 
-    @RequestMapping("/AnnouncementList.do")
-    public String selectAminNoticeBoardList(@org.jetbrains.annotations.NotNull @ModelAttribute("searchVO") NoticeBoardVO searchVO, @NotNull ModelMap model){
+    @RequestMapping({
+            "/Announcement.do",
+            "/Board.do",
+            "/QnA.do",
+    })
+    public String selectAminNoticeBoardList(@ModelAttribute("searchVO") NoticeBoardVO searchVO,  HttpServletRequest request, ModelMap model){
 
         searchVO.setPageUnit(propertiesService.getInt("pageUnit"));
         searchVO.setPageSize(propertiesService.getInt("pageSize"));
 
-        // 게시판 타입과 하위 타입 세팅
-        searchVO.setNoticeBoardType(4); // 알림마당
-        searchVO.setNoticeBoardSubType(1); // 공지사항
+        String requestUri = request.getRequestURI();
+
+
+        if (requestUri.endsWith("/Announcement.do")) {
+            // 공지사항 로직 처리
+            searchVO.setNoticeBoardType(4); // 알림마당
+            searchVO.setNoticeBoardSubType(1); // 공지사항
+            request.setAttribute("pageTitle", "공지사항");
+        } else if (requestUri.endsWith("/Board.do")) {
+            // 게시판 로직 처리
+            searchVO.setNoticeBoardType(4); // 알림마당
+            searchVO.setNoticeBoardSubType(5); // 게시판
+            request.setAttribute("pageTitle", "게시판");
+        } else if (requestUri.endsWith("/QnA.do")) {
+            // QnA 로직 처리
+            searchVO.setNoticeBoardType(4); // 알림마당
+            searchVO.setNoticeBoardSubType(4); // QnA
+            request.setAttribute("pageTitle", "Q&A");
+        }
+
 
         System.out.println(" 공지 사항 목록 테스트 중  ===============================================");
         System.out.println(" getter getNoticeBoardType~~  ===============================================" + searchVO.getNoticeBoardType());
@@ -65,17 +87,46 @@ public class AnnouncementAdminController {
         int totCnt = announcementAdminSerivce.selectBoardListTotCnt(searchVO);
         paginationInfo.setTotalRecordCount(totCnt);
 
-        logger.info("=========================Board List: {}", boardList);
-        System.out.println(" 공지 사항 목록 테스트 중  ===============================================" +boardList);
+//        logger.info("공지 사항 목록 테스트 중=========================Board List: {}", boardList);
 
         model.addAttribute("boardList", boardList);
+
+        model.addAttribute("noticeBoardSubType", searchVO.getNoticeBoardSubType());
+
         model.addAttribute("paginationInfo", paginationInfo);
 
 
 
-        return "admin/AnnouncementList.admin";
+        return "admin/AdminNoticeBoardList.admin";
     }
 
+    @GetMapping(value = "/selectAdminDetailNoticeBoard.do")
+    public String selectAdminDetailNoticeBoard(@ModelAttribute("searchVO") NoticeBoardVO noticeBoardVO, ModelMap model){
+
+        NoticeBoardVO boardVO= announcementAdminSerivce.selectBoardDetail(noticeBoardVO);
+
+        String boardType = "";
+
+        switch (boardVO.getNoticeBoardSubType()) {
+            case 1:
+                boardType = "공지사항";
+                break;
+            case 5:
+                boardType = "게시판";
+                break;
+            case 4:
+                boardType = "Q&A";
+                break;
+            default:
+                boardType = "기타";
+                break;
+        }
+
+        model.addAttribute("boardVO", boardVO);
+        model.addAttribute("boardType", boardType);
+
+        return "admin/AdminNoticeBoardDetail.admin";
+    }
 
 
 }

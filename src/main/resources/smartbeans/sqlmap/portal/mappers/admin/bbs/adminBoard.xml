@@ -12,7 +12,8 @@
         <result property="noticeBoardNo" column="notice_board_no"/>
         <result property="noticeBoardType" column="notice_board_type"/>
         <result property="noticeBoardSubType" column="notice_board_sub_type"/>
-        <result property="noticeFirstRegistDtm" column="notice_first_regis"/>
+        <result property="noticeLastUpdtDtm" column="notice_last_updt_dtm"/>
+        <result property="noticeFirstRegistDtm" column="notice_first_regist_dtm"/>
         <result property="noticeViewCount" column="notice_view_count"/>
         <result property="noticeWrtr" column="notice_wrtr"/>
         <result property="noticeAnsYn" column="notice_ans_yn"/>
@@ -26,8 +27,8 @@
         <result property="noticeBoardNo" column="notice_board_no"/>
         <result property="noticeBoardType" column="notice_board_type"/>
         <result property="noticeBoardSubType" column="notice_board_sub_type"/>
-        <result property="noticeLastUpdtDtm" column="notice_last_updt_d"/>
-        <result property="noticeFirstRegistDtm" column="notice_first_regis"/>
+        <result property="noticeLastUpdtDtm" column="notice_last_updt_dtm"/>
+        <result property="noticeFirstRegistDtm" column="notice_first_regist_dtm"/>
         <result property="noticeViewCount" column="notice_view_count"/>
         <result property="noticeContents" column="notice_contents"/>
         <result property="noticeWrtr" column="notice_wrtr"/>
@@ -50,8 +51,11 @@
     <select id="selectBoardList" parameterType="NoticeBoardVO" resultMap="NoticeBoardList">
         select
         row_number() over (order by notice_board_no) as rownum,
+        notice_board_no,
+        notice_board_type,
+        notice_board_sub_type,
         notice_title,
-        to_char(notice_first_regist_dtm, 'YYYY-MM-DD HH24:MI:SS') as noticeFirstRegistDtm,
+        notice_first_regist_dtm,
         notice_ans_yn,
         notice_wrtr,
         notice_view_count,
@@ -110,5 +114,29 @@
 
     </select>
 
+    <select id="selectBoardDetail" parameterType="NoticeBoardVO" resultMap="NoticeBoardDetail">
+        SELECT
+            row_number() over (order by notice_board_no) as rownum,
+            notice_board_no,
+            notice_board_type,
+            notice_board_sub_type,
+            notice_title,
+            notice_contents,
+            notice_wrtr,
+            notice_first_regist_dtm,
+            notice_last_updt_dtm,
+            notice_prvt_pst_yn,
+            notice_password,
+            notice_ans_yn,
+            notice_view_count,
+            notice_del_yn,
+            mbr_id,
+            notice_cat,
+            file_no
+        FROM
+            tb_notice_board
+        WHERE
+            notice_board_no = #{noticeBoardNo}
+    </select>
 
 </mapper>
