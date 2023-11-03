@@ -16,6 +16,7 @@ public class MenuServiceImpl implements MenuService {
 
     @Resource(name="menuMapper")
     private MenuMapper menuMapper;
+  
     @Override
     public List<MenuVO> selectMenuList() {
         int value = 6;

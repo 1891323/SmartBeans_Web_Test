@@ -15,5 +15,5 @@ public class MenuVO {
     public String menu_parent_id;
 
     public String menu_admin_parent_id;
-}
 
+}
