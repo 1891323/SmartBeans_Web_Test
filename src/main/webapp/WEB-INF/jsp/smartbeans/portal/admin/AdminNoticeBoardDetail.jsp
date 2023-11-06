@@ -145,10 +145,10 @@
             <tr>
               <th>파일첨부</th>
               <td class="url">
-                <%--          <c:import url="/common/fileView.do" charEncoding="utf-8">--%>
-                <%--            <c:param name="param_atchFileId" value="${boardVO.fileNo}" />--%>
-                <%--            <c:param name="param_mode" value="default" />--%>
-                <%--          </c:import>--%>
+<%--                          <c:import url="/common/fileView.do" charEncoding="utf-8">--%>
+<%--                            <c:param name="param_atchFileId" value="${boardVO.fileNo}" />--%>
+<%--                            <c:param name="param_mode" value="default" />--%>
+<%--                          </c:import>--%>
               </td>
             </tr>
           </table>
