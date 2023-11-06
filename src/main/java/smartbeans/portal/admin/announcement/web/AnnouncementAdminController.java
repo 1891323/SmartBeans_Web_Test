@@ -10,8 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import smartbeans.cmmn.ComDefaultVO;
+import smartbeans.cmmn.service.FileVO;
 import smartbeans.portal.admin.announcement.service.AnnouncementAdminSerivce;
 import smartbeans.portal.admin.announcement.service.NoticeBoardVO;
 
@@ -20,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 
 
 import java.util.List;
+import java.util.Map;
 
 import static com.squareup.okhttp.internal.Internal.logger;
 
@@ -36,6 +41,13 @@ public class AnnouncementAdminController {
     @Resource(name = "propertiesService")
     protected EgovPropertyService propertiesService;
 
+    /**
+     * notice 게시판 글목록 출력
+     * @param searchVO
+     * @param request
+     * @param model
+     * @return
+     */
     @RequestMapping({
             "/Announcement.do",
             "/Board.do",
@@ -100,6 +112,12 @@ public class AnnouncementAdminController {
         return "admin/AdminNoticeBoardList.admin";
     }
 
+    /**
+     * 상세글 이동
+     * @param noticeBoardVO
+     * @param model
+     * @return
+     */
     @GetMapping(value = "/selectAdminDetailNoticeBoard.do")
     public String selectAdminDetailNoticeBoard(@ModelAttribute("searchVO") NoticeBoardVO noticeBoardVO, ModelMap model){
 
@@ -128,5 +146,32 @@ public class AnnouncementAdminController {
         return "admin/AdminNoticeBoardDetail.admin";
     }
 
+    /**
+     * Name: selectAdminEditNoticeBoard()
+     * Descriptions: 관리자 공지사항 등록 페이지
+     * @param NoticeBoardVO
+     * @param editmode
+     * @param model
+     * @return
+     * @throws Exception
+     */
+    @PostMapping(value = "/selectAdminEditNoticeBoard.do")
+    public String selectAdminEditNoticeBoard(NoticeBoardVO NoticeBoardVO, String editmode, ModelMap model) throws Exception {
+        if ("U".equals(editmode)) {
+//            boardVO = announcementAdminSerivce.selectBoard(boardVO);
+//            model.addAttribute("boardVO", boardVO);
+        }
+
+        model.addAttribute("editmode", editmode);
+
+        return "admin/AdminNoticeBoardAdd.admin";
+    }
+
+    @PostMapping(value = "/insertAdminNoticeBoard.do")
+    public String insertAdminNoticeBoard(final MultipartHttpServletRequest multiRequest, NoticeBoardVO boardVO, ModelMap model) throws Exception {
+
+        logger.info("삽입 프로세스 진행 중");
+        return "admin/AdminNoticeBoardAdd.admin";
+    }
 
 }

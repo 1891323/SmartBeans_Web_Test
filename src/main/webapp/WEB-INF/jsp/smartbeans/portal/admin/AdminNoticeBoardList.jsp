@@ -25,9 +25,10 @@
 
   function goEdit(select, noticeBoardNo) {
     if (select === "insert") {
-      document.bbsNoticeListForm.action = "/admn/bbs/notice/selectAdminEditNoticeBoard.do";
-      document.bbsNoticeListForm.method = 'post';
-      document.bbsNoticeListForm.submit();
+      console.log("등록페이지 이동")
+      document.frm.action = "/admin/noti/selectAdminEditNoticeBoard.do";
+      document.frm.method = 'post';
+      document.frm.submit();
     } else if (select === "save") {
       let datas = getDummyCheckElements();
 
@@ -171,7 +172,8 @@
         <input class="f_input w_500" type="text" name="searchWrd" title="검색어 입력">
         <button class="btn" type="submit" onclick="fn_egov_select_noticeList('1'); return false;">조회</button>
     </span>
-        <a href="" class="item btn btn_blue_46 w_100">등록</a>
+<%--        <a href=# class="item btn btn_blue_46 w_100" onClick="javascript:goEdit('insert', 'I')">등록</a>--%>
+        <a href=# class="item btn btn_blue_46 w_100" onClick="javascript:goEdit('insert', 'I')">등록</a>
       </form>
 
     </div>

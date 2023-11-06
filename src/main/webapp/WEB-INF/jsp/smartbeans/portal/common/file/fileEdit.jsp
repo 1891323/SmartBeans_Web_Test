@@ -38,21 +38,41 @@ window['${id}-callback'] = (fileList) => {
   }
 
   $(document).ready(() => {
-    //첨부파일명 삽입
+    // 첨부파일명 삽입
     var fileTarget = $('#ex_filename');
-    fileTarget.on('change', function () { // 값이 변경되면
-      var filename = '';
-      if (window.FileReader) { // modern browser
-        filename = $(this)[0].files[0].name;
-      } else { // old IE
-        filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출
+
+    fileTarget.on('change', function () {
+      var fileList = fileTarget[0].files;
+      var fileNames = $("#egovComFileList");
+
+      fileNames.empty(); // 기존 목록을 비웁니다.
+
+      for (var i = 0; i < fileList.length; i++) {
+        var fileNameDiv = $('<div>').addClass('file_name').text(fileList[i].name);
+        var deleteBtn = $('<button>').addClass('deleteBtn').text('삭제').attr('data-file-index', i);
+
+        deleteBtn.on('click', function() {
+          var fileIndex = $(this).data('file-index');
+          // 파일 목록에서 해당 인덱스의 파일 제거
+          var newFileList = Array.from(fileTarget[0].files).filter((_, index) => index !== fileIndex);
+          // 인풋 필드에 새 파일 목록 설정 (아래 설명 참조)
+          setFilesToFileInput(fileTarget[0], newFileList);
+          // 목록에서 해당 요소 제거
+          $(this).parent().remove();
+        });
+
+        fileNames.append(fileNameDiv.append(deleteBtn));
       }
-      // 추출한 파일명 삽입
-      $(this).siblings('#file').val(filename);
-      $('#file2').attr("value", $('#file').val())
-      showDeleteBtn();
     });
   });
+
+  function setFilesToFileInput(fileInput, files) {
+    // DataTransfer 객체를 사용하여 파일 목록을 설정
+    var dataTransfer = new DataTransfer();
+    files.forEach(file => dataTransfer.items.add(file));
+    fileInput.files = dataTransfer.files;
+  }
+
 
   //첨부파일 취소버튼 이벤트
   $(document).on("click", ".deleteBtn", function () {
@@ -89,7 +109,9 @@ window['${id}-callback'] = (fileList) => {
       <button type="button" class="paperClip"></button>
     </label>
 <%--    <input type="file" id="ex_filename" class="upload-hidden" name="uploadFiles">--%>
-    <input type="file" id="ex_filename" class="upload-hidden" name="file_1">
+<%--    <input type="file" id="ex_filename" class="upload-hidden" name="file_1">--%>
+    <input type="file" id="ex_filename" class="upload-hidden" name="uploadFiles" multiple>
+
   </c:when>
   <c:otherwise>
     관리자에게 문의바랍니다.
