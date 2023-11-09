@@ -16,7 +16,7 @@
     <div class="menubar">
         <div class="menuWrap">
             <h1 class="logo">
-                <a href="/" class="logo"><img src="/images/egovframework/main/images/logo@2x.png" alt="pc메인로고"></a>
+                <a href="/" class="logo"><img src="/images/egovframework/main/images/logo.svg" alt="pc메인로고"></a>
             </h1>
 
             <nav id="gnb">

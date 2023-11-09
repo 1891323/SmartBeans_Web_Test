@@ -8,15 +8,14 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <title>충청남도 데이터허브 포털</title>
+    <title>괴산 스마트빈스</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <link rel="stylesheet" href="/css/egovframework/main/font.css">
     <link rel="stylesheet" href="/css/egovframework/main/reset.css">
-    <link rel="stylesheet" type="text/css"
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css"/>
     <link rel="stylesheet" href="/css/egovframework/main/style.css">
 
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
@@ -29,17 +28,19 @@
 <body>
 
 <tiles:insertAttribute name="header"/>
-
+<section id="container">
 <div style="display: flex;">
-    <div style="flex: 1;">
+
+    <div style="flex: 0;">
         <tiles:insertAttribute name="left"/>
     </div>
+
     <div style="flex: 1;">
         <tiles:insertAttribute name="content"/>
-
     </div>
-</div>
 
+</div>
+</section>
 <tiles:insertAttribute name="footer"/>
 
 </body>

@@ -30,7 +30,7 @@ public class NoticeController {
     }
 	
 	//20230511 - sbk 등록페이지
-    @RequestMapping("/insertNoticeBoardPage.do")
+    @RequestMapping("/NoticeBoard.do")
     public String insertNoticeBoardPage() throws Exception {
 		return "main/contents/admin/Board/Notice/Add.index";
     }

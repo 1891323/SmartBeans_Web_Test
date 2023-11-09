@@ -3,40 +3,123 @@
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
-
 <!-- 왼쪽 메뉴 html -->
-<div class="sidebar">
-    <ul class="nav flex-column">
-        <li class="nav-item">
-            <a class="nav-link active" href="#">게시판관리</a>
-            <ul class="nav flex-column ml-3">
-                <li class="nav-item"><a class="nav-link" href="#">공지사항 관리</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">문의하기 관리</a></li>
+<div class="wrapper">
+    <div class="lnb">
+        <!-- 왼쪽 메뉴 구조 (기존에 있던 내용) -->
+        <h3>메뉴</h3>
+        <div class="lnbList">
+            <ul>
+
+                <li>
+                    <a href="">사업소개</a>
+                    <ul>
+                        <li class="lnbCnt">
+                            <a href="">브랜드 전략</a>
+                        </li>
+                        <li class="lnbCnt">
+                            <a href="">브랜드 컨셉</a>
+                        </li>
+                        <li class="lnbCnt">
+                            <a href="">서비스 소개</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="">단지내 주요 시설물</a>
+                    <ul>
+                        <li class="lnbCnt">
+                            <a href="">종합 계획</a>
+                        </li>
+                        <li class="lnbCnt">
+                            <a href="">자동화 장비·기계 지원</a>
+                        </li>
+                        <li class="lnbCnt">
+                            <a href="">영농지원 기반 시설</a>
+                        </li>
+                        <li class="lnbCnt">
+                            <a href="">스마트 SPC/APC</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="">농업 정보</a>
+                    <ul>
+                        <li class="lnbCnt">
+                            <a href="">주간농사정보</a>
+                        </li>
+                        <li class="lnbCnt">
+                            <a href="">날씨정보</a>
+                        </li>
+                        <li class="lnbCnt">
+                            <a href="">콩 재배 매뉴얼</a>
+                        </li>
+                        <li class="lnbCnt">
+                            <a href="">병해충 발생정보</a>
+                        </li>
+                        <li class="lnbCnt">
+                            <a href="">비료 정보</a>
+                        </li>
+                        <li class="lnbCnt">
+                            <a href="">곡물별 가격 현황</a>
+                        </li>
+                        <li class="lnbCnt">
+                            <a href="">데이터</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="">알림마당</a>
+                    <ul>
+                        <li class="lnbCnt">
+                            <a href="">공지사항</a>
+                        </li>
+                        <li class="lnbCnt">
+                            <a href="">게시판</a>
+                        </li>
+                        <li class="lnbCnt">
+                            <a href="">자료실</a>
+                        </li>
+                        <li class="lnbCnt">
+                            <a href="">Q&A</a>
+                        </li>
+                        <li class="lnbCnt">
+                            <a href="">FAQ</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="">센터소개</a>
+                    <ul>
+                        <li class="lnbCnt">
+                            <a href="">인사말</a>
+                        </li>
+                        <li class="lnbCnt">
+                            <a href="">비전 및 목표</a>
+                        </li>
+                        <li class="lnbCnt">
+                            <a href="">CI 소개</a>
+                        </li>
+                        <li class="lnbCnt">
+                            <a href="">센터 연혁</a>
+                        </li>
+                        <li class="lnbCnt">
+                            <a href="">조직구성</a>
+                        </li>
+                        <li class="lnbCnt">
+                            <a href="">찾아오시는 길</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href=""></a>
+                </li>
             </ul>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">사용자 관리</a>
-            <ul class="nav flex-column ml-3">
-                <li class="nav-item"><a class="nav-link" href="#">권한 관리</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">메뉴 관리</a></li>
-            </ul>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">만족도 통계 관리</a>
-            <ul class="nav flex-column ml-3">
-                <li class="nav-item"><a class="nav-link" href="#">사용자별</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">메뉴별</a></li>
-            </ul>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">접속 이력 관리</a>
-            <ul class="nav flex-column ml-3">
-                <li class="nav-item"><a class="nav-link" href="#">사용자별</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">메뉴별</a></li>
-            </ul>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">데이터 관리</a>
-        </li>
-    </ul>
+        </div>
+    </div>
 </div>

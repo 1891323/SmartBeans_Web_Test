@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="<c:url value='/'/>css/egovframework/com/layout.css">
     <link rel="stylesheet" href="<c:url value='/'/>css/egovframework/com/component.css">
     <link rel="stylesheet" href="<c:url value='/'/>css/egovframework/com/page.css">
+
     <script src="<c:url value='/'/>js/jquery-1.11.2.min.js" type=""></script>
     <script src="<c:url value='/'/>js/ui.js" type=""></script>
     <%-- <link href="<c:url value='/'/>css_old/default.css" rel="stylesheet" type="text/css" > --%>
@@ -145,12 +146,16 @@
 
 <div class="wrap">
     <!-- header start -->
+
 <%--    <c:import url="/sym/mms/EgovHeader.do" />--%>
+
     <!-- //header end -->
 
     <div class="container">
         <div class="p_login">
             <h1>로그인</h1>
+
+
             <div class="loginbox">
 
                 <form name="loginForm" action ="<c:url value='/member/login/memberActionSecurityLogin'/>" method="post">
@@ -163,11 +168,13 @@
                         <legend>로그인</legend>
 
                         <dl>
+
                             <dt><label>아이디</label></dt>
                             <dd><input type="text" name="userId" id="userId" title="아이디" maxlength="10"/></dd>
                         </dl>
 
                         <dl>
+
                             <dt><label>비밀번호</label></dt>
                             <dd>
                                 <input type="password" name="password" id="password" title="비밀번호" onKeyDown="javascript:if (event.keyCode == 13) { actionLogin(); }"/>
@@ -179,6 +186,7 @@
                         </dl>
 
                         <div class="btn_a">
+
                             <a class="btn" onClick="actionLogin()">로그인</a>
                             <a class="btn" onClick="goRegiUsr();">회원가입</a>
                         </div>
@@ -193,9 +201,11 @@
     </div>
 
     <!-- footer 시작 -->
+
 <%--    <c:import url="/sym/mms/EgovFooter.do" />--%>
     <!-- //footer 끝 -->
 </div>
 
 </body>
+
 </html>

@@ -37,7 +37,6 @@ import static com.squareup.okhttp.internal.Internal.logger;
 @Controller
 @RequestMapping(value = "/admin/noti")
 public class AnnouncementAdminController {
-
     private static final Logger logger = LoggerFactory.getLogger(AnnouncementAdminController.class);
 
     @Resource(name = "AnnouncementAdminService")
@@ -216,5 +215,32 @@ public class AnnouncementAdminController {
         return redirectUrl;
 
     }
+
+
+    //밑에 URL을 가져와서 http://localhost:9090/AnnouncementList.do 라고 검색하면 접속 가능함!
+    @RequestMapping("AnnouncementList.do")
+    public String selectAminNoticeBoardList(@ModelAttribute("searchVO")ComDefaultVO searchVO, ModelMap model){
+
+        System.out.println("목록출력 테스트중 ===============================================");
+        List<NoticeBoardVO> allNotices = announcementAdminSerivce.selectAll();
+        model.addAttribute("allNotices", allNotices);
+        logger.info("공지목록리스트 출력 테스트: " + allNotices);
+
+        /* pageing setting */
+        PaginationInfo paginationInfo = new PaginationInfo();
+        paginationInfo.setCurrentPageNo(searchVO.getPageIndex());
+        paginationInfo.setRecordCountPerPage(searchVO.getPageUnit());
+        paginationInfo.setPageSize(searchVO.getPageSize());
+
+        searchVO.setFirstIndex(paginationInfo.getFirstRecordIndex());
+        searchVO.setLastIndex(paginationInfo.getLastRecordIndex());
+        searchVO.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
+
+
+
+        return "admin/AnnouncementList.admin";
+    }
+
+
 
 }

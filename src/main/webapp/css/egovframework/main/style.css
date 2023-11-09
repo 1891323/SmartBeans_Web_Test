@@ -41,7 +41,7 @@
 }
 #header .menubar .menuWrap .logo {
   position: absolute;
-  top: 15px;
+  top: 5px;
   left: 0;
   -o-object-fit: contain;
      object-fit: contain;
@@ -156,8 +156,13 @@
 
 #footer {
   width: 100%;
+<<<<<<< HEAD
+  background-color: #E4E7EC;
+  height: 130px;
+=======
   /*background-color: #E4E7EC; 푸터배경*/
   height: 101px;
+>>>>>>> 956e2ea2eff4baa947d443fcaed18225647ff805
   transform: inherit;
   position: relative;
   /* transform: translateY(-100%); */
@@ -166,27 +171,30 @@
   margin: 0 auto;
   width: 380px;
   display: grid;
-  gap: 13px;
+  gap: 12px;
   color: #73767F;
 }
 #footer .wrap > div {
-  margin: 18px 0 0;
+  margin: 15px 0 0;
   display: flex;
   gap: 10px;
   font-size: 13px;
 }
 #footer .wrap > div address {
+  margin-top:10px;
   font-style: normal;
-  line-height: 20px;
+  line-height: 30px;
+  font-size:14px;
 }
 #footer .wrap p {
   font-size: 12px;
+  margin: auto;
 }
 
 /* container */
 #container {
   margin: 0 auto;
-  max-width: 1400px;
+  max-width: 87.5%;
   height: auto;
   /*height: calc(100% - 222px);*/
 }
@@ -228,6 +236,7 @@
   font-size: 28px;
   font-weight: 500;
   margin: 6px 0 0;
+  text-align:center;
 }
 .wrapper .lnb .lnbList {
   width: 270px;
@@ -246,6 +255,7 @@
   font-size: 20px;
   font-weight: 600;
   text-decoration: none;
+  color: #000000;
 }
 .wrapper .lnb .lnbList > ul > li:first-child {
   margin-top: 0;
@@ -278,6 +288,7 @@
 .wrapper .lnb .lnbList ul .lnbCnt a {
   font-size: 18px;
   font-weight: 400;
+  text-decoration: none;
   color: #667085;
 }
 .wrapper .lnb .lnbList ul .lnbCnt a:hover {

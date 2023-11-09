@@ -40,6 +40,4 @@ public class MemberLoginServiceImpl implements MemberLoginService {
         return memberVO;
     }
 
-
-
 }
