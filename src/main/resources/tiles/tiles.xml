@@ -25,7 +25,7 @@
     <definition name=".template-lnb" template="/WEB-INF/jsp/smartbeans/portal/layouts/tiles/template/LayoutLnb.jsp" extends=".extends-commons">
         <put-attribute name="header" 			value="/WEB-INF/jsp/smartbeans/portal/layouts/tiles/attribute/com/LayoutHeader.jsp"/>
         <put-attribute name="footer" 			value="/WEB-INF/jsp/smartbeans/portal/layouts/tiles/attribute/com/LayoutFooter.jsp"/>
-        <put-attribute name="left" 			value="/WEB-INF/jsp/smartbeans/portal/layouts/tiles/attribute/com/LayoutLeft.jsp"/>
+        <put-attribute name="left" 			    value="/WEB-INF/jsp/smartbeans/portal/layouts/tiles/attribute/com/LayoutLeft.jsp"/>
         <put-attribute name="content" value="" />
     </definition>
 
