@@ -88,7 +88,7 @@ public class DatahubWebMvcConfiguration extends WebMvcConfigurationSupport {
     public UrlBasedViewResolver tilesViewResolver() {
         UrlBasedViewResolver tilesViewResolver = new UrlBasedViewResolver();
         tilesViewResolver.setViewClass(TilesView.class);
-        tilesViewResolver.setOrder(1);
+        tilesViewResolver.setOrder(0);
         return tilesViewResolver;
     }
 

@@ -282,5 +282,11 @@ public class LoginVO implements Serializable{
 		this.onepassIntfToken = onepassIntfToken;
 	}
 
+    public void setPasswordNew(String enpasswordNew) {
+    }
+
+	public String getPasswordNew() {
+		return password;
+	}
 }
 

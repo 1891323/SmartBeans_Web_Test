@@ -17,12 +17,12 @@ public class UserNoticeController {
     @Resource(name = "userNoticeService")
     private UserNoticeService usernoticeService;
 
-    @RequestMapping(value = "user/notice.do")
+    @RequestMapping(value = "user/noti/Announcement.do")
     public String userNoticeView(@ModelAttribute("userNoticeVO") UserNoticeVO userNoticeVO
             , HttpServletRequest request
             , HttpServletResponse response
             , ModelMap model) throws Exception {
 
-        return "user/notice/userNotice"; // view 반환
+        return "user/notice/userNotice.lnb"; // view 반환
     }
 }

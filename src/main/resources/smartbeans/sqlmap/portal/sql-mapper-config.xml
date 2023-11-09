@@ -15,5 +15,8 @@
 		<typeAlias alias="FileVO"			type="smartbeans.cmmn.service.FileVO" />
 		<typeAlias alias="ComDefaultCodeVO" type="smartbeans.cmmn.ComDefaultCodeVO" />
 		<typeAlias alias="comDefaultVO"		type="smartbeans.cmmn.ComDefaultVO" />
+		<typeAlias alias="NoticeBoardVO"		type="smartbeans.portal.admin.announcement.service.NoticeBoardVO" />
+		<typeAlias alias="AnnouncementVO"		type="smartbeans.portal.admin.announcement.service.AnnouncementVO" />
+
     </typeAliases>
 </configuration>

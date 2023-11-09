@@ -23,10 +23,6 @@
 
 <body>
 
-<jsp:include page="/WEB-INF/jsp/smartbeans/portal/layouts/tiles/attribute/com/LayoutHeader.jsp"/>
-
-<jsp:include page="/WEB-INF/jsp/smartbeans/portal/layouts/tiles/attribute/com/LayoutFooter.jsp"/>
-
 </body>
 
 </html>
