@@ -19,7 +19,7 @@
         <result property="noticeAnsYn" column="notice_ans_yn"/>
         <result property="noticeCat" column="notice_cat"/>
         <result property="noticeTitle" column="notice_title"/>
-        <result property="fileNo" column="file_no"/>
+        <result property="atchFileId" column="atch_file_id"/>
     </resultMap>
 
     <!--게시글 상세페이지-->
@@ -39,7 +39,7 @@
         <result property="mbrId" column="mbr_id"/>
         <result property="noticeCat" column="notice_cat"/>
         <result property="noticeTitle" column="notice_title"/>
-        <result property="fileNo" column="file_no"/>
+        <result property="atchFileId" column="atch_file_id"/>
     </resultMap>
 
     <select id="selectAll" resultMap="NoticeBoardList">
@@ -132,11 +132,39 @@
             notice_del_yn,
             mbr_id,
             notice_cat,
-            file_no
+            atch_file_id
         FROM
             tb_notice_board
         WHERE
             notice_board_no = #{noticeBoardNo}
     </select>
+
+    <insert id="insertBoard" parameterType="NoticeBoardVO">
+        INSERT INTO tb_notice_board (
+            notice_board_type,
+            notice_board_sub_type,
+            notice_last_updt_dtm,
+            notice_first_regist_dtm,
+            notice_contents,
+            notice_wrtr,
+            notice_password,
+            mbr_id,
+            notice_cat,
+            notice_title,
+            atch_file_id
+        ) VALUES (
+                     #{noticeBoardType},
+                     #{noticeBoardSubType},
+                     TO_TIMESTAMP(#{noticeLastUpdtDtm}, 'YYYY-MM-DD HH24:MI:SS'),
+                     TO_TIMESTAMP(#{noticeFirstRegistDtm}, 'YYYY-MM-DD HH24:MI:SS'),
+                     #{noticeContents},
+                     #{noticeWrtr},
+                     #{noticePassword},
+                     #{mbrId},
+                     #{noticeCat},
+                     #{noticeTitle},
+                     #{atchFileId}
+                 )
+    </insert>
 
 </mapper>

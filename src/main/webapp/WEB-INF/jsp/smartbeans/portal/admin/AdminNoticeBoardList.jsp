@@ -25,8 +25,8 @@
 
   function goEdit(select, noticeBoardNo) {
     if (select === "insert") {
-      console.log("등록페이지 이동")
       document.frm.action = "/admin/noti/selectAdminEditNoticeBoard.do";
+      document.frm.noticeBoardSubType.value = '${noticeBoardSubType}';
       document.frm.method = 'post';
       document.frm.submit();
     } else if (select === "save") {
@@ -161,6 +161,7 @@
     <div class="condition">
 
       <form name="frm" action="/portal/admin/announcement/AnnouncementList.do" method="post">
+        <input type="hidden" name="noticeBoardSubType" value="${noticeBoardSubType}" />
         <label class="item f_select">
           <select name="searchCnd" id="searchCnd" title="검색조건 선택">
             <option value="0">제목</option>
