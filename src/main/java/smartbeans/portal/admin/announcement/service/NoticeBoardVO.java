@@ -4,6 +4,7 @@ package smartbeans.portal.admin.announcement.service;
 * 일반 게시판 정보는 Board 참고
 * */
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 import smartbeans.cmmn.ComDefaultVO;
 
 import java.util.Date;
@@ -25,6 +26,7 @@ public class NoticeBoardVO extends ComDefaultVO {
     private Date noticeLastUpdtDtm;
 
     // 최초 등록 일시
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date noticeFirstRegistDtm;
 
     // 게시판 조회 수
@@ -58,7 +60,7 @@ public class NoticeBoardVO extends ComDefaultVO {
     private String noticeTitle;
 
     // 첨부파일 번호
-    private int fileNo;
+    private String atchFileId;
 
     public Long getRowNum() {
         return rowNum;
@@ -188,12 +190,13 @@ public class NoticeBoardVO extends ComDefaultVO {
         this.noticeTitle = noticeTitle;
     }
 
-    public int getFileNo() {
-        return fileNo;
+    public String getAtchFileId() {
+        return atchFileId;
     }
 
-    public void setFileNo(int fileNo) {
-        this.fileNo = fileNo;
-    }
+    public void setAtchFileId(String atchFileId) {  this.atchFileId = atchFileId;    }
+
 }
+
+
 

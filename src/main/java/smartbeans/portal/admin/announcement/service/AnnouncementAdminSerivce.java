@@ -12,4 +12,6 @@ public interface AnnouncementAdminSerivce {
     int selectBoardListTotCnt(NoticeBoardVO searchVO);
 
     NoticeBoardVO selectBoardDetail(NoticeBoardVO noticeBoardVO);
+
+    int insertBoard(NoticeBoardVO boardVO);
 }
