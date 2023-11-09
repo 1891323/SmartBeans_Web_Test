@@ -133,7 +133,7 @@
             <tr>
               <th>작성일</th>
               <td>
-                <fmt:formatDate value="${boardVO.noticeFirstRegistDtm}" pattern="yyyy.MM.dd" />
+                <fmt:formatDate value="${boardVO.noticeFirstRegistDtm}" pattern="yyyy.MM.dd HH:mm" />
               </td>
               <!-- <td>2023.03.08</td> -->
             </tr>
@@ -146,7 +146,7 @@
               <th>파일첨부</th>
               <td class="url">
 <%--                          <c:import url="/common/fileView.do" charEncoding="utf-8">--%>
-<%--                            <c:param name="param_atchFileId" value="${boardVO.fileNo}" />--%>
+<%--                            <c:param name="param_atchFileId" value="${boardVO.atchFileId}" />--%>
 <%--                            <c:param name="param_mode" value="default" />--%>
 <%--                          </c:import>--%>
               </td>

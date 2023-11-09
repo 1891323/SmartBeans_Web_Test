@@ -20,9 +20,44 @@
 <c:set var="now" value="<%= new java.util.Date() %>"/>
 
 <script>
+    <%--var noticeBoardSubType = ${boardVO.noticeBoardSubType};--%>
+    var noticeBoardSubType = Number('${boardVO.noticeBoardSubType}');
+    var formModified = false;
+    $(document).ready(function() {
+        $('input, textarea').on('change', function() {
+            formModified = true;
+        });
+
+        // 폼 제출시에는 경고가 나타나지 않도록 formModified를 false로 설정.
+        $('form').on('submit', function() {
+            formModified = false;
+        });
+    });
     function goList() {
-        location.href = "Announcement.do";
+        if (formModified && !confirm('작성하던 게시물이 저장되지 않습니다. 페이지를 벗어나시겠습니까?')) {
+            return false;
+        }
+        var redirectUrl = "/admin/noti/";
+        switch (noticeBoardSubType) {
+            case 1:
+                redirectUrl += "Announcement.do";
+                break;
+            case 5:
+                redirectUrl += "Board.do";
+                break;
+            case 4:
+                redirectUrl += "QnA.do";
+                break;
+            default:
+                redirectUrl += "Announcement.do"; // 기본값 혹은 예외 처리
+        }
+
+        // 사용자가 확인을 눌렀을 때만 formModified를 false로 설정하여 onbeforeunload 경고를 방지합니다.
+        formModified = false;
+        location.href = redirectUrl; // 결정된 URL로 이동합니다.
     }
+
+
 
     function editData() {
         var bbsTtl = document.getElementById('bbsTtl').value;
@@ -41,10 +76,10 @@
         }
 
         if (document.querySelector('#editmode').value === 'I') {
-            document.insertNoticeBoardOne.action = "/admn/bbs/notice/insertAdminNoticeBoard.do";
+            document.insertNoticeBoardOne.action = "/admin/noti/insertAdminNoticeBoard.do";
             document.insertNoticeBoardOne.submit();
         } else if (document.querySelector('#editmode').value === 'U') {
-            document.insertNoticeBoardOne.action = "/admn/bbs/notice/updateAdminNoticeBoard.do";
+            document.insertNoticeBoardOne.action = "/admin/noti/updateAdminNoticeBoard.do";
             document.insertNoticeBoardOne.submit();
         }
     }
@@ -133,16 +168,16 @@
 
             <input type="hidden" id="editmode" name="editmode" value="${editmode}"/>
             <form name="insertNoticeBoardOne" method="post" enctype="multipart/form-data" >
+                <input type="hidden" name="noticeBoardSubType" value="${noticeBoardSubType}"/>
+
 
                 <div class="inner">
                     <div class="inputWrap">
                         <div class="gridWrap">
                             <div>
                                 <span>제목</span>
-                                <input type="text" id="bbsTtl" name="bbsTtl" value="${boardVO.noticeTitle}" maxlength="200"/>
-                                <input type="hidden" name="registerId" value="${boardVO.noticeWrtr}"/>
-                                <input type="hidden" name="bbsSn" value="${boardVO.noticeBoardNo}"/>
-                                <input type="hidden" name="nttSeCd" value="${boardVO.noticeBoardSubType}"/>
+                                <input type="text" id="bbsTtl" name="noticeTitle" value="${boardVO.noticeTitle}" maxlength="200"/>
+
                             </div>
                             <div>
                                 <span>작성자</span>
@@ -150,11 +185,16 @@
                             </div>
                             <div>
                                 <span>작성일</span>
-                                <fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss"/>
+<%--                                <fmt:formatDate  value="${now}" pattern="yyyy-MM-dd HH:mm:ss"/>--%>
+                                <div>
+                                    <input type="text" name="noticeFirstRegistDtm"
+                                           value="<fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss"/>" readonly="readonly" class ="no-border" />
+                                </div>
+
                             </div>
                             <div>
                                 <span>내용</span>
-                                <textarea class="long pd15" id="bbsCn" name="bbsCn" rows="10" cols="40" maxlength="4000">${boardVO.noticeContents}</textarea>
+                                <textarea class="long pd15" id="bbsCn" name="noticeContents" rows="10" cols="40" maxlength="4000">${boardVO.noticeContents}</textarea>
                             </div>
                             <div class="file-upload">
                                 <span>파일첨부</span>
@@ -195,7 +235,7 @@
                         </button>
                     </li>
                     <li>
-                        <button type="button" class="dark" onClick="javascript:goEdit()">
+                        <button type="button" class="dark" onClick="javascript:editData()">
                             저장
                         </button>
                     </li>

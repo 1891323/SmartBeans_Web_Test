@@ -15,12 +15,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import smartbeans.cmmn.ComDefaultVO;
+import smartbeans.cmmn.service.EgovFileMngService;
+import smartbeans.cmmn.service.EgovFileMngUtil;
 import smartbeans.cmmn.service.FileVO;
 import smartbeans.portal.admin.announcement.service.AnnouncementAdminSerivce;
 import smartbeans.portal.admin.announcement.service.NoticeBoardVO;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 
 import java.util.List;
@@ -39,6 +44,12 @@ public class AnnouncementAdminController {
 
     @Resource(name = "propertiesService")
     protected EgovPropertyService propertiesService;
+
+    @Resource(name = "EgovFileMngUtil")
+    private EgovFileMngUtil fileUtil;
+
+    @Resource(name = "EgovFileMngService")
+    private EgovFileMngService fileMngService;
 
     /**
      * notice 게시판 글목록 출력
@@ -77,11 +88,6 @@ public class AnnouncementAdminController {
             request.setAttribute("pageTitle", "Q&A");
         }
 
-
-        System.out.println(" 공지 사항 목록 테스트 중  ===============================================");
-        System.out.println(" getter getNoticeBoardType~~  ===============================================" + searchVO.getNoticeBoardType());
-        System.out.println(" getter getNoticeBoardSubType~~  ===============================================" + searchVO.getNoticeBoardSubType());
-
         /* pageing setting */
         PaginationInfo paginationInfo = new PaginationInfo();
         paginationInfo.setCurrentPageNo(searchVO.getPageIndex());
@@ -98,7 +104,7 @@ public class AnnouncementAdminController {
         int totCnt = announcementAdminSerivce.selectBoardListTotCnt(searchVO);
         paginationInfo.setTotalRecordCount(totCnt);
 
-//        logger.info("공지 사항 목록 테스트 중=========================Board List: {}", boardList);
+
 
         model.addAttribute("boardList", boardList);
 
@@ -147,30 +153,67 @@ public class AnnouncementAdminController {
 
     /**
      * Name: selectAdminEditNoticeBoard()
-     * Descriptions: 관리자 공지사항 등록 페이지
-     * @param NoticeBoardVO
+     * Descriptions: 관리자 공지사항 등록 페이지 이동
+     * @param noticeBoardVO
      * @param editmode
      * @param model
      * @return
      * @throws Exception
      */
     @PostMapping(value = "/selectAdminEditNoticeBoard.do")
-    public String selectAdminEditNoticeBoard(NoticeBoardVO NoticeBoardVO, String editmode, ModelMap model) throws Exception {
+    public String selectAdminEditNoticeBoard(NoticeBoardVO boardVO, String editmode, ModelMap model) throws Exception {
         if ("U".equals(editmode)) {
 //            boardVO = announcementAdminSerivce.selectBoard(boardVO);
 //            model.addAttribute("boardVO", boardVO);
         }
 
         model.addAttribute("editmode", editmode);
+        model.addAttribute("noticeBoardVO", boardVO);
+        model.addAttribute("noticeBoardSubType", boardVO.getNoticeBoardSubType());
 
         return "admin/AdminNoticeBoardAdd.admin";
     }
 
     @PostMapping(value = "/insertAdminNoticeBoard.do")
     public String insertAdminNoticeBoard(final MultipartHttpServletRequest multiRequest, NoticeBoardVO boardVO, ModelMap model) throws Exception {
+        List<FileVO> result = null;
+        String atchFileId = "";
+        boardVO.setNoticeBoardType(4);
 
-        logger.info("삽입 프로세스 진행 중");
-        return "admin/AdminNoticeBoardAdd.admin";
+        //로그인 구현 전 임시로 setting
+        boardVO.setNoticeWrtr("임시 작성자");
+        boardVO.setMbrId("1");
+
+        final Map<String, MultipartFile> files = multiRequest.getFileMap();
+        if (!files.isEmpty()) {
+            result = fileUtil.parseFileInf(files, "BBS_", 0, "", "");
+            atchFileId = fileMngService.insertFileInfs(result);
+            boardVO.setAtchFileId(atchFileId);
+        }
+        announcementAdminSerivce.insertBoard(boardVO);
+
+
+        model.addAttribute("editmode", "I");
+        model.addAttribute("boardVO", boardVO);
+
+        // noticeBoardSubType 값에 따라 다른 페이지로 리디렉션
+        String redirectUrl = "redirect:/admin/noti/";
+        switch (boardVO.getNoticeBoardSubType()) {
+            case 1:
+                redirectUrl += "Announcement.do";
+                break;
+            case 5:
+                redirectUrl += "Board.do";
+                break;
+            case 4:
+                redirectUrl += "QnA.do";
+                break;
+            default:
+                redirectUrl += "Announcement.do"; // 기본값 혹은 예외 처리
+        }
+
+        return redirectUrl;
+
     }
 
 
