@@ -17,10 +17,25 @@
     </c:otherwise>
 </c:choose>
 
+<c:choose>
+    <c:when test="${noticeBoardSubType == '1'}">
+        <c:set var="Title" value="공지사항"/>
+    </c:when>
+    <c:when test="${noticeBoardSubType == '5'}">
+        <c:set var="Title" value="게시판"/>
+    </c:when>
+    <c:when test="${noticeBoardSubType == '4'}">
+        <c:set var="Title" value="Q&A"/>
+    </c:when>
+    <c:otherwise>
+        <c:set var="Title" value="공지사항"/>
+    </c:otherwise>
+</c:choose>
+
 <c:set var="now" value="<%= new java.util.Date() %>"/>
 
 <script>
-    <%--var noticeBoardSubType = ${boardVO.noticeBoardSubType};--%>
+
     var noticeBoardSubType = Number('${boardVO.noticeBoardSubType}');
     var formModified = false;
     $(document).ready(function() {
@@ -109,66 +124,16 @@
     <div class="wrapper">
         <div class="lnb">
             <h3>관리자 메뉴</h3>
-            <div class="lnbList">
-                <ul>
-                    <li>
-                        <a href="">게시판 관리</a>
-                        <ul>
-                            <li class="lnbCnt">
-                                <a href="">공지사항 관리</a>
-                            </li>
-                            <li class="lnbCnt">
-                                <a href="">자료실 관리</a>
-                            </li>
-                            <li class="lnbCnt">
-                                <a href="">FAQ 관리</a>
-                            </li>
-                            <li class="lnbCnt">
-                                <a href="">QnA 관리</a>
-                            </li>
-                            <li class="lnbCnt">
-                                <a href="">게시판 관리</a>
-                            </li>
-                            <li class="lnbCnt">
-                                <a href="">콩 재배 메뉴얼 관리</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="">사용자 관리</a>
-                        <ul>
-                            <li class="lnbCnt">
-                                <a href="">권한 관리</a>
-                            </li>
-                            <li class="lnbCnt">
-                                <a href="">메뉴 관리</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="">접속 이력 관리</a>
-                        <ul>
-                            <li class="lnbCnt">
-                                <a href="">사용자별</a>
-                            </li>
-                            <li class="lnbCnt">
-                                <a href="">메뉴별</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="">데이터 관리</a>
-                    </li>
-                </ul>
-            </div>
+            <%@ include file="/WEB-INF/jsp/smartbeans/portal/layouts/tiles/attribute/com/LayoutAdminLeft.jsp" %>
         </div>
 
         <div class="contents">
-            <h2>공지사항 ${subTitle}</h2>
+            <h2>${Title} ${subTitle}</h2>
 
             <input type="hidden" id="editmode" name="editmode" value="${editmode}"/>
             <form name="insertNoticeBoardOne" method="post" enctype="multipart/form-data" >
                 <input type="hidden" name="noticeBoardSubType" value="${noticeBoardSubType}"/>
+                <input type="hidden" name="noticeBoardNo" value="${boardVO.noticeBoardNo}"/>
 
 
                 <div class="inner">
@@ -185,13 +150,26 @@
                             </div>
                             <div>
                                 <span>작성일</span>
-<%--                                <fmt:formatDate  value="${now}" pattern="yyyy-MM-dd HH:mm:ss"/>--%>
-                                <div>
-                                    <input type="text" name="noticeFirstRegistDtm"
-                                           value="<fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss"/>" readonly="readonly" class ="no-border" />
-                                </div>
-
+                                <c:choose>
+                                    <c:when test="${editmode == 'U'}">
+                                        <c:choose>
+                                            <c:when test="${not empty boardVO.noticeLastUpdtDtm}">
+                                                <fmt:formatDate value="${boardVO.noticeLastUpdtDtm}" pattern="yyyy-MM-dd HH:mm:ss" var="formattedLastUpdtDate"/>
+                                                <input type="text" name="noticeLastUpdtDtm" value="${formattedLastUpdtDate}" readonly="readonly" class="no-border"/>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <fmt:formatDate value="${boardVO.noticeFirstRegistDtm}" pattern="yyyy-MM-dd HH:mm:ss" var="formattedFirstRegistDate"/>
+                                                <input type="text" name="noticeFirstRegistDtm" value="${formattedFirstRegistDate}" readonly="readonly" class="no-border"/>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" var="formattedDate"/>
+                                        <input type="text" name="noticeFirstRegistDtm" value="${formattedDate}" readonly="readonly" class="no-border"/>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
+
                             <div>
                                 <span>내용</span>
                                 <textarea class="long pd15" id="bbsCn" name="noticeContents" rows="10" cols="40" maxlength="4000">${boardVO.noticeContents}</textarea>
@@ -199,7 +177,7 @@
                             <div class="file-upload">
                                 <span>파일첨부</span>
 <%--                                <c:import url="/common/fileEdit.do" charEncoding="utf-8">--%>
-<%--                                    <c:param name="param_atchFileId" value="${boardVO.fileNo}" />--%>
+<%--                                    <c:param name="param_atchFileId" value="${boardVO.atchFileId}" />--%>
 <%--                                    <c:param name="param_mode" value="default" />--%>
 <%--                                </c:import>--%>
                                 <div id="file_upload_posbl" class="board_attach2">
@@ -210,7 +188,7 @@
                                 <div id="file_upload_imposbl" class="board_attach2">
                                     <!-- 필요한 경우 추가 콘텐츠를 여기에 배치 -->
                                 </div>
-                                <c:if test="${empty boardVO.fileNo}">
+                                <c:if test="${empty boardVO.atchFileId}">
                                     <input type="hidden" id="fileListCnt" name="fileListCnt" value="0" />
                                 </c:if>
                             </div>

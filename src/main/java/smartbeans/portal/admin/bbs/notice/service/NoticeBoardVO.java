@@ -1,9 +1,10 @@
-package smartbeans.portal.admin.announcement.service;
+package smartbeans.portal.admin.bbs.notice.service;
 /*
 * 페이지네이션, 검색에 관한 내용 저장
 * 일반 게시판 정보는 Board 참고
 * */
 import lombok.Data;
+import org.egovframe.rte.fdl.cryptography.EgovEnvCryptoService;
 import org.springframework.format.annotation.DateTimeFormat;
 import smartbeans.cmmn.ComDefaultVO;
 
@@ -194,5 +195,14 @@ public class NoticeBoardVO extends ComDefaultVO {
     }
 
     public void setAtchFileId(String atchFileId) {  this.atchFileId = atchFileId;    }
+
+    /**
+     * 첨부파일ID 복호화 적용
+     */
+    public void setDecryptAtchFileId(EgovEnvCryptoService cryptoService) {
+        if (this.atchFileId != null && !"".equals(this.atchFileId)) {
+            this.atchFileId = cryptoService.decrypt(this.atchFileId);
+        }
+    }
 
 }

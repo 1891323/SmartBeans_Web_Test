@@ -112,4 +112,10 @@ public interface EgovFileMngService {
      * @throws Exception
      */
     public List<FileVO> selectImageFileList(FileVO vo) throws Exception;
+
+    /**
+     * 소프트 딜리트
+     * @param atchFileId
+     */
+    void updateDeleteFlagForFiles(String atchFileId);
 }
