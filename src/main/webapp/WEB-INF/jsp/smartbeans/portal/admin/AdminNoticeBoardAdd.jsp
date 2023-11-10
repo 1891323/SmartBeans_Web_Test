@@ -181,11 +181,11 @@
                             </div>
                             <div>
                                 <span>작성자</span>
-<%--                                ${sessUserNm}--%>
+                                <%--                                ${sessUserNm}--%>
                             </div>
                             <div>
                                 <span>작성일</span>
-<%--                                <fmt:formatDate  value="${now}" pattern="yyyy-MM-dd HH:mm:ss"/>--%>
+                                <%--                                <fmt:formatDate  value="${now}" pattern="yyyy-MM-dd HH:mm:ss"/>--%>
                                 <div>
                                     <input type="text" name="noticeFirstRegistDtm"
                                            value="<fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss"/>" readonly="readonly" class ="no-border" />
@@ -198,10 +198,10 @@
                             </div>
                             <div class="file-upload">
                                 <span>파일첨부</span>
-<%--                                <c:import url="/common/fileEdit.do" charEncoding="utf-8">--%>
-<%--                                    <c:param name="param_atchFileId" value="${boardVO.fileNo}" />--%>
-<%--                                    <c:param name="param_mode" value="default" />--%>
-<%--                                </c:import>--%>
+                                <%--                                <c:import url="/common/fileEdit.do" charEncoding="utf-8">--%>
+                                <%--                                    <c:param name="param_atchFileId" value="${boardVO.fileNo}" />--%>
+                                <%--                                    <c:param name="param_mode" value="default" />--%>
+                                <%--                                </c:import>--%>
                                 <div id="file_upload_posbl" class="board_attach2">
                                     <!-- 'multiple' 속성 추가 -->
                                     <input name="file_1" id="egovComFileUploader" type="file" multiple />
@@ -227,23 +227,23 @@
                         </div>
                     </div>
 
-            <div class="btnArea">
-                <!-- 버튼 영역 (목록, 수정, 삭제 등의 버튼) -->
-                <ul>
-                    <li>
-                        <button type="button" class="dark" onClick="goList()">목록
-                        </button>
-                    </li>
-                    <li>
-                        <button type="button" class="dark" onClick="javascript:editData()">
-                            저장
-                        </button>
-                    </li>
+                    <div class="btnArea">
+                        <!-- 버튼 영역 (목록, 수정, 삭제 등의 버튼) -->
+                        <ul>
+                            <li>
+                                <button type="button" class="dark" onClick="goList()">목록
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="dark" onClick="javascript:editData()">
+                                    저장
+                                </button>
+                            </li>
 
-                </ul>
-            </div>
-        </div>
+                        </ul>
+                    </div>
+                </div>
             </form>
-    </div>
+        </div>
     </div>
 </section>

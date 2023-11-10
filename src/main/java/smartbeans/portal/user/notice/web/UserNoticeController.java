@@ -23,6 +23,6 @@ public class UserNoticeController {
             , HttpServletResponse response
             , ModelMap model) throws Exception {
 
-        return "user/notice/userNotice.lnb"; // view 반환
+        return "user/notice/UserNotice.lnb"; // view 반환
     }
 }
