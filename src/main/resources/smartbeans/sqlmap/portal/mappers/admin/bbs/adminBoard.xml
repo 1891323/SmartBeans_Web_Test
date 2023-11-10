@@ -5,9 +5,9 @@
 -->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="smartbeans.portal.admin.announcement.mapper.AnnouncementAdminMapper">
+<mapper namespace="smartbeans.portal.admin.bbs.notice.mapper.AdminNoticeMapper">
     <!--목록조회용-->
-    <resultMap id="NoticeBoardList" type="smartbeans.portal.admin.announcement.service.NoticeBoardVO">
+    <resultMap id="NoticeBoardList" type="smartbeans.portal.admin.bbs.notice.service.NoticeBoardVO">
         <result property="rowNum" column="rownum"/>
         <result property="noticeBoardNo" column="notice_board_no"/>
         <result property="noticeBoardType" column="notice_board_type"/>
@@ -23,7 +23,7 @@
     </resultMap>
 
     <!--게시글 상세페이지-->
-    <resultMap id="NoticeBoardDetail" type="smartbeans.portal.admin.announcement.service.NoticeBoardVO">
+    <resultMap id="NoticeBoardDetail" type="smartbeans.portal.admin.bbs.notice.service.NoticeBoardVO">
         <result property="noticeBoardNo" column="notice_board_no"/>
         <result property="noticeBoardType" column="notice_board_type"/>
         <result property="noticeBoardSubType" column="notice_board_sub_type"/>
@@ -166,5 +166,29 @@
                      #{atchFileId}
                  )
     </insert>
+
+    <update id="deleteBoard" parameterType="NoticeBoardVO">
+        update
+        tb_notice_board
+        set
+            notice_del_yn = 'Y'
+        where
+            notice_board_no = #{noticeBoardNo}
+
+    </update>
+
+    <update id="updateBoard" parameterType="NoticeBoardVO" >
+        update
+            tb_notice_board
+        set
+            notice_last_updt_dtm = now(),
+            notice_contents = #{noticeContents},
+            notice_cat = #{noticeTitle},
+            notice_title = #{noticeTitle}
+        where
+            notice_board_no = #{noticeBoardNo}
+
+    </update>
+
 
 </mapper>

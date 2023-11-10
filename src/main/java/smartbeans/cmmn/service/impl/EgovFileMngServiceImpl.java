@@ -153,4 +153,13 @@ public class EgovFileMngServiceImpl extends EgovAbstractServiceImpl implements E
 	public List<FileVO> selectImageFileList(FileVO vo) throws Exception {
 		return fileMngDAO.selectImageFileList(vo);
 	}
+
+	/**
+	 * 소프트딜리트
+	 * @param atchFileId
+	 */
+	@Override
+	public void updateDeleteFlagForFiles(String atchFileId) {
+		fileMngDAO.updateDeleteFlagForFiles(atchFileId);
+	}
 }
