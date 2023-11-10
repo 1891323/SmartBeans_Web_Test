@@ -57,8 +57,15 @@
                     <div class="right_col">
                         <!-- 괴산군 날씨 정보 -->
                         <div class="weather_info">
-                            <h2>괴산군 날씨 정보</h2>
-                            <%--<ul>
+                            <div class="weather_info_left">
+                                <h2>괴산군 날씨 정보</h2>
+                                <img src="<c:url value='/'/>images/main/wi_${weatherData.img}.svg" alt="날씨">
+                                <h1>${weatherData.tmp}º</h1>
+                                <h5>${weatherData.today}</h5>
+                                <p>날씨 <span>${weatherData.weather}</span> · 강수확률 <span>${weatherData.pop}%</span></p>
+                                <p>습도 <span>${weatherData.reh}%</span> · 풍속 <span>${weatherData.wsd}m/s</span></p>
+                            </div>
+                                <%--<ul>
                                 <li><a href="#LINK" class="tech" onclick="javascript:goMenuPage('2000000'); return false;">기술지원 필요시<br>유지보수 민원</a></li>
                                 <li><a href="#LINK" class="buy" onclick="javascript:goMenuPage('2000000'); return false;">구매 제품<br>A/S 민원</a></li>
                             </ul>--%>
