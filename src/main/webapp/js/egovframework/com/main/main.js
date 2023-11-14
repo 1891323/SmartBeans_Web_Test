@@ -22,20 +22,28 @@ $(document).ready(()=>{
   });
 
   //lnb
-  $(".lnbList > ul > li").click(function(e){
-		e.preventDefault();
-		if($(this).hasClass("active") == false){
-			$(".lnbList > ul > li").removeClass("active");
-			$(this).addClass("active");
-			$(".lnbList ul ul").slideUp(300);
-			$(this).children("ul").slideDown(300);
-		}
-		else{
-			$(this).removeClass("active");
-			$(this).children("ul").slideUp(300);
-		}
-	});
-  //checkbox
+    $(".lnbList > ul").on("click", "li", function(e){
+        if ($(e.target).is('.lnbCnt a')) {
+            // 하위 메뉴의 a 태그 클릭 시 기본 동작 수행
+            return;
+        }
+        e.preventDefault(); // 상위 메뉴의 a 태그 클릭 시 기본 동작 방지
+
+        if($(this).hasClass("active") == false){
+            $(".lnbList > ul > li").removeClass("active");
+            $(this).addClass("active");
+            $(".lnbList ul ul").slideUp(300);
+            $(this).children("ul").slideDown(300);
+        }
+        else{
+            $(this).removeClass("active");
+            $(this).children("ul").slideUp(300);
+        }
+    });
+
+
+
+    //checkbox
   $("table td label").click(function() {
     let chk_arr =[];
     $('input[name=checkBtn]:checked').each(()=>{

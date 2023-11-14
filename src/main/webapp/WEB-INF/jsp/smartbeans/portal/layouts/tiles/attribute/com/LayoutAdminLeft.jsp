@@ -14,19 +14,19 @@
                                 <a href="/admin/noti/Announcement.do">공지사항 관리</a>
                             </li>
                             <li class="lnbCnt">
-                                <a href="">자료실 관리</a>
+                                <a href="/admin/noti/Reference.do">자료실 관리</a>
                             </li>
                             <li class="lnbCnt">
-                                <a href="">FAQ 관리</a>
+                                <a href="/admin/noti/FAQ.do">FAQ 관리</a>
                             </li>
                             <li class="lnbCnt">
-                                <a href="">QnA 관리</a>
+                                <a href="/admin/noti/QnA.do">QnA 관리</a>
                             </li>
                             <li class="lnbCnt">
                                 <a href="/admin/noti/Board.do">게시판 관리</a>
                             </li>
                             <li class="lnbCnt">
-                                <a href="">콩 재배 메뉴얼 관리</a>
+                                <a href="/admin/noti/BeanFarmingManual.do">콩 재배 메뉴얼 관리</a>
                             </li>
                         </ul>
                     </li>
@@ -58,4 +58,4 @@
                 </ul>
             </div>
 
-<a href="/admin/noti/Announcement.do">공지사항 관리</a>
+

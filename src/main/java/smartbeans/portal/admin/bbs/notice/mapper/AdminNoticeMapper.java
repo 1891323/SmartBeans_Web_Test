@@ -22,4 +22,6 @@ public interface AdminNoticeMapper {
     int deleteBoard(NoticeBoardVO boardVO);
 
     void updateBoard(NoticeBoardVO boardVO);
+
+    int updateTopFixedStatus(int noticeBoardNo);
 }

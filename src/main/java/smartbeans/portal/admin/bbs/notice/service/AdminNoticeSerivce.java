@@ -19,4 +19,6 @@ public interface AdminNoticeSerivce {
     int deleteBoard(NoticeBoardVO boardVO);
 
     void updateBoard(NoticeBoardVO boardVO);
+
+    int updateTopFixedStatus(int noticeBoardNo);
 }

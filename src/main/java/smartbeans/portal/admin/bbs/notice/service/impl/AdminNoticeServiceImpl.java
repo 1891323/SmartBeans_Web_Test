@@ -54,7 +54,10 @@ public class AdminNoticeServiceImpl implements AdminNoticeSerivce {
     }
 
     @Override
-    public void updateBoard(NoticeBoardVO boardVO) {     announcementAdminMapper.updateBoard(boardVO) ;  }
+    public void updateBoard(NoticeBoardVO boardVO) { announcementAdminMapper.updateBoard(boardVO) ;  }
+
+    @Override
+    public int updateTopFixedStatus(int noticeBoardNo) { return announcementAdminMapper.updateTopFixedStatus(noticeBoardNo);   }
 
 
 }
