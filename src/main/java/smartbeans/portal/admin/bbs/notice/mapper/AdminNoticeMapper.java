@@ -1,12 +1,12 @@
-package smartbeans.portal.admin.announcement.mapper;
+package smartbeans.portal.admin.bbs.notice.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-import smartbeans.portal.admin.announcement.service.NoticeBoardVO;
+import smartbeans.portal.admin.bbs.notice.service.NoticeBoardVO;
 
 import java.util.List;
 
 @Mapper
-public interface AnnouncementAdminMapper {
+public interface AdminNoticeMapper {
     public List<NoticeBoardVO> selectAll();
 
 
@@ -18,4 +18,8 @@ public interface AnnouncementAdminMapper {
 
 
     int insertBoard(NoticeBoardVO boardVO);
+
+    int deleteBoard(NoticeBoardVO boardVO);
+
+    void updateBoard(NoticeBoardVO boardVO);
 }

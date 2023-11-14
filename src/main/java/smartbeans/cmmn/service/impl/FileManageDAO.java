@@ -175,4 +175,9 @@ public class FileManageDAO extends EgovComAbstractDAO {
 	public List<FileVO> selectImageFileList(FileVO vo) throws Exception {
 		return selectList("FileManageDAO.selectImageFileList", vo);
 	}
+
+
+	public void updateDeleteFlagForFiles(String atchFileId) {
+		update("FileManageDAO.updateDeleteFlagForFiles", atchFileId);
+	}
 }

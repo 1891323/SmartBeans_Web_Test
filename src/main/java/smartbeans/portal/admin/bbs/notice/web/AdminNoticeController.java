@@ -1,11 +1,10 @@
-package smartbeans.portal.admin.announcement.web;
+package smartbeans.portal.admin.bbs.notice.web;
 
+import org.egovframe.rte.fdl.cryptography.EgovEnvCryptoService;
 import org.egovframe.rte.fdl.property.EgovPropertyService;
 import org.egovframe.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
-import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,29 +17,26 @@ import smartbeans.cmmn.ComDefaultVO;
 import smartbeans.cmmn.service.EgovFileMngService;
 import smartbeans.cmmn.service.EgovFileMngUtil;
 import smartbeans.cmmn.service.FileVO;
-import smartbeans.portal.admin.announcement.service.AnnouncementAdminSerivce;
-import smartbeans.portal.admin.announcement.service.NoticeBoardVO;
+import smartbeans.portal.admin.bbs.notice.service.AdminNoticeSerivce;
+import smartbeans.portal.admin.bbs.notice.service.NoticeBoardVO;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 
 
 import java.util.List;
 import java.util.Map;
 
-import static com.squareup.okhttp.internal.Internal.logger;
+
 
 
 @Controller
 @RequestMapping(value = "/admin/noti")
-public class AnnouncementAdminController {
-    private static final Logger logger = LoggerFactory.getLogger(AnnouncementAdminController.class);
+public class AdminNoticeController {
+    private static final Logger logger = LoggerFactory.getLogger(AdminNoticeController.class);
 
     @Resource(name = "AnnouncementAdminService")
-    private AnnouncementAdminSerivce announcementAdminSerivce;
+    private AdminNoticeSerivce announcementAdminSerivce;
 
     @Resource(name = "propertiesService")
     protected EgovPropertyService propertiesService;
@@ -50,6 +46,10 @@ public class AnnouncementAdminController {
 
     @Resource(name = "EgovFileMngService")
     private EgovFileMngService fileMngService;
+
+    /** 암호화서비스 */
+    private static EgovEnvCryptoService cryptoService;
+
 
     /**
      * notice 게시판 글목록 출력
@@ -118,7 +118,7 @@ public class AnnouncementAdminController {
     }
 
     /**
-     * 상세글 이동
+     * 게시판 상세글 보기
      * @param noticeBoardVO
      * @param model
      * @return
@@ -154,7 +154,7 @@ public class AnnouncementAdminController {
     /**
      * Name: selectAdminEditNoticeBoard()
      * Descriptions: 관리자 공지사항 등록 페이지 이동
-     * @param noticeBoardVO
+     * @param NoticeBoardVO
      * @param editmode
      * @param model
      * @return
@@ -163,17 +163,31 @@ public class AnnouncementAdminController {
     @PostMapping(value = "/selectAdminEditNoticeBoard.do")
     public String selectAdminEditNoticeBoard(NoticeBoardVO boardVO, String editmode, ModelMap model) throws Exception {
         if ("U".equals(editmode)) {
-//            boardVO = announcementAdminSerivce.selectBoard(boardVO);
-//            model.addAttribute("boardVO", boardVO);
+
+            boardVO = announcementAdminSerivce.selectBoardDetail(boardVO);
+            model.addAttribute("editmode", "U");
+        }else {
+            model.addAttribute("editmode", "I");
         }
 
-        model.addAttribute("editmode", editmode);
-        model.addAttribute("noticeBoardVO", boardVO);
+//        System.out.println("Edit Mode 체크체크-----------------------: " + editmode);
+//        System.out.println("BoardVO 체크체크-----------------------:: " + boardVO);
+
+        model.addAttribute("boardVO", boardVO);
         model.addAttribute("noticeBoardSubType", boardVO.getNoticeBoardSubType());
+
 
         return "admin/AdminNoticeBoardAdd.admin";
     }
 
+    /**
+     * 게시물 삽입 페이지
+     * @param multiRequest
+     * @param boardVO
+     * @param model
+     * @return
+     * @throws Exception
+     */
     @PostMapping(value = "/insertAdminNoticeBoard.do")
     public String insertAdminNoticeBoard(final MultipartHttpServletRequest multiRequest, NoticeBoardVO boardVO, ModelMap model) throws Exception {
         List<FileVO> result = null;
@@ -221,10 +235,8 @@ public class AnnouncementAdminController {
     @RequestMapping("AnnouncementList.do")
     public String selectAminNoticeBoardList(@ModelAttribute("searchVO")ComDefaultVO searchVO, ModelMap model){
 
-        System.out.println("목록출력 테스트중 ===============================================");
         List<NoticeBoardVO> allNotices = announcementAdminSerivce.selectAll();
         model.addAttribute("allNotices", allNotices);
-        logger.info("공지목록리스트 출력 테스트: " + allNotices);
 
         /* pageing setting */
         PaginationInfo paginationInfo = new PaginationInfo();
@@ -241,6 +253,69 @@ public class AnnouncementAdminController {
         return "admin/AnnouncementList.admin";
     }
 
+    /**
+     * Name: deleteAdminNoticeBoard()
+     * Descriptions: 관리자 게시글 삭제
+     * @param boardVO
+     * @param model
+     * @return
+     * @throws Exception
+     */
+    @PostMapping(value = "/deleteAdminNoticeBoard.do")
+    public String deleteAdminNoticeBoard(NoticeBoardVO boardVO, ModelMap model) throws Exception {
+
+        System.out.println("파일 삭제 컬럼 테스트중 컨트롤러 첨부아이디================"+boardVO.getAtchFileId());
+        int result = announcementAdminSerivce.deleteBoard(boardVO);
+
+        String redirectUrl = "redirect:/admin/noti/";
+        switch (boardVO.getNoticeBoardSubType()) {
+            case 1:
+                redirectUrl += "Announcement.do";
+                break;
+            case 5:
+                redirectUrl += "Board.do";
+                break;
+            case 4:
+                redirectUrl += "QnA.do";
+                break;
+            default:
+                redirectUrl += "Announcement.do"; // 기본값 혹은 예외 처리
+        }
+
+        return redirectUrl;
+
+    }
 
 
-}
+    @PostMapping(value = "/updateAdminNoticeBoard.do")
+    public String updateAdminNoticeBoard(final MultipartHttpServletRequest multiRequest, NoticeBoardVO boardVO, ModelMap model) throws Exception {
+        boardVO.setDecryptAtchFileId(cryptoService);
+        String atchFileId = boardVO.getAtchFileId();
+
+        final List<MultipartFile> files = multiRequest.getFiles("file_1");
+
+//        if (!files.isEmpty()) {
+//            //파일이 없던 게시글에 파일을 추가할 때 - 신규 atchFileId생성
+//            if (atchFileId == null || "".equals(atchFileId)) {
+//                List<FileVO> result = fileUtil.parseFileInf(files, "BBS_", 0, atchFileId, "");
+//                atchFileId = fileMngService.insertFileInfs(result);
+//                boardVO.setAtchFileId(atchFileId);
+//            } else {
+//                FileVO fvo = new FileVO();
+//                fvo.setAtchFileId(atchFileId);
+//                int cnt = fileMngService.getMaxFileSN(fvo);
+//                List<FileVO> _result = fileUtil.parseFileInf(files, "BBS_", cnt, atchFileId, "");
+//                fileMngService.updateFileInfs(_result);
+//            }
+//        }
+
+
+        announcementAdminSerivce.updateBoard(boardVO);
+
+        boardVO = announcementAdminSerivce.selectBoardDetail(boardVO);
+
+        model.addAttribute("boardVO", boardVO);
+        return "admin/AdminNoticeBoardDetail.admin";
+    }
+
+}// end of class
