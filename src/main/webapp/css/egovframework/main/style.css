@@ -430,6 +430,8 @@ table thead tr th {
   border-bottom: 1px solid #d0d5dd;
   font-weight: 700;
   text-align:center;
+  width:25%;
+  font-size:18px;
 }
 table tbody {
   display: table-row-group;

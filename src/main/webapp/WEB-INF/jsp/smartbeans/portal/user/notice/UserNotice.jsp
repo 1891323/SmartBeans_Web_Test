@@ -14,9 +14,15 @@
     var contextPath = "${pageContext.request.contextPath}";
 
     function fn_egov_select_noticeList(pageNo) {
-        var newUrl = contextPath + "/user/noti/Announcement.do?pageIndex=" + pageNo;
+        var searchCnd = document.frm.searchCnd.value; // 검색 유형 추출
+        var searchWrd = document.frm.searchWrd.value; // 검색어 추출
+
+        var newUrl = contextPath + "/admin/noti/Announcement.do?pageIndex=" + pageNo
+            + "&searchCnd=" + encodeURIComponent(searchCnd)
+            + "&searchWrd=" + encodeURIComponent(searchWrd);
         window.location.href = newUrl;
     }
+
 </script>
 
 <!DOCTYPE html>
@@ -104,6 +110,11 @@
                 </tbody>
 
             </table>
+
+            <div>
+                <ul class="pagination" id="pagination">
+                </ul>
+            </div>
         </div>
     </div>
 </body>
