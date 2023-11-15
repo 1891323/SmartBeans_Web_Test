@@ -64,7 +64,10 @@ public class AnnouncementAdminController {
             "/Board.do",
             "/QnA.do",
     })
-    public String selectAminNoticeBoardList(@ModelAttribute("searchVO") NoticeBoardVO searchVO,  HttpServletRequest request, ModelMap model){
+    public String selectAminNoticeBoardList(@ModelAttribute("searchVO")
+        NoticeBoardVO searchVO,
+        HttpServletRequest request,
+        ModelMap model){
 
         searchVO.setPageUnit(propertiesService.getInt("pageUnit"));
         searchVO.setPageSize(propertiesService.getInt("pageSize"));

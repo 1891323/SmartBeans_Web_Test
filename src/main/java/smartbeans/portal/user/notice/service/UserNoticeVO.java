@@ -3,24 +3,19 @@ package smartbeans.portal.user.notice.service;
 import lombok.Data;
 
 import java.util.Date;
-
-import lombok.EqualsAndHashCode;
 import org.springframework.format.annotation.DateTimeFormat;
 import smartbeans.cmmn.ComDefaultVO;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
 public class UserNoticeVO extends ComDefaultVO {
-    //게시글 순서
-    private Long rowNum;
 
     // 게시글 번호
     private int noticeBoardNo;
 
-    // 게시판 타입 (숫자형) 4: 알림마당
+    // 게시판 타입 (숫자형)
     private int noticeBoardType;
 
-    // 게시판 하위 타입 (숫자형) 1: 공지사항, 4:QnA, 5:자유게시판
+    // 게시판 하위 타입 (숫자형) 4: 공지사항
     private int noticeBoardSubType;
 
     // 마지막 업데이트 일시
@@ -60,141 +55,6 @@ public class UserNoticeVO extends ComDefaultVO {
     // 게시글 제목
     private String noticeTitle;
 
-    // 첨부파일 번호
-    private String atchFileId;
-
-    public Long getRowNum() {
-        return rowNum;
-    }
-
-    public void setRowNum(Long rowNum) {
-        this.rowNum = rowNum;
-    }
-
-    public int getNoticeBoardNo() {
-        return noticeBoardNo;
-    }
-
-    public void setNoticeBoardNo(int noticeBoardNo) {
-        this.noticeBoardNo = noticeBoardNo;
-    }
-
-    public int getNoticeBoardType() {
-        return noticeBoardType;
-    }
-
-    public void setNoticeBoardType(int noticeBoardType) {
-        this.noticeBoardType = noticeBoardType;
-    }
-
-    public int getNoticeBoardSubType() {
-        return noticeBoardSubType;
-    }
-
-    public void setNoticeBoardSubType(int noticeBoardSubType) {
-        this.noticeBoardSubType = noticeBoardSubType;
-    }
-
-    public Date getNoticeLastUpdtDtm() {
-        return noticeLastUpdtDtm;
-    }
-
-    public void setNoticeLastUpdtDtm(Date noticeLastUpdtDtm) {
-        this.noticeLastUpdtDtm = noticeLastUpdtDtm;
-    }
-
-    public Date getNoticeFirstRegistDtm() {
-        return noticeFirstRegistDtm;
-    }
-
-    public void setNoticeFirstRegistDtm(Date noticeFirstRegistDtm) {
-        this.noticeFirstRegistDtm = noticeFirstRegistDtm;
-    }
-
-    public int getNoticeViewCount() {
-        return noticeViewCount;
-    }
-
-    public void setNoticeViewCount(int noticeViewCount) {
-        this.noticeViewCount = noticeViewCount;
-    }
-
-    public String getNoticeContents() {
-        return noticeContents;
-    }
-
-    public void setNoticeContents(String noticeContents) {
-        this.noticeContents = noticeContents;
-    }
-
-    public String getNoticeWrtr() {
-        return noticeWrtr;
-    }
-
-    public void setNoticeWrtr(String noticeWrtr) {
-        this.noticeWrtr = noticeWrtr;
-    }
-
-    public String getNoticePrvtPstYn() {
-        return noticePrvtPstYn;
-    }
-
-    public void setNoticePrvtPstYn(String noticePrvtPstYn) {
-        this.noticePrvtPstYn = noticePrvtPstYn;
-    }
-
-    public String getNoticePassword() {
-        return noticePassword;
-    }
-
-    public void setNoticePassword(String noticePassword) {
-        this.noticePassword = noticePassword;
-    }
-
-    public String getNoticeAnsYn() {
-        return noticeAnsYn;
-    }
-
-    public void setNoticeAnsYn(String noticeAnsYn) {
-        this.noticeAnsYn = noticeAnsYn;
-    }
-
-    public String getNoticeDelYn() {
-        return noticeDelYn;
-    }
-
-    public void setNoticeDelYn(String noticeDelYn) {
-        this.noticeDelYn = noticeDelYn;
-    }
-
-    public String getMbrId() {
-        return mbrId;
-    }
-
-    public void setMbrId(String mbrId) {
-        this.mbrId = mbrId;
-    }
-
-    public String getNoticeCat() {
-        return noticeCat;
-    }
-
-    public void setNoticeCat(String noticeCat) {
-        this.noticeCat = noticeCat;
-    }
-
-    public String getNoticeTitle() {
-        return noticeTitle;
-    }
-
-    public void setNoticeTitle(String noticeTitle) {
-        this.noticeTitle = noticeTitle;
-    }
-
-    public String getAtchFileId() {
-        return atchFileId;
-    }
-
-    public void setAtchFileId(String atchFileId) {  this.atchFileId = atchFileId;    }
+    // 기본 생성자, getter, setter, toString() 메서드 등 추가적인 메서드는 생략...
 
 }

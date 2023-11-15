@@ -17,16 +17,6 @@
         var newUrl = contextPath + "/user/noti/Announcement.do?pageIndex=" + pageNo;
         window.location.href = newUrl;
     }
-
-    function setDisabled() {
-        // dummy check 해서 변경사항 없을 시 disabled 처리
-        datas = getDummyCheckElements();
-        if (datas.length === 0) {
-            document.querySelector('#btnAreaSaveButton').classList.add('alpha30');
-        } else {
-            document.querySelector('#btnAreaSaveButton').classList.remove('alpha30');
-        }
-    }
 </script>
 
 <!DOCTYPE html>
@@ -84,10 +74,10 @@
             <table>
 
                 <colgroup>
-                        <col style="">
-                        <col style="">
-                        <col style="">
-                        <col style="">
+                    <col style="">
+                    <col style="">
+                    <col style="">
+                    <col style="">
                         <%--        <col style="">--%>
                 </colgroup>
 
@@ -100,21 +90,22 @@
                     </tr>
                 </thead>
 
+
+
+                <tbody>
+                <!--공지사항 리스트 목록 -->
+                <c:forEach items="${boardList}" var="notice">
+                    <tr>
+                        <td>${notice.rowNum}</td>
+                        <td> <a href="#" ${notice.noticeBoardNo}> <c:out value="${notice.noticeTitle}" /></a></td>
+                        <td>${notice.noticeWrtr}</td>
+                        <td><fmt:formatDate value="${notice.noticeFirstRegistDtm}" pattern="yyyy.MM.dd" /></td>
+                    </tr>
+                </c:forEach>
+                <!--공지사항 리스트 목록 -->
+                </tbody>
+
             </table>
-
-            <tbody>
-            <!--공지사항 리스트 목록 -->
-            <c:forEach items="${boardList}" var="notice">
-                <tr>
-                    <td>${notice.rowNum}</td>
-                    <td> <a href="#" ${notice.noticeBoardNo}> <c:out value="${notice.noticeTitle}" /></a></td>
-                    <td>${notice.noticeWrtr}</td>
-                    <td><fmt:formatDate value="${notice.noticeFirstRegistDtm}" pattern="yyyy.MM.dd" /></td>
-                </tr>
-            </c:forEach>
-            <!--공지사항 리스트 목록 -->
-            </tbody>
-
         </div>
     </div>
 </body>

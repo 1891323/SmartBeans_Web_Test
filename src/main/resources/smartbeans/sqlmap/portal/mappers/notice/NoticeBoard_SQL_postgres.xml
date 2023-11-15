@@ -1,85 +1,144 @@
-<?xml version="1.0" encoding="UTF-8"?><!-- 
+<?xml version="1.0" encoding="UTF-8"?><!--
     수정일                 수정자           수정내용
   =========     =======    =================================================
-  2020.07.14    신용호           게시판마스터 페이징처리 오류수정 (180. 게시판관리)
+  2023.11.14    최정우           쿼리 변경
 -->
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="smartbeans.portal.notice.dao.NoticeDAO">
+<mapper namespace="smartbeans.portal.user.notice.mapper.UserNoticeMapper">
 
-	<!-- 20230509 sbk -->
-	<resultMap id="NoticeBoardList" type="smartbeans.portal.notice.vo.NoticeVO">
-		<result property="bbs_sn" column="BBS_SN"/>
-		<result property="ntt_se" column="NTT_SE"/>
-		<result property="sj" column="SJ"/>
-		<result property="cn" column="CN"/>
-		<result property="create_id" column="CREATE_ID"/>
-		<result property="reg_dttm" column="REG_DTTM"/>
-		<result property="mdfcn" column="MDFCN"/>
-		<result property="mdfcn_dttm" column="MDFCN_DTTM"/>
-		<result property="upper_bbs_sn" column="UPPER_BBS_SN"/>
-		<result property="rdcnt" column="RDCNT"/>
-		<result property="answer_sttus" column="ANSWER_STTUS"/>
-		<result property="user_id" column="USER_ID"/>
-		<result property="answer_cn" column="ANSWER_CN"/>
-		<result property="othbsc_yn" column="OTHBSC_YN"/>
-		<result property="upend_fixing_yn" column="UPEND_FIXING_YN"/>
+	<!-- 목록조회 -->
+	<resultMap id="NoticeBoardList" type="smartbeans.portal.user.notice.service.UserNoticeVO">
+		<result property="rowNum" column="rownum"/>
+		<result property="noticeBoardNo" column="notice_board_no"/>
+		<result property="noticeBoardType" column="notice_board_type"/>
+		<result property="noticeBoardSubType" column="notice_board_sub_type"/>
+		<result property="noticeLastUpdtDtm" column="notice_last_updt_dtm"/>
+		<result property="noticeFirstRegistDtm" column="notice_first_regist_dtm"/>
+		<result property="noticeViewCount" column="notice_view_count"/>
+		<result property="noticeWrtr" column="notice_wrtr"/>
+		<result property="noticeAnsYn" column="notice_ans_yn"/>
+		<result property="noticeCat" column="notice_cat"/>
+		<result property="noticeTitle" column="notice_title"/>
+		<result property="atchFileId" column="atch_file_id"/>
 	</resultMap>
-	
+
+	<resultMap id="NoticeBoardDetail" type="smartbeans.portal.user.notice.service.UserNoticeVO">
+		<result property="noticeBoardNo" column="notice_board_no"/>
+		<result property="noticeBoardType" column="notice_board_type"/>
+		<result property="noticeBoardSubType" column="notice_board_sub_type"/>
+		<result property="noticeLastUpdtDtm" column="notice_last_updt_dtm"/>
+		<result property="noticeFirstRegistDtm" column="notice_first_regist_dtm"/>
+		<result property="noticeViewCount" column="notice_view_count"/>
+		<result property="noticeContents" column="notice_contents"/>
+		<result property="noticeWrtr" column="notice_wrtr"/>
+		<result property="noticePrvtPstYn" column="notice_prvt_pst_yn"/>
+		<result property="noticePassword" column="notice_password"/>
+		<result property="noticeAnsYn" column="notice_ans_yn"/>
+		<result property="noticeDelYn" column="notice_del_yn"/>
+		<result property="mbrId" column="mbr_id"/>
+		<result property="noticeCat" column="notice_cat"/>
+		<result property="noticeTitle" column="notice_title"/>
+		<result property="atchFileId" column="atch_file_id"/>
+	</resultMap>
+
+	<select id="selectAll" resultMap="NoticeBoardList">
+		SELECT *
+		FROM tb_notice_board
+	</select>
+
 	<!-- 20230512 - sbk 게시판 리스트 -->
-	<select id="selectNoticeBoardList" parameterType="smartbeans.portal.notice.vo.NoticeVO" resultMap="NoticeBoardList">
-		
-			SELECT
-				BBS_SN, SJ, CREATE_ID, REG_DTTM, UPEND_FIXING_YN 
-			from
-				BBS
-						
+	<select id="selectNoticeBoardList" parameterType="UserNoticeVO" resultMap="NoticeBoardList">
+
+		select
+		row_number() over (order by notice_board_no) as rownum,
+		notice_board_no,
+		notice_board_type,
+		notice_board_sub_type,
+		notice_title,
+		notice_first_regist_dtm,
+		notice_ans_yn,
+		notice_wrtr,
+		notice_view_count,
+		notice_cat
+		from
+		tb_notice_board
+		where notice_del_yn = 'N'
+		and notice_board_type = #{noticeBoardType}
+		and notice_board_sub_type = #{noticeBoardSubType}
+		<choose>
+			<when test="searchCondition == '0'">
+				and notice_title like '%'||#{searchKeyword}||'%'
+			</when>
+			<when test="searchCondition == '1'">
+				and notice_contents like '%'||#{searchKeyword}||'%'
+			</when>
+			<when test="searchCondition == '2'">
+				and notice_wrtr like '%'||#{searchKeyword}||'%'
+			</when>
+			<otherwise>
+				<!-- 아무 조건도 없이 전체 목록을 출력 -->
+			</otherwise>
+		</choose>
+
+		order by
+		notice_board_no DESC
+		limit CAST(#{recordCountPerPage} AS INTEGER) offset CAST(#{firstIndex} AS INTEGER)
+
 	</select>
-	
-	<!-- 20230512 - sbk 게시판 글 개수 -->
-	<select id="selectNoticeBoardListCnt" parameterType="smartbeans.portal.notice.vo.NoticeVO" resultType="java.lang.Integer">
-		
-			SELECT 
-				COUNT(create_id)
-			FROM
-				BBS
-						
+
+	<!-- 게시판 글 개수 -->
+	<select id="selectBoardListTotCnt" parameterType="UserNoticeVO" resultType="java.lang.Integer">
+
+		select
+		count(notice_board_no)
+		from
+		tb_notice_board
+		where notice_del_yn = 'N'
+		and notice_board_type = #{noticeBoardType}
+		and notice_board_sub_type = #{noticeBoardSubType}
+		<choose>
+			<when test="searchCondition == '0'">
+				and notice_title like '%'||#{searchKeyword}||'%'
+			</when>
+			<when test="searchCondition == '1'">
+				and notice_contents like '%'||#{searchKeyword}||'%'
+			</when>
+			<when test="searchCondition == '2'">
+				and notice_wrtr like '%'||#{searchKeyword}||'%'
+			</when>
+			<otherwise>
+				<!-- 아무 조건도 없이 전체 목록을 출력 -->
+			</otherwise>
+		</choose>
+
 	</select>
-	
-	<!-- 20230512 - sbk 게시판 글 등록 -->
-	<insert id="insertNoticeBoardOne" parameterType="smartbeans.portal.notice.vo.NoticeVO">
-	
-			INSERT INTO
-				BBS
-				(
-					SJ,
-    				CREATE_ID,
-    				CN,
-    				NTT_SE,
-    				UPPER_BBS_SN,
-    				USER_ID
-				)
-				VALUES
-				(
-					#{sj},
-    				#{create_id},
-    				#{cn},
-    				#{ntt_se},
-    				#{upper_bbs_sn},
-    				#{user_id}
-				)
-	
-	</insert>
-	
+
+
 	<!-- 20230512 - sbk 게시판 상세페이지 -->
-	<select id="selectNoticeBoardDetail" parameterType="int" resultType="smartbeans.portal.notice.vo.NoticeVO">
-		
-			SELECT 
-				BBS_SN, SJ, CREATE_ID, REG_DTTM, CN
-			FROM
-				BBS
-			WHERE
-				BBS_SN=#{no}
-						
+	<select id="selectBoardDetail" parameterType="UserNoticeVO" resultMap="NoticeBoardDetail">
+		SELECT
+			row_number() over (order by notice_board_no) as rownum,
+			notice_board_no,
+			notice_board_type,
+			notice_board_sub_type,
+			notice_title,
+			notice_contents,
+			notice_wrtr,
+			notice_first_regist_dtm,
+			notice_last_updt_dtm,
+			notice_prvt_pst_yn,
+			notice_password,
+			notice_ans_yn,
+			notice_view_count,
+			notice_del_yn,
+			mbr_id,
+			notice_cat,
+			atch_file_id
+		FROM
+			tb_notice_board
+		WHERE
+			notice_board_no = #{noticeBoardNo}
 	</select>
+
 </mapper>
