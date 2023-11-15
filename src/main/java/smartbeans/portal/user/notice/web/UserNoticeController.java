@@ -37,6 +37,7 @@ import static com.squareup.okhttp.internal.Internal.logger;
 
 @Controller
 @RequestMapping(value= "/user/noti")
+
 public class UserNoticeController {
 
     private static final Logger logger = LoggerFactory.getLogger(UserNoticeController.class);
@@ -98,12 +99,12 @@ public class UserNoticeController {
         searchVO.setLastIndex(paginationInfo.getLastRecordIndex());
         searchVO.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
 
-        List<UserNoticeVO> boadrList = userNoticeService.selectBoardList(searchVO);
+        List<UserNoticeVO> boardList = userNoticeService.selectUserBoardList(searchVO);
 
-        int totCnt = userNoticeService.selectBoardListTotCnt(searchVO);
+        int totCnt = userNoticeService.selectUserBoardListTotCnt(searchVO);
         paginationInfo.setTotalRecordCount(totCnt);
 
-        model.addAttribute("boardList", boadrList);
+        model.addAttribute("boardList", boardList);
 
         return "user/notice/UserNotice.lnb"; // view 반환
     }

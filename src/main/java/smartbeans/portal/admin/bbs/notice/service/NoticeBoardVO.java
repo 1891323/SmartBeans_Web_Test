@@ -56,6 +56,7 @@ public class NoticeBoardVO extends ComDefaultVO {
 
     // 게시글 제목
     private String noticeTitle;
+
     // 첨부파일 번호
     private String atchFileId;
 

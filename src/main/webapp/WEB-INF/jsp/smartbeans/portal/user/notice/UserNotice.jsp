@@ -50,7 +50,7 @@
 </div>
 
     <div class="contents">
-                <h2 name ="">공지사항 </h2>
+                <h2 name ="">${pageTitle} </h2>
             <!-- 검색조건 -->
         <div class="condition">
             <form name="frm" action="/portal/user/notice/noticeList.do" method="post">
@@ -89,8 +89,6 @@
                         <th>작성일</th>
                     </tr>
                 </thead>
-
-
 
                 <tbody>
                 <!--공지사항 리스트 목록 -->

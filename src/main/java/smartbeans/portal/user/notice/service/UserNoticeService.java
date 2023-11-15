@@ -6,8 +6,8 @@ public interface UserNoticeService {
 
     List<UserNoticeVO> selectALL();
 
-    List<UserNoticeVO> selectBoardList(UserNoticeVO searchVO);
+    List<UserNoticeVO> selectUserBoardList(UserNoticeVO searchVO);
 
-    int selectBoardListTotCnt(UserNoticeVO searchVO);
+    int selectUserBoardListTotCnt(UserNoticeVO searchVO);
 
 }

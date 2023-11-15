@@ -22,12 +22,12 @@ public class UserNoticeServiceImpl implements UserNoticeService {
     }
 
     @Override
-    public List<UserNoticeVO> selectBoardList(UserNoticeVO searchVO) {
-        return usernoticeMapper.selectBoardList(searchVO);
+    public List<UserNoticeVO> selectUserBoardList(UserNoticeVO searchVO) {
+        return usernoticeMapper.selectUserBoardList(searchVO);
     }
 
     @Override
-    public int selectBoardListTotCnt(UserNoticeVO searchVO) {
-        return usernoticeMapper.selectBoardListTotCnt(searchVO);
+    public int selectUserBoardListTotCnt(UserNoticeVO searchVO) {
+        return usernoticeMapper.selectUserBoardListTotCnt(searchVO);
     }
 }
