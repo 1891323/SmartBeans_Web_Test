@@ -13,24 +13,29 @@
   });
 
   var contextPath = "${pageContext.request.contextPath}";
+  var currentPagePrefix = getCurrentPagePrefix(); // 현재 페이지의 prefix 추출
 
-
-  // function fn_egov_select_noticeList(pageNo) {
-  //   var newUrl = contextPath + "/admin/noti/Announcement.do?pageIndex=" + pageNo;
-  //   window.location.href = newUrl;
-  // }
+  function getCurrentPagePrefix() {
+    var pathArray = window.location.pathname.split('/');
+    var lastSegment = pathArray[pathArray.length - 1];
+    return lastSegment.split('.')[0]; // 'Announcement.do'에서 'Announcement' 부분만 추출
+  }
 
   function fn_egov_select_noticeList(pageNo) {
+    var newUrl = contextPath + "/admin/noti/" + currentPagePrefix + ".do?pageIndex=" + pageNo;
+    window.location.href = newUrl;
+  }
+
+  function go_search(pageNo) {
     var searchCnd = document.frm.searchCnd.value; // 검색 유형 추출
     var searchWrd = document.frm.searchWrd.value; // 검색어 추출
 
-    var newUrl = contextPath + "/admin/noti/Announcement.do?pageIndex=" + pageNo
+
+    var newUrl = contextPath + "/admin/noti/" + currentPagePrefix + ".do?pageIndex=" + pageNo
             + "&searchCnd=" + encodeURIComponent(searchCnd)
             + "&searchWrd=" + encodeURIComponent(searchWrd);
     window.location.href = newUrl;
   }
-
-
 
   function goEdit(select, noticeBoardNo) {
     if (select === "insert") {
@@ -150,7 +155,7 @@
           </label>
           <span class="item f_search">
         <input class="f_input w_500" type="text" name="searchKeyword" title="검색어 입력">
-        <button class="btn" type="submit" onclick="fn_egov_select_noticeList('1'); return false;">조회</button>
+        <button class="btn" type="submit" onclick=" go_search('1'); return false;">조회</button>
     </span>
           <a href=# class="item btn btn_blue_46 w_100" onClick="javascript:goEdit('insert', 'I')">등록</a>
         </form>

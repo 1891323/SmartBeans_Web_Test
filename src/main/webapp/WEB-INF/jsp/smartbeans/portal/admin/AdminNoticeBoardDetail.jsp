@@ -119,6 +119,28 @@
               </td>
             </tr>
           </table>
+
+          <div class="comment">
+
+            <div>
+
+              <form method="post" action="/reply/write">
+
+                <p>
+                  <label>댓글 작성자</label> <input type="text" name="writer">
+                </p>
+                <p>
+                  <textarea rows="5" cols="50" name="content"></textarea>
+                </p>
+                <p>
+                  <input type="hidden" name="noticeBoardNo" value="${boardVO.noticeBoardNo}">
+                  <button type="submit">댓글 작성</button>
+                </p>
+              </form>
+
+            </div>
+
+          </div>
           <div class="btnArea">
             <ul>
               <li>

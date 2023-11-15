@@ -68,13 +68,13 @@
         and notice_board_sub_type = #{noticeBoardSubType}
         <choose>
             <when test='searchCondition =="0"'>
-                and notice_title like '%'||#{searchKeyword}||'%'
+                and LOWER(notice_title) like '%'||LOWER(#{searchKeyword})||'%'
             </when>
             <when test='searchCondition == "1"'>
-                and notice_contents like '%'||#{searchKeyword}||'%'
+                and LOWER(notice_contents) like '%'||LOWER(#{searchKeyword})||'%'
             </when>
             <when test='searchCondition == "2"'>
-                and notice_wrtr like '%'||#{searchKeyword}||'%'
+                and LOWER(notice_wrtr) like '%'||LOWER(#{searchKeyword})||'%'
             </when>
             <otherwise>
                 <!-- 아무 조건도 없이 전체 목록을 출력 -->
@@ -84,8 +84,8 @@
         order by
         notice_board_no DESC
         limit CAST(#{recordCountPerPage} AS INTEGER) offset CAST(#{firstIndex} AS INTEGER)
-
     </select>
+
 
     <!--  글 개수 Count -->
     <select id="selectBoardListTotCnt" parameterType="NoticeBoardVO" resultType="java.lang.Integer">
