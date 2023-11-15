@@ -1,9 +1,9 @@
-package smartbeans.portal.admin.announcement.service;
+package smartbeans.portal.admin.bbs.notice.service;
 
 
 import java.util.List;
 
-public interface AnnouncementAdminSerivce {
+public interface AdminNoticeSerivce {
 
     List<NoticeBoardVO> selectAll();
 
@@ -15,4 +15,10 @@ public interface AnnouncementAdminSerivce {
     NoticeBoardVO selectBoardDetail(NoticeBoardVO noticeBoardVO);
 
     int insertBoard(NoticeBoardVO boardVO);
+
+    int deleteBoard(NoticeBoardVO boardVO);
+
+    void updateBoard(NoticeBoardVO boardVO);
+
+    int updateTopFixedStatus(int noticeBoardNo);
 }

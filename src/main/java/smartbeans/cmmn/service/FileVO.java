@@ -1,5 +1,6 @@
 package smartbeans.cmmn.service;
 
+import org.egovframe.rte.fdl.cryptography.EgovEnvCryptoService;
 import smartbeans.cmmn.ComDefaultVO;
 
 /**
@@ -227,5 +228,7 @@ public class FileVO extends ComDefaultVO {
     public void setStreFileNm(String streFileNm) {
 	this.streFileNm = streFileNm;
     }
+
+
 	
 }

@@ -1,9 +1,10 @@
-package smartbeans.portal.admin.announcement.service;
+package smartbeans.portal.admin.bbs.notice.service;
 /*
 * 페이지네이션, 검색에 관한 내용 저장
 * 일반 게시판 정보는 Board 참고
 * */
 import lombok.Data;
+import org.egovframe.rte.fdl.cryptography.EgovEnvCryptoService;
 import org.springframework.format.annotation.DateTimeFormat;
 import smartbeans.cmmn.ComDefaultVO;
 
@@ -15,9 +16,6 @@ public class NoticeBoardVO extends ComDefaultVO {
 
     // 게시글 번호
     private int noticeBoardNo;
-
-    // 게시판 타입 (숫자형) : 4. 알림마당
-    private int noticeBoardType;
 
     // 게시판 하위 타입 (숫자형) 1: 공지사항, 4:QnA, 5:자유게시판
     private int noticeBoardSubType;
@@ -61,6 +59,12 @@ public class NoticeBoardVO extends ComDefaultVO {
     // 첨부파일 번호
     private String atchFileId;
 
+    // 공지사항 상단 고정 여부
+    private String noticeTopFixed;
+
+    //QNA 질문글번호(계층구조)
+    private int parentId;
+
     public Long getRowNum() {
         return rowNum;
     }
@@ -75,14 +79,6 @@ public class NoticeBoardVO extends ComDefaultVO {
 
     public void setNoticeBoardNo(int noticeBoardNo) {
         this.noticeBoardNo = noticeBoardNo;
-    }
-
-    public int getNoticeBoardType() {
-        return noticeBoardType;
-    }
-
-    public void setNoticeBoardType(int noticeBoardType) {
-        this.noticeBoardType = noticeBoardType;
     }
 
     public int getNoticeBoardSubType() {
@@ -194,5 +190,14 @@ public class NoticeBoardVO extends ComDefaultVO {
     }
 
     public void setAtchFileId(String atchFileId) {  this.atchFileId = atchFileId;    }
+
+    /**
+     * 첨부파일ID 복호화 적용
+     */
+    public void setDecryptAtchFileId(EgovEnvCryptoService cryptoService) {
+        if (this.atchFileId != null && !"".equals(this.atchFileId)) {
+            this.atchFileId = cryptoService.decrypt(this.atchFileId);
+        }
+    }
 
 }

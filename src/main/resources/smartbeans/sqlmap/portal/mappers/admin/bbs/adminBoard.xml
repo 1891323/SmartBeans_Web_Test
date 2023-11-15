@@ -5,13 +5,12 @@
 -->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="smartbeans.portal.admin.announcement.mapper.AnnouncementAdminMapper">
 
+<mapper namespace="smartbeans.portal.admin.bbs.notice.mapper.AdminNoticeMapper">
     <!--목록조회용-->
-    <resultMap id="NoticeBoardList" type="smartbeans.portal.admin.announcement.service.NoticeBoardVO">
+    <resultMap id="NoticeBoardList" type="smartbeans.portal.admin.bbs.notice.service.NoticeBoardVO">
         <result property="rowNum" column="rownum"/>
         <result property="noticeBoardNo" column="notice_board_no"/>
-        <result property="noticeBoardType" column="notice_board_type"/>
         <result property="noticeBoardSubType" column="notice_board_sub_type"/>
         <result property="noticeLastUpdtDtm" column="notice_last_updt_dtm"/>
         <result property="noticeFirstRegistDtm" column="notice_first_regist_dtm"/>
@@ -21,12 +20,14 @@
         <result property="noticeCat" column="notice_cat"/>
         <result property="noticeTitle" column="notice_title"/>
         <result property="atchFileId" column="atch_file_id"/>
+        <result property="noticeTopFixed" column="notice_top_fixed"/>
+        <result property="parentId" column="patent_id"/>
+
     </resultMap>
 
     <!--게시글 상세페이지-->
-    <resultMap id="NoticeBoardDetail" type="smartbeans.portal.admin.announcement.service.NoticeBoardVO">
+    <resultMap id="NoticeBoardDetail" type="smartbeans.portal.admin.bbs.notice.service.NoticeBoardVO">
         <result property="noticeBoardNo" column="notice_board_no"/>
-        <result property="noticeBoardType" column="notice_board_type"/>
         <result property="noticeBoardSubType" column="notice_board_sub_type"/>
         <result property="noticeLastUpdtDtm" column="notice_last_updt_dtm"/>
         <result property="noticeFirstRegistDtm" column="notice_first_regist_dtm"/>
@@ -41,6 +42,7 @@
         <result property="noticeCat" column="notice_cat"/>
         <result property="noticeTitle" column="notice_title"/>
         <result property="atchFileId" column="atch_file_id"/>
+        <result property="parentId" column="patent_id"/>
     </resultMap>
 
     <select id="selectAll" resultMap="NoticeBoardList">
@@ -53,27 +55,26 @@
         select
         row_number() over (order by notice_board_no) as rownum,
         notice_board_no,
-        notice_board_type,
         notice_board_sub_type,
         notice_title,
         notice_first_regist_dtm,
         notice_ans_yn,
         notice_wrtr,
         notice_view_count,
-        notice_cat
+        notice_cat,
+        notice_top_fixed
         from
         tb_notice_board
         where notice_del_yn = 'N'
-        and notice_board_type = #{noticeBoardType}
         and notice_board_sub_type = #{noticeBoardSubType}
         <choose>
-            <when test="searchCondition == '0'">
+            <when test='searchCondition =="0"'>
                 and notice_title like '%'||#{searchKeyword}||'%'
             </when>
-            <when test="searchCondition == '1'">
+            <when test='searchCondition == "1"'>
                 and notice_contents like '%'||#{searchKeyword}||'%'
             </when>
-            <when test="searchCondition == '2'">
+            <when test='searchCondition == "2"'>
                 and notice_wrtr like '%'||#{searchKeyword}||'%'
             </when>
             <otherwise>
@@ -91,20 +92,19 @@
     <select id="selectBoardListTotCnt" parameterType="NoticeBoardVO" resultType="java.lang.Integer">
 
         select
-        count(notice_board_no)
+        count(notice_board_sub_type)
         from
         tb_notice_board
         where notice_del_yn = 'N'
-        and notice_board_type = #{noticeBoardType}
         and notice_board_sub_type = #{noticeBoardSubType}
         <choose>
-            <when test="searchCondition == '0'">
+            <when test='searchCondition =="0"'>
                 and notice_title like '%'||#{searchKeyword}||'%'
             </when>
-            <when test="searchCondition == '1'">
+            <when test='searchCondition == "1"'>
                 and notice_contents like '%'||#{searchKeyword}||'%'
             </when>
-            <when test="searchCondition == '2'">
+            <when test='searchCondition == "2"'>
                 and notice_wrtr like '%'||#{searchKeyword}||'%'
             </when>
             <otherwise>
@@ -119,7 +119,6 @@
         SELECT
             row_number() over (order by notice_board_no) as rownum,
             notice_board_no,
-            notice_board_type,
             notice_board_sub_type,
             notice_title,
             notice_contents,
@@ -142,7 +141,6 @@
 
     <insert id="insertBoard" parameterType="NoticeBoardVO">
         INSERT INTO tb_notice_board (
-            notice_board_type,
             notice_board_sub_type,
             notice_last_updt_dtm,
             notice_first_regist_dtm,
@@ -154,7 +152,7 @@
             notice_title,
             atch_file_id
         ) VALUES (
-                     #{noticeBoardType},
+
                      #{noticeBoardSubType},
                      TO_TIMESTAMP(#{noticeLastUpdtDtm}, 'YYYY-MM-DD HH24:MI:SS'),
                      TO_TIMESTAMP(#{noticeFirstRegistDtm}, 'YYYY-MM-DD HH24:MI:SS'),
@@ -167,5 +165,40 @@
                      #{atchFileId}
                  )
     </insert>
+
+    <update id="deleteBoard" parameterType="NoticeBoardVO">
+        update
+        tb_notice_board
+        set
+            notice_del_yn = 'Y'
+        where
+            notice_board_no = #{noticeBoardNo}
+
+    </update>
+
+    <update id="updateBoard" parameterType="NoticeBoardVO" >
+        update
+            tb_notice_board
+        set
+            notice_last_updt_dtm = now(),
+            notice_contents = #{noticeContents},
+            notice_cat = #{noticeTitle},
+            notice_title = #{noticeTitle}
+        where
+            notice_board_no = #{noticeBoardNo}
+
+    </update>
+
+    <update id="updateTopFixedStatus">
+        UPDATE tb_notice_board
+        SET notice_top_fixed =
+                CASE
+                    WHEN notice_top_fixed = 'Y' THEN 'N'
+                    ELSE 'Y'
+                    END
+        WHERE notice_board_no = #{noticeBoardNo}
+    </update>
+
+
 
 </mapper>

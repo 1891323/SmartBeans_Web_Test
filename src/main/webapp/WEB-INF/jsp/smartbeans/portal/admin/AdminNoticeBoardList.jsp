@@ -15,11 +15,20 @@
   var contextPath = "${pageContext.request.contextPath}";
 
 
+  // function fn_egov_select_noticeList(pageNo) {
+  //   var newUrl = contextPath + "/admin/noti/Announcement.do?pageIndex=" + pageNo;
+  //   window.location.href = newUrl;
+  // }
+
   function fn_egov_select_noticeList(pageNo) {
-    var newUrl = contextPath + "/admin/noti/Announcement.do?pageIndex=" + pageNo;
+    var searchCnd = document.frm.searchCnd.value; // 검색 유형 추출
+    var searchWrd = document.frm.searchWrd.value; // 검색어 추출
+
+    var newUrl = contextPath + "/admin/noti/Announcement.do?pageIndex=" + pageNo
+            + "&searchCnd=" + encodeURIComponent(searchCnd)
+            + "&searchWrd=" + encodeURIComponent(searchWrd);
     window.location.href = newUrl;
   }
-
 
 
 
@@ -59,15 +68,8 @@
         }
       });
     } else if (select === "detail") {
-      // document.bbsNoticeListForm.noticeBoardNo.value = noticeBoardNo;
-      // document.bbsNoticeListForm.action = "/admn/bbs/notice/selectAdminDetailNoticeBoard.do";
-      // document.bbsNoticeListForm.method = 'get';
-      // document.bbsNoticeListForm.submit();
-
       var newUrl = contextPath + "/admin/noti/selectAdminDetailNoticeBoard.do?noticeBoardNo=" + noticeBoardNo;
       window.location.href = newUrl;
-
-
     }
   }
 
@@ -80,6 +82,32 @@
       document.querySelector('#btnAreaSaveButton').classList.remove('alpha30');
     }
   }
+
+  function updateTopFixedStatus(noticeBoardNo, isChecked) {
+    var topFixedStatus = isChecked ? 'Y' : 'N';
+
+    $.ajax({
+      type: "POST",
+      url:  "/admin/noti/updateTopFixedStatus.do",
+      data: {
+        noticeBoardNo: noticeBoardNo,
+        noticeTopFixed: topFixedStatus
+      },
+      success: function(response) {
+        if (response === 1) {
+          alert('변경에 성공했습니다.');
+        } else {
+          alert('변경에 실패했습니다. 잠시 후 다시 시도해 주세요.');
+        }
+      },
+      error: function(xhr, status, error) {
+        // 에러 처리
+      }
+    });
+  }
+
+
+
 </script>
 
 <c:set var="noticeBoardSubType" value="${noticeBoardSubType}" />
@@ -102,6 +130,7 @@
   <div class="wrapper">
     <div class="lnb">
       <h3>관리자 메뉴</h3>
+<<<<<<< HEAD
       <div class="lnbList">
         <ul>
           <li>
@@ -164,21 +193,47 @@
           <input type="hidden" name="noticeBoardSubType" value="${noticeBoardSubType}" />
           <label class="item f_select">
             <select name="searchCnd" id="searchCnd" title="검색조건 선택">
+=======
+
+      <%@ include file="/WEB-INF/jsp/smartbeans/portal/layouts/tiles/attribute/com/LayoutAdminLeft.jsp" %>
+
+    </div>
+    <div class="contents">
+      <h2 name ="">${pageTitle} 관리 </h2>
+      <!-- 검색조건 -->
+      <div class="condition">
+
+        <form name="frm" action="/admin/noti/Announcement.do" method="post">
+          <input type="hidden" name="noticeBoardSubType" value="${noticeBoardSubType}" />
+          <label class="item f_select">
+            <select name="searchCondition" id="searchCnd" title="검색조건 선택">
+>>>>>>> 39285758d308059af9207cf667d088a42b215946
               <option value="0">제목</option>
               <option value="1">내용</option>
               <option value="2">작성자</option>
             </select>
           </label>
           <span class="item f_search">
+<<<<<<< HEAD
         <input class="f_input w_500" type="text" name="searchWrd" title="검색어 입력">
         <button class="btn" type="submit" onclick="fn_egov_select_noticeList('1'); return false;">조회</button>
     </span>
           <%--        <a href=# class="item btn btn_blue_46 w_100" onClick="javascript:goEdit('insert', 'I')">등록</a>--%>
+=======
+        <input class="f_input w_500" type="text" name="searchKeyword" title="검색어 입력">
+        <button class="btn" type="submit" onclick="fn_egov_select_noticeList('1'); return false;">조회</button>
+    </span>
+>>>>>>> 39285758d308059af9207cf667d088a42b215946
           <a href=# class="item btn btn_blue_46 w_100" onClick="javascript:goEdit('insert', 'I')">등록</a>
         </form>
 
       </div>
       <!--// 검색조건 -->
+<<<<<<< HEAD
+=======
+
+      <p style="font-size: 16px; margin-top: 5px; text-align: right;">[ 총 게시물 : ${totCnt} 개 ]</p>
+>>>>>>> 39285758d308059af9207cf667d088a42b215946
       <div class="inner">
         <table>
           <colgroup>
@@ -205,15 +260,28 @@
           <c:forEach items="${boardList}" var="notice">
             <tr>
               <td>${notice.rowNum}</td>
+<<<<<<< HEAD
               <td> <a href="#" onclick="goEdit('detail', '${notice.noticeBoardNo}')"> <c:out value="${notice.noticeTitle}" /></a></td>
               <td>${notice.noticeWrtr}</td>
               <td><fmt:formatDate value="${notice.noticeFirstRegistDtm}" pattern="yyyy.MM.dd" /></td>
               <c:if test="${notice.noticeBoardSubType == 1}"> <!-- 공지사항의 하위 타입이 1인 경우에만 상단고정 체크박스를 표시 -->
                 <td><input type="checkbox" name="checkBtn" id='chkBtn${notice.noticeBoardNo}'><label for="chkBtn${notice.noticeBoardNo}">&nbsp;</label></td>
+=======
+              <td><a href="#" onclick="goEdit('detail', '${notice.noticeBoardNo}')"><c:out value="${notice.noticeTitle}" /></a></td>
+              <td>${notice.noticeWrtr}</td>
+              <td><fmt:formatDate value="${notice.noticeFirstRegistDtm}" pattern="yyyy.MM.dd" /></td>
+              <c:if test="${notice.noticeBoardSubType == 1}"> <!-- 공지사항의 하위 타입이 1인 경우에만 상단고정 체크박스를 표시 -->
+                <td>
+                  <input type="checkbox" name="checkBtn" id='chkBtn${notice.noticeBoardNo}' ${notice.noticeTopFixed == 'Y' ? 'checked' : ''}
+                         onchange="updateTopFixedStatus(${notice.noticeBoardNo}, this.checked)">
+                  <label for="chkBtn${notice.noticeBoardNo}">&nbsp;</label>
+                </td>
+>>>>>>> 39285758d308059af9207cf667d088a42b215946
               </c:if>
             </tr>
           </c:forEach>
           <!--공지사항 리스트 목록 -->
+<<<<<<< HEAD
           </tbody>
 
         </table>
@@ -221,6 +289,16 @@
           <ul class="pagination" id = "pagination">
             <ui:pagination paginationInfo="${paginationInfo}" type="renew" jsFunction="fn_egov_select_noticeList" />
 
+=======
+
+          </tbody>
+
+        </table>
+        <div>
+          <ul class="pagination" id = "pagination">
+            <ui:pagination paginationInfo="${paginationInfo}" type="renew" jsFunction="fn_egov_select_noticeList" />
+
+>>>>>>> 39285758d308059af9207cf667d088a42b215946
             <%--          <li><button type='button' class='btnPrevend'></button></li>--%>
             <%--          <li><button type='button' class='btnPrev'></button></li>--%>
             <%--          <!--하단 페이징 구간-->--%>

@@ -9,12 +9,27 @@
   var contextPath = "${pageContext.request.contextPath}";
 
   function goList() {
-    location.href = "Announcement.do";
+    var noticeBoardSubType = parseInt(document.bbsDetailForm.noticeBoardSubType.value, 10);
+    var redirectUrl = "/admin/noti/";
+    switch (noticeBoardSubType) {
+      case 1:
+        redirectUrl += "Announcement.do";
+        break;
+      case 5:
+        redirectUrl += "Board.do";
+        break;
+      case 4:
+        redirectUrl += "QnA.do";
+        break;
+      default:
+        redirectUrl += "Announcement.do"; // 기본값 혹은 예외 처리
+    }
+    location.href = redirectUrl;
   }
 
 
   function goEdit() {
-    document.bbsDetailForm.action = "/admn/bbs/notice/selectAdminEditNoticeBoard.do";
+    document.bbsDetailForm.action = "/admin/noti/selectAdminEditNoticeBoard.do";
     document.bbsDetailForm.submit();
   }
 
@@ -23,7 +38,7 @@
       return;
     }
 
-    document.bbsDetailForm.action = "/admn/bbs/notice/deleteAdminNoticeBoard.do";
+    document.bbsDetailForm.action = "/admin/noti/deleteAdminNoticeBoard.do";
     document.bbsDetailForm.submit();
   }
 </script>
@@ -49,58 +64,7 @@
   <div class="wrapper">
     <div class="lnb">
       <h3>관리자 메뉴</h3>
-      <div class="lnbList">
-        <ul>
-          <li>
-            <a href="">게시판 관리</a>
-            <ul>
-              <li class="lnbCnt">
-                <a href="">공지사항 관리</a>
-              </li>
-              <li class="lnbCnt">
-                <a href="">자료실 관리</a>
-              </li>
-              <li class="lnbCnt">
-                <a href="">FAQ 관리</a>
-              </li>
-              <li class="lnbCnt">
-                <a href="">QnA 관리</a>
-              </li>
-              <li class="lnbCnt">
-                <a href="">게시판 관리</a>
-              </li>
-              <li class="lnbCnt">
-                <a href="">콩 재배 메뉴얼 관리</a>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <a href="">사용자 관리</a>
-            <ul>
-              <li class="lnbCnt">
-                <a href="">권한 관리</a>
-              </li>
-              <li class="lnbCnt">
-                <a href="">메뉴 관리</a>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <a href="">접속 이력 관리</a>
-            <ul>
-              <li class="lnbCnt">
-                <a href="">사용자별</a>
-              </li>
-              <li class="lnbCnt">
-                <a href="">메뉴별</a>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <a href="">데이터 관리</a>
-          </li>
-        </ul>
-      </div>
+      <%@ include file="/WEB-INF/jsp/smartbeans/portal/layouts/tiles/attribute/com/LayoutAdminLeft.jsp" %>
     </div>
 
     <div class="contents">
@@ -108,8 +72,11 @@
 
       <div class="inner">
         <form name="bbsDetailForm" action="" method="post">
-          <input type="hidden" name="bbsSn" value="${boardVO.noticeBoardNo}">
+          <input type="hidden" name="noticeBoardNo" value="${boardVO.noticeBoardNo}">
           <input type="hidden" name="editmode" value="U">
+          <input type="hidden" name="noticeBoardSubType" value="${boardVO.noticeBoardSubType}">
+          <input type="hidden" name="atchFileId" value="${boardVO.atchFileId}">
+
           <table class="view" cellspacing="0" style="border-collapse:collapse;">
             <colgroup>
               <col style="width: 15%;">

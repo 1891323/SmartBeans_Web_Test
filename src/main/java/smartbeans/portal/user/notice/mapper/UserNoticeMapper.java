@@ -1,7 +1,7 @@
 package smartbeans.portal.user.notice.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-import smartbeans.portal.admin.announcement.service.NoticeBoardVO;
+import smartbeans.portal.admin.bbs.notice.service.NoticeBoardVO;
 import smartbeans.portal.user.notice.service.UserNoticeVO;
 
 import java.util.List;

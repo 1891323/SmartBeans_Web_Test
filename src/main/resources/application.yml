@@ -8,3 +8,7 @@ server:
 spring:
   main:
     allow-bean-definition-overriding: true
+  output:
+    ansi:
+      enabled: always
+
