@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,6 +65,23 @@
                                 <h5>${weatherData.today}</h5>
                                 <p>날씨 <span>${weatherData.weather}</span> · 강수확률 <span>${weatherData.pop}%</span></p>
                                 <p>습도 <span>${weatherData.reh}%</span> · 풍속 <span>${weatherData.wsd}m/s</span></p>
+                            </div>
+                            <div class="weather_info_right">
+                                <c:forEach var="tmp" items="${tmp}">
+                                    <span class="hour">${fn:substring(tmp.fcstTime,0,2)}시</span>
+                                </c:forEach>
+                                <br>
+                                <c:forEach var="imgList" items="${imgList}">
+                                    <img src="<c:url value='/'/>images/main/wi_${imgList.img}.svg" alt="날씨">
+                                </c:forEach>
+                                <br>
+                                <c:forEach var="tmp" items="${tmp}">
+                                    <span class="tmp">${tmp.fcstValue}º</span>
+                                </c:forEach>
+                                <br>
+                                <c:forEach var="wsd" items="${wsd}">
+                                    <span class="wsd">${wsd.fcstValue}m/s</span>
+                                </c:forEach>
                             </div>
                                 <%--<ul>
                                 <li><a href="#LINK" class="tech" onclick="javascript:goMenuPage('2000000'); return false;">기술지원 필요시<br>유지보수 민원</a></li>
