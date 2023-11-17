@@ -30,26 +30,40 @@ package smartbeans.cmmn.web;
  * </pre>
  */
 
-import java.lang.reflect.Method;
-import java.util.Map;
-import java.util.TreeMap;
-
-import javax.annotation.Resource;
-
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import smartbeans.cmmn.IncludedCompInfoVO;
 import smartbeans.cmmn.annotation.IncludedInfo;
 import smartbeans.portal.uat.uia.service.EgovLoginService;
+import smartbeans.portal.user.farminfo.service.WeatherVO;
+
+import javax.annotation.Resource;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.lang.reflect.Method;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.util.*;
+import java.util.stream.IntStream;
 
 
 @Controller
+@PropertySource("classpath:config.properties")
 public class EgovComIndexController {
 
 	@Autowired
@@ -61,8 +75,219 @@ public class EgovComIndexController {
 	@Resource(name = "loginService")
 	private EgovLoginService loginService;
 
+	private static final int[] HOUR = {2, 5, 8, 11, 14, 17, 20, 23}; // 단기예보 기준시간 (1일 8회)
+	private static final String[] SKYDESC = {"", "맑음", "", "구름많음", "흐림"};
+	private static final String[] PTYDESC = {"", "비", "비/눈", "눈", "소나기"};
+	private static final String[] DAYSKYICON = {"", "clear-day", "", "cloudy", "partly-cloudy-day"};
+	private static final String[] NIGHTSKYICON = {"", "clear-night", "", "cloudy", "partly-cloudy-night"};
+	private static final String[] PTYICON = {"", "rain", "sleet", "snow", "hail"};
+	private static final String[] DETAILPTYICON = {"", "rain", "sleet", "snow", "", "drizzle", "sleet", "snow"};
+
+	@Value("${WEATHER_API_KEY}")
+	private String WEATHER_API_KEY;
+	public String dateFormat() {
+		Date nowDate = new Date();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+
+		return simpleDateFormat.format(nowDate);
+	}
+
+	public String hourFormatforVilage() {
+		LocalTime now = LocalTime.now();
+		int[] filteredHour = IntStream.of(HOUR).filter(h -> h <= now.getHour()).toArray();
+		int max = Arrays.stream(filteredHour).max().getAsInt();
+
+		return String.format("%02d00", max);
+	}
+
+	public String hourFormatforUltraSrt() {
+		LocalTime now = LocalTime.now();
+		int hour = now.getHour();
+		int min = now.getMinute();
+
+		if (min < 45) hour -= 1;
+
+		return String.format("%02d30", hour);
+	}
+
+	public JSONArray getVilageFcst(String API_kEY, String date, String time) throws IOException, ParseException {
+		StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst");
+		urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=" + API_kEY); /*Service Key(Encoding)*/
+		urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
+		urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("12", "UTF-8")); /*한 페이지 결과 수*/
+		urlBuilder.append("&" + URLEncoder.encode("dataType","UTF-8") + "=" + URLEncoder.encode("JSON", "UTF-8")); /*요청자료형식(XML/JSON) Default: XML*/
+		urlBuilder.append("&" + URLEncoder.encode("base_date","UTF-8") + "=" + URLEncoder.encode(date, "UTF-8")); /*날짜*/
+		urlBuilder.append("&" + URLEncoder.encode("base_time","UTF-8") + "=" + URLEncoder.encode(time, "UTF-8")); /*시간*/
+		urlBuilder.append("&" + URLEncoder.encode("nx","UTF-8") + "=" + URLEncoder.encode("74", "UTF-8")); /*예보지점(괴산)의 X 좌표값*/
+		urlBuilder.append("&" + URLEncoder.encode("ny","UTF-8") + "=" + URLEncoder.encode("111", "UTF-8")); /*예보지점(괴산)의 Y 좌표값*/
+		URL url = new URL(urlBuilder.toString());
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		conn.setRequestMethod("GET");
+		conn.setRequestProperty("Content-type", "application/json");
+		System.out.println("Response code: " + conn.getResponseCode());
+		BufferedReader rd;
+		if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+			rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+		} else {
+			rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+		}
+		StringBuilder sb = new StringBuilder();
+		String line;
+		while ((line = rd.readLine()) != null) {
+			sb.append(line);
+		}
+		rd.close();
+		conn.disconnect();
+
+		JSONParser parser = new JSONParser();
+		JSONObject obj = (JSONObject) parser.parse(sb.toString());
+		JSONObject response = (JSONObject) obj.get("response");
+		JSONObject body = (JSONObject) response.get("body");
+		JSONObject items = (JSONObject) body.get("items");
+		JSONArray item = (JSONArray) items.get("item");
+
+		return item;
+	}
+
+	public JSONArray getUltraSrtFcst(String API_kEY, String pageNo, String date, String time) throws IOException, ParseException {
+		StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst");
+		urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=" + API_kEY); /*Service Key(Encoding)*/
+		urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode(pageNo, "UTF-8")); /*페이지번호*/
+		urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("6", "UTF-8")); /*한 페이지 결과 수*/
+		urlBuilder.append("&" + URLEncoder.encode("dataType","UTF-8") + "=" + URLEncoder.encode("JSON", "UTF-8")); /*요청자료형식(XML/JSON) Default: XML*/
+		urlBuilder.append("&" + URLEncoder.encode("base_date","UTF-8") + "=" + URLEncoder.encode(date, "UTF-8")); /*날짜*/
+		urlBuilder.append("&" + URLEncoder.encode("base_time","UTF-8") + "=" + URLEncoder.encode(time, "UTF-8")); /*시간*/
+		urlBuilder.append("&" + URLEncoder.encode("nx","UTF-8") + "=" + URLEncoder.encode("74", "UTF-8")); /*예보지점(괴산)의 X 좌표값*/
+		urlBuilder.append("&" + URLEncoder.encode("ny","UTF-8") + "=" + URLEncoder.encode("111", "UTF-8")); /*예보지점(괴산)의 Y 좌표값*/
+		URL url = new URL(urlBuilder.toString());
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		conn.setRequestMethod("GET");
+		conn.setRequestProperty("Content-type", "application/json");
+		System.out.println("Response code: " + conn.getResponseCode());
+		BufferedReader rd;
+		if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+			rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+		} else {
+			rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+		}
+		StringBuilder sb = new StringBuilder();
+		String line;
+		while ((line = rd.readLine()) != null) {
+			sb.append(line);
+		}
+		rd.close();
+		conn.disconnect();
+
+		JSONParser parser = new JSONParser();
+		JSONObject obj = (JSONObject) parser.parse(sb.toString());
+		JSONObject response = (JSONObject) obj.get("response");
+		JSONObject body = (JSONObject) response.get("body");
+		JSONObject items = (JSONObject) body.get("items");
+		JSONArray item = (JSONArray) items.get("item");
+
+		return item;
+	}
+
 	@RequestMapping("/index.do")
-	public String index(ModelMap model) {
+	public String index(ModelMap model) throws IOException, ParseException {
+		JSONArray item = getVilageFcst(WEATHER_API_KEY, dateFormat(), hourFormatforVilage());
+
+		JSONObject tmp_obj = (JSONObject) item.get(0); // 기온
+		String tmp = (String) tmp_obj.get("fcstValue");
+		JSONObject pty_obj = (JSONObject) item.get(6); // 강수형태
+		String pty = (String) pty_obj.get("fcstValue");
+		JSONObject sky_obj = (JSONObject) item.get(5); // 하늘상태
+		String sky = (String) sky_obj.get("fcstValue");
+
+		String weather = "";
+		String img = "";
+		if (Objects.equals(pty, "0")) {
+			weather = SKYDESC[Integer.parseInt(sky)];
+			LocalTime now = LocalTime.now();
+			int hour = now.getHour();
+			if (hour >= 18)
+				img = NIGHTSKYICON[Integer.parseInt(sky)];
+			else
+				img = DAYSKYICON[Integer.parseInt(sky)];
+		}
+		else {
+			weather = PTYDESC[Integer.parseInt(pty)];
+			img = PTYICON[Integer.parseInt(pty)];
+		}
+
+		JSONObject pop_obj = (JSONObject) item.get(7); // 강수확률
+		String pop = (String) pop_obj.get("fcstValue");
+		JSONObject reh_obj = (JSONObject) item.get(10); // 습도
+		String reh = (String) reh_obj.get("fcstValue");
+		JSONObject wsd_obj = (JSONObject) item.get(4); // 풍속
+		String wsd = (String) wsd_obj.get("fcstValue");
+
+		Calendar cal = Calendar.getInstance();
+		int year = cal.get(Calendar.YEAR); // 년
+		int month = cal.get(Calendar.MONTH) + 1; // 월
+		int date = cal.get(Calendar.DATE); // 일
+		int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK); // 요일
+		String week = "";
+		switch (dayOfWeek) {
+			case 1:
+				week = "일";
+				break;
+			case 2:
+				week = "월";
+				break;
+			case 3:
+				week = "화";
+				break;
+			case 4:
+				week = "수";
+				break;
+			case 5:
+				week = "목";
+				break;
+			case 6:
+				week = "금";
+				break;
+			case 7:
+				week = "토";
+				break;
+		}
+		String today = year + "년 " + month + "월 " + date + "일 " + week + "요일";
+
+		WeatherVO weatherVO = new WeatherVO(weather, tmp, pop, reh, wsd, today, img);
+		model.addAttribute("weatherData", weatherVO);
+
+		JSONArray tmp_arr = getUltraSrtFcst(WEATHER_API_KEY, "5", dateFormat(), hourFormatforUltraSrt()); // 기온
+		JSONArray sky_arr = getUltraSrtFcst(WEATHER_API_KEY, "4", dateFormat(), hourFormatforUltraSrt()); // 하늘상태
+		JSONArray pty_arr = getUltraSrtFcst(WEATHER_API_KEY, "2", dateFormat(), hourFormatforUltraSrt()); // 강수형태
+
+		List<Map<String, String>> imgList = new ArrayList<>();
+		for (int i=0; i<pty_arr.size(); i++) {
+			Map<String, String> imgMap = new HashMap<>();
+
+			JSONObject ptyJson = (JSONObject) pty_arr.get(i);
+			String ptyStr = (String) ptyJson.get("fcstValue");
+
+			if (Objects.equals(ptyStr, "0")) {
+				JSONObject skyJson = (JSONObject) sky_arr.get(i);
+				String skyStr = (String) skyJson.get("fcstValue");
+				String timeStr = (String) skyJson.get("fcstTime");
+				int hour = Integer.parseInt(timeStr.substring(0, 2));
+				if (hour >= 18)
+					imgMap.put("img", NIGHTSKYICON[Integer.parseInt(skyStr)]);
+				else
+					imgMap.put("img", DAYSKYICON[Integer.parseInt(skyStr)]);
+			} else {
+				imgMap.put("img", DETAILPTYICON[Integer.parseInt(ptyStr)]);
+			}
+			imgList.add(imgMap);
+		}
+
+		JSONArray wsd_arr = getUltraSrtFcst(WEATHER_API_KEY, "10", dateFormat(), hourFormatforUltraSrt()); // 풍속
+
+		model.addAttribute("tmp", tmp_arr);
+		model.addAttribute("imgList", imgList);
+		model.addAttribute("wsd", wsd_arr);
+
 		return "main/main.index";
 	}
 

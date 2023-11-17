@@ -50,13 +50,18 @@
 
 .p_main .g_area .inner .right_col {width: 940px; padding-top: 60px;}
 .p_main .g_area .weather_info {position: relative; height: 300px; padding: 42px 40px 0 40px; border-radius: 27px; background: #fff;}
-.p_main .g_area .weather_info h2 {color: #222; font-size: 23px; font-weight: 700;}
-.p_main .g_area .weather_info ul {margin-top: 37px; font-size: 0; text-align: center;}
-.p_main .g_area .weather_info ul li {display: inline-block; min-width: 120px; vertical-align: top;}
-.p_main .g_area .weather_info ul li + li {margin-left: 60px;}
-.p_main .g_area .weather_info ul li a {display: block; padding-top: 137px; color: #333; font-size: 20px; line-height: 30px; background-position: center top;}
-.p_main .g_area .weather_info ul li a.tech {background: url(../images/ico_complain01.png) no-repeat;}
-.p_main .g_area .weather_info ul li a.buy {background: url(../images/ico_complain02.png) no-repeat;}
+.p_main .g_area .weather_info .weather_info_left {float: left;}
+.p_main .g_area .weather_info .weather_info_left h2 {color: #222; font-size: 23px; font-weight: 700;}
+.p_main .g_area .weather_info .weather_info_left img {width: 120px; text-align: center; margin-left: 12px;}
+.p_main .g_area .weather_info .weather_info_left h1 {position: absolute; top:100px; left:130px; font-size: 65px;}
+.p_main .g_area .weather_info .weather_info_left h5 {text-align: center; font-weight: bold;}
+.p_main .g_area .weather_info .weather_info_left p {color: #2b2b2b; text-align: center; margin-bottom: 5px;}
+.p_main .g_area .weather_info .weather_info_left span {font-weight: 600;}
+.p_main .g_area .weather_info .weather_info_right {text-align: center; margin-top: 40px; margin-right: -60px;}
+.p_main .g_area .weather_info .weather_info_right .hour {font-weight: bold; font-size: 20px; margin-right: 40px; margin-left: 15px;}
+.p_main .g_area .weather_info .weather_info_right img {width: 80px; margin-right: 20px; margin-top: 10px; margin-bottom: 10px;}
+.p_main .g_area .weather_info .weather_info_right .tmp {font-size: 20px; color: #666; margin-right: 45px; margin-left: 28px;}
+.p_main .g_area .weather_info .weather_info_right .wsd {font-size: 20px; color: #666; margin-right: 40px; margin-left: 15px;}
 .p_main .g_area .weather_info .more {display: block; position: absolute; right: 40px; top: 30px; width: 40px; height: 40px; font-size: 0; background: url(../images/main/ico_more.png) no-repeat;}
 
 .p_main .g_area .notification {width: 400px; position: relative; float:left; height: 360px; margin-top: 20px; padding: 42px 40px 0 40px; border-radius: 27px; background: #fff;}
