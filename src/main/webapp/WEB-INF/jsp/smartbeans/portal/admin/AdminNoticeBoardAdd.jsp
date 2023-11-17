@@ -150,14 +150,6 @@
                             </div>
                             <div>
                                 <span>작성일</span>
-<<<<<<< HEAD
-                                <%--                                <fmt:formatDate  value="${now}" pattern="yyyy-MM-dd HH:mm:ss"/>--%>
-                                <div>
-                                    <input type="text" name="noticeFirstRegistDtm"
-                                           value="<fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss"/>" readonly="readonly" class ="no-border" />
-                                </div>
-
-=======
                                 <c:choose>
                                     <c:when test="${editmode == 'U'}">
                                         <c:choose>
@@ -176,7 +168,6 @@
                                         <input type="text" name="noticeFirstRegistDtm" value="${formattedDate}" readonly="readonly" class="no-border"/>
                                     </c:otherwise>
                                 </c:choose>
->>>>>>> 39285758d308059af9207cf667d088a42b215946
                             </div>
 
                             <div>
@@ -185,17 +176,10 @@
                             </div>
                             <div class="file-upload">
                                 <span>파일첨부</span>
-<<<<<<< HEAD
-                                <%--                                <c:import url="/common/fileEdit.do" charEncoding="utf-8">--%>
-                                <%--                                    <c:param name="param_atchFileId" value="${boardVO.fileNo}" />--%>
-                                <%--                                    <c:param name="param_mode" value="default" />--%>
-                                <%--                                </c:import>--%>
-=======
 <%--                                <c:import url="/common/fileEdit.do" charEncoding="utf-8">--%>
 <%--                                    <c:param name="param_atchFileId" value="${boardVO.atchFileId}" />--%>
 <%--                                    <c:param name="param_mode" value="default" />--%>
 <%--                                </c:import>--%>
->>>>>>> 39285758d308059af9207cf667d088a42b215946
                                 <div id="file_upload_posbl" class="board_attach2">
                                     <!-- 'multiple' 속성 추가 -->
                                     <input name="file_1" id="egovComFileUploader" type="file" multiple />

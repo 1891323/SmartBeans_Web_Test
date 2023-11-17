@@ -24,6 +24,7 @@
         <result property="parentId" column="patent_id"/>
     </resultMap>
 
+    <!-- 게시글 상세페이지 -->
     <resultMap id="UserNoticeDetail" type="smartbeans.portal.user.notice.service.UserNoticeVO">
         <result property="noticeBoardNo" column="notice_board_no"/>
         <result property="noticeBoardSubType" column="notice_board_sub_type"/>

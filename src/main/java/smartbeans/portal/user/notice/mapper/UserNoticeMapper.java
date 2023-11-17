@@ -13,7 +13,6 @@ public interface UserNoticeMapper {
 
     int selectUserBoardListTotCnt(UserNoticeVO searchVO);
 
-    UserNoticeVO selectBoardDetail(UserNoticeVO userNoticeVO);
+    UserNoticeVO UserNoticeDetail(UserNoticeVO userNoticeVO);
 
-    int insertBoard(UserNoticeVO boardVO);
 }

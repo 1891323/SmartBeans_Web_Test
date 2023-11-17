@@ -1,11 +1,11 @@
 package smartbeans.portal.user.notice.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import smartbeans.cmmn.service.EgovFileMngService;
+import smartbeans.portal.user.notice.mapper.UserNoticeMapper;
 import smartbeans.portal.user.notice.service.UserNoticeService;
 import smartbeans.portal.user.notice.service.UserNoticeVO;
-import smartbeans.portal.user.notice.mapper.UserNoticeMapper;
-
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -15,6 +15,9 @@ public class UserNoticeServiceImpl implements UserNoticeService {
 
     @Resource(name="userNoticeMapper")
     private UserNoticeMapper usernoticeMapper;
+
+    @Resource(name = "EgovFileMngService")
+    EgovFileMngService egovFileMngService;
 
     @Override
     public List<UserNoticeVO> selectALL() {
@@ -30,4 +33,8 @@ public class UserNoticeServiceImpl implements UserNoticeService {
     public int selectUserBoardListTotCnt(UserNoticeVO searchVO) {
         return usernoticeMapper.selectUserBoardListTotCnt(searchVO);
     }
+
+    @Override
+    public UserNoticeVO UserNoticeDetail(UserNoticeVO userNoticeVO) {
+        return usernoticeMapper.UserNoticeDetail(userNoticeVO);    }
 }

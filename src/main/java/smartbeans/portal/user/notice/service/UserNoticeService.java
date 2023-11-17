@@ -1,7 +1,7 @@
 package smartbeans.portal.user.notice.service;
 
-
 import java.util.List;
+
 public interface UserNoticeService {
 
     List<UserNoticeVO> selectALL();
@@ -9,5 +9,7 @@ public interface UserNoticeService {
     List<UserNoticeVO> selectUserBoardList(UserNoticeVO searchVO);
 
     int selectUserBoardListTotCnt(UserNoticeVO searchVO);
+
+    UserNoticeVO UserNoticeDetail(UserNoticeVO userNoticeVO);
 
 }

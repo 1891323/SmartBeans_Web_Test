@@ -18,6 +18,7 @@ import smartbeans.cmmn.ComDefaultVO;
 import smartbeans.cmmn.service.EgovFileMngService;
 import smartbeans.cmmn.service.EgovFileMngUtil;
 import smartbeans.cmmn.service.FileVO;
+import smartbeans.portal.admin.bbs.notice.service.NoticeBoardVO;
 import smartbeans.portal.user.notice.service.UserNoticeService;
 import smartbeans.portal.user.notice.service.UserNoticeVO;
 
@@ -50,6 +51,7 @@ public class UserNoticeController {
 
     /**
      * notice 게시판 글목록 출력
+     *
      * @param searchVO
      * @param request
      * @param model
@@ -59,13 +61,14 @@ public class UserNoticeController {
             "/Announcement.do",
             "/Board.do",
             "/QnA.do",
-            "/FAQ.do"
+            "/FAQ.do",
+            "/Reference.do"
     })
     public String userNoticeView(@ModelAttribute("UserNoticeVO")
-        UserNoticeVO searchVO,
-        HttpServletRequest request,
-        HttpServletResponse response,
-        ModelMap model) throws Exception {
+                                     UserNoticeVO searchVO,
+                                 HttpServletRequest request,
+                                 HttpServletResponse response,
+                                 ModelMap model) throws Exception {
 
         searchVO.setPageUnit(propertiesService.getInt("pageUnit"));
         searchVO.setPageSize(propertiesService.getInt("pageSize"));
@@ -77,16 +80,26 @@ public class UserNoticeController {
             searchVO.setNoticeBoardType(4); // 알림마당
             searchVO.setNoticeBoardSubType(1); // 공지사항
             request.setAttribute("pageTitle", "공지사항");
-        } else if (requestUri.endsWith("/Board.do")) {
+        } else if (requestUri.endsWith("/Reference.do")) {
             // 게시판 로직 처리
             searchVO.setNoticeBoardType(4); // 알림마당
-            searchVO.setNoticeBoardSubType(5); // 게시판
-            request.setAttribute("pageTitle", "게시판");
+            searchVO.setNoticeBoardSubType(2); // 게시판
+            request.setAttribute("pageTitle", "자료실");
+        } else if (requestUri.endsWith("/FAQ.do")) {
+            // 게시판 로직 처리
+            searchVO.setNoticeBoardType(4); // 알림마당
+            searchVO.setNoticeBoardSubType(3); // 게시판
+            request.setAttribute("pageTitle", "FAQ");
         } else if (requestUri.endsWith("/QnA.do")) {
             // QnA 로직 처리
             searchVO.setNoticeBoardType(4); // 알림마당
             searchVO.setNoticeBoardSubType(4); // QnA
             request.setAttribute("pageTitle", "Q&A");
+        } else if (requestUri.endsWith("/Board.do")) {
+            // 게시판 로직 처리
+            searchVO.setNoticeBoardType(4); // 알림마당
+            searchVO.setNoticeBoardSubType(5); // 게시판
+            request.setAttribute("pageTitle", "게시판");
         }
 
         /* pageing setting */
@@ -105,7 +118,52 @@ public class UserNoticeController {
         paginationInfo.setTotalRecordCount(totCnt);
 
         model.addAttribute("boardList", boardList);
+        model.addAttribute("noticeBoardSubType", searchVO.getNoticeBoardSubType());
+        model.addAttribute("paginationInfo", paginationInfo);
+        model.addAttribute("totCnt", totCnt);
 
         return "user/notice/UserNotice.lnb"; // view 반환
+    }
+
+    /**
+     * 게시판 상세글 보기
+     *
+     * @param userNoticeVO
+     * @param model
+     * @return
+     */
+
+    @GetMapping(value = "/selectUserDetailNoticeBoard.do")
+    public String selectUserDetailNoticeBoard(@ModelAttribute("searchVO") UserNoticeVO userNoticeVO, ModelMap model) {
+
+        UserNoticeVO boardVO = userNoticeService.UserNoticeDetail(userNoticeVO);
+
+        String boardType = "";
+
+        switch (boardVO.getNoticeBoardSubType()) {
+            case 1:
+                boardType = "공지사항";
+                break;
+            case 2:
+                boardType = "자료실";
+                break;
+            case 3:
+                boardType = "FAQ";
+                break;
+            case 4:
+                boardType = "Q&A";
+                break;
+            case 5:
+                boardType = "게시판";
+                break;
+
+            default:
+                boardType = "공지사항";
+                break;
+        }
+        model.addAttribute("boardVO", boardVO);
+        model.addAttribute("boardType", boardType);
+
+        return "user/notice/UserNoticeDetail.lnb";
     }
 }

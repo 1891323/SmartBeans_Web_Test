@@ -1,12 +1,10 @@
 package smartbeans.portal.admin.bbs.notice.service;
 
-
 import java.util.List;
 
 public interface AdminNoticeSerivce {
 
     List<NoticeBoardVO> selectAll();
-
 
     List<NoticeBoardVO> selectBoardList(NoticeBoardVO searchVO);
 

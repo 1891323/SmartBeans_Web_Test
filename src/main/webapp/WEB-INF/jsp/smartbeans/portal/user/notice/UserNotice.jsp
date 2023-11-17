@@ -17,10 +17,17 @@
         var searchCnd = document.frm.searchCnd.value; // 검색 유형 추출
         var searchWrd = document.frm.searchWrd.value; // 검색어 추출
 
-        var newUrl = contextPath + "/admin/noti/Announcement.do?pageIndex=" + pageNo
+        var newUrl = contextPath + "/user/noti/Announcement.do?pageIndex=" + pageNo
             + "&searchCnd=" + encodeURIComponent(searchCnd)
             + "&searchWrd=" + encodeURIComponent(searchWrd);
         window.location.href = newUrl;
+    }
+
+    function goDeatil(select, noticeBoardNo) {
+        if (select === "detail") {
+            var newUrl = contextPath + "/user/noti/selectUserDetailNoticeBoard.do?noticeBoardNo=" + noticeBoardNo;
+            window.location.href = newUrl;
+        }
     }
 
 </script>
@@ -101,7 +108,7 @@
                 <c:forEach items="${boardList}" var="notice">
                     <tr>
                         <td>${notice.rowNum}</td>
-                        <td> <a href="#" ${notice.noticeBoardNo}> <c:out value="${notice.noticeTitle}" /></a></td>
+                        <td> <a href="#" onclick="goDeatil('detail','${notice.noticeBoardNo}')"> <c:out value="${notice.noticeTitle}" /></a></td>
                         <td>${notice.noticeWrtr}</td>
                         <td><fmt:formatDate value="${notice.noticeFirstRegistDtm}" pattern="yyyy.MM.dd" /></td>
                     </tr>
