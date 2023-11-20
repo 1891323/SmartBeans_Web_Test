@@ -75,19 +75,19 @@
                     <a href="">알림마당</a>
                     <ul>
                         <li class="lnbCnt">
-                            <a href="">공지사항</a>
+                            <a href="Announcement.do">공지사항</a>
                         </li>
                         <li class="lnbCnt">
-                            <a href="">게시판</a>
+                            <a href="Board.do">게시판</a>
                         </li>
                         <li class="lnbCnt">
-                            <a href="">자료실</a>
+                            <a href="Reference.do">자료실</a>
                         </li>
                         <li class="lnbCnt">
-                            <a href="">Q&A</a>
+                            <a href="QnA.do">Q&A</a>
                         </li>
                         <li class="lnbCnt">
-                            <a href="">FAQ</a>
+                            <a href="FAQ.do">FAQ</a>
                         </li>
                     </ul>
                 </li>

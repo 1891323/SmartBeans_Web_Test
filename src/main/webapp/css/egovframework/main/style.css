@@ -478,6 +478,7 @@ table tbody tr td a {
   height: 36px;
   color: #7E84A3;
   text-align: center;
+
   font-size: 16px;
   line-height: 36px;
   display: block;
@@ -494,16 +495,16 @@ table tbody tr td a {
   height: 36px;
 }
 .pagination li button[type=button].btnPrevend {
-  background: url("/images/btn_prevend.svg");
+  background: url("/images/images/btn_prevend.svg");
 }
 .pagination li button[type=button].btnPrev {
-  background: url("/images/btn_prev.svg");
+  background: url("/images/images/btn_prev.svg");
 }
 .pagination li button[type=button].btnNext {
-  background: url("/images/btn_next.svg");
+  background: url("/images/images/btn_next.svg");
 }
 .pagination li button[type=button].btnNextEnd {
-  background: url("/images/btn_nextend.svg");
+  background: url("/images/images/btn_nextend.svg");
 }
 
 /* button 커스텀*/

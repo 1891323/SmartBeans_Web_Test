@@ -47,7 +47,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
-    <title>공지 사항</title>
 </head>
 
 <body>
@@ -120,6 +119,11 @@
 
             <div>
                 <ul class="pagination" id="pagination">
+                    <li><button type='button' class='btnPrevend'></button></li>
+                    <li><button type='button' class='btnPrev'></button></li>
+                    <ui:pagination paginationInfo="${paginationInfo}" type="renew" jsFunction="fn_egov_select_noticeList" />
+                    <li><button type='button' class='btnNext'></button>
+                    <li><button  type='button' class='btnNextEnd'></button>
                 </ul>
             </div>
         </div>

@@ -433,16 +433,16 @@ table{
       width: 36px;
       height: 36px;
       &.btnPrevend{
-        background: url('/images/btn_prevend.svg');
+        background: url('/images/images/btn_next.svg');
       }
       &.btnPrev{
-        background: url('/images/btn_prev.svg');
+        background: url('/images/images/btn_prev.svg');
       }
       &.btnNext{
-        background: url('/images/btn_next.svg');
+        background: url('/images/images/btn_next.svg');
       }
       &.btnNextEnd{
-        background: url('/images/btn_nextend.svg');
+        background: url('/images/images/btn_nextend.svg');
       }
     }
   }
