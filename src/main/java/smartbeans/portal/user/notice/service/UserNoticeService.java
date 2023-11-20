@@ -10,6 +10,6 @@ public interface UserNoticeService {
 
     int selectUserBoardListTotCnt(UserNoticeVO searchVO);
 
-    UserNoticeVO UserNoticeDetail(UserNoticeVO userNoticeVO);
+    UserNoticeVO selectUserBoardDetail(UserNoticeVO userNoticeVO);
 
 }

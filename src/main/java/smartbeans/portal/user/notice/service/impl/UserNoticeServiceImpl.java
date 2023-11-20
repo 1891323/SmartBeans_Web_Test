@@ -35,6 +35,6 @@ public class UserNoticeServiceImpl implements UserNoticeService {
     }
 
     @Override
-    public UserNoticeVO UserNoticeDetail(UserNoticeVO userNoticeVO) {
-        return usernoticeMapper.UserNoticeDetail(userNoticeVO);    }
+    public UserNoticeVO selectUserBoardDetail(UserNoticeVO userNoticeVO) {
+        return usernoticeMapper.selectUserBoardDetail(userNoticeVO);    }
 }

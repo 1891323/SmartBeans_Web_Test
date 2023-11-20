@@ -11,8 +11,9 @@ public interface UserNoticeMapper {
 
     public List<UserNoticeVO> selectUserBoardList(UserNoticeVO searchVO);
 
+
     int selectUserBoardListTotCnt(UserNoticeVO searchVO);
 
-    UserNoticeVO UserNoticeDetail(UserNoticeVO userNoticeVO);
+    UserNoticeVO selectUserBoardDetail(UserNoticeVO userNoticeVO);
 
 }

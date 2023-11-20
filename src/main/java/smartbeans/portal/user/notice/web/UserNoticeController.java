@@ -136,7 +136,7 @@ public class UserNoticeController {
     @GetMapping(value = "/selectUserDetailNoticeBoard.do")
     public String selectUserDetailNoticeBoard(@ModelAttribute("searchVO") UserNoticeVO userNoticeVO, ModelMap model) {
 
-        UserNoticeVO boardVO = userNoticeService.UserNoticeDetail(userNoticeVO);
+        UserNoticeVO boardVO = userNoticeService.selectUserBoardDetail(userNoticeVO);
 
         String boardType = "";
 

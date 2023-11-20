@@ -35,27 +35,19 @@
 
 </script>
 
+<body>
+
+<div class="location">
+    <ul>
+        <li><a href="#"><img src="${pageContext.request.contextPath}/images/egovframework/main/images/ic_sub_navi_home.svg"
+                             alt="메인으로"  style="position: relative; top: -5px;">
+        </a></li>
+        <li><a href="#">알림마당</a></li>
+        <li><a href="#">${boardType} 상세보기</a></li>
+    </ul>
+</div>
+
 <section id="container">
-    <div class="breadCrumb">
-        <!-- 빵 부스러기 경로 표시 -->
-    </div>
-
-    <!-- Location -->
-    <div class="location">
-        <ul>
-            <li><a href="#"><img src="${pageContext.request.contextPath}/images/egovframework/main/images/ic_sub_navi_home.svg"
-                                 alt="메인으로"  style="position: relative; top: -5px;">
-            </a></li>
-            <li><a href="#">알림마당</a></li>
-            <li><a href="#">${boardType} 상세보기</a></li>
-        </ul>
-    </div>
-    <!--// Location -->
-
-    <div class="wrapper">
-        <div class="lnb">
-            <h3>메뉴</h3>
-        </div>
 
         <div class="contents">
             <h2>${boardType} 상세보기</h2>
@@ -117,6 +109,6 @@
                 </form>
             </div>
 
-        </div>
     </div>
 </section>
+</body>
