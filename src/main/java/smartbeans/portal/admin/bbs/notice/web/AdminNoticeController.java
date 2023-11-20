@@ -115,8 +115,6 @@ public class AdminNoticeController {
         model.addAttribute("paginationInfo", paginationInfo);
         model.addAttribute("totCnt", totCnt);
 
-
-
         return "admin/AdminNoticeBoardList.admin";
     }
 
@@ -250,7 +248,6 @@ public class AdminNoticeController {
     }
 
 
-    //밑에 URL을 가져와서 http://localhost:9090/AnnouncementList.do 라고 검색하면 접속 가능함!
     @RequestMapping("AnnouncementList.do")
     public String selectAminNoticeBoardList(@ModelAttribute("searchVO")ComDefaultVO searchVO, ModelMap model){
 
