@@ -150,9 +150,9 @@
           </label>
           <span class="item f_search">
 
-        <input class="f_input w_500" type="text" name="searchKeyword" title="검색어 입력">
-        <button class="btn" type="submit" onclick="fn_egov_select_noticeList('1'); return false;">조회</button>
-    </span>
+            <input class="f_input w_500" type="text" name="searchKeyword" title="검색어 입력">
+            <button class="btn" type="submit" onclick="fn_egov_select_noticeList('1'); return false;">조회</button>
+          </span>
           <a href=# class="item btn btn_blue_46 w_100" onClick="javascript:goEdit('insert', 'I')">등록</a>
         </form>
 

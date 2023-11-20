@@ -30,6 +30,95 @@
         }
     }
 
+    function goEdit(select, noticeBoardNo) {
+        if (select === "insert") {
+            document.frm.action = "/user/noti/selectUserEditNoticeBoard.do";
+            document.frm.noticeBoardSubType.value = '${noticeBoardSubType}';
+            document.frm.method = 'post';
+            document.frm.submit();
+        } else if (select === "save") {
+            let datas = getDummyCheckElements();
+
+            if (datas.length === 0) {
+                alert('변경사항이 없습니다.');
+                return false;
+            }
+            if (!confirm("저장하시겠습니까?")) {
+                return false;
+            }
+
+            $.ajax({
+                url: '/user/notice/updateUserNoticeBoardList.do',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(datas),
+                success: function (response) {
+                    if (response.alertMessage) {
+                        alert(response.alertMessage);
+                        var row = $('tr').has('td:contains("' + noticeBoardNo + '")');
+                        row.prependTo('tbody');
+                    }
+                    if (response.status === 'success') {
+                        alert('저장되었습니다.');
+                        location.reload();
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error('Failed to update the notice board list');
+                }
+            });
+        } else if (select === "detail") {
+            var newUrl = contextPath + "/user/noti/selectUserDetailNoticeBoard.do?noticeBoardNo=" + noticeBoardNo;
+            window.location.href = newUrl;
+        }
+    }
+
+    function setDisabled() {
+        // dummy check 해서 변경사항 없을 시 disabled 처리
+        datas = getDummyCheckElements();
+        if (datas.length === 0) {
+            document.querySelector('#btnAreaSaveButton').classList.add('alpha30');
+        } else {
+            document.querySelector('#btnAreaSaveButton').classList.remove('alpha30');
+        }
+    }
+
+    function userupdateTopFixedStatus(noticeBoardNo, isChecked) {
+        var topFixedStatus = isChecked ? 'Y' : 'N';
+
+        $.ajax({
+            type: "POST",
+            url:  "/admin/noti/userupdateTopFixedStatus.do",
+            data: {
+                noticeBoardNo: noticeBoardNo,
+                noticeTopFixed: topFixedStatus
+            },
+            success: function(response) {
+                if (response === 1) {
+                    alert('변경에 성공했습니다.');
+                } else {
+                    alert('변경에 실패했습니다. 잠시 후 다시 시도해 주세요.');
+                }
+            },
+            error: function(xhr, status, error) {
+                // 에러 처리
+            },
+        });
+    }
+
+    $(document).ready(function () {
+        // 체크박스의 변경 감지
+        $('tbody').on('change', 'input[type="checkbox"]', function () {
+            var isChecked = $(this).is(':checked');
+            var row = $(this).closest('tr');
+
+            // 체크박스가 체크된 경우 해당 행을 테이블 상단으로 이동
+            if (isChecked) {
+                row.prependTo('table tbody');
+            }
+        });
+    });
+
 </script>
 
 <!DOCTYPE html>
@@ -57,7 +146,7 @@
                              alt="메인으로"  style="position: relative; top: -1px;">
         </a></li>
         <li><a href="#">알림마당</a></li>
-        <li><a href="#">공지사항</a></li>
+        <li><a href="#">${pageTitle}</a></li>
     </ul>
 </div>
 
@@ -65,7 +154,7 @@
                 <h2 name ="">${pageTitle} </h2>
             <!-- 검색조건 -->
         <div class="condition">
-            <form name="frm" action="/portal/user/notice/noticeList.do" method="post">
+            <form name="frm" action="/user/noti/Announcement.do" method="post">
                 <input type="hidden" name="noticeBoardSubType" value="${noticeBoardSubType}" />
                 <label class="item f_select">
                     <select name="searchCnd" id="searchCnd" title="검색조건 선택">
@@ -78,10 +167,14 @@
                     <input class="f_input w_500" type="text" name="searchWrd" title="검색어 입력">
                     <button class="btn" type="submit" onclick="fn_egov_select_noticeList('1'); return false;">조회</button>
                  </span>
+                <c:if test="${noticeBoardSubType == 4}"> <!-- Q&A일 경우에만 사용자가 글 등록 가능 -->
+                <a href=# class="item btn btn_blue_46 w_100" onClick="javascript:goEdit('insert', 'I')">등록</a>
+                </c:if>
             </form>
         </div>
+        <!--// 검색조건 -->
 
-            <!--// 검색조건 -->
+        <p style="font-size: 20px; margin-top: 15px; text-align: right;">[ 총 게시물 : ${totCnt} 개 ]</p>
         <div class="inner">
             <table>
 
@@ -106,13 +199,22 @@
                 <!--공지사항 리스트 목록 -->
                 <c:forEach items="${boardList}" var="notice">
                     <tr>
+
                         <td>${notice.rowNum}</td>
-                        <td> <a href="#" onclick="goDeatil('detail','${notice.noticeBoardNo}')"> <c:out value="${notice.noticeTitle}" /></a></td>
+                        <td><a href="#" onclick="goEdit('detail', '${notice.noticeBoardNo}')"><c:out value="${notice.noticeTitle}" /></a></td>
                         <td>${notice.noticeWrtr}</td>
                         <td><fmt:formatDate value="${notice.noticeFirstRegistDtm}" pattern="yyyy.MM.dd" /></td>
+
+                        <c:if test="${notice.noticeBoardSubType == 1}"> <!-- 공지사항의 하위 타입이 1인 경우에만 상단고정 체크박스를 표시 -->
+                            <input type="checkbox" name="checkBtn" id='chkBtn${notice.noticeBoardNo}' ${notice.noticeTopFixed == 'Y' ? 'checked' : ''}
+                                   onchange="updateTopFixedStatus(${notice.noticeBoardNo}, this.checked)">
+                            <label for="chkBtn${notice.noticeBoardNo}">&nbsp;</label>
+                        </c:if>
+
                     </tr>
                 </c:forEach>
                 <!--공지사항 리스트 목록 -->
+
                 </tbody>
 
             </table>

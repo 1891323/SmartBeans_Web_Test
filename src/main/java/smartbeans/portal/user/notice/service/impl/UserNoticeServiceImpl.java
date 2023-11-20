@@ -1,7 +1,7 @@
 package smartbeans.portal.user.notice.service.impl;
 
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import smartbeans.cmmn.service.EgovFileMngService;
 import smartbeans.portal.user.notice.mapper.UserNoticeMapper;
 import smartbeans.portal.user.notice.service.UserNoticeService;
@@ -36,5 +36,14 @@ public class UserNoticeServiceImpl implements UserNoticeService {
 
     @Override
     public UserNoticeVO selectUserBoardDetail(UserNoticeVO userNoticeVO) {
-        return usernoticeMapper.selectUserBoardDetail(userNoticeVO);    }
+        return usernoticeMapper.selectUserBoardDetail(userNoticeVO);
+    }
+
+    @Override
+    public int userinsertBoard(UserNoticeVO boardVO){
+        return usernoticeMapper.userinsertBoard(boardVO);
+    }
+
+    @Override
+    public int userupdateTopFixedStatus(int noticeBoardNo) { return usernoticeMapper.userupdateTopFixedStatus(noticeBoardNo);   }
 }

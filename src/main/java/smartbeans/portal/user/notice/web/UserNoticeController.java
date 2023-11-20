@@ -1,13 +1,13 @@
 package smartbeans.portal.user.notice.web;
 
+import org.egovframe.rte.fdl.cryptography.EgovEnvCryptoService;
 import org.egovframe.rte.fdl.property.EgovPropertyService;
 import org.egovframe.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
-import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +18,6 @@ import smartbeans.cmmn.ComDefaultVO;
 import smartbeans.cmmn.service.EgovFileMngService;
 import smartbeans.cmmn.service.EgovFileMngUtil;
 import smartbeans.cmmn.service.FileVO;
-import smartbeans.portal.admin.bbs.notice.service.NoticeBoardVO;
 import smartbeans.portal.user.notice.service.UserNoticeService;
 import smartbeans.portal.user.notice.service.UserNoticeVO;
 
@@ -26,15 +25,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-import twitter4j.User;
-
-
 import java.util.List;
 import java.util.Map;
-
-import static com.squareup.okhttp.internal.Internal.logger;
 
 @Controller
 @RequestMapping(value= "/user/noti")
@@ -48,6 +40,13 @@ public class UserNoticeController {
 
     @Resource(name = "propertiesService")
     protected EgovPropertyService propertiesService;
+
+    @Resource(name = "EgovFileMngUtil")
+    private EgovFileMngUtil fileUtil;
+
+    @Resource(name = "EgovFileMngService")
+    private EgovFileMngService fileMngService;
+
 
     /**
      * notice 게시판 글목록 출력
@@ -64,7 +63,7 @@ public class UserNoticeController {
             "/FAQ.do",
             "/Reference.do"
     })
-    public String userNoticeView(@ModelAttribute("UserNoticeVO")
+    public String selectUserNoticeBoardList(@ModelAttribute("UserNoticeVO")
                                      UserNoticeVO searchVO,
                                  HttpServletRequest request,
                                  HttpServletResponse response,
@@ -83,12 +82,12 @@ public class UserNoticeController {
         } else if (requestUri.endsWith("/Reference.do")) {
             // 게시판 로직 처리
             searchVO.setNoticeBoardType(4); // 알림마당
-            searchVO.setNoticeBoardSubType(2); // 게시판
+            searchVO.setNoticeBoardSubType(2); // 자료실
             request.setAttribute("pageTitle", "자료실");
         } else if (requestUri.endsWith("/FAQ.do")) {
             // 게시판 로직 처리
             searchVO.setNoticeBoardType(4); // 알림마당
-            searchVO.setNoticeBoardSubType(3); // 게시판
+            searchVO.setNoticeBoardSubType(3); // FAQ
             request.setAttribute("pageTitle", "FAQ");
         } else if (requestUri.endsWith("/QnA.do")) {
             // QnA 로직 처리
@@ -127,7 +126,6 @@ public class UserNoticeController {
 
     /**
      * 게시판 상세글 보기
-     *
      * @param userNoticeVO
      * @param model
      * @return
@@ -166,4 +164,95 @@ public class UserNoticeController {
 
         return "user/notice/UserNoticeDetail.lnb";
     }
+
+    /**
+     * Name: selectUserEditNoticeBoard()
+     * Descriptions: 관리자 공지사항 등록 페이지 이동
+     *
+     * @param boardVO
+     * @param editmode
+     * @param model
+     * @return
+     * @throws Exception
+     */
+    @PostMapping(value = "/selectUserEditNoticeBoard.do")
+    public String selectUserEditNoticeBoard(UserNoticeVO boardVO, String editmode, ModelMap model) throws Exception {
+        if ("U".equals(editmode)) {
+
+            boardVO = userNoticeService.selectUserBoardDetail(boardVO);
+            model.addAttribute("editmode", "U");
+        } else {
+            model.addAttribute("editmode", "I");
+        }
+
+        model.addAttribute("boardVO", boardVO);
+        model.addAttribute("noticeBoardSubType", boardVO.getNoticeBoardSubType());
+
+
+        return "user/notice/UserNoticeAdd.lnb";
+    }
+
+    /**
+     * 게시물 삽입 페이지
+     * @param multiRequest
+     * @param boardVO
+     * @param model
+     * @return
+     * @throws Exception
+     */
+    @PostMapping(value = "/insertUserNoticeBoard.do")
+    public String insertUserNoticeBoard(final MultipartHttpServletRequest multiRequest, UserNoticeVO boardVO, ModelMap model) throws Exception {
+        List<FileVO> result = null;
+        String atchFileId = "";
+
+        //로그인 구현 전 임시로 setting
+        boardVO.setNoticeWrtr("임시 회원");
+        boardVO.setMbrId("2");
+
+        final Map<String, MultipartFile> files = multiRequest.getFileMap();
+        if (!files.isEmpty()) {
+            result = fileUtil.parseFileInf(files, "BBS_", 0, "", "");
+            atchFileId = fileMngService.insertFileInfs(result);
+            boardVO.setAtchFileId(atchFileId);
+        }
+        userNoticeService.userinsertBoard(boardVO);
+
+
+        model.addAttribute("editmode", "I");
+        model.addAttribute("boardVO", boardVO);
+
+        // noticeBoardSubType 값에 따라 다른 페이지로 리디렉션
+        String redirectUrl = "redirect:/user/noti/";
+        switch (boardVO.getNoticeBoardSubType()) {
+            case 1:
+                redirectUrl += "Announcement.do";
+                break;
+            case 2:
+                redirectUrl += "Reference.do";
+                break;
+            case 3:
+                redirectUrl += "FAQ.do";
+                break;
+            case 4:
+                redirectUrl += "QnA.do";
+                break;
+            case 5:
+                redirectUrl += "Board.do";
+                break;
+        }
+
+        return redirectUrl;
+
+    }
+
+    @PostMapping("/userupdateTopFixedStatus.do")
+    public int updateTopFixedStatus(@RequestParam("noticeBoardNo") int noticeBoardNo
+    ) {
+
+        logger.info("변경 대상================"+noticeBoardNo);
+        int result = userNoticeService.userupdateTopFixedStatus(noticeBoardNo);
+
+        return result;
+    }
+
 }

@@ -11,8 +11,9 @@ import smartbeans.cmmn.ComDefaultVO;
 import java.util.Date;
 @Data
 public class UserNoticeVO extends ComDefaultVO {
-
+    //게시글 순서
     private Long rowNum;
+
     // 게시글 번호
     private int noticeBoardNo;
 

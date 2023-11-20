@@ -12,4 +12,8 @@ public interface UserNoticeService {
 
     UserNoticeVO selectUserBoardDetail(UserNoticeVO userNoticeVO);
 
+    int userinsertBoard(UserNoticeVO boardVO);
+
+    int userupdateTopFixedStatus(int noticeBoardNo);
+
 }
