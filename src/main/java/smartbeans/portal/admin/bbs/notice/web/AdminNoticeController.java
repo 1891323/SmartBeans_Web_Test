@@ -7,10 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import smartbeans.cmmn.ComDefaultVO;
@@ -32,6 +29,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/admin/noti")
+
 public class AdminNoticeController {
     private static final Logger logger = LoggerFactory.getLogger(AdminNoticeController.class);
 
@@ -60,32 +58,40 @@ public class AdminNoticeController {
      */
     @RequestMapping({
             "/Announcement.do",
-            "/Board.do",
+            "/Reference.do",
+            "/FAQ.do",
             "/QnA.do",
+            "/Board.do",
+            "/BeanFarmingManual.do"
     })
-    public String selectAminNoticeBoardList(@ModelAttribute("searchVO") NoticeBoardVO searchVO,  HttpServletRequest request, ModelMap model){
+    public String selectAminNoticeBoardList(@ModelAttribute("searchVO") NoticeBoardVO searchVO,
+                                            HttpServletRequest request,
+                                            ModelMap model){
 
         searchVO.setPageUnit(propertiesService.getInt("pageUnit"));
         searchVO.setPageSize(propertiesService.getInt("pageSize"));
 
         String requestUri = request.getRequestURI();
 
-
         if (requestUri.endsWith("/Announcement.do")) {
-            // 공지사항 로직 처리
-            searchVO.setNoticeBoardType(4); // 알림마당
             searchVO.setNoticeBoardSubType(1); // 공지사항
             request.setAttribute("pageTitle", "공지사항");
+        } else if (requestUri.endsWith("/Reference.do")) {
+            searchVO.setNoticeBoardSubType(2); // 게시판
+            request.setAttribute("pageTitle", "자료실");
+        } else if (requestUri.endsWith("/FAQ.do")) {
+            searchVO.setNoticeBoardSubType(3); // FAQ
+            request.setAttribute("pageTitle", "FAQ");
+        } else if (requestUri.endsWith("/QnA.do")) {
+            searchVO.setNoticeBoardSubType(4); // FAQ
+            request.setAttribute("pageTitle", "QnA");
         } else if (requestUri.endsWith("/Board.do")) {
-            // 게시판 로직 처리
-            searchVO.setNoticeBoardType(4); // 알림마당
             searchVO.setNoticeBoardSubType(5); // 게시판
             request.setAttribute("pageTitle", "게시판");
-        } else if (requestUri.endsWith("/QnA.do")) {
+        } else if (requestUri.endsWith("/BeanFarmingManual.do")) {
             // QnA 로직 처리
-            searchVO.setNoticeBoardType(4); // 알림마당
-            searchVO.setNoticeBoardSubType(4); // QnA
-            request.setAttribute("pageTitle", "Q&A");
+            searchVO.setNoticeBoardSubType(6); // 콩 재배 메뉴얼
+            request.setAttribute("pageTitle", "콩 재배 메뉴얼");
         }
 
         /* pageing setting */
@@ -104,15 +110,10 @@ public class AdminNoticeController {
         int totCnt = announcementAdminSerivce.selectBoardListTotCnt(searchVO);
         paginationInfo.setTotalRecordCount(totCnt);
 
-
-
         model.addAttribute("boardList", boardList);
-
         model.addAttribute("noticeBoardSubType", searchVO.getNoticeBoardSubType());
-
         model.addAttribute("paginationInfo", paginationInfo);
-
-
+        model.addAttribute("totCnt", totCnt);
 
         return "admin/AdminNoticeBoardList.admin";
     }
@@ -134,14 +135,24 @@ public class AdminNoticeController {
             case 1:
                 boardType = "공지사항";
                 break;
-            case 5:
-                boardType = "게시판";
+            case 2:
+                boardType = "자료실";
+                break;
+            case 3:
+                boardType = "FAQ";
                 break;
             case 4:
                 boardType = "Q&A";
                 break;
+            case 5:
+                boardType = "게시판";
+                break;
+            case 6:
+                boardType = "Q&A";
+                break;
+
             default:
-                boardType = "기타";
+                boardType = "콩 재배 메뉴얼";
                 break;
         }
 
@@ -170,9 +181,6 @@ public class AdminNoticeController {
             model.addAttribute("editmode", "I");
         }
 
-//        System.out.println("Edit Mode 체크체크-----------------------: " + editmode);
-//        System.out.println("BoardVO 체크체크-----------------------:: " + boardVO);
-
         model.addAttribute("boardVO", boardVO);
         model.addAttribute("noticeBoardSubType", boardVO.getNoticeBoardSubType());
 
@@ -192,7 +200,6 @@ public class AdminNoticeController {
     public String insertAdminNoticeBoard(final MultipartHttpServletRequest multiRequest, NoticeBoardVO boardVO, ModelMap model) throws Exception {
         List<FileVO> result = null;
         String atchFileId = "";
-        boardVO.setNoticeBoardType(4);
 
         //로그인 구현 전 임시로 setting
         boardVO.setNoticeWrtr("임시 작성자");
@@ -216,12 +223,22 @@ public class AdminNoticeController {
             case 1:
                 redirectUrl += "Announcement.do";
                 break;
-            case 5:
-                redirectUrl += "Board.do";
+            case 2:
+                redirectUrl += "Reference.do";
+                break;
+            case 3:
+                redirectUrl += "FAQ.do";
                 break;
             case 4:
                 redirectUrl += "QnA.do";
                 break;
+            case 5:
+                redirectUrl += "Board.do";
+                break;
+            case 6:
+                redirectUrl += "BeanFarmingManual.do";
+                break;
+
             default:
                 redirectUrl += "Announcement.do"; // 기본값 혹은 예외 처리
         }
@@ -231,12 +248,11 @@ public class AdminNoticeController {
     }
 
 
-    //밑에 URL을 가져와서 http://localhost:9090/AnnouncementList.do 라고 검색하면 접속 가능함!
     @RequestMapping("AnnouncementList.do")
     public String selectAminNoticeBoardList(@ModelAttribute("searchVO")ComDefaultVO searchVO, ModelMap model){
 
         List<NoticeBoardVO> allNotices = announcementAdminSerivce.selectAll();
-        model.addAttribute("allNotices", allNotices);
+
 
         /* pageing setting */
         PaginationInfo paginationInfo = new PaginationInfo();
@@ -244,9 +260,15 @@ public class AdminNoticeController {
         paginationInfo.setRecordCountPerPage(searchVO.getPageUnit());
         paginationInfo.setPageSize(searchVO.getPageSize());
 
+
         searchVO.setFirstIndex(paginationInfo.getFirstRecordIndex());
         searchVO.setLastIndex(paginationInfo.getLastRecordIndex());
         searchVO.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
+
+        model.addAttribute("allNotices", allNotices);
+        int totalcnt = paginationInfo.getTotalRecordCount();
+        model.addAttribute("totalcnt", totalcnt);
+
 
 
 
@@ -286,7 +308,6 @@ public class AdminNoticeController {
 
     }
 
-
     @PostMapping(value = "/updateAdminNoticeBoard.do")
     public String updateAdminNoticeBoard(final MultipartHttpServletRequest multiRequest, NoticeBoardVO boardVO, ModelMap model) throws Exception {
         boardVO.setDecryptAtchFileId(cryptoService);
@@ -317,5 +338,16 @@ public class AdminNoticeController {
         model.addAttribute("boardVO", boardVO);
         return "admin/AdminNoticeBoardDetail.admin";
     }
+
+    @PostMapping("/updateTopFixedStatus.do")
+    public int updateTopFixedStatus(@RequestParam("noticeBoardNo") int noticeBoardNo
+                                    ) {
+
+        logger.info("변경 대상================"+noticeBoardNo);
+        int result = announcementAdminSerivce.updateTopFixedStatus(noticeBoardNo);
+
+        return result;
+    }
+
 
 }// end of class

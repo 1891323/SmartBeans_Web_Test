@@ -30,7 +30,6 @@ var CKBUILDER_CONFIG = {
 	ignore: [
 		'.DS_Store',
 		'.bender',
-		'.editorconfig',
 		'.gitattributes',
 		'.gitignore',
 		'.idea',

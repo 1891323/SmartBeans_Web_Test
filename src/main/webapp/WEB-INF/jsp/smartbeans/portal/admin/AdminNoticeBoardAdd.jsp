@@ -146,7 +146,7 @@
                             </div>
                             <div>
                                 <span>작성자</span>
-<%--                                ${sessUserNm}--%>
+                                <%--                                ${sessUserNm}--%>
                             </div>
                             <div>
                                 <span>작성일</span>
@@ -205,23 +205,23 @@
                         </div>
                     </div>
 
-            <div class="btnArea">
-                <!-- 버튼 영역 (목록, 수정, 삭제 등의 버튼) -->
-                <ul>
-                    <li>
-                        <button type="button" class="dark" onClick="goList()">목록
-                        </button>
-                    </li>
-                    <li>
-                        <button type="button" class="dark" onClick="javascript:editData()">
-                            저장
-                        </button>
-                    </li>
+                    <div class="btnArea">
+                        <!-- 버튼 영역 (목록, 수정, 삭제 등의 버튼) -->
+                        <ul>
+                            <li>
+                                <button type="button" class="dark" onClick="goList()">목록
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="dark" onClick="javascript:editData()">
+                                    저장
+                                </button>
+                            </li>
 
-                </ul>
-            </div>
-        </div>
+                        </ul>
+                    </div>
+                </div>
             </form>
-    </div>
+        </div>
     </div>
 </section>

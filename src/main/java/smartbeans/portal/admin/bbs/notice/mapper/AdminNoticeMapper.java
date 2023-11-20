@@ -9,7 +9,6 @@ import java.util.List;
 public interface AdminNoticeMapper {
     public List<NoticeBoardVO> selectAll();
 
-
     public List<NoticeBoardVO> selectBoardList(NoticeBoardVO searchVO);
 
     int selectBoardListTotCnt(NoticeBoardVO searchVO);
@@ -22,4 +21,6 @@ public interface AdminNoticeMapper {
     int deleteBoard(NoticeBoardVO boardVO);
 
     void updateBoard(NoticeBoardVO boardVO);
+
+    int updateTopFixedStatus(int noticeBoardNo);
 }

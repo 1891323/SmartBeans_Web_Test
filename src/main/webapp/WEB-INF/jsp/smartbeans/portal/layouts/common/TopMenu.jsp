@@ -43,7 +43,7 @@
             <div class="user">
                 <a>
                     <img src="/images/egovframework/main/images/ic_login.svg" alt="로그인">
-                    <span>하이루</span>
+                    <span>사용자</span>
                 </a>
             </div>
         </div>
