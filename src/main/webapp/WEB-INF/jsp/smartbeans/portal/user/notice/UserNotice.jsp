@@ -107,16 +107,8 @@
     }
 
     $(document).ready(function () {
-        // 체크박스의 변경 감지
-        $('tbody').on('change', 'input[type="checkbox"]', function () {
-            var isChecked = $(this).is(':checked');
-            var row = $(this).closest('tr');
-
-            // 체크박스가 체크된 경우 해당 행을 테이블 상단으로 이동
-            if (isChecked) {
-                row.prependTo('table tbody');
-            }
-        });
+        // 체크박스가 체크된 행을 테이블의 맨 위로 이동
+        $('tbody tr:has(input:checked)').prependTo('tbody');
     });
 
 </script>
@@ -204,11 +196,13 @@
                         <td><a href="#" onclick="goEdit('detail', '${notice.noticeBoardNo}')"><c:out value="${notice.noticeTitle}" /></a></td>
                         <td>${notice.noticeWrtr}</td>
                         <td><fmt:formatDate value="${notice.noticeFirstRegistDtm}" pattern="yyyy.MM.dd" /></td>
-
+                        <!-- 사용자페이지에서는 안보이도록 style display를 none 으로 처리 -->
                         <c:if test="${notice.noticeBoardSubType == 1}"> <!-- 공지사항의 하위 타입이 1인 경우에만 상단고정 체크박스를 표시 -->
-                            <input type="checkbox" name="checkBtn" id='chkBtn${notice.noticeBoardNo}' ${notice.noticeTopFixed == 'Y' ? 'checked' : ''}
-                                   onchange="updateTopFixedStatus(${notice.noticeBoardNo}, this.checked)">
-                            <label for="chkBtn${notice.noticeBoardNo}">&nbsp;</label>
+                            <td style="display: none;">
+                                <input type="checkbox" name="checkBtn" id='chkBtn${notice.noticeBoardNo}' ${notice.noticeTopFixed == 'Y' ? 'checked' : ''}
+                                       onchange="updateTopFixedStatus(${notice.noticeBoardNo}, this.checked)">
+                                <label for="chkBtn${notice.noticeBoardNo}">&nbsp;</label>
+                            </td>
                         </c:if>
 
                     </tr>
