@@ -17,7 +17,30 @@
         var searchCnd = document.frm.searchCnd.value; // 검색 유형 추출
         var searchWrd = document.frm.searchWrd.value; // 검색어 추출
 
-        var newUrl = contextPath + "/user/noti/Announcement.do?pageIndex=" + pageNo
+        var noticeBoardSubType = <c:out value="${noticeBoardSubType}" />;
+        var pageType = "";
+
+        switch (noticeBoardSubType) {
+            case 1:
+                pageType = "Announcement";
+                break;
+            case 2:
+                pageType = "Reference";
+                break;
+            case 3:
+                pageType = "FAQ";
+                break;
+            case 4:
+                pageType = "QnA";
+                break;
+            case 5:
+                pageType = "Board";
+                break;
+            default:
+                pageType = "Announcement";
+        }
+
+        var newUrl = contextPath + "/user/noti/" + pageType + ".do?pageIndex=" + pageNo
             + "&searchCnd=" + encodeURIComponent(searchCnd)
             + "&searchWrd=" + encodeURIComponent(searchWrd);
         window.location.href = newUrl;
@@ -156,12 +179,16 @@
                     </select>
                 </label>
                 <span class="item f_search">
+
                     <input class="f_input w_500" type="text" name="searchWrd" title="검색어 입력">
                     <button class="btn" type="submit" onclick="fn_egov_select_noticeList('1'); return false;">조회</button>
-                 </span>
+
+                </span>
+
                 <c:if test="${noticeBoardSubType == 4}"> <!-- Q&A일 경우에만 사용자가 글 등록 가능 -->
                 <a href=# class="item btn btn_blue_46 w_100" onClick="javascript:goEdit('insert', 'I')">등록</a>
                 </c:if>
+
             </form>
         </div>
         <!--// 검색조건 -->
