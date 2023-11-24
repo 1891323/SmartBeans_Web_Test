@@ -227,7 +227,7 @@
 
 /* wrapper */
 .wrapper {
-  margin: 70px 0 0 ;
+  margin: 100px 0 0 ;
   display: grid;
   gap: 50px;
   grid-template-columns: 270px 1fr;
