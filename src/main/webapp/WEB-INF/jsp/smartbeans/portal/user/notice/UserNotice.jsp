@@ -14,12 +14,35 @@
     var contextPath = "${pageContext.request.contextPath}";
 
     function fn_egov_select_noticeList(pageNo) {
-        var searchCnd = document.frm.searchCnd.value; // 검색 유형 추출
-        var searchWrd = document.frm.searchWrd.value; // 검색어 추출
+        var searchCondition = document.frm.searchCondition.value; // 검색 유형 추출
+        var searchKeyword = document.frm.searchKeyword.value; // 검색어 추출
 
-        var newUrl = contextPath + "/user/noti/Announcement.do?pageIndex=" + pageNo
-            + "&searchCnd=" + encodeURIComponent(searchCnd)
-            + "&searchWrd=" + encodeURIComponent(searchWrd);
+        var noticeBoardSubType = <c:out value="${noticeBoardSubType}" />;
+        var pageType = "";
+
+        switch (noticeBoardSubType) {
+            case 1:
+                pageType = "Announcement";
+                break;
+            case 2:
+                pageType = "Reference";
+                break;
+            case 3:
+                pageType = "FAQ";
+                break;
+            case 4:
+                pageType = "QnA";
+                break;
+            case 5:
+                pageType = "Board";
+                break;
+            default:
+                pageType = "Announcement";
+        }
+
+        var newUrl = contextPath + "/user/noti/" + pageType + ".do?pageIndex=" + pageNo
+            + "&searchCondition=" + encodeURIComponent(searchCondition)
+            + "&searchKeyword=" + encodeURIComponent(searchKeyword);
         window.location.href = newUrl;
     }
 
@@ -113,6 +136,8 @@
 
 </script>
 
+<c:set var="noticeBoardSubType" value="${noticeBoardSubType}" />
+
 <!DOCTYPE html>
 <html>
 
@@ -124,9 +149,6 @@
     <link rel="stylesheet" href="<c:url value='/'/>css/layout.css">
     <link rel="stylesheet" href="<c:url value='/'/>css/component.css">
     <link rel="stylesheet" href="<c:url value='/'/>css/page.css">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
 </head>
 
@@ -149,19 +171,23 @@
             <form name="frm" action="/user/noti/Announcement.do" method="post">
                 <input type="hidden" name="noticeBoardSubType" value="${noticeBoardSubType}" />
                 <label class="item f_select">
-                    <select name="searchCnd" id="searchCnd" title="검색조건 선택">
+                    <select name="searchCondition" id="searchCnd" title="검색조건 선택">
                         <option value="0">제목</option>
                         <option value="1">내용</option>
                         <option value="2">작성자</option>
                     </select>
                 </label>
                 <span class="item f_search">
-                    <input class="f_input w_500" type="text" name="searchWrd" title="검색어 입력">
+
+                    <input class="f_input w_500" type="text" name="searchKeyword" title="검색어 입력">
                     <button class="btn" type="submit" onclick="fn_egov_select_noticeList('1'); return false;">조회</button>
-                 </span>
+
+                </span>
+
                 <c:if test="${noticeBoardSubType == 4}"> <!-- Q&A일 경우에만 사용자가 글 등록 가능 -->
-                <a href=# class="item btn btn_blue_46 w_100" onClick="javascript:goEdit('insert', 'I')">등록</a>
+                <a href=# class="item btn btn_blue_46" onClick="javascript:goEdit('insert', 'I')">등록</a>
                 </c:if>
+
             </form>
         </div>
         <!--// 검색조건 -->

@@ -345,12 +345,12 @@ input[type=checkbox]{
     display: inline-block;
     width: 24px;
     height: 24px;
-    background: url('/images/btn_checkbox.svg');
+    background: url('/images/images/btn_checkbox.svg');
     background-size: contain;
     cursor: pointer;
   }
   &:checked + label{
-    background: url('/images/btn_checkbox_selected.svg');
+    background: url('/images/images/btn_checkbox_selected.svg');
     background-size: contain;
   }
 }

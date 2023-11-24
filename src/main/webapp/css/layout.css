@@ -110,7 +110,7 @@ body {min-width: 1400px;}
 
 
 /* location */
-.location {height: 70px; padding-top: 42px; text-align: right;}
+.location {height: 50px; padding-top: 42px; text-align: right;}
 .location ul, .location ul li {display: inline-block; vertical-align: top;}
 .location ul li {position: relative; color: #666; font-size: 16px;}
 .location ul li + li::before {content: ""; display: inline-block; width: 4px; height: 7px; margin: 0 9px 0 3px; line-height: 18px; background: url(../images/ico_arrow_r_gray_4x7.png) no-repeat; vertical-align: 2px;}
