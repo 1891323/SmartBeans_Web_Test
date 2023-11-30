@@ -219,7 +219,7 @@
   top: 2px;
   left: -26px;
   color: #101828;
-  content: url("/images/chevron-right.svg");
+  content: url("/images/images/chevron-right.svg");
 }
 .breadCrumb ul li a:hover {
   color: #396AFF;
@@ -316,7 +316,7 @@
   font-weight: 500;
 }
 .wrapper .contents .inner {
-  margin: 20px 0 0;
+  margin: 100px 0 0;
 }
 
 /*게시글 등록페이지*/
@@ -530,4 +530,5 @@ button[type=button].dark {
   color: #fff;
   background-color: #101828;
   border-radius: 4px;
+  cursor:pointer;
 }/*# sourceMappingURL=style.css.map */

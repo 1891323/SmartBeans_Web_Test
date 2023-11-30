@@ -35,6 +35,8 @@
 
 </script>
 
+<c:set var="noticeBoardSubType" value="${noticeBoardSubType}" />
+
 <!DOCTYPE html>
 <html>
 
@@ -46,10 +48,6 @@
     <link rel="stylesheet" href="<c:url value='/'/>css/layout.css">
     <link rel="stylesheet" href="<c:url value='/'/>css/component.css">
     <link rel="stylesheet" href="<c:url value='/'/>css/page.css">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-
 </head>
 
 <body>
@@ -68,6 +66,7 @@
             <h2>${boardType} 상세보기</h2>
 
             <div class="inner">
+
                 <form name="bbsDetailForm" action="" method="post">
 
                     <input type="hidden" name="noticeBoardNo" value="${boardVO.noticeBoardNo}">
@@ -106,13 +105,36 @@
                         <tr>
                             <th>파일첨부</th>
                             <td class="url">
-                                <%--                          <c:import url="/common/fileView.do" charEncoding="utf-8">--%>
-                                <%--                            <c:param name="param_atchFileId" value="${boardVO.atchFileId}" />--%>
-                                <%--                            <c:param name="param_mode" value="default" />--%>
-                                <%--                          </c:import>--%>
+                                <%--<c:import url="/common/fileView.do" charEncoding="utf-8">
+                                <c:param name="param_atchFileId" value="${boardVO.atchFileId}" />
+                                <c:param name="param_mode" value="default" />
+                                </c:import>--%>
                             </td>
                         </tr>
+
+                        <tbody>
+                        <!--알림마당 리스트 목록 -->
+                        <c:forEach items="${boardList}" var="notice">
+                            <tr>
+                                <td>${notice.rowNum}</td>
+                                <td><a href="#" onclick="goEdit('detail', '${notice.noticeBoardNo}')"><c:out value="${notice.noticeTitle}" /></a></td>
+                            </tr>
+                        </c:forEach>
+                        <!--알림마당 리스트 목록 -->
+
+                        <!--Q&A만 댓글 리스트 출력 구현 중...-->
+                        <c:if test="${boardVO.noticeBoardSubType == 4}">
+                            <c:forEach items="${boardList}" var="qna">
+                                <tr>
+                                    <td>${boardVO.cmntNo}</td>
+                                    <td><a${boardVO.cmntCn}')"><c:out value="${boardVO.cmntCn}" /></a></td>
+                                </tr>
+                            </c:forEach>
+                        </c:if>
+                        <!--댓글 리스트 출력-->
+                        </tbody>
                     </table>
+
                     <div class="btnArea">
                         <ul>
                             <li>
@@ -121,8 +143,11 @@
                             </li>
                         </ul>
                     </div>
+
                 </form>
+
             </div>
+
         </div>
 
 </body>

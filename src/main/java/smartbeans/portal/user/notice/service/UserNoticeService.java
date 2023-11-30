@@ -16,4 +16,6 @@ public interface UserNoticeService {
 
     int userupdateTopFixedStatus(int noticeBoardNo);
 
+    UserNoticeVO UserQnaComment(UserNoticeVO userNoticeVO);
+
 }
