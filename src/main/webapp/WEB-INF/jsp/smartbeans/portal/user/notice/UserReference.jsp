@@ -18,22 +18,6 @@
         }
     });
 
-    document.addEventListener('DOMContentLoaded', function () {
-        var toggleButtons = document.querySelectorAll('.btn_category');
-
-        toggleButtons.forEach(function (button) {
-            button.addEventListener('click', function () {
-                // 다른 모든 버튼의 색 초기화
-                toggleButtons.forEach(function (otherButton) {
-                    otherButton.classList.remove('active');
-                });
-
-                // 선택한 버튼에만 'active' 클래스 추가
-                this.classList.add('active');
-            });
-        });
-    });
-
     var contextPath = "${pageContext.request.contextPath}";
 
     function fn_egov_select_noticeList(pageNo) {
@@ -88,9 +72,9 @@
 
         document.getElementById(category).classList.add('active-content');
 
-        var buttons = document.querySelectorAll('button');
-        buttons.forEach(function (button) {
-            button.classList.remove('active');
+        var catbuttons = document.querySelectorAll('catbutton');
+        catbuttons.forEach(function (catbutton) {
+            catbutton.classList.remove('active');
         });
 
         event.target.classList.add('active');
@@ -151,72 +135,177 @@
 
         <p style="font-size: 20px; margin-top: 15px; text-align: right;">[ 총 게시물 : ${totCnt} 개 ]</p>
 
-        <button onclick="showCategory('all')">전체</button>
-        <button onclick="showCategory('promotion')">홍보 컨텐츠</button>
-        <button onclick="showCategory('webzine')">웹진</button>
-        <button onclick="showCategory('press')">보도자료</button>
+        <catbutton onclick="showCategory('all')">전체</catbutton>
+        <catbutton onclick="showCategory('promotion')">홍보 컨텐츠</catbutton>
+        <catbutton onclick="showCategory('webzine')">웹진</catbutton>
+        <catbutton onclick="showCategory('press')">보도자료</catbutton>
 
         <div class="inner">
 
             <table>
 
                 <div id="all" class="category-content active-content">
-                    <h2>전체 카테고리 내용</h2>
                     <div class="box-container">
-                        <div class="box">홍보 컨텐츠</div>
-                        <div class="box">홍보 컨텐츠</div>
-                        <div class="box">홍보 컨텐츠</div>
-                        <div class="box">웹진</div>
-                        <div class="box">웹진</div>
-                        <div class="box">웹진</div>
-                        <div class="box">보도 자료</div>
-                        <div class="box">보도 자료</div>
-                        <div class="box">보도 자료</div>
+                        <div class="box">
+                            <img src="<c:url value="/images/images/press_thumb.jpg"/>"  style= width:100% height="200px" alt="썸네일">
+                            <p>보도 자료</p>
+                        </div>
+                        <div class="box">
+                            <img src="<c:url value="/images/images/webzine_thumb.jpg"/>"  style= width:100% height="200px" alt="썸네일">
+                            <p>웹진</p>
+                        </div>
+                        <div class="box">
+                            <img src="<c:url value="/images/images/promotion_thumb.PNG"/>"  style= width:100% height="200px" alt="썸네일">
+                            <p>홍보 컨텐츠</p>
+                        </div>
+                        <div class="box">
+                            <img src="<c:url value="/images/images/press_thumb.jpg"/>"  style= width:100% height="200px" alt="썸네일">
+                            <p>보도 자료</p>
+                        </div>
+                        <div class="box">
+                            <img src="<c:url value="/images/images/promotion_thumb.PNG"/>"  style= width:100% height="200px" alt="썸네일">
+                            <p>홍보 컨텐츠</p>
+                        </div>
+                        <div class="box">
+                            <img src="<c:url value="/images/images/webzine_thumb.jpg"/>"  style= width:100% height="200px" alt="썸네일">
+                            <p>웹진</p>
+                        </div>
+
+                        <div class="box">
+                            <img src="<c:url value="/images/images/promotion_thumb.PNG"/>"  style= width:100% height="200px" alt="썸네일">
+                            <p>홍보 컨텐츠</p>
+                        </div>
+                        <div class="box">
+                            <img src="<c:url value="/images/images/press_thumb.jpg"/>"  style= width:100% height="200px" alt="썸네일">
+                            <p>보도 자료</p>
+                        </div>
+                        <div class="box">
+                            <img src="<c:url value="/images/images/webzine_thumb.jpg"/>"  style= width:100% height="200px" alt="썸네일">
+                            <p>웹진</p>
+                        </div>
                     </div>
                 </div>
 
                 <div id="promotion" class="category-content">
-                    <h2>홍보 컨텐츠 내용</h2>
                     <div class="box-container">
-                        <div class="box">홍보 컨텐츠</div>
-                        <div class="box">홍보 컨텐츠</div>
-                        <div class="box">홍보 컨텐츠</div>
-                        <div class="box">홍보 컨텐츠</div>
-                        <div class="box">홍보 컨텐츠</div>
-                        <div class="box">홍보 컨텐츠</div>
-                        <div class="box">홍보 컨텐츠</div>
-                        <div class="box">홍보 컨텐츠</div>
-                        <div class="box">홍보 컨텐츠</div>
+                        <div class="box">
+                            <img src="<c:url value="/images/images/promotion_thumb.PNG"/>"  style= width:100% height="200px" alt="썸네일">
+                            <p>홍보 컨텐츠</p>
+                        </div>
+                        <div class="box">
+                            <img src="<c:url value="/images/images/promotion_thumb.PNG"/>"  style= width:100% height="200px" alt="썸네일">
+                            <p>홍보 컨텐츠</p>
+                        </div>
+                        <div class="box">
+                            <img src="<c:url value="/images/images/promotion_thumb.PNG"/>"  style= width:100% height="200px" alt="썸네일">
+                            <p>홍보 컨텐츠</p>
+                        </div>
+                        <div class="box">
+                            <img src="<c:url value="/images/images/promotion_thumb.PNG"/>"  style= width:100% height="200px" alt="썸네일">
+                            <p>홍보 컨텐츠</p>
+                        </div>
+                        <div class="box">
+                            <img src="<c:url value="/images/images/promotion_thumb.PNG"/>"  style= width:100% height="200px" alt="썸네일">
+                            <p>홍보 컨텐츠</p>
+                        </div>
+                        <div class="box">
+                            <img src="<c:url value="/images/images/promotion_thumb.PNG"/>"  style= width:100% height="200px" alt="썸네일">
+                            <p>홍보 컨텐츠</p>
+                        </div>
+                        <div class="box">
+                            <img src="<c:url value="/images/images/promotion_thumb.PNG"/>"  style= width:100% height="200px" alt="썸네일">
+                            <p>홍보 컨텐츠</p>
+                        </div>
+                        <div class="box">
+                            <img src="<c:url value="/images/images/promotion_thumb.PNG"/>"  style= width:100% height="200px" alt="썸네일">
+                            <p>홍보 컨텐츠</p>
+                        </div>
+                        <div class="box">
+                            <img src="<c:url value="/images/images/promotion_thumb.PNG"/>"  style= width:100% height="200px" alt="썸네일">
+                            <p>홍보 컨텐츠</p>
+                        </div>
                     </div>
                 </div>
 
                 <div id="webzine" class="category-content">
-                    <h2>웹진 내용</h2>
                     <div class="box-container">
-                        <div class="box">웹진</div>
-                        <div class="box">웹진</div>
-                        <div class="box">웹진</div>
-                        <div class="box">웹진</div>
-                        <div class="box">웹진</div>
-                        <div class="box">웹진</div>
-                        <div class="box">웹진</div>
-                        <div class="box">웹진</div>
-                        <div class="box">웹진</div>
+                        <div class="box">
+                            <img src="<c:url value="/images/images/webzine_thumb.jpg"/>"  style= width:100% height="200px" alt="썸네일">
+                            <p>웹진</p>
+                        </div>
+                        <div class="box">
+                            <img src="<c:url value="/images/images/webzine_thumb.jpg"/>"  style= width:100% height="200px" alt="썸네일">
+                            <p>웹진</p>
+                        </div>
+                        <div class="box">
+                            <img src="<c:url value="/images/images/webzine_thumb.jpg"/>"  style= width:100% height="200px" alt="썸네일">
+                            <p>웹진</p>
+                        </div>
+                        <div class="box">
+                            <img src="<c:url value="/images/images/webzine_thumb.jpg"/>"  style= width:100% height="200px" alt="썸네일">
+                            <p>웹진</p>
+                        </div>
+                        <div class="box">
+                            <img src="<c:url value="/images/images/webzine_thumb.jpg"/>"  style= width:100% height="200px" alt="썸네일">
+                            <p>웹진</p>
+                        </div>
+                        <div class="box">
+                            <img src="<c:url value="/images/images/webzine_thumb.jpg"/>"  style= width:100% height="200px" alt="썸네일">
+                            <p>웹진</p>
+                        </div>
+                        <div class="box">
+                            <img src="<c:url value="/images/images/webzine_thumb.jpg"/>"  style= width:100% height="200px" alt="썸네일">
+                            <p>웹진</p>
+                        </div>
+                        <div class="box">
+                            <img src="<c:url value="/images/images/webzine_thumb.jpg"/>"  style= width:100% height="200px" alt="썸네일">
+                            <p>웹진</p>
+                        </div>
+                        <div class="box">
+                            <img src="<c:url value="/images/images/webzine_thumb.jpg"/>"  style= width:100% height="200px" alt="썸네일">
+                            <p>웹진</p>
+                        </div>
                     </div>
                 </div>
 
                 <div id="press" class="category-content">
-                    <h2>보도자료 내용</h2>
                     <div class="box-container">
-                        <div class="box">보도 자료</div>
-                        <div class="box">보도 자료</div>
-                        <div class="box">보도 자료</div>
-                        <div class="box">보도 자료</div>
-                        <div class="box">보도 자료</div>
-                        <div class="box">보도 자료</div>
-                        <div class="box">보도 자료</div>
-                        <div class="box">보도 자료</div>
-                        <div class="box">보도 자료</div>
+                        <div class="box">
+                            <img src="<c:url value="/images/images/press_thumb.jpg"/>"  style= width:100% height="200px" alt="썸네일">
+                            <p>보도 자료</p>
+                        </div>
+                        <div class="box">
+                            <img src="<c:url value="/images/images/press_thumb.jpg"/>"  style= width:100% height="200px" alt="썸네일">
+                            <p>보도 자료</p>
+                        </div>
+                        <div class="box">
+                            <img src="<c:url value="/images/images/press_thumb.jpg"/>"  style= width:100% height="200px" alt="썸네일">
+                            <p>보도 자료</p>
+                        </div>
+                        <div class="box">
+                            <img src="<c:url value="/images/images/press_thumb.jpg"/>"  style= width:100% height="200px" alt="썸네일">
+                            <p>보도 자료</p>
+                        </div>
+                        <div class="box">
+                            <img src="<c:url value="/images/images/press_thumb.jpg"/>"  style= width:100% height="200px" alt="썸네일">
+                            <p>보도 자료</p>
+                        </div>
+                        <div class="box">
+                            <img src="<c:url value="/images/images/press_thumb.jpg"/>"  style= width:100% height="200px" alt="썸네일">
+                            <p>보도 자료</p>
+                        </div>
+                        <div class="box">
+                            <img src="<c:url value="/images/images/press_thumb.jpg"/>"  style= width:100% height="200px" alt="썸네일">
+                            <p>보도 자료</p>
+                        </div>
+                        <div class="box">
+                            <img src="<c:url value="/images/images/press_thumb.jpg"/>"  style= width:100% height="200px" alt="썸네일">
+                            <p>보도 자료</p>
+                        </div>
+                        <div class="box">
+                            <img src="<c:url value="/images/images/press_thumb.jpg"/>"  style= width:100% height="200px" alt="썸네일">
+                            <p>보도 자료</p>
+                        </div>
                     </div>
                 </div>
 
