@@ -15,7 +15,6 @@
             document.frm.searchCondition.value = savedSearchCondition;
             document.frm.searchKeyword.value = savedSearchKeyword;
         }
-        setDisabled();
     });
 
     var contextPath = "${pageContext.request.contextPath}";
@@ -50,9 +49,14 @@
                 pageType = "Announcement";
         }
 
+        var searchRegex = new RegExp(searchKeyword, 'i');
+
         var newUrl = contextPath + "/user/noti/" + pageType + ".do?pageIndex=" + pageNo
             + "&searchCondition=" + encodeURIComponent(searchCondition)
             + "&searchKeyword=" + encodeURIComponent(searchKeyword);
+
+        newUrl = newUrl.replace(/searchKeyword=([^&]*)/i, 'searchKeyword=' + encodeURIComponent(searchKeyword));
+
         window.location.href = newUrl;
     }
 
@@ -103,16 +107,6 @@
         } else if (select === "detail") {
             var newUrl = contextPath + "/user/noti/selectUserDetailNoticeBoard.do?noticeBoardNo=" + noticeBoardNo;
             window.location.href = newUrl;
-        }
-    }
-
-    function setDisabled() {
-        // dummy check 해서 변경사항 없을 시 disabled 처리
-        datas = getDummyCheckElements();
-        if (datas.length === 0) {
-            document.querySelector('#btnAreaSaveButton').classList.add('alpha30');
-        } else {
-            document.querySelector('#btnAreaSaveButton').classList.remove('alpha30');
         }
     }
 

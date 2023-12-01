@@ -10,7 +10,7 @@
 <head>
     <title>Error Page</title>
 </head>
-<body>
+<body style="text-align:center; font-size:50px; margin-top:20%;">
     슬프게도 에러 발생... T.T
 </body>
 </html>
