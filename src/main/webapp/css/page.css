@@ -185,3 +185,25 @@
 .EgovQustnrManageListPopup {background-color: #fff;}
 .EgovQustnrManageListPopup .pop_inner {height: 100%; overflow: auto;}
 .EgovQustnrManageListPopup .pop_header {margin-bottom: 29px;}
+/*날씨 정보 페이지*/
+.title h2 {text-align: left; font-size: 34px; font-weight: 500;}
+.w_area {text-align: center;}
+.w_area img {width: 80px; margin-top: -6px;}
+.w_area .area {margin: 40px;}
+.w_area .area h2 {font-size: 18px; font-weight: bold;}
+.w_area .area .now {margin-top: 25px;}
+.w_area .area .now img {width: 140px;}
+.w_area .area .now .tmp {font-size: 45px; font-weight: bold;}
+.w_area .area .today {font-size: 25px; font-weight: bold;}
+.w_area .flex-container{
+    display: inline-flex;
+    padding: 10px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    margin:5px;
+}
+.w_area .flex-container.space-around {justify-content: space-around; align-items: center;}
+.w_area .flex-item {/*width: 50px;
+    height: 50px;*/
+    margin: 15px;
+    text-align: center;}
