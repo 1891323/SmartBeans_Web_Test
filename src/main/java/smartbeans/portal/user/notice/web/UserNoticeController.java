@@ -121,7 +121,11 @@ public class UserNoticeController {
         model.addAttribute("paginationInfo", paginationInfo);
         model.addAttribute("totCnt", totCnt);
 
-        return "user/notice/UserNotice.lnb"; // view 반환
+        if (searchVO.getNoticeBoardSubType() == 2) {
+            return "user/notice/UserReference.lnb"; // NoticeBoardType이 2일 때 반환
+        } else {
+            return "user/notice/UserNotice.lnb"; // NoticeBoardType이 2가 아닌 경우 반환
+        }
     }
 
     /**

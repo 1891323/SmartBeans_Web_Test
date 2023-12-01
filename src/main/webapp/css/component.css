@@ -6,7 +6,7 @@
 
 
 /* Button */
-.btn {display: inline-block; vertical-align: top;}
+.btn {display: inline-block; vertical-align: top; cursor:pointer;}
     .btn_blue_30 {height: 30px; border-radius: 5px; color: #fff; font-size: 14px; font-weight: 300; text-align: center; line-height: 30px; background: #169bd5;}
     .btn_blue_46 {height: 46px; width:100px; border-radius: 5px; color: #fff; font-size: 20px; text-align: center; line-height: 46px; background: #169bd5;}
     .btn_skyblue_h46 {height: 46px; border-radius: 5px; color: #005b82; font-size: 16px; text-align: center; line-height: 46px; background: #daedf5;}
@@ -15,7 +15,6 @@
 
     .btn_area {font-size: 0;}
     .btn_area > .btn + .btn {margin-left: 10px;}
-
 
 /* Label */
 .label {display: inline-block; height: 30px; padding: 0 10px; border-radius: 4px; font-size: 16px; font-weight: 300; line-height: 30px; vertical-align: top;}

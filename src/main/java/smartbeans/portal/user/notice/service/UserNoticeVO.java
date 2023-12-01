@@ -195,6 +195,7 @@ public class UserNoticeVO extends ComDefaultVO {
 
     public void setAtchFileId(String atchFileId) {  this.atchFileId = atchFileId;    }
 
+
     /**
      * 첨부파일ID 복호화 적용
      */

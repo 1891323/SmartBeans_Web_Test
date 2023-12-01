@@ -46,4 +46,9 @@ public class UserNoticeServiceImpl implements UserNoticeService {
 
     @Override
     public int userupdateTopFixedStatus(int noticeBoardNo) { return usernoticeMapper.userupdateTopFixedStatus(noticeBoardNo);   }
+
+    @Override
+    public UserNoticeVO UserQnaComment(UserNoticeVO userNoticeVO){
+        return usernoticeMapper.UserQnaComment(userNoticeVO);
+    }
 }

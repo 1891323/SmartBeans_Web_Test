@@ -19,4 +19,6 @@ public interface UserNoticeMapper {
 
     int userupdateTopFixedStatus(int noticeBoardNo);
 
+    UserNoticeVO UserQnaComment(UserNoticeVO searchVO);
+
 }

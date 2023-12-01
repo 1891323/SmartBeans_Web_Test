@@ -8,6 +8,13 @@
 <script>
     // init
     document.addEventListener('DOMContentLoaded', function () {
+        var savedSearchCondition = sessionStorage.getItem('searchCondition');
+        var savedSearchKeyword = sessionStorage.getItem('searchKeyword');
+
+        if (savedSearchCondition && savedSearchKeyword) {
+            document.frm.searchCondition.value = savedSearchCondition;
+            document.frm.searchKeyword.value = savedSearchKeyword;
+        }
         setDisabled();
     });
 
@@ -16,6 +23,9 @@
     function fn_egov_select_noticeList(pageNo) {
         var searchCondition = document.frm.searchCondition.value; // 검색 유형 추출
         var searchKeyword = document.frm.searchKeyword.value; // 검색어 추출
+
+        sessionStorage.setItem('searchCondition', searchCondition);
+        sessionStorage.setItem('searchKeyword', searchKeyword);
 
         var noticeBoardSubType = <c:out value="${noticeBoardSubType}" />;
         var pageType = "";

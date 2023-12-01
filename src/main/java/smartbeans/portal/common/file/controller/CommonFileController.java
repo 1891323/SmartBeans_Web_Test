@@ -52,9 +52,8 @@ public class CommonFileController {
     protected DefaultBeanValidator beanValidator;
 
     @RequestMapping(value = "/common/fileView.do")
-    public String fileView(@ModelAttribute("searchVO") FileVO fileVO,
-                                       HttpServletRequest request,
-                                       @RequestParam Map<String, Object> commandMap, ModelMap model) throws Exception {
+    public String fileView(@ModelAttribute("searchVO") FileVO fileVO, HttpServletRequest request,
+                           @RequestParam Map<String, Object> commandMap, ModelMap model) throws Exception {
 
         String param_atchFileId = (String) commandMap.get("param_atchFileId");
         String param_mode = (String) commandMap.get("param_mode");

@@ -1,0 +1,53 @@
+@charset "utf-8";
+
+.btn {display: inline-block; vertical-align: top; cursor:pointer;}
+    .btn_category {height: 50px; width:120px; border-radius: 5px; color: #fff; font-size: 22px; text-align: center; line-height: 50px; background: #16d576; margin-right:1rem;
+    margin-top:-20px;}
+
+/* 버튼 스타일 */
+button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size:1.5rem;
+}
+
+/* 선택된 버튼 스타일 */
+button.active {
+    background-color: #4CAF50;
+}
+
+/* 카테고리 내용 숨김 */
+.category-content {
+    display: none;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+/* 선택된 카테고리 내용 표시 */
+.active-content {
+    display: block;
+}
+
+.box-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    height:250px;
+    border-radius:10px;
+
+    /* 그림자 효과 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0.5, 0.2); /* 수평 위치, 수직 위치, 흐림 정도, 색상 */
+}

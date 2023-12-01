@@ -66,6 +66,12 @@ public class NoticeBoardVO extends ComDefaultVO {
     //QNA 질문글번호(계층구조)
     private int parentId;
 
+    //댓글 내용
+    private String cmntCn;
+
+    //댓글 번호
+    private int cmntNo;
+
     public Long getRowNum() {
         return rowNum;
     }
