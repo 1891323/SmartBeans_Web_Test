@@ -13,10 +13,10 @@ public class WeatherVO {
     private String wsd;
     private String today;
     private String img;
-
-    public WeatherVO(String tmp, String pop, String img) {
+    public WeatherVO(String tmp, String pop, String today, String img) {
         this.tmp = tmp;
         this.pop = pop;
+        this.today = today;
         this.img = img;
     }
 }

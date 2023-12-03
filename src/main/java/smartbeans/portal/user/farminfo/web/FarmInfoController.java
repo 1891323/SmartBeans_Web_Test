@@ -17,7 +17,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.TextStyle;
 import java.util.*;
 import java.util.stream.IntStream;
 
@@ -36,6 +39,7 @@ public class FarmInfoController {
     @Value("${WEATHER_API_KEY}")
     private String WEATHER_API_KEY;
 
+    private static final String F_DATE = "MM.d";
     private String pageNoFormat() {
         LocalTime now = LocalTime.now();
         int[] filteredHour = IntStream.of(HOUR).filter(h -> h <= now.getHour()).toArray();
@@ -306,6 +310,20 @@ public class FarmInfoController {
         WeatherVO weatherVO = new WeatherVO(weather, tmp, pop, reh, wsd, today, img);
         model.addAttribute("weatherData", weatherVO);
     }
+
+    private String getDate(int add) {
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat(F_DATE);
+        cal.add(cal.DATE, add);
+        return sdf.format(cal.getTime());
+    }
+
+    private String getWeek(int add) {
+        LocalDate now = LocalDate.now();
+        LocalDate addNow = now.plusDays(add);
+        DayOfWeek dayOfWeek = addNow.getDayOfWeek();
+        return dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.KOREAN); // ex. 토
+    }
     @RequestMapping("/WeatherInformation.do")
     public String WeatherInformation(ModelMap model) throws IOException, ParseException {
         JSONArray tmrwArr = getVilageFcst(WEATHER_API_KEY, pageNoFormat(), dateFormat(), hourFormat());
@@ -343,7 +361,7 @@ public class FarmInfoController {
             img = PTYICON[Integer.parseInt(pty)];
         }
 
-        WeatherVO tmrwVO = new WeatherVO(tmp, pop, img);
+        WeatherVO tmrwVO = new WeatherVO(tmp, pop, getDate(1), img);
         model.addAttribute("tmrw", tmrwVO);
 
         for (Object i : aftertmrwArr) {
@@ -372,7 +390,7 @@ public class FarmInfoController {
             img = PTYICON[Integer.parseInt(pty)];
         }
 
-        WeatherVO aftertmrwVO = new WeatherVO(tmp, pop, img);
+        WeatherVO aftertmrwVO = new WeatherVO(tmp, pop, getDate(2), img);
         model.addAttribute("aftertmrw", aftertmrwVO);
 
         JSONArray MidLandArr = getMidLandFcst(WEATHER_API_KEY, dateFormatforMid());
@@ -422,6 +440,24 @@ public class FarmInfoController {
         taMap.put("taMin7", String.valueOf(MidTaObj.get("taMin7")));
         taMap.put("taMax7", String.valueOf(MidTaObj.get("taMax7")));
         model.addAttribute("taMap", taMap);
+
+        // 요일
+        Map<String, String> weekMap = new LinkedHashMap<>();
+        weekMap.put("weekaf3", getWeek(3));
+        weekMap.put("weekaf4", getWeek(4));
+        weekMap.put("weekaf5", getWeek(5));
+        weekMap.put("weekaf6", getWeek(6));
+        weekMap.put("weekaf7", getWeek(7));
+        model.addAttribute("weekMap", weekMap);
+
+        // 날짜
+        Map<String, String> dateMap = new LinkedHashMap<>();
+        dateMap.put("dateaf3", getDate(3));
+        dateMap.put("dateaf4", getDate(4));
+        dateMap.put("dateaf5", getDate(5));
+        dateMap.put("dateaf6", getDate(6));
+        dateMap.put("dateaf7", getDate(7));
+        model.addAttribute("dateMap", dateMap);
 
         addWeatherAttribute(model);
 
