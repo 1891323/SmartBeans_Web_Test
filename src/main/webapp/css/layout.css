@@ -123,7 +123,7 @@ body {min-width: 1400px;}
 
 
 
-.footer .inner {position: relative; width: 1400px; height: 250px; margin: 0 auto; padding: 0 50px;}
+.footer .inner {position: relative; width: 1300px; height: 250px; margin: 0 auto; padding: 0 50px;}
 .footer .inner::after {content: ""; display: block; clear: both;}
 .footer h1 {float: left; padding-top: 115px;}
 .footer h1 a {display: block;}
@@ -131,10 +131,10 @@ body {min-width: 1400px;}
 .footer .mid {color: #888; font-size: 16px;}
 .footer .mid address {line-height: 26px; font-style: unset;}
 .footer .mid .copy {margin-top: 11px;}
-.footer .right_col {position: absolute; margin-top: 35px;}
-.footer .right_col a {display: inline-block; height: 35px; vertical-align: top;}
-.footer .right_col a + a {margin-left: 56px;}
-
+.footer .inner .flex-container {display: flex; margin-bottom: -100px; height: 100px;}
+.footer .inner .flex-container.center {align-items: center; justify-content: space-between;}
+.footer .inner .flex-container.center div + div {margin-left: 50px;}
+.footer .flex-item {text-align: center;}
 
 .tit_1 + .txt_1 {margin-top: 42px;}
 .txt_1 + .tit_2 {margin-top: 45px;}

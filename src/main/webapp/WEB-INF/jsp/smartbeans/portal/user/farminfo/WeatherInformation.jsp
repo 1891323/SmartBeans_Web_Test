@@ -85,41 +85,41 @@
                 <p>${weekMap.weekaf3}</p>
                 <p>${dateMap.dateaf3}</p>
                 <img src="<c:url value='/'/>images/${wfImg.wf3Am}.svg" alt="날씨">
-                <p>강수확률 ${rnMap.rnSt3Am}%</p>
-                <p>최저 ${taMap.taMin3}º</p>
-                <p>최고 ${taMap.taMax3}º</p>
+                <p class="name">강수확률 <span class="value">${rnMap.rnSt3Am}%</span></p>
+                <p class="name">최저 <span class="value">${taMap.taMin3}º</span></p>
+                <p class="name">최고 <span class="value">${taMap.taMax3}º</span></p>
             </div>
             <div class="flex-item">
                 <p>${weekMap.weekaf4}</p>
                 <p>${dateMap.dateaf4}</p>
                 <img src="<c:url value='/'/>images/${wfImg.wf4Am}.svg" alt="날씨">
-                <p>강수확률 ${rnMap.rnSt4Am}%</p>
-                <p>최저 ${taMap.taMin4}º</p>
-                <p>최고 ${taMap.taMax4}º</p>
+                <p class="name">강수확률 <span class="value">${rnMap.rnSt4Am}%</span></p>
+                <p class="name">최저 <span class="value">${taMap.taMin4}º</span></p>
+                <p class="name">최고 <span class="value">${taMap.taMax4}º</span></p>
             </div>
             <div class="flex-item">
                 <p>${weekMap.weekaf5}</p>
                 <p>${dateMap.dateaf5}</p>
                 <img src="<c:url value='/'/>images/${wfImg.wf5Am}.svg" alt="날씨">
-                <p>강수확률 ${rnMap.rnSt5Am}%</p>
-                <p>최저 ${taMap.taMin5}º</p>
-                <p>최고 ${taMap.taMax5}º</p>
+                <p class="name">강수확률 <span class="value">${rnMap.rnSt5Am}%</span></p>
+                <p class="name">최저 <span class="value">${taMap.taMin5}º</span></p>
+                <p class="name">최고 <span class="value">${taMap.taMax5}º</span></p>
             </div>
             <div class="flex-item">
                 <p>${weekMap.weekaf6}</p>
                 <p>${dateMap.dateaf6}</p>
                 <img src="<c:url value='/'/>images/${wfImg.wf6Am}.svg" alt="날씨">
-                <p>강수확률 ${rnMap.rnSt6Am}%</p>
-                <p>최저 ${taMap.taMin6}º</p>
-                <p>최고 ${taMap.taMax6}º</p>
+                <p class="name">강수확률 <span class="value">${rnMap.rnSt6Am}%</span></p>
+                <p class="name">최저 <span class="value">${taMap.taMin6}º</span></p>
+                <p class="name">최고 <span class="value">${taMap.taMax6}º</span></p>
             </div>
             <div class="flex-item">
                 <p>${weekMap.weekaf7}</p>
                 <p>${dateMap.dateaf7}</p>
                 <img src="<c:url value='/'/>images/${wfImg.wf7Am}.svg" alt="날씨">
-                <p>강수확률 ${rnMap.rnSt7Am}%</p>
-                <p>최저 ${taMap.taMin7}º</p>
-                <p>최고 ${taMap.taMax7}º</p>
+                <p class="name">강수확률 <span class="value">${rnMap.rnSt7Am}%</span></p>
+                <p class="name">최저 <span class="value">${taMap.taMin7}º</span></p>
+                <p class="name">최고 <span class="value">${taMap.taMax7}º</span></p>
             </div>
         </div>
     </div>
