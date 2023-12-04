@@ -87,7 +87,7 @@
                                 <li><a href="#LINK" class="tech" onclick="javascript:goMenuPage('2000000'); return false;">기술지원 필요시<br>유지보수 민원</a></li>
                                 <li><a href="#LINK" class="buy" onclick="javascript:goMenuPage('2000000'); return false;">구매 제품<br>A/S 민원</a></li>
                             </ul>--%>
-                            <a href="#LINK" class="more"<%-- onclick="javascript:goMenuPage('2000000'); return false;"--%>>더보기</a>
+                            <a href="/user/farminfo/WeatherInformation.do" class="more">더보기</a>
                         </div>
 
                         <!-- 공지사항 -->
