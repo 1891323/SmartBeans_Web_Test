@@ -6,24 +6,23 @@
 
 <div class="footer">
     <div class="inner">
-        <div class="right_col">
-            <a href="#LINK"><img src="<c:url value='/'/>images/main/banner01.png" alt="행정안전부"></a>
-            <a href="#LINK"><img src="<c:url value='/'/>images/main/banner02.png" alt="NIA 한국지능정보사회진흥원"></a>
-            <a href="#LINK"><img src="<c:url value='/'/>images/main/banner01.png" alt="행정안전부"></a>
-            <a href="#LINK"><img src="<c:url value='/'/>images/main/banner02.png" alt="NIA 한국지능정보사회진흥원"></a>
-            <a href="#LINK"><img src="<c:url value='/'/>images/main/banner01.png" alt="행정안전부"></a>
-            <a href="#LINK"><img src="<c:url value='/'/>images/main/banner02.png" alt="NIA 한국지능정보사회진흥원"></a>
-            <a href="#LINK"><img src="<c:url value='/'/>images/main/banner01.png" alt="행정안전부"></a>
+        <div class="flex-container center">
+            <div class="flex-item"><a href="#LINK"><img src="<c:url value='/'/>images/main/banner01.jpg" alt="한국농수산식품유통공사"></a></div>
+            <div class="flex-item"><a href="#LINK"><img src="<c:url value='/'/>images/main/banner02.png" alt="충청북도"></a></div>
+            <div class="flex-item"><a href="#LINK"><img src="<c:url value='/'/>images/main/banner03.jpg" alt="괴산군"></a></div>
+            <div class="flex-item"><a href="#LINK"><img src="<c:url value='/'/>images/main/banner04.png" alt="농촌진흥청"></a></div>
+            <div class="flex-item"><a href="#LINK"><img src="<c:url value='/'/>images/main/banner05.jpg" alt="기상청"></a></div>
+            <div class="flex-item"><a href="#LINK"><img src="<c:url value='/'/>images/main/banner06.png" alt="농사로"></a></div>
         </div>
 
         <h1><a href="#LINK"><img src="<c:url value='/'/>images/main/logo_footer.svg" alt="표준프레임워크 포털 eGovFrame"></a></h1>
 
         <div class="mid">
             <address>
-                대표문의메일 : egovframesupport@gmail.com  |  대표전화 : 0000-0000 (000-0000-0000)<br>
-                호환성확인 : 000-0000-0000  |  교육문의 : 000-0000-0000
+                충청북도 괴산군 불정면 한불로 1245-43<br>
+                TEL. 043-833-6007 FAX. 043-833-6008
             </address>
-            <p class="copy">Copyright © 2021 Ministry Of The Interior And Safety. All Rights Reserved.</p>
+            <p class="copy">Copyright © 2023 괴산스마트농업. All Rights Reserved.</p>
         </div>
     </div>
 </div>
