@@ -49,13 +49,22 @@
                 pageType = "Announcement";
         }
 
-        var searchRegex = new RegExp(searchKeyword, 'i');
+        console.log("Search Keyword:", searchKeyword);
+        console.log("Search Condition:", searchCondition);
 
+
+        var searchRegex = searchKeyword ? new RegExp(searchKeyword.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&"), 'i') : null;
+
+        console.log("Search Regex:", searchRegex);
+
+        // 기존 코드에서 검색 부분 수정
         var newUrl = contextPath + "/user/noti/" + pageType + ".do?pageIndex=" + pageNo
-            + "&searchCondition=" + encodeURIComponent(searchCondition)
-            + "&searchKeyword=" + encodeURIComponent(searchKeyword);
+            + "&searchCondition=" + encodeURIComponent(searchCondition);
 
-        newUrl = newUrl.replace(/searchKeyword=([^&]*)/i, 'searchKeyword=' + encodeURIComponent(searchKeyword));
+        // 검색어가 비어있지 않은 경우에만 URL에 추가
+        if (searchRegex) {
+            newUrl += "&searchKeyword=" + encodeURIComponent(searchKeyword);
+        }
 
         window.location.href = newUrl;
     }

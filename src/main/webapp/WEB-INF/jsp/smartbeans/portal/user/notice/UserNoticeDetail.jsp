@@ -147,10 +147,9 @@
                     </div>
 
                 </form>
+            </box>
 
             </div>
-
-        </div>
 
 </body>
 
