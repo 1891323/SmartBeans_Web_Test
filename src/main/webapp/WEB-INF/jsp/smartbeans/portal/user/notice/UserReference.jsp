@@ -93,7 +93,7 @@
     <link rel="stylesheet" href="<c:url value='/'/>css/layout.css">
     <link rel="stylesheet" href="<c:url value='/'/>css/component.css">
     <link rel="stylesheet" href="<c:url value='/'/>css/page.css">
-    <link rel="stylesheet" href="<c:url value='/'/>css/userreference.css">
+    <link rel="stylesheet" href="<c:url value='/'/>css/user/userreference.css">
 
 
 </head>
@@ -143,7 +143,7 @@
         <div class="inner">
 
             <table>
-
+                <!-- 이하 카테고리 내용은 예시를 위해 작성한 더미 코드임 -->
                 <div id="all" class="category-content active-content">
                     <div class="box-container">
                         <div class="box">

@@ -15,7 +15,6 @@
             document.frm.searchCondition.value = savedSearchCondition;
             document.frm.searchKeyword.value = savedSearchKeyword;
         }
-        setDisabled();
     });
 
     var contextPath = "${pageContext.request.contextPath}";
@@ -50,9 +49,23 @@
                 pageType = "Announcement";
         }
 
+        console.log("Search Keyword:", searchKeyword);
+        console.log("Search Condition:", searchCondition);
+
+
+        var searchRegex = searchKeyword ? new RegExp(searchKeyword.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&"), 'i') : null;
+
+        console.log("Search Regex:", searchRegex);
+
+        // 기존 코드에서 검색 부분 수정
         var newUrl = contextPath + "/user/noti/" + pageType + ".do?pageIndex=" + pageNo
-            + "&searchCondition=" + encodeURIComponent(searchCondition)
-            + "&searchKeyword=" + encodeURIComponent(searchKeyword);
+            + "&searchCondition=" + encodeURIComponent(searchCondition);
+
+        // 검색어가 비어있지 않은 경우에만 URL에 추가
+        if (searchRegex) {
+            newUrl += "&searchKeyword=" + encodeURIComponent(searchKeyword);
+        }
+
         window.location.href = newUrl;
     }
 
@@ -103,16 +116,6 @@
         } else if (select === "detail") {
             var newUrl = contextPath + "/user/noti/selectUserDetailNoticeBoard.do?noticeBoardNo=" + noticeBoardNo;
             window.location.href = newUrl;
-        }
-    }
-
-    function setDisabled() {
-        // dummy check 해서 변경사항 없을 시 disabled 처리
-        datas = getDummyCheckElements();
-        if (datas.length === 0) {
-            document.querySelector('#btnAreaSaveButton').classList.add('alpha30');
-        } else {
-            document.querySelector('#btnAreaSaveButton').classList.remove('alpha30');
         }
     }
 

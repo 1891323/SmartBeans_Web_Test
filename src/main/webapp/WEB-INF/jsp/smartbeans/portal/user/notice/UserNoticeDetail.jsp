@@ -38,9 +38,10 @@
 <c:set var="noticeBoardSubType" value="${noticeBoardSubType}" />
 
 <!DOCTYPE html>
-<html>
+<html lang="eo">
 
 <head>
+    <title></title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -65,7 +66,7 @@
         <div class="contents">
             <h2>${boardType} 상세보기</h2>
 
-            <div class="inner">
+            <box class="inner">
 
                 <form name="bbsDetailForm" action="" method="post">
 
@@ -80,17 +81,14 @@
                         <tr>
                             <th>NO</th>
                             <td><c:out value='${boardVO.noticeBoardNo}'/></td>
-                            <!-- <td>3</td> -->
                         </tr>
                         <tr>
                             <th>제목</th>
                             <td><c:out value='${boardVO.noticeTitle}'/></td>
-                            <!-- <td>데이터허브 포털 소개</td> -->
                         </tr>
                         <tr>
                             <th>작성자</th>
                             <td><c:out value='${boardVO.noticeWrtr}'/></td>
-                            <!-- <td>홍길동</td> -->
                         </tr>
                         <tr>
                             <th>작성일</th>
@@ -132,6 +130,10 @@
                             </c:forEach>
                         </c:if>
                         <!--댓글 리스트 출력-->
+
+                        <c:if test="${boardVO.noticeBoardSubType == 4}">
+                        </c:if>
+
                         </tbody>
                     </table>
 
@@ -145,10 +147,9 @@
                     </div>
 
                 </form>
+            </box>
 
             </div>
-
-        </div>
 
 </body>
 
