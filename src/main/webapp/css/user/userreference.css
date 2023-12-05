@@ -17,7 +17,7 @@ catbutton {
     text-align: center;
     line-height: 50px;
     background: #0da7fa;
-    margin-right: 1.5rem;
+    margin-right: 3rem;
     margin-top: -20px;
     box-shadow: 3px 4px 2px rgba(0, 0, 0, 0.1); /* 수평 위치, 수직 위치, 흐림 정도, 색상 */
 }

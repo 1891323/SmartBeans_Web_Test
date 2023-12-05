@@ -93,7 +93,7 @@
     <link rel="stylesheet" href="<c:url value='/'/>css/layout.css">
     <link rel="stylesheet" href="<c:url value='/'/>css/component.css">
     <link rel="stylesheet" href="<c:url value='/'/>css/page.css">
-    <link rel="stylesheet" href="<c:url value='/'/>css/userreference.css">
+    <link rel="stylesheet" href="<c:url value='/'/>css/user/userreference.css">
 
 
 </head>
