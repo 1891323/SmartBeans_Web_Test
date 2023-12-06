@@ -203,3 +203,6 @@
 .w_area .flex-container.space-around {justify-content: space-around; align-items: center;}
 .w_area .flex-item {margin: 15px; text-align: center;}
 .w_area .week .flex-item {margin:21px;}
+/*곡물별 가격 현황 페이지*/
+.price_status {width: 100%;}
+.price_status th, .price_status td {width: 100px;}
