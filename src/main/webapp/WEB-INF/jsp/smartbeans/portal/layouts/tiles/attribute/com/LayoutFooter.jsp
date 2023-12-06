@@ -7,15 +7,15 @@
 <div class="footer">
     <div class="inner">
         <div class="flex-container center">
-            <div class="flex-item"><a href="#LINK"><img src="<c:url value='/'/>images/main/banner01.jpg" alt="한국농수산식품유통공사"></a></div>
-            <div class="flex-item"><a href="#LINK"><img src="<c:url value='/'/>images/main/banner02.png" alt="충청북도"></a></div>
-            <div class="flex-item"><a href="#LINK"><img src="<c:url value='/'/>images/main/banner03.jpg" alt="괴산군"></a></div>
-            <div class="flex-item"><a href="#LINK"><img src="<c:url value='/'/>images/main/banner04.png" alt="농촌진흥청"></a></div>
-            <div class="flex-item"><a href="#LINK"><img src="<c:url value='/'/>images/main/banner05.jpg" alt="기상청"></a></div>
-            <div class="flex-item"><a href="#LINK"><img src="<c:url value='/'/>images/main/banner06.png" alt="농사로"></a></div>
+            <div class="flex-item"><a href="https://www.at.or.kr/home/apko000000/index.action" target="_blank"><img src="<c:url value='/'/>images/main/banner01.jpg" alt="한국농수산식품유통공사"></a></div>
+            <div class="flex-item"><a href="https://www.chungbuk.go.kr/www/index.do" target="_blank"><img src="<c:url value='/'/>images/main/banner02.png" alt="충청북도"></a></div>
+            <div class="flex-item"><a href="https://www.goesan.go.kr/www/index.do" target="_blank"><img src="<c:url value='/'/>images/main/banner03.jpg" alt="괴산군"></a></div>
+            <div class="flex-item"><a href="https://www.rda.go.kr/main/mainPage.do" target="_blank"><img src="<c:url value='/'/>images/main/banner04.png" alt="농촌진흥청"></a></div>
+            <div class="flex-item"><a href="https://www.kma.go.kr/kma/" target="_blank"><img src="<c:url value='/'/>images/main/banner05.jpg" alt="기상청"></a></div>
+            <div class="flex-item"><a href="https://www.nongsaro.go.kr/portal/portalMain.ps?menuId=PS00001" target="_blank"><img src="<c:url value='/'/>images/main/banner06.png" alt="농사로"></a></div>
         </div>
 
-        <h1><a href="#LINK"><img src="<c:url value='/'/>images/main/logo_footer.svg" alt="표준프레임워크 포털 eGovFrame"></a></h1>
+        <h1><a href="${pageContext.request.contextPath}/"><img src="<c:url value='/'/>images/main/logo_footer.svg" alt="표준프레임워크 포털 eGovFrame"></a></h1>
 
         <div class="mid">
             <address>
