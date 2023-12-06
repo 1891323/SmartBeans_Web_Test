@@ -334,7 +334,7 @@ $normal : 400;
       font-weight: $medium;
     }
     .inner{
-      margin: 20px 0 0;      
+      margin: 20px 0 0;
     }
   }
 }
@@ -345,12 +345,12 @@ input[type=checkbox]{
     display: inline-block;
     width: 24px;
     height: 24px;
-    background: url('/images/btn_checkbox.svg');
+    background: url('/images/images/btn_checkbox.svg');
     background-size: contain;
     cursor: pointer;
   }
   &:checked + label{
-    background: url('/images/btn_checkbox_selected.svg');
+    background: url('/images/images/btn_checkbox_selected.svg');
     background-size: contain;
   }
 }
@@ -433,16 +433,16 @@ table{
       width: 36px;
       height: 36px;
       &.btnPrevend{
-        background: url('/images/btn_prevend.svg');
+        background: url('/images/images/btn_next.svg');
       }
       &.btnPrev{
-        background: url('/images/btn_prev.svg');
+        background: url('/images/images/btn_prev.svg');
       }
       &.btnNext{
-        background: url('/images/btn_next.svg');
+        background: url('/images/images/btn_next.svg');
       }
       &.btnNextEnd{
-        background: url('/images/btn_nextend.svg');
+        background: url('/images/images/btn_nextend.svg');
       }
     }
   }

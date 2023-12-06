@@ -6,7 +6,7 @@
 	<artifactId>portal</artifactId>
 	<packaging>war</packaging>
 	<version>1.0.0</version>
-	<name>chungnam-portal</name>
+	<name>smartbeans-portal</name>
 	<parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -17,7 +17,7 @@
 	<properties>
 	    <spring.maven.artifact.version>5.3.20</spring.maven.artifact.version>
 		<org.egovframe.rte.version>4.1.0</org.egovframe.rte.version>
-		<logback.version>1.2.11</logback.version>
+<!--		<logback.version>1.2.11</logback.version>-->
 		<maven.compiler.target>11</maven.compiler.target>
     	<maven.compiler.source>11</maven.compiler.source>
     	<java.version>11</java.version>
@@ -25,7 +25,6 @@
         <tiles.version>3.0.8</tiles.version>
     </properties>
 
-   
 
 	<dependencies>
 		<dependency>
@@ -36,6 +35,10 @@
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-starter-logging</artifactId>
 				</exclusion>
+                <exclusion>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-classic</artifactId>
+                </exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
@@ -494,6 +497,29 @@
 		</dependency>
         <!-- 3rd party 라이브러리로 별도의 설치 필요 끝 -->
 
+        <!--Project Reactor관련 의존성-->
+        <dependency>
+            <groupId>io.projectreactor</groupId>
+            <artifactId>reactor-core</artifactId>
+            <version>3.4.16</version> <!-- Use the latest version available -->
+        </dependency>
+
+<!--        &lt;!&ndash; Spring WebFlux 의존성 &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-webflux</artifactId>-->
+<!--            <version>6.0.11</version>-->
+<!--        </dependency>-->
+
+<!--        &lt;!&ndash; Reactor Netty 의존성 &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>io.projectreactor.netty</groupId>-->
+<!--            <artifactId>reactor-netty</artifactId>-->
+<!--            <version>YOUR_REACTOR_NETTY_VERSION</version>-->
+<!--        </dependency>-->
+
+
+
         <!-- 공통컴포넌트 끝 -->
         
         <!--  M-Gov (SMS Service API) -->
@@ -580,9 +606,34 @@
 		    <artifactId>commons-lang3</artifactId>
 		    <version>3.12.0</version>
 		</dependency>
-		<!-- Utility for Omnione End -->
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
+        <!-- Utility for Omnione End -->
 		<!-- 모바일 운전면허증 라이브러리 끝 -->
-	</dependencies>
+
+        <!-- Log4j (Logging) -->
+         <!-- Log4JDBC for Log4j2 -->
+        <dependency>
+            <groupId>org.bgee.log4jdbc-log4j2</groupId>
+            <artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
+            <version>1.16</version>
+        </dependency>
+
+
+
+
+
+    </dependencies>
 
     <build>
         <plugins>

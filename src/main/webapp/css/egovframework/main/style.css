@@ -41,7 +41,7 @@
 }
 #header .menubar .menuWrap .logo {
   position: absolute;
-  top: 15px;
+  top: 5px;
   left: 0;
   -o-object-fit: contain;
      object-fit: contain;
@@ -56,7 +56,7 @@
 #header .menubar .menuWrap .user {
   position: absolute;
   top: 20px;
-  right: 0;
+  right: -80px;
 }
 #header .menubar .menuWrap .user > a {
   display: grid;
@@ -72,8 +72,12 @@
   width: 100%;
   height: 96px;
 }
-#gnb ul li a {
+#gnb ul li a { /*주메뉴*/
   font-size: 18px;
+  text-decoration: none;
+}
+#gnb ul li .menu_admin { /*주메뉴-관리자*/
+  color: #396AFF;
 }
 #gnb ul li .subMenu {
   position: absolute;
@@ -84,14 +88,19 @@
   margin: 20px 0 0;
   gap: 19px;
 }
-#gnb ul li .subMenu li a {
+#gnb ul li .subMenu li a { /*서브메뉴*/
   font-weight: 600;
   font-size: 18px;
+  color: #101828;
+}
+#gnb ul li .subMenu.admin .sub_admin { /*서브메뉴-관리자*/
+  list-style-type: disc;
+  list-style-position: inside;
+  text-align: left;
 }
 #gnb ul li .subMenu.admin li .menuList {
   margin: 12px 0 0 0;
   width: 132px;
-  border-top: 1px solid;
   display: grid;
   gap: 10px;
 }
@@ -119,20 +128,8 @@
   position: relative;
   height: 96px;
 }
-#gnb > ul > li:first-child {
+#gnb > ul > li:first-child { /*주메뉴*/
   margin-left: 286px;
-}
-#gnb > ul > li:first-child > a {
-  margin: 0 25px 0 4px;
-}
-#gnb > ul > li:nth-child(2) .subMenu {
-  left: 13%;
-}
-#gnb > ul > li:nth-child(5) .subMenu {
-  left: 22%;
-}
-#gnb > ul > li:nth-child(7) .subMenu {
-  left: 3%;
 }
 #gnb > ul > li:hover > a::after {
   transform: scaleX(1);
@@ -140,7 +137,7 @@
 #gnb > ul > li > a {
   display: block;
   position: relative;
-  margin: 0px 25px;
+  margin: 0 44px;
   line-height: 96px;
   height: 96px;
   font-size: 18px;
@@ -159,39 +156,47 @@
 
 #footer {
   width: 100%;
+<<<<<<< HEAD
   background-color: #E4E7EC;
+  height: 130px;
+=======
+  /*background-color: #E4E7EC; 푸터배경*/
   height: 101px;
+>>>>>>> 956e2ea2eff4baa947d443fcaed18225647ff805
   transform: inherit;
   position: relative;
   /* transform: translateY(-100%); */
 }
 #footer .wrap {
   margin: 0 auto;
-  width: 342px;
+  width: 380px;
   display: grid;
-  gap: 13px;
+  gap: 12px;
   color: #73767F;
 }
 #footer .wrap > div {
-  margin: 18px 0 0;
+  margin: 15px 0 0;
   display: flex;
   gap: 10px;
   font-size: 13px;
 }
 #footer .wrap > div address {
+  margin-top:10px;
   font-style: normal;
-  line-height: 20px;
+  line-height: 30px;
+  font-size:14px;
 }
 #footer .wrap p {
   font-size: 12px;
+  margin: auto;
 }
 
 /* container */
 #container {
   margin: 0 auto;
-  max-width: 1400px;
+  max-width: 87.5%;
   height: auto;
-  height: calc(100% - 222px);
+  /*height: calc(100% - 222px);*/
 }
 
 /* breadCrum */
@@ -214,7 +219,7 @@
   top: 2px;
   left: -26px;
   color: #101828;
-  content: url("/images/chevron-right.svg");
+  content: url("/images/images/chevron-right.svg");
 }
 .breadCrumb ul li a:hover {
   color: #396AFF;
@@ -222,7 +227,7 @@
 
 /* wrapper */
 .wrapper {
-  margin: 20px 0 0;
+  margin: 100px 0 0 ;
   display: grid;
   gap: 50px;
   grid-template-columns: 270px 1fr;
@@ -231,6 +236,7 @@
   font-size: 28px;
   font-weight: 500;
   margin: 6px 0 0;
+  text-align:center;
 }
 .wrapper .lnb .lnbList {
   width: 270px;
@@ -249,6 +255,7 @@
   font-size: 20px;
   font-weight: 600;
   text-decoration: none;
+  color: #000000;
 }
 .wrapper .lnb .lnbList > ul > li:first-child {
   margin-top: 0;
@@ -281,6 +288,7 @@
 .wrapper .lnb .lnbList ul .lnbCnt a {
   font-size: 18px;
   font-weight: 400;
+  text-decoration: none;
   color: #667085;
 }
 .wrapper .lnb .lnbList ul .lnbCnt a:hover {
@@ -308,8 +316,78 @@
   font-weight: 500;
 }
 .wrapper .contents .inner {
-  margin: 20px 0 0;
+  margin: 100px 0 0;
 }
+
+/*게시글 등록페이지*/
+
+
+/* inputWrap은 모든 입력 필드를 감싸는 컨테이너 */
+.inputWrap {
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-top: 2px solid black;
+}
+
+/* gridWrap은 각 입력 필드를 담는 그리드 구조 */
+.gridWrap > div {
+  display: flex; /* flexbox 레이아웃을 사용 */
+  align-items: center; /* 세로 중앙 정렬 */
+  margin-bottom: 15px; /* 각 입력 필드 간격 */
+}
+
+.gridWrap span {
+  flex: 0 0 100px; /* 라벨의 너비 고정 */
+  margin-right: 10px; /* 라벨과 입력 필드 사이의 간격 */
+}
+.gridWrap input[type="text"],
+.gridWrap textarea {
+  flex: 1; /* 남은 공간을 모두 채움 */
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+
+/* '파일첨부' 영역의 스타일링 */
+.file-upload {
+  padding: 10px 0;
+}
+
+/* 파일 선택 텍스트 필드 스타일링 */
+.upload-name {
+  margin-right: 10px; /* 오른쪽 여백 추가 */
+  cursor: default; /* 마우스 오버 시 커서 변경 */
+}
+
+/* 파일 선택 버튼 스타일링 */
+.paperClip {
+  opacity: 1; /* 투명도 조정 */
+  cursor: pointer; /* 마우스 오버 시 커서 변경 */
+  /* 추가적인 스타일링 */
+}
+
+/* 파일 삭제 버튼 스타일링 */
+.deleteBtn {
+  visibility: visible; /* 버튼을 보이게 설정 */
+  margin-left: 10px; /* 왼쪽 여백 추가 */
+  /* 추가적인 스타일링 */
+}
+
+/* 파일 선택 영역의 전반적인 레이아웃을 정렬하기 위한 스타일 */
+.file-upload {
+  display: flex;
+  align-items: center; /* 세로 중앙 정렬 */
+  justify-content: flex-start; /* 요소들을 왼쪽 정렬 */
+}
+
+/*!* 숨겨진 파일 입력 필드 스타일 (필요한 경우) *!*/
+/*.upload-hidden {*/
+/*  display: none; !* 실제 파일 필드 숨김 *!*/
+/*}*/
+
 
 /* checkbox 커스텀 */
 input[type=checkbox] {
@@ -319,12 +397,13 @@ input[type=checkbox] + label {
   display: inline-block;
   width: 24px;
   height: 24px;
-  background: url("/images/btn_checkbox.svg");
+  /*background: url("/images/btn_checkbox.svg"); 경로 수정중*/
+  background: url("../../../images/images/btn_checkbox.svg");
   background-size: contain;
   cursor: pointer;
 }
 input[type=checkbox]:checked + label {
-  background: url("/images/btn_checkbox_selected.svg");
+  background: url("../../../images/images/btn_checkbox_selected.svg");
   background-size: contain;
 }
 
@@ -350,6 +429,9 @@ table thead tr th {
   border-collapse: collapse;
   border-bottom: 1px solid #d0d5dd;
   font-weight: 700;
+  text-align:center;
+  width:25%;
+  font-size:18px;
 }
 table tbody {
   display: table-row-group;
@@ -376,6 +458,9 @@ table tbody tr td {
 }
 table tbody tr td a {
   display: block;
+  text-decoration: none;
+  color:black;
+  font-size: 16px;
 }
 
 /* pagination */
@@ -393,6 +478,7 @@ table tbody tr td a {
   height: 36px;
   color: #7E84A3;
   text-align: center;
+
   font-size: 16px;
   line-height: 36px;
   display: block;
@@ -409,16 +495,16 @@ table tbody tr td a {
   height: 36px;
 }
 .pagination li button[type=button].btnPrevend {
-  background: url("/images/btn_prevend.svg");
+  background: url("/images/images/btn_prevend.svg");
 }
 .pagination li button[type=button].btnPrev {
-  background: url("/images/btn_prev.svg");
+  background: url("/images/images/btn_prev.svg");
 }
 .pagination li button[type=button].btnNext {
-  background: url("/images/btn_next.svg");
+  background: url("/images/images/btn_next.svg");
 }
 .pagination li button[type=button].btnNextEnd {
-  background: url("/images/btn_nextend.svg");
+  background: url("/images/images/btn_nextend.svg");
 }
 
 /* button 커스텀*/
@@ -444,4 +530,5 @@ button[type=button].dark {
   color: #fff;
   background-color: #101828;
   border-radius: 4px;
+  cursor:pointer;
 }/*# sourceMappingURL=style.css.map */

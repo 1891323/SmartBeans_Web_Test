@@ -1,0 +1,203 @@
+@charset "utf-8";
+
+.p_login {width: 690px; margin: 98px auto 0;}
+.p_login h1 {color: #222; font-size: 48px; font-weight: 500; text-align: center;}
+.p_login .txt {margin-top: 32px; color: #666; font-size: 20px; text-align: center; line-height: 30px;}
+.loginbox {margin-top: 55px; padding: 59px 0; border: 1px solid #dde2e5; border-radius: 25px; box-shadow: 3px 8px 13px #ccc;}
+.loginbox dl + dl {margin-top: 18px;}
+.loginbox dl > * {float: left;}
+.loginbox dl::after {content: ""; display: block; clear: both;}
+.loginbox dt {width: 177px; height: 46px; padding-right: 19px; color: #222; font-size: 16px; font-weight: 300; line-height: 46px; text-align: right;}
+.loginbox dd input[type=text],
+.loginbox dd input[type=password] {width: 336px; height: 46px; padding: 0 10px; border: 0; border-radius: 8px; color: #666; font-size: 16px; background: #f5f5f5;}
+.loginbox dd .f_chk {margin-left: 6px;}
+.loginbox .btn_a {padding: 30px 0 0 177px;}
+.loginbox .btn_a .btn {width: 160px; height: 50px; margin-right: 12px; border-radius: 8px; color: #fff; font-size: 18px; font-weight: 500; text-align: center; line-height: 50px; background: #169bd5;}
+/*메인 콘텐츠의 각 항목(시작)*/
+.p_main .g_area {background: #f2f2f2;}
+.p_main .g_area .inner {width: 1700px; margin: 0 auto; padding: 0 50px 60px 50px;}
+.p_main .g_area .inner::after {content: ""; display: block; clear: both;}
+.p_main .g_area .inner > * {float: left;}
+.p_main .g_area .left_col {width: 640px; margin-right: 20px; padding-top: 60px;}
+.p_main .g_area .farm_info {position: relative; height: 270px; border-radius: 27px; background: #fff;}
+/*.p_main .g_area .farm_info .head {height: 96px; padding: 40px 0 0 50px; border-bottom: 1px solid #e8e8e8;}*/
+.p_main .g_area .farm_info .head {height: 96px; padding: 40px 0 0 50px;}
+.p_main .g_area .farm_info .head h2 {color: #222; font-size: 23px; font-weight: 700;}
+.p_main .g_area .farm_info .head p {margin-top: 6px; color: #888; font-size: 18px;}
+.p_main .g_area .farm_info dl {margin-top: 30px; padding: 0 50px; font-size: 20px; font-weight: 300;}
+.p_main .g_area .farm_info dl > * {position: relative; height: 32px; padding: 0 40px; line-height: 32px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;}
+.p_main .g_area .farm_info dl a {color: #222; font-size: 20px;}
+.p_main .g_area .farm_info dl .q,
+.p_main .g_area .farm_info dl .a {display: block; position: absolute; left: 0; top: 0; width: 32px; height: 32px; font-size: 0;}
+.p_main .g_area .farm_info dl .q {background: url(../images/ico_q.png) no-repeat;}
+.p_main .g_area .farm_info dl .a {background: url(../images/ico_a.png) no-repeat;}
+.p_main .g_area .farm_info dl dt + dd {margin-top: 10px;}
+.p_main .g_area .farm_info dl dd + dt {margin-top: 30px;}
+.p_main .g_area .farm_info .more {display: block; position: absolute; right: 40px; top: 30px; width: 40px; height: 40px; font-size: 0; background: url(../images/main/ico_more.png) no-repeat;}
+
+.p_main .g_area .pest_info {position: relative; height: 270px; border-radius: 27px; background: #fff; margin-top: 20px;}
+/*.p_main .g_area .pest_info .head {height: 146px; padding: 40px 0 0 50px; border-bottom: 1px solid #e8e8e8;}*/
+.p_main .g_area .pest_info .head {height: 146px; padding: 40px 0 0 50px;}
+.p_main .g_area .pest_info .head h2 {color: #222; font-size: 23px; font-weight: 700;}
+.p_main .g_area .pest_info .head p {margin-top: 6px; color: #888; font-size: 18px;}
+.p_main .g_area .pest_info .more {display: block; position: absolute; right: 40px; top: 30px; width: 40px; height: 40px; font-size: 0; background: url(../images/main/ico_more.png) no-repeat;}
+
+.p_main .g_area .manual {position: relative; height: 100px; margin-top: 20px; padding: 40px 50px 0 50px; border-radius: 27px; background: #fff;}
+.p_main .g_area .manual::after {content: ""; display: block;}
+.p_main .g_area .manual h2 {float: left; color: #000; font-size: 23px; font-weight: 700; line-height: 26px;}
+.p_main .g_area .manual h2 span {color: #004986;}
+.p_main .g_area .manual .more {display: block; position: absolute; right: 40px; top: 30px; width: 40px; height: 40px; font-size: 0; background: url(../images/main/ico_more.png) no-repeat;}
+
+.p_main .g_area .inner .right_col {width: 940px; padding-top: 60px;}
+.p_main .g_area .weather_info {position: relative; height: 300px; padding: 42px 40px 0 40px; border-radius: 27px; background: #fff;}
+.p_main .g_area .weather_info .weather_info_left {float: left;}
+.p_main .g_area .weather_info .weather_info_left h2 {color: #222; font-size: 23px; font-weight: 700;}
+.p_main .g_area .weather_info .weather_info_left img {width: 120px; text-align: center; margin-left: 12px;}
+.p_main .g_area .weather_info .weather_info_left h1 {position: absolute; top:100px; left:130px; font-size: 65px;}
+.p_main .g_area .weather_info .weather_info_left h5 {text-align: center; font-weight: bold;}
+.p_main .g_area .weather_info .weather_info_left p {color: #2b2b2b; text-align: center; margin-bottom: 5px;}
+.p_main .g_area .weather_info .weather_info_left span {font-weight: 600;}
+.p_main .g_area .weather_info .weather_info_right {text-align: center; margin-top: 40px; margin-right: -60px;}
+.p_main .g_area .weather_info .weather_info_right .hour {font-weight: bold; font-size: 20px; margin-right: 40px; margin-left: 15px;}
+.p_main .g_area .weather_info .weather_info_right img {width: 80px; margin-right: 20px; margin-top: 10px; margin-bottom: 10px;}
+.p_main .g_area .weather_info .weather_info_right .tmp {font-size: 20px; color: #666; margin-right: 45px; margin-left: 28px;}
+.p_main .g_area .weather_info .weather_info_right .wsd {font-size: 20px; color: #666; margin-right: 40px; margin-left: 15px;}
+.p_main .g_area .weather_info .more {display: block; position: absolute; right: 40px; top: 30px; width: 40px; height: 40px; font-size: 0; background: url(../images/main/ico_more.png) no-repeat;}
+
+.p_main .g_area .notification {width: 400px; position: relative; float:left; height: 360px; margin-top: 20px; padding: 42px 40px 0 40px; border-radius: 27px; background: #fff;}
+.p_main .g_area .notification h2 {color: #222; font-size: 23px; font-weight: 700;}
+.p_main .g_area .notification p {margin-top: 16px; color: #333; font-size: 20px; line-height: 30px;}
+.p_main .g_area .notification a {display: block; position: absolute; right: 45px; bottom: 37px; width: 150px; height: 50px; border-radius: 25px; color: #fff; font-size: 20px; text-align: center; line-height: 50px; background: #004986;}
+.p_main .g_area .notification .more {display: block; position: absolute; right: 40px; top: 30px; width: 40px; height: 40px; font-size: 0; background: url(../images/main/ico_more.png) no-repeat;}
+
+.p_main .g_area .price {width: 520px; position: relative; float:right; height: 360px; margin-top: 20px; padding: 42px 40px 0 40px; border-radius: 27px; background: #fff;}
+.p_main .g_area .price h2 {color: #222; font-size: 23px; font-weight: 700;}
+.p_main .g_area .price .more {display: block; position: absolute; right: 40px; top: 30px; width: 40px; height: 40px; font-size: 0; background: url(../images/main/ico_more.png) no-repeat;}
+/*메인 콘텐츠의 각 항목(끝)*/
+.p_contactus .map {margin-top: 43px;}
+.p_contactus .addr {margin-top: 30px; border-top: 2px solid #666;}
+.p_contactus .addr h2 {color: #222; font-size: 20px; font-weight: 500;}
+.p_contactus .addr .top {padding-bottom: 14px; border-bottom: 1px solid #dde2e5;}
+.p_contactus .addr .top > * {float: left;}
+.p_contactus .addr .top::after {content: ""; display: block; clear: both;}
+.p_contactus .addr .top .left_col {width: 60%; padding-top: 24px;}
+.p_contactus .addr .top dl {margin-top: 26px;}
+.p_contactus .addr .top dl + dl {margin-top: 5px;}
+.p_contactus .addr .top dl > * {display: inline-block; height: 20px; font-size: 16px; line-height: 20px; vertical-align: top;}
+.p_contactus .addr .top dt {width: 120px; color: #222;}
+.p_contactus .addr .top dt::before {content: ""; display: inline-block; width: 12px; height: 19px; margin-right: 9px; background: url(../images/ico_position.png) no-repeat; vertical-align: top;}
+.p_contactus .addr .top dd {color: #666; font-weight: 300;}
+.p_contactus .addr .top .right_col {width: 40%; text-align: right;}
+.p_contactus .addr .top .right_col p {display: inline-block; vertical-align: top;}
+.p_contactus .addr .top .right_col p:nth-child(1) {width: 167px; padding-top: 27px; color: #666; font-size: 15px; font-weight: 300; line-height: 18px; text-align: left;}
+.p_contactus .addr .top .right_col p:nth-child(1) strong {display: block; padding-bottom: 10px; color: #222; font-size: 16px; font-weight: 400;}
+.p_contactus .addr .top .right_col p:nth-child(2) {padding-top: 14px;}
+
+.p_contactus .addr .bot {padding-bottom: 28px; border-bottom: 1px solid #dde2e5;}
+.p_contactus .addr .bot > * {float: left; width: 50%;}
+.p_contactus .addr .bot::after {content: ""; display: block; clear: both;}
+.p_contactus .addr .bot .left_col {padding-top: 24px;}
+.p_contactus .addr .bot .left_col h2 {padding-bottom: 24px;}
+.p_contactus .addr .bot .left_col dl > * {display: inline-block; font-size: 16px;}
+.p_contactus .addr .bot .left_col dl + dl {margin-top: 6px;}
+.p_contactus .addr .bot .left_col dt {width: 120px; color: #222; line-height: 20px;}
+.p_contactus .addr .bot .left_col dt::before {content: ""; display: inline-block; width: 15px; height: 20px; margin-right: 6px; background: url(../images/ico_subway.png) no-repeat; vertical-align: top;}
+.p_contactus .addr .bot .left_col dd {color: #666; font-weight: 300;}
+.p_contactus .addr .bot .right_col {padding-top: 24px;}
+.p_contactus .addr .bot .right_col h2 {padding-bottom: 24px;}
+.p_contactus .addr .bot .right_col dl > * {display: inline-block; font-size: 16px;}
+.p_contactus .addr .bot .right_col dl + dl {margin-top: 6px;}
+.p_contactus .addr .bot .right_col dt {width: 83px; color: #222; line-height: 20px;}
+.p_contactus .addr .bot .right_col dt.call::before {content: ""; display: inline-block; width: 15px; height: 20px; margin-right: 6px; background: url(../images/ico_call.png) no-repeat; vertical-align: top;}
+.p_contactus .addr .bot .right_col dt.email::before {content: ""; display: inline-block; width: 15px; height: 20px; margin-right: 6px; background: url(../images/ico_email.png) no-repeat; vertical-align: top;}
+.p_contactus .addr .bot .right_col dd {color: #666; font-weight: 300;}
+
+/* error page */
+.error_page h1 {margin-top: 199px; color: #222; font-size: 48px; font-weight: 500; text-align: center;}
+.error_page .inner {width: 690px; margin: 35px auto 0; padding: 40px 0; border: 1px solid #dde2e5; border-radius: 28px; text-align: center;}
+.error_page .inner p {display: inline-block; padding: 50px 0 50px 150px; color: #666; font-size: 24px; background: url(../images/ico_error.png) no-repeat left center;}
+.error_page .inner .btn {margin-top: 20px;}
+
+
+.POP_TEMPLATE_INTRO {background-color: #fff;}
+.POP_TEMPLATE_INTRO .pop_inner {width: 1200px; height: 100%; overflow: auto;}
+.POP_TEMPLATE_INTRO .list {padding: 27px 30px; border-radius: 10px; background: #f5f5f5;}
+.POP_TEMPLATE_INTRO .list li {position: relative; padding-left: 16px; color: #666; font-size: 16px;}
+.POP_TEMPLATE_INTRO .list li + li {margin-top: 5px;}
+.POP_TEMPLATE_INTRO .list li::before {content: ""; display: block; position: absolute; left: 0; top: 9px; width: 6px; height: 6px; border-radius: 50%; background: #222;}
+.POP_TEMPLATE_INTRO .list2 {margin-top: 20px;}
+.POP_TEMPLATE_INTRO .list2::after {content: ""; display: block; clear: both;}
+.POP_TEMPLATE_INTRO .list2 > div {float: left; width: 186px; height: 486px; border-bottom: 1px solid #dde2e5;}
+.POP_TEMPLATE_INTRO .list2 > div + div {border-left: 1px solid #dde2e5;}
+.POP_TEMPLATE_INTRO .list2 > div:first-child {border-left: 1px solid #dde2e5; border-radius: 10px 0 0 10px;}
+.POP_TEMPLATE_INTRO .list2 > div:last-child {width: 190px; border-right: 1px solid #dde2e5; border-radius: 0 10px 10px 0;}
+.POP_TEMPLATE_INTRO .list2 > div h2 {height: 66px; border-top: 1px solid #dde2e5; color: #222; font-size: 18px; font-weight: 500; text-align: center; line-height: 66px; background: #e7eef2; margin: 0;}
+.POP_TEMPLATE_INTRO .list2 > div:first-child h2 {border-top-left-radius: 10px;}
+.POP_TEMPLATE_INTRO .list2 > div:last-child h2 {border-top-right-radius: 10px;}
+.POP_TEMPLATE_INTRO .list2 .dep1 {padding: 13px 29px;}
+.POP_TEMPLATE_INTRO .list2 .dep1 li {color: #666; font-size: 16px; font-weight: 300;}
+.POP_TEMPLATE_INTRO .list2 .dep1 li + li {margin-top: 6px;}
+.POP_TEMPLATE_INTRO .list2 .dep2 {height: 419px; padding: 13px 29px; color: #222; font-weight: 300; background: #f5f5f5;}
+.POP_TEMPLATE_INTRO .list2 > div:last-child .dep2 {border-bottom-right-radius: 10px;}
+.POP_TEMPLATE_INTRO .list2 .dep2 > li {font-size: 16px;}
+.POP_TEMPLATE_INTRO .list2 .dep2 > li + li {margin-top: 7px;}
+.POP_TEMPLATE_INTRO .list2 .dep2 > li > ul {padding: 2px 0 0 8px;}
+.POP_TEMPLATE_INTRO .list2 .dep2 > li > ul > li {font-size: 14px;}
+.POP_TEMPLATE_INTRO .list2 .dep2 > li > ul > li + li {margin-top: 2px;}
+.POP_TEMPLATE_INTRO .btn_area {margin-top: 20px;}
+.POP_TEMPLATE_INTRO .btn_area .btn {width: 320px;}
+
+
+/* password confirm popup */
+.POP_CONFIRM_PWD {background-color: #fff;}
+.POP_CONFIRM_PWD .pop_inner {width: 550px; height: 100%; overflow: auto;}
+.POP_CONFIRM_PWD .box_1 {text-align: center;}
+
+/* duplicate id check popup */
+.POP_DUPID_CONF {background-color: #fff;}
+.POP_DUPID_CONF .pop_inner {width: 550px; height: 100%; overflow: auto;}
+.POP_DUPID_CONF .box_1 {text-align: center;}
+.POP_DUPID_CONF .result {margin-top: 20px; padding: 28px 20px; border-radius: 9px; background: #eee;}
+.POP_DUPID_CONF .result span {color: #0465be; font-weight: 700;}
+
+/* survey item search popup */
+.POP_SURVEY_ITEM {background-color: #fff;}
+.POP_SURVEY_ITEM .pop_inner {width: 1024px; height: 100%; overflow: auto;}
+
+.EgovQustnrItemManageListPopup {background-color: #fff;}
+.EgovQustnrItemManageListPopup .pop_inner {width: 1024px; height: 100%; overflow: auto;}
+
+.EgovBoardMstrListPop {background-color: #fff;}
+.EgovBoardMstrListPop .pop_inner {width: 1024px; height: 100%; overflow: auto;}
+
+.EgovGroupSearch {background-color: #fff;}
+.EgovGroupSearch .pop_inner {width: 800px; height: 100%; overflow: auto;}
+
+.EgovTemplateInqirePopup .pop_inner {width: 1280px;}
+
+.POP_GROUP_SEARCH .pop_inner,
+.POP_POST_SEARCH .pop_inner,
+.POP_PRGFILE_SEARCH .pop_inner {width: 1024px;}
+
+.POP_POST_SEARCH {background-color: #fff;}
+.POP_POST_SEARCH .pop_inner {height: 100%; overflow: auto;}
+
+.EgovQustnrManageListPopup {background-color: #fff;}
+.EgovQustnrManageListPopup .pop_inner {height: 100%; overflow: auto;}
+.EgovQustnrManageListPopup .pop_header {margin-bottom: 29px;}
+/*날씨 정보 페이지*/
+.title h2 {text-align: left; font-size: 34px; font-weight: 500;}
+.w_area {text-align: center;}
+.w_area img {width: 80px; margin-top: -6px;}
+.w_area .area {margin: 40px;}
+.w_area .area h2 {font-size: 18px; font-weight: bold;}
+.w_area .area .now {margin-top: 25px;}
+.w_area .area .now img {width: 140px; display: inline-block;}
+.w_area .area .now .tmp {font-size: 60px; font-weight: bold; display: inline-block; margin-top: 28px; margin-left: -30px;}
+.w_area .area .detail .today {font-size: 25px; font-weight: bold; margin-bottom: 12px;}
+.w_area .name {color: #2b2b2b;}
+.w_area .value {font-weight: 600;}
+.w_area .flex-container{display: inline-flex; padding: 10px; border: 1px solid lightgray; border-radius: 10px; margin:5px;}
+.w_area .flex-container.space-around {justify-content: space-around; align-items: center;}
+.w_area .flex-item {margin: 15px; text-align: center;}
+.w_area .week .flex-item {margin:21px;}

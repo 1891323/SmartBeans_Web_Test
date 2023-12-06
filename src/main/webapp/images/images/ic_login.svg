@@ -1,0 +1,7 @@
+<svg id="ic_login" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+  <rect id="사각형_532" data-name="사각형 532" width="40" height="40" fill="none"/>
+  <g id="user" transform="translate(5.5 7)">
+    <path id="패스_38138" data-name="패스 38138" d="M24,21V19c0-2.209-2.239-4-5-4H9c-2.761,0-5,1.791-5,4v2" transform="translate(0.5 3)" fill="none" stroke="#172026" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"/>
+    <circle id="타원_176" data-name="타원 176" cx="5" cy="5" r="5" transform="translate(9.5 3)" fill="none" stroke="#172026" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"/>
+  </g>
+</svg>

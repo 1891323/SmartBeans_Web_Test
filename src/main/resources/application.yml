@@ -1,6 +1,14 @@
 server:
   port: 9090
+  servlet:
+    jsp:
+      init-parameters:
+        development: true
 
 spring:
   main:
     allow-bean-definition-overriding: true
+  output:
+    ansi:
+      enabled: always
+

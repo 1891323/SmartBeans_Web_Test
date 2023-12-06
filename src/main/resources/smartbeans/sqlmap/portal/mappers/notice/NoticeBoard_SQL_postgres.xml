@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+    수정일                 수정자           수정내용
+  =========     =======    =================================================
+  2020.07.14    신용호           게시판마스터 페이징처리 오류수정 (180. 게시판관리)
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="smartbeans.portal.notice.dao.NoticeDAO">
+
+	<!-- 20230509 sbk -->
+	<resultMap id="NoticeBoardList" type="smartbeans.portal.notice.vo.NoticeVO">
+		<result property="bbs_sn" column="BBS_SN"/>
+		<result property="ntt_se" column="NTT_SE"/>
+		<result property="sj" column="SJ"/>
+		<result property="cn" column="CN"/>
+		<result property="create_id" column="CREATE_ID"/>
+		<result property="reg_dttm" column="REG_DTTM"/>
+		<result property="mdfcn" column="MDFCN"/>
+		<result property="mdfcn_dttm" column="MDFCN_DTTM"/>
+		<result property="upper_bbs_sn" column="UPPER_BBS_SN"/>
+		<result property="rdcnt" column="RDCNT"/>
+		<result property="answer_sttus" column="ANSWER_STTUS"/>
+		<result property="user_id" column="USER_ID"/>
+		<result property="answer_cn" column="ANSWER_CN"/>
+		<result property="othbsc_yn" column="OTHBSC_YN"/>
+		<result property="upend_fixing_yn" column="UPEND_FIXING_YN"/>
+	</resultMap>
+
+	<!-- 20230512 - sbk 게시판 리스트 -->
+	<select id="selectNoticeBoardList" parameterType="smartbeans.portal.notice.vo.NoticeVO" resultMap="NoticeBoardList">
+
+		SELECT
+			BBS_SN, SJ, CREATE_ID, REG_DTTM, UPEND_FIXING_YN
+		from
+			BBS
+
+	</select>
+
+	<!-- 20230512 - sbk 게시판 글 개수 -->
+	<select id="selectNoticeBoardListCnt" parameterType="smartbeans.portal.notice.vo.NoticeVO" resultType="java.lang.Integer">
+
+		SELECT
+			COUNT(create_id)
+		FROM
+			BBS
+
+	</select>
+
+	<!-- 20230512 - sbk 게시판 글 등록 -->
+	<insert id="insertNoticeBoardOne" parameterType="smartbeans.portal.notice.vo.NoticeVO">
+
+		INSERT INTO
+			BBS
+		(
+			SJ,
+			CREATE_ID,
+			CN,
+			NTT_SE,
+			UPPER_BBS_SN,
+			USER_ID
+		)
+		VALUES
+			(
+				#{sj},
+				#{create_id},
+				#{cn},
+				#{ntt_se},
+				#{upper_bbs_sn},
+				#{user_id}
+			)
+
+	</insert>
+
+	<!-- 20230512 - sbk 게시판 상세페이지 -->
+	<select id="selectNoticeBoardDetail" parameterType="int" resultType="smartbeans.portal.notice.vo.NoticeVO">
+
+		SELECT
+			BBS_SN, SJ, CREATE_ID, REG_DTTM, CN
+		FROM
+			BBS
+		WHERE
+			BBS_SN=#{no}
+
+	</select>
+</mapper>

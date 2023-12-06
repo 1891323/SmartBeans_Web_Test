@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="smartbeans.portal.sym.mpm.mapper.PrgrmMapper">
+
+	<resultMap id="prgrmVO" type="smartbeans.portal.sym.mpm.vo.PrgrmVO">
+		<result property="prgrmSn" column="prgrm_sn"/>
+		<result property="prgrmId" column="prgrm_id"/>
+		<result property="prgrmUrl" column="prgrm_url"/>
+		<result property="prgrmNm" column="prgrm_nm"/>
+		<result property="prgrmLevel" column="prgrm_level"/>
+		<result property="prgrmOrdr" column="prgrm_ordr"/>
+		<result property="upprgrmId" column="up_prgrm_id"/>
+		<result property="rlsYn" column="RLS_YN"/>
+		<result property="registerId" column="register_id"/>
+		<result property="regYmd" column="reg_ymd"/>
+		<result property="updusrId" column="updusr_id"/>
+		<result property="updtYmd" column="updt_ymd"/>
+	</resultMap>
+
+	<insert id="insertPrgrm" parameterType="smartbeans.portal.sym.mpm.vo.PrgrmVO">
+		<selectKey keyProperty="prgrmSn" resultType="Long" order="BEFORE">
+			SELECT nextval('prgrm_sn_seq')
+		</selectKey>
+		INSERT INTO PRGRM
+		( prgrm_sn
+		, prgrm_id
+		, prgrm_url
+		, prgrm_nm
+		, prgrm_level
+		, prgrm_ordr
+		, up_prgrm_id
+		, RLS_YN
+		, register_id
+		, reg_ymd
+		, updusr_id
+		, updt_ymd )
+		VALUES ( #{prgrmSn}
+		  	   , #{prgrmId}
+			   , #{prgrmUrl}
+			   , #{prgrmNm}
+			   , #{prgrmLevel}
+			   , #{prgrmOrdr}
+			   , #{upprgrmId}
+			   , #{rlsYn}
+			   , #{registerId}
+			   , NOW()
+			   , #{updusrId}
+			   , NOW() )
+	</insert>
+
+
+	<update id="updatePrgrm" parameterType="smartbeans.portal.sym.mpm.vo.PrgrmVO">
+		UPDATE PRGRM
+		SET prgrm_id=#{prgrmId}
+		  , prgrm_url=#{prgrmUrl}
+		  , prgrm_nm=#{prgrmNm}
+		  , prgrm_level=#{prgrmLevel}
+		  , prgrm_ordr=#{prgrmOrdr}
+		  , up_prgrm_id=#{upprgrmId}
+		  , RLS_YN=#{rlsYn}
+		  , updusr_id=#{updusrId}
+		  , updt_ymd=NOW()
+		WHERE prgrm_sn=#{prgrmSn}
+	</update>
+
+
+	<delete id="deletePrgrm">
+
+			DELETE FROM PRGRM
+			WHERE prgrm_sn=#{prgrmSn}
+
+	</delete>
+
+	<select id="selectPrgrm" parameterType="smartbeans.portal.sym.mpm.vo.PrgrmVO" resultMap="prgrmVO">
+		SELECT
+			prgrm_sn, prgrm_id, prgrm_url, prgrm_nm, prgrm_level,
+			prgrm_ordr, up_prgrm_id, RLS_YN, register_id,
+			reg_ymd, updusr_id, updt_ymd
+		FROM PRGRM
+		WHERE prgrm_sn=#{prgrmSn}
+	</select>
+
+
+	<select id="selectPrgrmList" parameterType="smartbeans.cmmn.ComDefaultVO" resultType="egovMap">
+		SELECT
+		ROW_NUMBER() OVER (ORDER BY prgrm_ordr, prgrm_sn ASC) AS rownum,
+		prgrm_sn, prgrm_id, prgrm_url, prgrm_nm, prgrm_level,
+		prgrm_ordr, up_prgrm_id, RLS_YN, register_id,
+		reg_ymd, updusr_id, updt_ymd
+		FROM PRGRM
+		WHERE 1=1
+		<if test="searchKeyword != null and searchKeyword != ''">
+			<choose>
+				<when test="searchCondition == 0">
+					AND	prgrm_id LIKE '%' || #{searchKeyword} || '%'
+				</when>
+				<when test="searchCondition == 1">
+					AND	prgrm_nm LIKE '%' || #{searchKeyword} || '%'
+				</when>
+			</choose>
+		</if>
+		ORDER BY prgrm_ordr, prgrm_sn ASC
+		LIMIT #{recordCountPerPage} OFFSET #{firstIndex}
+	</select>
+
+	<!-- todo author_cd 확정 시 변경
+	-->
+	<select id="selectPrgrmListForAuth" parameterType="smartbeans.cmmn.ComDefaultVO" resultType="egovMap">
+		SELECT
+		    ROW_NUMBER() OVER (ORDER BY prgrm_ordr, prgrm_sn ASC) AS rownum,
+			prgrm_sn, prgrm_id, prgrm_url, prgrm_nm, prgrm_level,
+			prgrm_ordr, up_prgrm_id, RLS_YN, register_id,
+			reg_ymd, updusr_id, updt_ymd,
+			(SELECT CASE COUNT(*) WHEN 0 THEN 'N' ELSE 'Y' END FROM prgrm_author PA WHERE PA.prgrm_sn = P.prgrm_sn AND PA.author_cd = 'US') AS author_user_yn,
+			(SELECT CASE COUNT(*) WHEN 0 THEN 'N' ELSE 'Y' END FROM prgrm_author PA WHERE PA.prgrm_sn = P.prgrm_sn AND PA.author_cd = 'OP') AS author_oper_yn,
+			(SELECT CASE COUNT(*) WHEN 0 THEN 'N' ELSE 'Y' END FROM prgrm_author PA WHERE PA.prgrm_sn = P.prgrm_sn AND PA.author_cd = 'AD') AS author_admn_yn
+		FROM PRGRM P
+		WHERE 1=1
+		<if test="searchKeyword != null and searchKeyword != ''">
+			<choose>
+				<when test="searchCondition == 0">
+					AND	prgrm_id LIKE '%' || #{searchKeyword} || '%'
+				</when>
+				<when test="searchCondition == 1">
+					AND	prgrm_nm LIKE '%' || #{searchKeyword} || '%'
+				</when>
+			</choose>
+		</if>
+		ORDER BY prgrm_ordr, prgrm_sn ASC
+		LIMIT #{recordCountPerPage} OFFSET #{firstIndex}
+	</select>
+
+
+	<select id="selectPrgrmListTotCnt" parameterType="smartbeans.cmmn.ComDefaultVO" resultType="int">
+			SELECT COUNT(*) totcnt
+			FROM PRGRM
+			WHERE 1=1
+			<if test="searchKeyword != null and searchKeyword != ''">
+		        <choose>
+		            <when test="searchCondition == 0">
+						AND ID LIKE '%' || #{searchKeyword} || '%'
+					</when>
+		            <when test="searchCondition == 1">
+						AND	NAME LIKE '%' || #{searchKeyword} || '%'
+					</when>
+				</choose>
+			</if>
+	</select>
+
+</mapper>
