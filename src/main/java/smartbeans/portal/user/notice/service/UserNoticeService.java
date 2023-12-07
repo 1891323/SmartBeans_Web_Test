@@ -8,6 +8,8 @@ public interface UserNoticeService {
 
     List<UserNoticeVO> selectUserBoardList(UserNoticeVO searchVO);
 
+    List<UserNoticeVO> selectCmntList(UserNoticeVO searchVO);
+
     int selectUserBoardListTotCnt(UserNoticeVO searchVO);
 
     UserNoticeVO selectUserBoardDetail(UserNoticeVO userNoticeVO);
@@ -16,6 +18,12 @@ public interface UserNoticeService {
 
     int userupdateTopFixedStatus(int noticeBoardNo);
 
-    UserNoticeVO UserQnaComment(UserNoticeVO userNoticeVO);
 
+    UserNoticeVO selectCmntDetail(int cmntNo);
+
+    int userinsertComment(UserNoticeVO cmntVO);
+
+    int userupdateComment(UserNoticeVO cmntVO);
+
+    int userdeleteComment(int cmntNo);
 }

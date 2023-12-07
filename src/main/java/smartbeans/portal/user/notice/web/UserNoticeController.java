@@ -259,4 +259,70 @@ public class UserNoticeController {
         return result;
     }
 
+    /* 댓글 기능 에러 발생중
+    *  userboard.xml은 문제없이 쿼리 선언 완료하였으므로
+    *  controller 및 service 수정해볼 것 */
+    /**
+     * 댓글 목록 조회
+     * @param searchVO
+     * @param model
+     * @return
+     */
+    @GetMapping(value = "/selectCmntList.do")
+    public String selectCmntList(@ModelAttribute("searchVO") UserNoticeVO searchVO, ModelMap model) {
+        List<UserNoticeVO> cmntList = userNoticeService.selectCmntList(searchVO);
+        model.addAttribute("cmntList", cmntList);
+        return "user/notice/UserCmntList.lnb";
+    }
+
+    /**
+     * 댓글 상세 조회
+     * @param cmntNo
+     * @param model
+     * @return
+     */
+    @GetMapping(value = "/selectCmntDetail.do")
+    public String selectCmntDetail(@RequestParam("cmntNo") int cmntNo, ModelMap model) {
+        UserNoticeVO cmntVO = userNoticeService.selectCmntDetail(cmntNo);
+        model.addAttribute("cmntVO", cmntVO);
+        return "user/notice/UserCmntDetail.lnb";
+    }
+
+    /**
+     * 댓글 삽입
+     * @param cmntVO
+     * @param model
+     * @return
+     */
+    @PostMapping(value = "/insertUserComment.do")
+    @ResponseBody
+    public String insertUserComment(UserNoticeVO cmntVO, ModelMap model) {
+        userNoticeService.userinsertComment(cmntVO);
+        return "redirect:/user/noti/selectCmntList.do";
+    }
+
+    /**
+     * 댓글 수정
+     * @param cmntVO
+     * @param model
+     * @return
+     */
+    @PostMapping(value = "/updateUserComment.do")
+    public String updateUserComment(UserNoticeVO cmntVO, ModelMap model) {
+        userNoticeService.userupdateComment(cmntVO);
+        return "redirect:/user/noti/selectCmntList.do";
+    }
+
+    /**
+     * 댓글 삭제
+     * @param cmntNo
+     * @param model
+     * @return
+     */
+    @GetMapping(value = "/deleteUserComment.do")
+    public String deleteUserComment(@RequestParam("cmntNo") int cmntNo, ModelMap model) {
+        userNoticeService.userdeleteComment(cmntNo);
+        return "redirect:/user/noti/selectCmntList.do";
+    }
+
 }
