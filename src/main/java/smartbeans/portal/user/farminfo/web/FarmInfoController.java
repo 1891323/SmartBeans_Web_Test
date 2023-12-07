@@ -504,62 +504,34 @@ public class FarmInfoController {
         return price;
     }
 
-    public void addAttributePriceInfo(ModelMap model, JSONArray jsonArr, String category) {
+    @RequestMapping("/GrainPriceStatus.do")
+    public String GrainPriceStatus(ModelMap model) throws IOException, ParseException {
+        JSONArray priceArr = getPriceStatus(AT_API_KEY, "3863", "json");
+
         List<PriceStatusVO> itemList = new ArrayList<>();
-        for (Object o : jsonArr) {
+        for (Object o : priceArr) {
             JSONObject priceJson = (JSONObject) o;
 
             PriceStatusVO item = new PriceStatusVO();
             item.setProductName(String.valueOf(priceJson.get("productName")));
             item.setUnit(String.valueOf(priceJson.get("unit")));
-            item.setDpr1(String.valueOf(priceJson.get("dpr1")));
-            item.setDpr2(String.valueOf(priceJson.get("dpr2")));
-            item.setDpr3(String.valueOf(priceJson.get("dpr3")));
-            item.setDpr4(String.valueOf(priceJson.get("dpr4")));
+            if (Objects.equals(String.valueOf(priceJson.get("dpr1")), "[]")) {
+                item.setDpr1("-");
+            } else item.setDpr1(priceJson.get("dpr1") + "원");
+            if (Objects.equals(String.valueOf(priceJson.get("dpr2")), "[]")) {
+                item.setDpr2("-");
+            } else item.setDpr2(priceJson.get("dpr2") + "원");
+            if (Objects.equals(String.valueOf(priceJson.get("dpr3")), "[]")) {
+                item.setDpr3("-");
+            } else item.setDpr3(priceJson.get("dpr3") + "원");
+            if (Objects.equals(String.valueOf(priceJson.get("dpr4")), "[]")) {
+                item.setDpr4("-");
+            } else item.setDpr4(priceJson.get("dpr4") + "원");
 
             itemList.add(item);
         }
 
         model.addAttribute("itemList", itemList);
-    }
-    @RequestMapping("/GrainPriceStatus.do")
-    public String GrainPriceStatus(ModelMap model) throws IOException, ParseException {
-        JSONArray priceArr = getPriceStatus(AT_API_KEY, "3863", "json");
-
-        addAttributePriceInfo(model, priceArr, "productName");
-        addAttributePriceInfo(model, priceArr, "unit");
-        addAttributePriceInfo(model, priceArr, "dpr1");
-        addAttributePriceInfo(model, priceArr, "dpr2");
-        addAttributePriceInfo(model, priceArr, "dpr3");
-        addAttributePriceInfo(model, priceArr, "dpr4");
-
-        /*
-        List<Map<String, String>> objList = new ArrayList<>();
-        for (Object o : jsonArr) {
-            Map<String, String> objMap = new HashMap<>();
-
-            JSONObject priceJson = (JSONObject) o;
-            String value = String.valueOf(priceJson.get(category));
-
-            objMap.put(category, value);
-
-            objList.add(objMap);
-        }
-
-        model.addAttribute("itemList", objList);
-
-        List<Map<String, String>> nameList = new ArrayList<>();
-        for (Object o : priceArr) {
-            Map<String, String> nameMap = new HashMap<>();
-
-            JSONObject priceJson = (JSONObject) o;
-            String productName = (String) priceJson.get("productName");
-
-            nameMap.put("productName", productName);
-
-            nameList.add(nameMap);
-        }
-        model.addAttribute("nameList", nameList);*/
 
         return "/user/farminfo/GrainPriceStatus.lnb";
     }

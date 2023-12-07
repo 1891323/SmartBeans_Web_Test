@@ -31,7 +31,7 @@
 <div class="title">
     <h2>곡물별 가격 현황</h2>
 </div>
-<div>
+<div class="table_area">
     <table class="price_status">
         <thead>
             <tr>
