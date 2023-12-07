@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
@@ -14,6 +14,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
     <title>스마트빈스</title>
 </head>
 <body>
@@ -93,18 +94,83 @@
                         <!-- 공지사항 -->
                         <div class="notification">
                             <h2>공지사항</h2>
-<%--                            <p>표준프레임워크 경량환경 포털 홈페이지<br>
-                                이용에 대해서 사용자 여러분들께<br>
-                                설문조사를 진행합니다.</p>--%>
                            <%-- <a href="<c:url value=''/>">참여하기</a>--%>
-                            <a href="#LINK" class="more">더보기</a>
+                            <a href="/user/noti/Announcement.do" class="more">더보기</a>
                         </div>
 
                         <%--곡물별 가격 현황--%>
                         <div class="price">
                             <h2>곡물별 가격 현황</h2>
-                            <a href="#LINK" class="more">더보기</a>
+                            <a href="/user/farminfo/GrainPriceStatus.do" class="more">더보기</a>
+                            <canvas id="myChart" width="400" height="250"></canvas>
                         </div>
+                        <script type="text/javascript">
+                            const context = document.getElementById('myChart').getContext('2d');
+                            const myChart = new Chart(context, {
+                                type: 'bar',
+                                data: {
+                                    labels: ['6일전', '5일전', '4일전', '3일전', '2일전', '1일전', '오늘'],
+                                    datasets: [
+                                        {
+                                            type: 'line',
+                                            label: '평균가격',
+                                            borderColor: 'rgb(255, 99, 132)',
+                                            borderWidth: 2,
+                                            fill: false,
+                                            data: ['140', '500', '1200', '390', '800', '130', '250'],
+                                            yAxisID: 'y',
+                                        },
+                                        {
+                                            type: 'bar',
+                                            label: '거래물량',
+                                            backgroundColor: 'rgb(75, 192, 192)',
+                                            data: ['100', '150', '200', '110', '80', '50', '180'],
+                                            borderColor: 'white',
+                                            borderWidth: 2,
+                                            yAxisID: 'y1',
+                                        }
+                                    ]
+                                },
+                                options: {
+                                    interaction: {
+                                        mode: 'index',
+                                        intersect: false,
+                                    },
+                                    scales: {
+                                        y: {
+                                            type: 'linear',
+                                            display: true,
+                                            position: 'left',
+                                        },
+                                        y1: {
+                                            type: 'linear',
+                                            display: true,
+                                            position: 'right',
+                                            grid: {
+                                                drawOnChartArea: false,
+                                            },
+                                        },
+                                    },
+                                    plugins: {
+                                        tooltip: {
+                                            padding: 10,
+                                            bodySpacing: 5,
+                                            usePointStyle: true,
+                                            filter: (item) => item.parsed.y !== null,
+                                            callbacks: {
+                                                label: (context) => {
+                                                    let label = context.dataset.label;
+
+                                                    return context.parsed.y !== null &&
+                                                    label === '평균가격' ? label + ': ' + context.parsed.y + '원/kg'
+                                                        : label + ': ' + context.parsed.y + '톤'
+                                                },
+                                            },
+                                        }
+                                    },
+                                }
+                            });
+                        </script>
                     </div>
                 </div>
             </div>
@@ -118,24 +184,21 @@
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active" data-bs-interval="2000">
-                    <img src="/images/main/slide01.jpg" class="d-block w-100 img-fluid" alt="...">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>First slide label</h5>
-                        <p>Some representative placeholder content for the first slide.</p>
+                    <div class="position-relative">
+                        <img src="${pageContext.request.contextPath}/images/main/slide01.jpg" class="d-block w-100 img-fluid" alt="...">
+                        <p class="position-absolute top-50 start-50 translate-middle">자동화 장비·기계 지원</p>
                     </div>
                 </div>
                 <div class="carousel-item" data-bs-interval="2000">
-                    <img src="/images/main/slide02.jpg" class="d-block w-100 img-fluid" alt="...">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Second slide label</h5>
-                        <p>Some representative placeholder content for the second slide.</p>
+                    <div class="position-relative">
+                        <img src="${pageContext.request.contextPath}/images/main/slide02.jpg" class="d-block w-100 img-fluid" alt="...">
+                        <p class="position-absolute top-50 start-50 translate-middle">영농지원 기반 시설</p>
                     </div>
                 </div>
                 <div class="carousel-item" data-bs-interval="2000">
-                    <img src="/images/main/slide03.jpg" class="d-block w-100 img-fluid" alt="...">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Third slide label</h5>
-                        <p>Some representative placeholder content for the third slide.</p>
+                    <div class="position-relative">
+                        <img src="${pageContext.request.contextPath}/images/main/slide03.jpg" class="d-block w-100 img-fluid" alt="...">
+                        <p class="position-absolute top-50 start-50 translate-middle">스마트 SPC/APC</p>
                     </div>
                 </div>
             </div>

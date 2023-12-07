@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import smartbeans.portal.user.farminfo.service.PriceStatusVO;
 import smartbeans.portal.user.farminfo.service.WeatherVO;
 
 import java.io.BufferedReader;
@@ -38,6 +39,9 @@ public class FarmInfoController {
 
     @Value("${WEATHER_API_KEY}")
     private String WEATHER_API_KEY;
+
+    @Value("${AT_API_KEY}")
+    private String AT_API_KEY;
 
     private static final String F_DATE = "MM.d";
     private String pageNoFormat() {
@@ -462,5 +466,73 @@ public class FarmInfoController {
         addWeatherAttribute(model);
 
         return "/user/farminfo/WeatherInformation.lnb";
+    }
+    public JSONArray getPriceStatus(String API_KEY, String certId, String returnType) throws IOException, ParseException {
+        // 요청을 보낼 URL
+        String apiUrl = "http://www.kamis.co.kr/service/price/xml.do?action=dailySalesList";
+
+        // URL 생성
+        StringBuilder urlBuilder = new StringBuilder(apiUrl);
+        urlBuilder.append("&" + URLEncoder.encode("p_cert_key", "UTF-8") + "=" + API_KEY);
+        urlBuilder.append("&" + URLEncoder.encode("p_cert_id", "UTF-8") + "=" + URLEncoder.encode(certId, "UTF-8"));
+        urlBuilder.append("&" + URLEncoder.encode("p_returntype", "UTF-8") + "=" + URLEncoder.encode(returnType, "UTF-8"));
+
+        // URL 연결 설정
+        URL url = new URL(urlBuilder.toString());
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+
+        // 응답 코드 확인
+        int responseCode = conn.getResponseCode();
+        System.out.println("Response Code: " + responseCode);
+
+        // 응답 내용 읽기
+        BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        String inputLine;
+        StringBuilder response = new StringBuilder();
+
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+        }
+        in.close();
+
+        // 응답 내용
+        JSONParser parser = new JSONParser();
+        JSONObject obj = (JSONObject) parser.parse(response.toString());
+        JSONArray price = (JSONArray) obj.get("price");
+
+        return price;
+    }
+
+    @RequestMapping("/GrainPriceStatus.do")
+    public String GrainPriceStatus(ModelMap model) throws IOException, ParseException {
+        JSONArray priceArr = getPriceStatus(AT_API_KEY, "3863", "json");
+
+        List<PriceStatusVO> itemList = new ArrayList<>();
+        for (Object o : priceArr) {
+            JSONObject priceJson = (JSONObject) o;
+
+            PriceStatusVO item = new PriceStatusVO();
+            item.setProductName(String.valueOf(priceJson.get("productName")));
+            item.setUnit(String.valueOf(priceJson.get("unit")));
+            if (Objects.equals(String.valueOf(priceJson.get("dpr1")), "[]")) {
+                item.setDpr1("-");
+            } else item.setDpr1(priceJson.get("dpr1") + "원");
+            if (Objects.equals(String.valueOf(priceJson.get("dpr2")), "[]")) {
+                item.setDpr2("-");
+            } else item.setDpr2(priceJson.get("dpr2") + "원");
+            if (Objects.equals(String.valueOf(priceJson.get("dpr3")), "[]")) {
+                item.setDpr3("-");
+            } else item.setDpr3(priceJson.get("dpr3") + "원");
+            if (Objects.equals(String.valueOf(priceJson.get("dpr4")), "[]")) {
+                item.setDpr4("-");
+            } else item.setDpr4(priceJson.get("dpr4") + "원");
+
+            itemList.add(item);
+        }
+
+        model.addAttribute("itemList", itemList);
+
+        return "/user/farminfo/GrainPriceStatus.lnb";
     }
 }
