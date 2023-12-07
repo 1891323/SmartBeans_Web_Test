@@ -485,7 +485,7 @@
 
             <div class="minibox-sec-content">
                 <div class="image-box">
-                    <img src="<c:url value="/images/facility/plan-detail-img02.svg"/>"  style= height:14.9% alt="썸네일">
+                    <img src="<c:url value="/images/facility/plan-detail-img02.svg"/>"  style= height:15.1% alt="썸네일">
                 </div>
             </div>
         </div>
