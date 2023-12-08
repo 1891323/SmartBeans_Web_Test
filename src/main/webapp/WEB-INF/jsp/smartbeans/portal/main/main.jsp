@@ -38,7 +38,7 @@
                                 </dl>
                             </c:forEach>--%>
 
-                            <a href="<%--<c:url value='/uss/olh/faq/FaqListInqire.do' />--%>" class="more">더보기</a>
+                            <a href="/user/farminfo/WeeklyFarming.do" class="more">더보기</a>
                         </div>
 
                         <!-- 병해충 발생정보 -->
@@ -103,6 +103,27 @@
                             <h2>곡물별 가격 현황</h2>
                             <a href="/user/farminfo/GrainPriceStatus.do" class="more">더보기</a>
                             <canvas id="myChart" width="400" height="250"></canvas>
+                            <%--<div id="carouselExample" class="carousel carousel-dark slide">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <canvas id="myChart" width="200" height="250"></canvas>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="..." class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="..." class="d-block w-100" alt="...">
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>--%>
                         </div>
                         <script type="text/javascript">
                             const context = document.getElementById('myChart').getContext('2d');

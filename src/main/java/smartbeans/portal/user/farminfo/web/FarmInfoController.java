@@ -535,4 +535,9 @@ public class FarmInfoController {
 
         return "/user/farminfo/GrainPriceStatus.lnb";
     }
+
+    @RequestMapping("/WeeklyFarming.do")
+    public String WeeklyFarming() {
+        return "/user/farminfo/WeeklyFarming.lnb";
+    }
 }
