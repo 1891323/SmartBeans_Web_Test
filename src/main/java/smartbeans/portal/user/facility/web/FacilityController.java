@@ -15,8 +15,26 @@ public class FacilityController {
 
     @RequestMapping(value="/ComprehensivePlan.do")
     public String comprehensiveView(){
+
         return "user/facility/ComprehensivePlan.lnb";
     }
 
+    @RequestMapping(value="/MachineSupport.do")
+    public String machinesupportView(){
+
+        return "user/facility/MachineSupport.lnb";
+    }
+
+    @RequestMapping(value="/FarmingInfrastructure.do")
+    public String farminfratView(){
+
+        return "user/facility/FarmingInfrastructure.lnb";
+    }
+
+    @RequestMapping(value="/SmartSPC.do")
+    public String smartspcView(){
+
+        return "user/facility/SmartSPC.lnb";
+    }
 
 }
