@@ -72,6 +72,22 @@ public class NoticeBoardVO extends ComDefaultVO {
     //댓글 번호
     private int cmntNo;
 
+    //댓글 최초 등록 일시
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date cmntFirstRegistDtm;
+
+    //부모 댓글 번호
+    private int cmntParentNo;
+
+    //댓글 삭제 여부
+    private String cmntSt;
+
+    //댓글 계층, 최상위일 경우 0
+    private int cmntDepth;
+
+    //전체 댓글 순서
+    private int cmntOrder;
+
     public Long getRowNum() {
         return rowNum;
     }
@@ -197,6 +213,39 @@ public class NoticeBoardVO extends ComDefaultVO {
     }
 
     public void setAtchFileId(String atchFileId) {  this.atchFileId = atchFileId;    }
+
+
+    public int getParentId() { return parentId; }
+
+    public void setParentId(int parentId) { this.parentId = parentId; }
+
+    public int getCmntNo() { return cmntNo; }
+
+    public void setCmntNo(int cmntNo) { this.cmntNo = cmntNo; }
+
+    public String getCmntCn() { return cmntCn; }
+
+    public void setCmntCn(String cmntCn) { this.cmntCn = cmntCn; }
+
+    public Date getCmntFirstRegistDtm() { return cmntFirstRegistDtm; }
+
+    public void setCmntFirstRegistDtm(Date cmntFirstRegistDtm) { this.cmntFirstRegistDtm = cmntFirstRegistDtm; }
+
+    public int getCmntParentNo() { return cmntParentNo; }
+
+    public void setCmntParentNo(int cmntParentNo) { this.cmntParentNo = cmntParentNo; }
+
+    public String getCmntSt() { return cmntSt; }
+
+    public void setCmntSt(String cmntSt) { this.cmntSt = cmntSt; }
+
+    public int getCmntDepth() { return cmntDepth; }
+
+    public void setCmntDepth(int cmntDepth) { this.cmntDepth = cmntDepth; }
+
+    public int getCmntOrder() { return cmntOrder; }
+
+    public void setCmntOrder(int cmntOrder) { this.cmntOrder = cmntOrder; }
 
     /**
      * 첨부파일ID 복호화 적용

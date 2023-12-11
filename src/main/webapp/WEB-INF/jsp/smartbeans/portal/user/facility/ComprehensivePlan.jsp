@@ -247,6 +247,300 @@
             <div class="name-name"><p>빅데이터 기반의</p> 노지스마트 농업</div>
         </div>
 
+        <div class="page-content-minibox2">
+
+            <div class="minibox-title-box">
+                <div class="title-box-num">01</div>
+                <div class="title-box-tit"> 데이터 수집</div>
+                <div class="title-box-cat">영농현장</div>
+            </div>
+
+            <div class="minibox-first-content">
+                <div class="first-content-minibox">
+                    <div class="image-box">
+                        <img src="<c:url value="/images/facility/free-icon-gps-navigation-5894199.png"/>"  style= height:30% alt="썸네일">
+                    </div>
+
+                    <p class="box-text">발생</p>
+                </div>
+
+                <div class="first-content-minibox">
+                    <div class="image-box">
+                        <img src="<c:url value="/images/facility/free-icon-digital-6283155.png"/>"  style= height:30% alt="썸네일">
+                    </div>
+
+                    <p class="box-text">수집</p>
+                </div>
+
+                <div class="first-content-minibox">
+                    <div class="image-box">
+                        <img src="<c:url value="/images/facility/free-icon-wifi-area-108275.png"/>"  style= height:30% alt="썸네일">
+                    </div>
+
+                    <p class="box-text">전송</p>
+                </div>
+            </div>
+
+            <div class="content-line"></div>
+
+            <div class="minibox-sec-content">
+                <div class="image-box">
+                    <img src="<c:url value="/images/facility/plan-detail-img01.svg"/>" style="height:10%" alt="썸네일">
+
+                    <p class="box-text">데이터 수집 - 7항목, 총 105종</p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="page-content-minibox2">
+
+            <div class="minibox-title-box">
+                <div class="title-box-num">02</div>
+                <div class="title-box-tit"> 데이터 처리 및 저장</div>
+                <div class="title-box-cat">플랫폼</div>
+            </div>
+
+            <div class="minibox-first-content">
+                <div class="first-content-minibox">
+                    <div class="image-box">
+                        <img src="<c:url value="/images/facility/link.png"/>"  style= height:30% alt="썸네일">
+                    </div>
+
+                    <p class="box-text">분류</p>
+                </div>
+
+                <div class="first-content-minibox">
+                    <div class="image-box">
+                        <img src="<c:url value="/images/facility/free-icon-trash-7356775.png"/>"  style= height:30% alt="썸네일">
+                    </div>
+
+                    <p class="box-text">전처리</p>
+                </div>
+
+                <div class="first-content-minibox">
+                    <div class="image-box">
+                        <img src="<c:url value="/images/facility/free-icon-recycling-4459945.png"/>"  style= height:30% alt="썸네일">
+                    </div>
+
+                    <p class="box-text">가공</p>
+                </div>
+
+                <div class="first-content-minibox">
+                    <div class="image-box">
+                        <img src="<c:url value="/images/facility/free-icon-save-file-2810399.png"/>" style=height:30%
+                             alt="썸네일">
+                    </div>
+
+                    <p class="box-text">저장</p>
+                </div>
+            </div>
+
+            <div class="content-line"></div>
+
+            <div class="minibox-sec-content">
+                <div class="sec-content-box" style="margin-top:10%; margin-bottom:7%;">
+                    <div style="float:left; font-weight:bold;">분류</div>
+                    <div style="margin-left:5%">정형/반정형/비정형 유형 구분</div>
+                </div>
+            </div>
+
+            <div class="minibox-sec-content">
+                <div class="sec-content-box" style="margin-bottom:7%">
+                    <div style="float:left; font-weight:bold;">전처리</div>
+                    <div style="margin-left:5%">중복값/파생변수/결측처리</div>
+                </div>
+            </div>
+
+            <div class="minibox-sec-content">
+                <div class="sec-content-box" style="margin-bottom:7%">
+                    <div style="float:left; font-weight:bold;">가공</div>
+                    <div style="margin-left:5%">정규화/표준화/비식별조치</div>
+                </div>
+            </div>
+
+            <div class="minibox-sec-content">
+                <div class="sec-content-box" style="margin-bottom:9%">
+                    <div style="float:left; font-weight:bold;">저장</div>
+                    <div style="margin-left:5%">주제별 데이터웨어하우스 저장</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-content-minibox2">
+
+            <div class="minibox-title-box">
+                <div class="title-box-num">03</div>
+                <div class="title-box-tit"> 데이터 분석</div>
+                <div class="title-box-cat">플랫폼</div>
+            </div>
+
+            <div class="minibox-first-content">
+                <div class="first-content-minibox">
+                    <div class="image-box">
+                        <img src="<c:url value="/images/facility/free-icon-profit-growth-4672328.png"/>"  style= height:30% alt="썸네일">
+                    </div>
+
+                    <p class="box-text">추이</p>
+                </div>
+
+                <div class="first-content-minibox">
+                    <div class="image-box">
+                        <img src="<c:url value="/images/facility/free-icon-analytics-11629295.png"/>"  style= height:30% alt="썸네일">
+                    </div>
+
+                    <p class="box-text">통계</p>
+                </div>
+
+                <div class="first-content-minibox">
+                    <div class="image-box">
+                        <img src="<c:url value="/images/facility/free-icon-map-1534777.png"/>"  style= height:30% alt="썸네일">
+                    </div>
+
+                    <p class="box-text">지도</p>
+                </div>
+
+                <div class="first-content-minibox">
+                    <div class="image-box">
+                        <img src="<c:url value="/images/facility/free-icon-video-call-4012303.png"/>"  style= height:30% alt="썸네일">
+                    </div>
+
+                    <p class="box-text">영상</p>
+                </div>
+            </div>
+
+            <div class="content-line"></div>
+
+            <div class="minibox-sec-content">
+                <div class="sec-content-box" style="margin-top:5%;">
+                    <div style="float:left">
+                        <img src="<c:url value="/images/facility/dig.png"/>"  style= "height:40px; float:left;" alt="썸네일">
+                    </div>
+
+                    <div style="float:left; width:100%; line-height:1.3rem;">
+                        <p style="font-weight:bold;">재배환경 분석</p>
+                        <p style="margin-left:5%">기상,토양 현황벽 작황 성과 연관성</p>
+                    </div>
+                </div>
+
+                <div class="sec-content-box" style="margin-top:5%;">
+                    <div style="float:left">
+                        <img src="<c:url value="/images/facility/lettuce.png"/>"  style= "height:40px; float:left;" alt="썸네일">
+                    </div>
+
+                    <div style="float:left; width:100%; line-height:1.3rem;">
+                        <p style="font-weight:bold;">식생지수 판단</p>
+                        <p style="margin-left:5%">기상,토양 현황벽 작황 성과 연관성</p>
+                    </div>
+                </div>
+
+                <div class="sec-content-box" style="margin-top:5%;">
+                    <div style="float:left">
+                        <img src="<c:url value="/images/facility/film.png"/>"  style= "height:40px; float:left;" alt="썸네일">
+                    </div>
+
+                    <div style="float:left; width:100%; line-height:1.3rem;">
+                        <p style="font-weight:bold;">수집영상 분석</p>
+                        <p style="margin-left:5%">CCTV, 드론 영상 (+이미지) 참고 분석</p>
+                    </div>
+                </div>
+
+                <div class="sec-content-box" style="margin-top:5%;">
+                    <div style="float:left">
+                        <img src="<c:url value="/images/facility/bugs.png"/>"  style= "height:40px; float:left;" alt="썸네일">
+                    </div>
+
+                    <div style="float:left; width:100%; line-height:1.3rem;">
+                        <p style="font-weight:bold;">위험요소 분류</p>
+                        <p style="margin-left:5%">유해조수, 병충해 및 자연재해 영향도</p>
+                    </div>
+                </div>
+
+                <div class="sec-content-box" style="margin-top:5%; margin-bottom:5%;">
+                    <div style="float:left">
+                        <img src="<c:url value="/images/facility/idea.png"/>"  style= "height:40px; float:left;" alt="썸네일">
+                    </div>
+
+                    <div style="float:left; width:100%; line-height:1.3rem;">
+                        <p style="font-weight:bold;">작황성과 평가</p>
+                        <p style="margin-left:5%">수확시기, 품질 및 시장가격 상관관계</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-content-minibox2">
+
+            <div class="minibox-title-box">
+                <div class="title-box-num">04</div>
+                <div class="title-box-tit"> 기초 데이터 활용</div>
+                <div class="title-box-cat">농업인</div>
+            </div>
+
+            <div class="minibox-first-content">
+                <div class="first-content-minibox">
+                    <div class="image-box">
+                        <img src="<c:url value="/images/facility/free-icon-notification-2326010.png"/>"  style= height:30% alt="썸네일">
+                    </div>
+
+                    <p class="box-text">알람</p>
+                </div>
+
+                <div class="first-content-minibox">
+                    <div class="image-box">
+                        <img src="<c:url value="/images/facility/free-icon-search-file-2889682.png"/>"  style= height:30% alt="썸네일">
+                    </div>
+
+                    <p class="box-text">조회</p>
+                </div>
+
+                <div class="first-content-minibox">
+                    <div class="image-box">
+                        <img src="<c:url value="/images/facility/free-icon-settings-126472.png"/>"  style= height:30% alt="썸네일">
+                    </div>
+
+                    <p class="box-text">설정</p>
+                </div>
+            </div>
+
+            <div class="content-line"></div>
+
+            <div class="minibox-sec-content">
+                <div class="image-box">
+                    <img src="<c:url value="/images/facility/plan-detail-img02.svg"/>"  style= height:16.1% alt="썸네일">
+                </div>
+            </div>
+        </div>
+
+        <div class="page-content-minibox2">
+
+            <div class="minibox-title-box">
+                <div class="title-box-num">05</div>
+                <div class="title-box-tit"> 응용 데이터 활용</div>
+                <div class="title-box-cat">농업인</div>
+            </div>
+
+            <div class="minibox-first-content">
+                <div class="first-content-minibox" style="margin:auto; padding-bottom:10%;">
+                    <div class="image-box">
+                        <img src="<c:url value="/images/facility/free-icon-info-5393011.png"/>"  style= height:30% alt="썸네일">
+                    </div>
+
+                    <p class="box-text">의사결정</p>
+                </div>
+            </div>
+
+            <div class="content-line"></div>
+
+            <div class="minibox-sec-content">
+                <div class="image-box">
+                    <img src="<c:url value="/images/facility/plan-detail-img03.svg"/>"  style= height:10% alt="썸네일">
+                </div>
+            </div>
+        </div>
+
+
+
     </div>
 
 </div>

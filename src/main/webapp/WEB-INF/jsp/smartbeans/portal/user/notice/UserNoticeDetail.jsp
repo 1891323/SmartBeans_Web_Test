@@ -129,7 +129,62 @@
                                 </tr>
                             </c:forEach>
                         </c:if>
-                        <!--댓글 리스트 출력-->
+
+                        <!-- Q&A 댓글 리스트 출력 -->
+                        <c:if test="${boardVO.noticeBoardSubType == 4}">
+                            <c:if test="${not empty cmntList}">
+                                <h3>댓글 목록</h3>
+                                <table class="comment">
+                                    <thead>
+                                    <tr>
+                                        <th>작성자</th>
+                                        <th>내용</th>
+                                        <th>작성일</th>
+                                        <!-- 필요에 따라 수정, 삭제 버튼 등을 추가할 수 있습니다. -->
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <c:forEach items="${cmntList}" var="cmnt">
+                                        <tr>
+                                            <td>${cmnt.noticeWrtr}</td>
+                                            <td>${cmnt.cmntCn}</td>
+                                            <td>${cmnt.cmntFirstRegistDtm}</td>
+                                            <!-- 필요에 따라 수정, 삭제 버튼 등을 추가할 수 있습니다. -->
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                            </c:if>
+
+                            <!-- 댓글 입력 폼 -->
+                            <h3>댓글 작성</h3>
+                            <form action="${contextPath}/user/noti/insertUserComment.do" method="post">
+                                <input type="hidden" name="noticeBoardNo" value="${boardVO.noticeBoardNo}" />
+                                <input type="hidden" name="cmntParentNo" value="0" />
+                                <textarea name="cmntCn" rows="4" cols="50" placeholder="댓글을 입력하세요"></textarea>
+                                <br />
+                                <button type="submit">댓글 작성</button>
+                            </form>
+                        </c:if>
+
+                        <!-- 댓글 상세 조회 -->
+                        <c:if test="${boardVO.noticeBoardNo == parentId  and not empty cmntVO}">
+                            <h3>댓글 상세 보기</h3>
+                            <table class="comment">
+                                <tr>
+                                    <th>작성자</th>
+                                    <td>${cmntVO.mbrId}</td>
+                                </tr>
+                                <tr>
+                                    <th>내용</th>
+                                    <td>${cmntVO.cmntCn}</td>
+                                </tr>
+                                <tr>
+                                    <th>작성일</th>
+                                    <td>${cmntVO.cmntFirstRegistDtm}</td>
+                                </tr>
+                            </table>
+                        </c:if>
 
                         <c:if test="${boardVO.noticeBoardSubType == 4}">
                         </c:if>
