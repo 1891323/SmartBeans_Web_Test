@@ -44,9 +44,26 @@
         <result property="parentId" column="patent_id"/>
     </resultMap>
 
+    <resultMap id="UserCmntList" type="smartbeans.portal.user.notice.service.UserNoticeVO">
+        <result property="cmntNo" column="cmnt_no"/>
+        <result property="cmntCn" column="cmnt_cn"/>
+        <result property="cmntFirstRegistDtm" column="cmnt_first_regist_dtm"/>
+        <result property="cmntParentNo" column="cmnt_parent_no"/>
+        <result property="mbrId" column="mbr_id"/>
+        <result property="noticeBoardNo" column="notice_board_no"/>
+        <result property="cmntSt" column="cmnt_st"/>
+        <result property="cmntDepth" column="cmnt_depth"/>
+        <result property="cmntOrder" column="cmnt_order"/>
+    </resultMap>
+
     <select id="selectAll" resultMap="UserNoticeList">
         SELECT *
         FROM tb_notice_board
+    </select>
+
+    <select id="selectAllcmnt" resultMap="UserCmntList">
+        SELECT *
+        FROM tb_cmnt;
     </select>
 
     <!-- 목록 출력 -->
@@ -136,6 +153,60 @@
         WHERE
             notice_board_no = #{noticeBoardNo}
     </select>
+
+    <select id="selectCmntList" parameterType="int" resultMap="UserCmntList">
+        SELECT *
+        FROM tb_cmnt
+        WHERE notice_board_no = #{noticeBoardNo};
+    </select>
+
+    <insert id="userinsertBoard" parameterType="NoticeBoardVO">
+        INSERT INTO tb_notice_board (
+            notice_board_sub_type,
+            notice_last_updt_dtm,
+            notice_first_regist_dtm,
+            notice_contents,
+            notice_wrtr,
+            notice_password,
+            mbr_id,
+            notice_cat,
+            notice_title,
+            atch_file_id
+        ) VALUES (
+                     #{noticeBoardSubType},
+                     TO_TIMESTAMP(#{noticeLastUpdtDtm}, 'YYYY-MM-DD HH24:MI:SS'),
+                     TO_TIMESTAMP(#{noticeFirstRegistDtm}, 'YYYY-MM-DD HH24:MI:SS'),
+                     #{noticeContents},
+                     #{noticeWrtr},
+                     #{noticePassword},
+                     #{mbrId},
+                     #{noticeCat},
+                     #{noticeTitle},
+                     #{atchFileId}
+                 )
+    </insert>
+
+    <insert id="userinsertComment" parameterType="NoticeBoardVO">
+        INSERT INTO tb_cmnt (
+            cmnt_cn,
+            cmnt_first_regist_dtm,
+            cmnt_parent_no,
+            mbr_id,
+            notice_board_no,
+            cmnt_st,
+            cmnt_depth,
+            cmnt_order
+        ) VALUES (
+                  #{cmntCn},
+                  #{cmntFirstRegistDtm},
+                  #{cmntParentNo},
+                  #{mbrId},
+                  #{noticeBoardNo},
+                  #{cmntSt},
+                  #{cmntDepth},
+                  #{cmntOrder}
+                )
+    </insert>
 
 
 </mapper>

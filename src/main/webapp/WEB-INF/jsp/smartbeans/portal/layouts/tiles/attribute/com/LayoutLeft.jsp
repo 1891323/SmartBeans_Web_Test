@@ -4,6 +4,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <!-- 왼쪽 메뉴 html -->
+<script>
+
+</script>
+
 <div class="wrapper">
     <div class="lnb">
         <!-- 왼쪽 메뉴 구조 (기존에 있던 내용) -->
