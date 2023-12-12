@@ -45,9 +45,8 @@
                         <div class="pest_info">
                             <div class="head">
                                 <h2>병해충 발생정보</h2>
-                                <%--<p>표준프레임워크 경량화 서비스에 대한 자주하는 질문의 답변들을 볼 수 있습니다.</p>--%>
                             </div>
-                            <a href="<%--<c:url value='/uss/olh/faq/FaqListInqire.do' />--%>" class="more">더보기</a>
+                            <a href="/user/farminfo/PestOccuranceInformation.do" class="more">더보기</a>
                         </div>
 
                         <!-- 노지 콩 재배 매뉴얼 -->

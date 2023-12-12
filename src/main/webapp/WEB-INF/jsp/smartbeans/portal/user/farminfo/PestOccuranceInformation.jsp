@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: 네이버시스템
-  Date: 2023-12-08
-  Time: 오후 2:51
+  Date: 2023-12-12
+  Time: 오후 5:06
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="<c:url value='/'/>css/layout.css">
     <link rel="stylesheet" href="<c:url value='/'/>css/component.css">
     <link rel="stylesheet" href="<c:url value='/'/>css/page.css">
-    <title>주간농사정보</title>
+    <title>병해충발생정보</title>
 
     <!-- 공통 CSS, JS 선언 -->
     <link href="http://api.nongsaro.go.kr/css/api.css" rel="stylesheet" type="text/css">
@@ -41,9 +41,9 @@
     %>
     <script type="text/javascript">
         nongsaroOpenApiRequest.apiKey = "<%= apiKey %>";
-        nongsaroOpenApiRequest.serviceName = "weekFarmInfo";
-        nongsaroOpenApiRequest.operationName = "weekFarmInfoList";
-        nongsaroOpenApiRequest.htmlArea = "nongsaroApiLoadingArea";
+        nongsaroOpenApiRequest.serviceName = "dbyhsCccrrncInfo";
+        nongsaroOpenApiRequest.operationName = "dbyhsCccrrncInfoYear";
+        nongsaroOpenApiRequest.htmlArea="nongsaroApiLoadingArea";
         nongsaroOpenApiRequest.callback = "http://localhost:9090/user/farminfo/FarmInfoCallback.do";
     </script>
 </head>
@@ -54,14 +54,15 @@
                              alt="메인으로"  style="position: relative; top: -5px;">
         </a></li>
         <li><a href="#">농업정보</a></li>
-        <li><a href="#">주간농사정보</a></li>
+        <li><a href="#">병해충발생정보</a></li>
     </ul>
 </div>
 <div class="title">
-    <h2>주간 농사정보</h2>
+    <h2>병해충 발생정보</h2>
 </div>
-<div class="weekfarm_area">
+<div class="pestinfo_area">
     <div id="nongsaroApiLoadingArea"></div>
+    <div id="nongsaroApiLoadingArea1"></div>
 </div>
 </body>
 </html>
