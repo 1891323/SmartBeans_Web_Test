@@ -5,7 +5,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<c:set var="now" value="<%= new java.util.Date() %>"/>
+<c:set var="noticeBoardSubType" value="${noticeBoardSubType}" />
+
 <script>
+
     var contextPath = "${pageContext.request.contextPath}";
 
     function goList() {
@@ -33,9 +37,54 @@
         location.href = redirectUrl;
     }
 
-</script>
+    function insertComment() {
+        //var noticeBoardNo = document.getElementById('noticeBoardNo').value;
+        var noticeBoardNo = "${boardVO.noticeBoardNo}"; // boardVO.noticeBoardNo를 사용
+        var cmntCn = document.getElementById('cmntCn').value;
 
-<c:set var="noticeBoardSubType" value="${noticeBoardSubType}" />
+        // AJAX를 사용하여 댓글 삽입
+        $.ajax({
+            type: 'POST',
+            url: '${contextPath}/user/noti/insertUserComment.do',
+            data: {
+                noticeBoardNo: noticeBoardNo,
+                cmntCn: cmntCn,
+                cmntFirstRegistDtm: '',
+            },
+            success: function (data) {
+                // 댓글 삽입 성공 후 댓글 목록을 갱신
+                alert('댓글 삽입 성공.');
+                refreshCommentList();
+            },
+            error: function () {
+                alert('댓글 삽입에 실패했습니다.');
+            }
+        });
+    }
+
+    function refreshCommentList() {
+        var noticeBoardNo = document.getElementById('noticeBoardNo').value; // 이 부분 삭제
+        <%--var noticeBoardNo = "${boardVO.noticeBoardNo}"; // boardVO.noticeBoardNo를 사용--%>
+
+        // AJAX를 사용하여 업데이트된 댓글 목록을 가져옴
+        $.ajax({
+            type: 'GET',
+            url: '${contextPath}/user/noti/selectCmntList.do',
+            data: {
+                noticeBoardNo: noticeBoardNo
+            },
+            success: function (data) {
+                // id가 "commentList"인 HTML 엘리먼트를 통해 댓글 목록을 업데이트
+                alert('댓글 목록을 가져왔습니다.');
+                $('#commentList').html(data);
+            },
+            error: function () {
+                alert('댓글 목록을 가져오지 못했습니다.');
+            }
+        });
+    }
+
+</script>
 
 <!DOCTYPE html>
 <html lang="eo">
@@ -130,63 +179,38 @@
                             </c:forEach>
                         </c:if>
 
-                        <!-- Q&A 댓글 리스트 출력 -->
-                        <c:if test="${boardVO.noticeBoardSubType == 4}">
-                            <c:if test="${not empty cmntList}">
-                                <h3>댓글 목록</h3>
-                                <table class="comment">
+                        <!-- 댓글 목록 -->
+                        <c:if test="${boardVO.noticeBoardSubType == 1 || boardVO.noticeBoardSubType == 2 || boardVO.noticeBoardSubType == 4 || boardVO.noticeBoardSubType == 5}">
+                                <table class="commentList">
                                     <thead>
                                     <tr>
                                         <th>작성자</th>
                                         <th>내용</th>
                                         <th>작성일</th>
-                                        <!-- 필요에 따라 수정, 삭제 버튼 등을 추가할 수 있습니다. -->
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <c:forEach items="${cmntList}" var="cmnt">
                                         <tr>
-                                            <td>${cmnt.noticeWrtr}</td>
-                                            <td>${cmnt.cmntCn}</td>
-                                            <td>${cmnt.cmntFirstRegistDtm}</td>
-                                            <!-- 필요에 따라 수정, 삭제 버튼 등을 추가할 수 있습니다. -->
+                                            <td><c:out value='${cmnt.MbrId}'/></td>
+                                            <td><c:out value='${cmnt.cmntCn}'/></td>
+                                            <td><fmt:formatDate value="${cmnt.cmntFirstRegistDtm}" pattern="yyyy.MM.dd HH:mm"/></td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
                                 </table>
-                            </c:if>
-
-                            <!-- 댓글 입력 폼 -->
-                            <h3>댓글 작성</h3>
-                            <form action="${contextPath}/user/noti/insertUserComment.do" method="post">
-                                <input type="hidden" name="noticeBoardNo" value="${boardVO.noticeBoardNo}" />
-                                <input type="hidden" name="cmntParentNo" value="0" />
-                                <textarea name="cmntCn" rows="4" cols="50" placeholder="댓글을 입력하세요"></textarea>
-                                <br />
-                                <button type="submit">댓글 작성</button>
-                            </form>
                         </c:if>
 
-                        <!-- 댓글 상세 조회 -->
-                        <c:if test="${boardVO.noticeBoardNo == parentId  and not empty cmntVO}">
-                            <h3>댓글 상세 보기</h3>
-                            <table class="comment">
-                                <tr>
-                                    <th>작성자</th>
-                                    <td>${cmntVO.mbrId}</td>
-                                </tr>
-                                <tr>
-                                    <th>내용</th>
-                                    <td>${cmntVO.cmntCn}</td>
-                                </tr>
-                                <tr>
-                                    <th>작성일</th>
-                                    <td>${cmntVO.cmntFirstRegistDtm}</td>
-                                </tr>
-                            </table>
-                        </c:if>
-
+                        <!-- 댓글 입력 폼 -->
                         <c:if test="${boardVO.noticeBoardSubType == 4}">
+                            <h3>댓글 작성</h3>
+                            <form id="commentForm">
+                                <input type="hidden" id="noticeBoardNo" value="${boardVO.noticeBoardNo}" />
+                                <label>
+                                    <textarea id="cmntCn" rows="4" cols="50" placeholder="댓글을 입력하세요"></textarea>
+                                </label>
+                                <button type="button" onclick="insertComment()">댓글 작성</button>
+                            </form>
                         </c:if>
 
                         </tbody>

@@ -188,6 +188,7 @@
 
     <insert id="userinsertComment" parameterType="NoticeBoardVO">
         INSERT INTO tb_cmnt (
+            cmnt_no,
             cmnt_cn,
             cmnt_first_regist_dtm,
             cmnt_parent_no,
@@ -197,10 +198,11 @@
             cmnt_depth,
             cmnt_order
         ) VALUES (
+                  #{cmntNo},
                   #{cmntCn},
-                  #{cmntFirstRegistDtm},
+                  TO_TIMESTAMP(#{cmntFirstRegistDtm}, 'YYYY-MM-DD HH24:MI:SS'),
                   #{cmntParentNo},
-                  #{mbrId},
+                  CAST(#{mbrId} AS bigint),
                   #{noticeBoardNo},
                   #{cmntSt},
                   #{cmntDepth},

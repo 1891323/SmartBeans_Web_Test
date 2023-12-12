@@ -8,7 +8,6 @@ public interface UserNoticeService {
 
     List<UserNoticeVO> selectUserBoardList(UserNoticeVO searchVO);
 
-    List<UserNoticeVO> selectCmntList(UserNoticeVO searchVO);
 
     int selectUserBoardListTotCnt(UserNoticeVO searchVO);
 
@@ -18,6 +17,7 @@ public interface UserNoticeService {
 
     int userupdateTopFixedStatus(int noticeBoardNo);
 
+    List<UserNoticeVO> selectCmntList(UserNoticeVO cmntVO);
 
     UserNoticeVO selectCmntDetail(int cmntNo);
 

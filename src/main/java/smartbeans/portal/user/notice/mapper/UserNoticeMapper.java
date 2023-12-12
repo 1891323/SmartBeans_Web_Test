@@ -19,13 +19,13 @@ public interface UserNoticeMapper {
 
     int userupdateTopFixedStatus(int noticeBoardNo);
 
-    public List<UserNoticeVO> selectCmntList(UserNoticeVO searchVO);
+    public List<UserNoticeVO> selectCmntList(UserNoticeVO cmntVO);
 
-    UserNoticeVO selectCmntDetail(int cmntNo);
+    UserNoticeVO selectCmntDetail(int cmntVO);
 
-    int userinsertComment(UserNoticeVO searchVO);
+    int userinsertComment(UserNoticeVO cmntVO);
 
-    int userupdateComment(UserNoticeVO searchVO);
+    int userupdateComment(UserNoticeVO cmntVO);
 
     int userdeleteComment(int cmntNo);
 }

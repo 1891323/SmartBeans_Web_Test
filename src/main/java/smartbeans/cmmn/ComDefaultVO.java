@@ -55,9 +55,10 @@ public class ComDefaultVO implements Serializable {
     private String searchKeywordFrom = "";    
 
 	/** 검색KeywordTo */
-    private String searchKeywordTo = "";  
-    
-	public int getFirstIndex() {
+    private String searchKeywordTo = "";
+    private int noticeBoardSubType;
+
+    public int getFirstIndex() {
 		return firstIndex;
 	}
 
@@ -165,4 +166,12 @@ public class ComDefaultVO implements Serializable {
 	public void setSearchKeywordTo(String searchKeywordTo) {
 		this.searchKeywordTo = searchKeywordTo;
 	}
+
+    public int getNoticeBoardSubType() {
+        return noticeBoardSubType;
+    }
+
+    public void setNoticeBoardSubType(int noticeBoardSubType) {
+        this.noticeBoardSubType = noticeBoardSubType;
+    }
 }

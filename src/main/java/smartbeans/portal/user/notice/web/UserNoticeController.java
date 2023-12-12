@@ -1,6 +1,5 @@
 package smartbeans.portal.user.notice.web;
 
-import org.egovframe.rte.fdl.cryptography.EgovEnvCryptoService;
 import org.egovframe.rte.fdl.property.EgovPropertyService;
 import org.egovframe.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 import org.slf4j.Logger;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import smartbeans.cmmn.ComDefaultVO;
 import smartbeans.cmmn.service.EgovFileMngService;
 import smartbeans.cmmn.service.EgovFileMngUtil;
 import smartbeans.cmmn.service.FileVO;
@@ -25,6 +23,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +32,6 @@ import java.util.Map;
 @RequestMapping(value= "/user/noti")
 
 public class UserNoticeController {
-
     private static final Logger logger = LoggerFactory.getLogger(UserNoticeController.class);
 
     @Resource(name = "UserNoticeService")
@@ -64,7 +63,7 @@ public class UserNoticeController {
             "/Reference.do"
     })
     public String selectUserNoticeBoardList(@ModelAttribute("UserNoticeVO")
-                                     UserNoticeVO searchVO,
+                                                UserNoticeVO searchVO,
                                  HttpServletRequest request,
                                  HttpServletResponse response,
                                  ModelMap model) throws Exception {
@@ -248,7 +247,7 @@ public class UserNoticeController {
         return redirectUrl;
 
     }
-
+    //공지사항 상단 고정 기능
     @PostMapping("/userupdateTopFixedStatus.do")
     public int updateTopFixedStatus(@RequestParam("noticeBoardNo") int noticeBoardNo
     ) {
@@ -259,20 +258,17 @@ public class UserNoticeController {
         return result;
     }
 
-    /* 댓글 기능 에러 발생중
-    *  userboard.xml은 문제없이 쿼리 선언 완료하였으므로
-    *  controller 및 service 수정해볼 것 */
+    /*  controller 및 service 수정 해볼 것 2023-12-12/jeoung */
     /**
      * 댓글 목록 조회
-     * @param searchVO
-     * @param model
+     * @param cmntVO
      * @return
      */
     @GetMapping(value = "/selectCmntList.do")
-    public String selectCmntList(@ModelAttribute("searchVO") UserNoticeVO searchVO, ModelMap model) {
-        List<UserNoticeVO> cmntList = userNoticeService.selectCmntList(searchVO);
-        model.addAttribute("cmntList", cmntList);
-        return "user/notice/UserCmntList.lnb";
+    @ResponseBody
+    public List<UserNoticeVO> selectCmntList(@ModelAttribute("searchVO") UserNoticeVO cmntVO) {
+        List<UserNoticeVO> cmntList = userNoticeService.selectCmntList(cmntVO);
+        return cmntList;
     }
 
     /**
@@ -293,12 +289,22 @@ public class UserNoticeController {
      * @param cmntVO
      * @param model
      * @return
+     * @throws Exception
      */
     @PostMapping(value = "/insertUserComment.do")
     @ResponseBody
-    public String insertUserComment(UserNoticeVO cmntVO, ModelMap model) {
+    public List<UserNoticeVO> userinsertComment(UserNoticeVO cmntVO, ModelMap model) {
+
+        UserNoticeVO boardVO = new UserNoticeVO();
+        boardVO.setNoticeWrtr("임시 회원");
+        cmntVO.setMbrId("2");
+
         userNoticeService.userinsertComment(cmntVO);
-        return "redirect:/user/noti/selectCmntList.do";
+
+        List<UserNoticeVO> cmntList = userNoticeService.selectCmntList(cmntVO);
+
+        // 화면에 댓글 목록 전달
+        return cmntList;
     }
 
     /**
@@ -308,7 +314,7 @@ public class UserNoticeController {
      * @return
      */
     @PostMapping(value = "/updateUserComment.do")
-    public String updateUserComment(UserNoticeVO cmntVO, ModelMap model) {
+    public String userupdateComment(UserNoticeVO cmntVO, ModelMap model) {
         userNoticeService.userupdateComment(cmntVO);
         return "redirect:/user/noti/selectCmntList.do";
     }
@@ -320,7 +326,7 @@ public class UserNoticeController {
      * @return
      */
     @GetMapping(value = "/deleteUserComment.do")
-    public String deleteUserComment(@RequestParam("cmntNo") int cmntNo, ModelMap model) {
+    public String userdeleteComment(@RequestParam("cmntNo") int cmntNo, ModelMap model) {
         userNoticeService.userdeleteComment(cmntNo);
         return "redirect:/user/noti/selectCmntList.do";
     }
