@@ -6,17 +6,46 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page import="java.io.InputStream" %>
+<%@ page import="java.util.Properties" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta content="no-cache" http-equiv="pragma">
 
     <link rel="stylesheet" href="<c:url value='/'/>css/layout.css">
     <link rel="stylesheet" href="<c:url value='/'/>css/component.css">
     <link rel="stylesheet" href="<c:url value='/'/>css/page.css">
     <title>주간농사정보</title>
+
+    <!-- 공통 CSS, JS 선언 -->
+    <link href="http://api.nongsaro.go.kr/css/api.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="http://api.nongsaro.go.kr/js/framework.js"></script>
+    <script type="text/javascript" src="http://api.nongsaro.go.kr/js/openapi_nongsaro.js"></script>
+
+    <%
+        InputStream input = application.getClassLoader().getResourceAsStream("config.properties");
+
+        Properties properties = new Properties();
+
+        if (input != null) {
+            properties.load(input);
+        } else {
+            throw new RuntimeException("config.properties not found");
+        }
+
+        String apiKey = properties.getProperty("NONGSARO_API_KEY");
+    %>
+    <script type="text/javascript">
+        nongsaroOpenApiRequest.apiKey = "<%= apiKey %>";
+        nongsaroOpenApiRequest.serviceName = "weekFarmInfo";
+        nongsaroOpenApiRequest.operationName = "weekFarmInfoList";
+        nongsaroOpenApiRequest.htmlArea = "nongsaroApiLoadingArea";
+        nongsaroOpenApiRequest.callback = "http://localhost:9090/user/farminfo/WeeklyFarmingCallback.do";
+    </script>
 </head>
 <body>
 <div class="location">
@@ -30,6 +59,9 @@
 </div>
 <div class="title">
     <h2>주간농사정보</h2>
+</div>
+<div class="weekfarm_area">
+    <div id="nongsaroApiLoadingArea"></div><!-- HTML 로딩 영역 -->
 </div>
 </body>
 </html>

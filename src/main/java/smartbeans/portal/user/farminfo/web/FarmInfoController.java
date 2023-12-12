@@ -540,4 +540,9 @@ public class FarmInfoController {
     public String WeeklyFarming() {
         return "/user/farminfo/WeeklyFarming.lnb";
     }
+
+    @RequestMapping("/WeeklyFarmingCallback.do")
+    public String WeeklyFarmingCallback() {
+        return "/user/farminfo/ajax_local_callback";
+    }
 }
