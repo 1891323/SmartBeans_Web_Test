@@ -230,3 +230,9 @@
 .pestinfo_area #nongsaroApiLoadingArea h3, .pestinfo_area p {display: none;}
 .pestinfo_area thead {height: 50px;}
 .pestinfo_area th, .pestinfo_area td {width: 100px; text-align: center;}
+.pestinfo_area #nongsaroApiLoadingArea .apiContArea .schBox .outerRound {background: #fff; border: 1px solid #dde2e5; border-radius: 10px; text-align: center;}
+.pestinfo_area #nongsaroApiLoadingArea .apiContArea .schBox .outerRound .innerRound {border: none;}
+.pestinfo_area #nongsaroApiLoadingArea .apiContArea .schBox .fl .inputW  input {border-radius: 5px !important; padding: 15px 10px; width: 400px; border: none; font-size: 16px; background: #f7f7f7;}
+.pestinfo_area #nongsaroApiLoadingArea .apiContArea .schBox .fl {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);}
+.pestinfo_area #nongsaroApiLoadingArea .apiContArea .sch .button * {background: url(../images/admin/ico_search_b.png) no-repeat; font-size: 0; position: absolute; margin-left: -400px; width: 10px;}
+.pestinfo_area select {border: none; border-radius: unset; font-size: 16px; background: #f7f7f7; padding: 15px 15px 15px 10px;}
