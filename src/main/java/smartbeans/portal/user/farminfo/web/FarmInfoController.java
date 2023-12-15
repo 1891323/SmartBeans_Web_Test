@@ -402,16 +402,16 @@ public class FarmInfoController {
 
         // 날씨
         Map<String, String> wfMap = new LinkedHashMap<>();
-        wfMap.put("wf3Am", String.valueOf(firstItem.get("wf3Am")));
-        wfMap.put("wf3Pm", String.valueOf(firstItem.get("wf3Pm")));
-        wfMap.put("wf4Am", String.valueOf(firstItem.get("wf4Am")));
-        wfMap.put("wf4Pm", String.valueOf(firstItem.get("wf4Pm")));
-        wfMap.put("wf5Am", String.valueOf(firstItem.get("wf5Am")));
-        wfMap.put("wf5Pm", String.valueOf(firstItem.get("wf5Pm")));
-        wfMap.put("wf6Am", String.valueOf(firstItem.get("wf6Am")));
-        wfMap.put("wf6Pm", String.valueOf(firstItem.get("wf6Pm")));
-        wfMap.put("wf7Am", String.valueOf(firstItem.get("wf7Am")));
-        wfMap.put("wf7Pm", String.valueOf(firstItem.get("wf7Pm")));
+        wfMap.put("wf3Am", String.valueOf(firstItem.get("wf3Am")).replace("/","_"));
+        wfMap.put("wf3Pm", String.valueOf(firstItem.get("wf3Pm")).replace("/","_"));
+        wfMap.put("wf4Am", String.valueOf(firstItem.get("wf4Am")).replace("/","_"));
+        wfMap.put("wf4Pm", String.valueOf(firstItem.get("wf4Pm")).replace("/","_"));
+        wfMap.put("wf5Am", String.valueOf(firstItem.get("wf5Am")).replace("/","_"));
+        wfMap.put("wf5Pm", String.valueOf(firstItem.get("wf5Pm")).replace("/","_"));
+        wfMap.put("wf6Am", String.valueOf(firstItem.get("wf6Am")).replace("/","_"));
+        wfMap.put("wf6Pm", String.valueOf(firstItem.get("wf6Pm")).replace("/","_"));
+        wfMap.put("wf7Am", String.valueOf(firstItem.get("wf7Am")).replace("/","_"));
+        wfMap.put("wf7Pm", String.valueOf(firstItem.get("wf7Pm")).replace("/","_"));
         model.addAttribute("wfImg", wfMap);
 
         // 강수확률
@@ -534,5 +534,20 @@ public class FarmInfoController {
         model.addAttribute("itemList", itemList);
 
         return "/user/farminfo/GrainPriceStatus.lnb";
+    }
+
+    @RequestMapping("/WeeklyFarming.do")
+    public String WeeklyFarming() {
+        return "/user/farminfo/WeeklyFarming.lnb";
+    }
+
+    @RequestMapping("/FarmInfoCallback.do")
+    public String FarmInfoCallback() {
+        return "/user/farminfo/ajax_local_callback";
+    }
+
+    @RequestMapping("/PestOccuranceInformation.do")
+    public String PestOccuranceInformation() {
+        return "/user/farminfo/PestOccuranceInformation.lnb";
     }
 }

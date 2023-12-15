@@ -212,3 +212,29 @@
 .price_status th {border-top: 2px solid #57A580; border-bottom: 2px solid #57A580; color: #57A580;}
 .price_status tr:nth-child(even) {background-color: #fff6f6;}
 .price_status td {font-size: 16px;}
+/*주간농사정보 페이지*/
+.weekfarm_area {margin-top: 30px;}
+.weekfarm_area #nongsaroApiLoadingArea h3 {display: none;}
+.weekfarm_area p {display: none;}
+.weekfarm_area thead {height: 50px;}
+.weekfarm_area th, .weekfarm_area td {width: 100px; text-align: center;}
+.weekfarm_area #nongsaroApiLoadingArea .apiContArea .schBox .nTitle {background: none; font-size: 17px; font-family: 'NotoSans', sans-serif; font-weight: unset;}
+.weekfarm_area #nongsaroApiLoadingArea .apiContArea .schBox .innerRound {height: 50px;}
+.weekfarm_area #nongsaroApiLoadingArea .apiContArea .schBox .fl {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);}
+.weekfarm_area #nongsaroApiLoadingArea .apiContArea .schBox .fl .inputW  input {border-radius: 5px !important; padding: 15px 10px; width: 500px; border: none; font-size: 16px; background: #f7f7f7;}
+.weekfarm_area #nongsaroApiLoadingArea .apiContArea .schBox .fr  {position: relative; top: 50%; transform: translateY(-50%);}
+.weekfarm_area #nongsaroApiLoadingArea .apiContArea .schBox .outerRound {background: #fff; border: 1px solid #dde2e5; border-radius: 10px; text-align: center;}
+.weekfarm_area #nongsaroApiLoadingArea .apiContArea .schBox .outerRound .innerRound {border: none;}
+.weekfarm_area #nongsaroApiLoadingArea .apiContArea .button * {background: url(../images/admin/ico_search_b.png) no-repeat; font-size: 0; position: absolute; margin-left: -400px; width: 10px;}
+/*병해충발생정보 페이지*/
+.pestinfo_area #nongsaroApiLoadingArea h3, .pestinfo_area p {display: none;}
+.pestinfo_area thead {height: 50px;}
+.pestinfo_area th, .pestinfo_area td {width: 100px; text-align: center;}
+.pestinfo_area #nongsaroApiLoadingArea .apiContArea .schBox .outerRound {background: #fff; border: 1px solid #dde2e5; border-radius: 10px; text-align: center;}
+.pestinfo_area #nongsaroApiLoadingArea .apiContArea .schBox .outerRound .innerRound {border: none;}
+.pestinfo_area #nongsaroApiLoadingArea .apiContArea .schBox .fl .inputW  input {border-radius: 5px !important; padding: 15px 10px; width: 400px; border: none; font-size: 16px; background: #f7f7f7;}
+.pestinfo_area #nongsaroApiLoadingArea .apiContArea .schBox .fl {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);}
+.pestinfo_area #nongsaroApiLoadingArea .apiContArea .fr {margin-bottom: 10px;}
+.pestinfo_area #nongsaroApiLoadingArea .apiContArea .sch .button * {background: url(../images/admin/ico_search_b.png) no-repeat; position: absolute; font-size: 0; margin-left: -370px; width: 10px; margin-top: 5px;}
+.pestinfo_area select {background: url(../images/ico_arrow_gray_15x9.png) no-repeat right 8px center #f7f7f7; border: none; border-radius: 5px; font-size: 16px; padding: 15px 30px 15px 10px; font-family: 'NotoSans', sans-serif; -webkit-appearance: none; -moz-appearance: none; appearance: none;}
+.pestinfo_area select::-ms-expand {display: none;}
