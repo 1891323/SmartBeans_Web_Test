@@ -234,5 +234,7 @@
 .pestinfo_area #nongsaroApiLoadingArea .apiContArea .schBox .outerRound .innerRound {border: none;}
 .pestinfo_area #nongsaroApiLoadingArea .apiContArea .schBox .fl .inputW  input {border-radius: 5px !important; padding: 15px 10px; width: 400px; border: none; font-size: 16px; background: #f7f7f7;}
 .pestinfo_area #nongsaroApiLoadingArea .apiContArea .schBox .fl {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);}
-.pestinfo_area #nongsaroApiLoadingArea .apiContArea .sch .button * {background: url(../images/admin/ico_search_b.png) no-repeat; font-size: 0; position: absolute; margin-left: -400px; width: 10px;}
-.pestinfo_area select {border: none; border-radius: unset; font-size: 16px; background: #f7f7f7; padding: 15px 15px 15px 10px;}
+.pestinfo_area #nongsaroApiLoadingArea .apiContArea .fr {margin-bottom: 10px;}
+.pestinfo_area #nongsaroApiLoadingArea .apiContArea .sch .button * {background: url(../images/admin/ico_search_b.png) no-repeat; position: absolute; font-size: 0; margin-left: -370px; width: 10px; margin-top: 5px;}
+.pestinfo_area select {background: url(../images/ico_arrow_gray_15x9.png) no-repeat right 8px center #f7f7f7; border: none; border-radius: 5px; font-size: 16px; padding: 15px 30px 15px 10px; font-family: 'NotoSans', sans-serif; -webkit-appearance: none; -moz-appearance: none; appearance: none;}
+.pestinfo_area select::-ms-expand {display: none;}
