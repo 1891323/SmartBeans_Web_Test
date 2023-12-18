@@ -1,11 +1,17 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<!DOCTYPE html>
+<%@page import="java.io.InputStream"%>
+<%@page import="java.util.Properties" %>
+<%@page import="org.w3c.dom.NodeList"%>
+<%@page import="javax.xml.parsers.DocumentBuilderFactory"%>
+<%@page import="org.w3c.dom.Document"%>
+<%@page import="java.net.URL"%>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="<c:url value='/'/>css/layout.css">
@@ -28,16 +34,98 @@
                         <div class="farm_info">
                             <div class="head">
                                 <h2>주간 농사정보</h2>
-                                <%--<p>표준프레임워크 경량화 서비스에 대한 자주하는 질문의 답변들을 볼 수 있습니다.</p>--%>
                             </div>
+                            <%
+                                InputStream input = application.getClassLoader().getResourceAsStream("config.properties");
 
-                            <%--<c:forEach var="result" items="${faqList}" varStatus="status">
-                                <dl>
-                                    <dt><span class="q">Q</span><a href="<c:url value='/uss/olh/faq/FaqListInqire.do' />"><c:out value="${result.qestnSj}"/></a></dt>
-                                    <dd><span class="a">A</span><c:out value="${fn:substring(fn:escapeXml(result.answerCn), 0, 70)}" /></dd>
-                                </dl>
-                            </c:forEach>--%>
+                                Properties properties = new Properties();
 
+                                if (input != null) {
+                                    properties.load(input);
+                                } else {
+                                    throw new RuntimeException("config.properties not found");
+                                }
+
+                                if(true) {
+                                String apiKey = properties.getProperty("NONGSARO_API_KEY");
+                                String serviceName = "weekFarmInfo";
+                                String operationName = "weekFarmInfoList";
+                                String pageNo = "1";
+                                String numOfRows = "4";
+
+                                //XML 받을 URL 생성
+                                String parameter = "/"+serviceName+"/"+operationName;
+                                parameter += "?apiKey="+ apiKey + "&pageNo=" + pageNo + "&numOfRows=" + numOfRows;
+
+                                //서버와 통신
+                                URL apiUrl = new URL("http://api.nongsaro.go.kr/service"+parameter);
+                                InputStream apiStream = apiUrl.openStream();
+
+                                Document doc = null;
+                                try{
+                                    //xml document
+                                    doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(apiStream);
+                                }catch(Exception e){
+                                    e.printStackTrace();
+                                }finally{
+                                    apiStream.close();
+                                }
+
+                                int size = 0;
+
+                                NodeList items = null;
+                                NodeList downUrls = null;
+                                NodeList fileNames = null;
+                                NodeList hitCts = null;
+                                NodeList regDts = null;
+                                NodeList subjects = null;
+                                NodeList writerNms = null;
+
+                                items = doc.getElementsByTagName("item");
+                                size = doc.getElementsByTagName("item").getLength();
+                                downUrls = doc.getElementsByTagName("downUrl");
+                                fileNames = doc.getElementsByTagName("fileName");
+                                hitCts = doc.getElementsByTagName("hitCt");
+                                regDts = doc.getElementsByTagName("regDt");
+                                subjects = doc.getElementsByTagName("subject");
+                                writerNms = doc.getElementsByTagName("writerNm");
+
+                                if(size==0){%>
+                            <h3>조회한 정보가 없습니다.</h3>
+                            <%	}else{ %>
+                            <table width="100%">
+                                <colgroup>
+                                    <col width="50%"/>
+                                    <col width="10%"/>
+                                    <col width="20%"/>
+                                    <col width="30%"/>
+                                </colgroup>
+                                <%
+                                    for(int i=0; i<size; i++){
+                                        //파일다운로드
+                                        String downUrl = downUrls.item(i).getFirstChild() == null ? "" : downUrls.item(i).getFirstChild().getNodeValue();
+                                        //파일명
+                                        String fileName = fileNames.item(i).getFirstChild() == null ? "" : fileNames.item(i).getFirstChild().getNodeValue();
+                                        //조회수
+                                        String hitCt = hitCts.item(i).getFirstChild() == null ? "" : hitCts.item(i).getFirstChild().getNodeValue();
+                                        //등록일
+                                        String regDt = regDts.item(i).getFirstChild() == null ? "" : regDts.item(i).getFirstChild().getNodeValue();
+                                        //제목
+                                        String subject = subjects.item(i).getFirstChild() == null ? "" : subjects.item(i).getFirstChild().getNodeValue();
+                                        //작성자
+                                        String writerNm = writerNms.item(i).getFirstChild() == null ? "" : writerNms.item(i).getFirstChild().getNodeValue();
+                                %>
+                                <tr>
+                                    <td><%=subject%></td>
+                                    <td align="center"><%=writerNm%></td>
+                                    <td align="center"><%=regDt%></td>
+                                    <td align="center"><a href="<%=downUrl%>"><img src="http://www.nongsaro.go.kr/ps/img/icon/icon_file.gif"></a></td>
+                                </tr>
+                                <%
+                                    }
+                                %>
+                            </table>
+                            <%}}%>
                             <a href="/user/farminfo/WeeklyFarming.do" class="more">더보기</a>
                         </div>
 
@@ -46,6 +134,91 @@
                             <div class="head">
                                 <h2>병해충 발생정보</h2>
                             </div>
+                            <%
+                                if(true) {
+                                    String apiKey = properties.getProperty("NONGSARO_API_KEY");
+                                    String serviceName = "dbyhsCccrrncInfo";
+                                    String operationName = "dbyhsCccrrncInfoList";
+                                    String pageNo = "1";
+                                    String numOfRows = "4";
+
+                                    //XML 받을 URL 생성
+                                    String parameter = "/"+serviceName+"/"+operationName;
+                                    parameter += "?apiKey="+ apiKey + "&pageNo=" + pageNo + "&numOfRows=" + numOfRows;
+
+                                    //서버와 통신
+                                    URL apiUrl = new URL("http://api.nongsaro.go.kr/service"+parameter);
+                                    InputStream apiStream = apiUrl.openStream();
+
+                                    Document doc = null;
+                                    try{
+                                        //xml document
+                                        doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(apiStream);
+                                    }catch(Exception e){
+                                        e.printStackTrace();
+                                    }finally{
+                                        apiStream.close();
+                                    }
+
+                                    int size = 0;
+
+                                    NodeList items = null;
+                                    NodeList cntntsSjs = null;
+                                    NodeList updusrEsntlNms = null;
+                                    NodeList registDts = null;
+                                    NodeList cntntsRdcnts = null;
+                                    NodeList downFiles = null;
+                                    NodeList rtnOrginlFileNms = null;
+                                    NodeList cntntsNos = null;
+
+                                    items = doc.getElementsByTagName("item");
+                                    size = doc.getElementsByTagName("item").getLength();
+                                    cntntsSjs = doc.getElementsByTagName("cntntsSj");
+                                    updusrEsntlNms = doc.getElementsByTagName("updusrEsntlNm");
+                                    registDts = doc.getElementsByTagName("registDt");
+                                    cntntsRdcnts = doc.getElementsByTagName("cntntsRdcnt");
+                                    downFiles = doc.getElementsByTagName("downFile");
+                                    rtnOrginlFileNms = doc.getElementsByTagName("rtnOrginlFileNm");
+                                    cntntsNos = doc.getElementsByTagName("cntntsNo");
+
+                                    if(size==0){%>
+                            <h3>조회한 정보가 없습니다.</h3>
+                            <%	}else{ %>
+                            <table width="100%">
+                                <colgroup>
+                                    <col width="50%"/>
+                                    <col width="10%"/>
+                                    <col width="20%"/>
+                                    <col width="30%"/>
+                                </colgroup>
+                                <%
+                                    for(int i=0; i<size; i++){
+                                        //컨텐츠 제목
+                                        String cntntsSj = cntntsSjs.item(i).getFirstChild() == null ? "" : cntntsSjs.item(i).getFirstChild().getNodeValue();
+                                        //등록자
+                                        String updusrEsntlNm = updusrEsntlNms.item(i).getFirstChild() == null ? "" : updusrEsntlNms.item(i).getFirstChild().getNodeValue();
+                                        //등록 일자
+                                        String registDt = registDts.item(i).getFirstChild() == null ? "" : registDts.item(i).getFirstChild().getNodeValue();
+                                        //조회수
+                                        String cntntsRdcnt = cntntsRdcnts.item(i).getFirstChild() == null ? "" : cntntsRdcnts.item(i).getFirstChild().getNodeValue();
+                                        //파일경로
+                                        String downFile = downFiles.item(i).getFirstChild() == null ? "" : downFiles.item(i).getFirstChild().getNodeValue();
+                                        //파일명
+                                        String rtnOrginlFileNm = rtnOrginlFileNms.item(i).getFirstChild() == null ? "" : rtnOrginlFileNms.item(i).getFirstChild().getNodeValue();
+                                        //컨텐츠 번호
+                                        String cntntsNo = cntntsNos.item(i).getFirstChild() == null ? "" : cntntsNos.item(i).getFirstChild().getNodeValue();
+                                %>
+                                <tr>
+                                    <td><%=cntntsSj%></td>
+                                    <td align="center"><%=updusrEsntlNm%></td>
+                                    <td align="center"><%=registDt%></td>
+                                    <td align="center"><a href="<%=downFile%>"><img src="http://www.nongsaro.go.kr/ps/img/icon/icon_file.gif"></a></td>
+                                </tr>
+                                <%
+                                    }
+                                %>
+                            </table>
+                            <%}}%>
                             <a href="/user/farminfo/PestOccuranceInformation.do" class="more">더보기</a>
                         </div>
 
@@ -83,17 +256,12 @@
                                     <span class="wsd">${wsd.fcstValue}m/s</span>
                                 </c:forEach>
                             </div>
-                                <%--<ul>
-                                <li><a href="#LINK" class="tech" onclick="javascript:goMenuPage('2000000'); return false;">기술지원 필요시<br>유지보수 민원</a></li>
-                                <li><a href="#LINK" class="buy" onclick="javascript:goMenuPage('2000000'); return false;">구매 제품<br>A/S 민원</a></li>
-                            </ul>--%>
                             <a href="/user/farminfo/WeatherInformation.do" class="more">더보기</a>
                         </div>
 
                         <!-- 공지사항 -->
                         <div class="notification">
                             <h2>공지사항</h2>
-                           <%-- <a href="<c:url value=''/>">참여하기</a>--%>
                             <a href="/user/noti/Announcement.do" class="more">더보기</a>
                         </div>
 

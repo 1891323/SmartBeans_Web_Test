@@ -20,7 +20,6 @@
 .p_main .g_area .inner > * {float: left;}
 .p_main .g_area .left_col {width: 640px; margin-right: 20px; padding-top: 60px;}
 .p_main .g_area .farm_info {position: relative; height: 270px; border-radius: 27px; background: #fff;}
-/*.p_main .g_area .farm_info .head {height: 96px; padding: 40px 0 0 50px; border-bottom: 1px solid #e8e8e8;}*/
 .p_main .g_area .farm_info .head {height: 96px; padding: 40px 0 0 50px;}
 .p_main .g_area .farm_info .head h2 {color: #222; font-size: 23px; font-weight: 700;}
 .p_main .g_area .farm_info .head p {margin-top: 6px; color: #888; font-size: 18px;}
@@ -34,13 +33,20 @@
 .p_main .g_area .farm_info dl dt + dd {margin-top: 10px;}
 .p_main .g_area .farm_info dl dd + dt {margin-top: 30px;}
 .p_main .g_area .farm_info .more {display: block; position: absolute; right: 40px; top: 30px; width: 40px; height: 40px; font-size: 0; background: url(../images/main/ico_more.png) no-repeat;}
+.p_main .g_area .farm_info table {margin-top: -10px; border-top: none;}
+.p_main .g_area .farm_info table tbody {border-bottom: none;}
+.p_main .g_area .farm_info table tr {height: 45px; border-top: 1px solid #d0d5dd;}
+.p_main .g_area .farm_info table tr td {border-bottom: none;}
 
 .p_main .g_area .pest_info {position: relative; height: 270px; border-radius: 27px; background: #fff; margin-top: 20px;}
-/*.p_main .g_area .pest_info .head {height: 146px; padding: 40px 0 0 50px; border-bottom: 1px solid #e8e8e8;}*/
-.p_main .g_area .pest_info .head {height: 146px; padding: 40px 0 0 50px;}
+.p_main .g_area .pest_info .head {height: 96px; padding: 40px 0 0 50px;}
 .p_main .g_area .pest_info .head h2 {color: #222; font-size: 23px; font-weight: 700;}
 .p_main .g_area .pest_info .head p {margin-top: 6px; color: #888; font-size: 18px;}
 .p_main .g_area .pest_info .more {display: block; position: absolute; right: 40px; top: 30px; width: 40px; height: 40px; font-size: 0; background: url(../images/main/ico_more.png) no-repeat;}
+.p_main .g_area .pest_info table {margin-top: -10px; border-top: none;}
+.p_main .g_area .pest_info table tbody {border-bottom: none;}
+.p_main .g_area .pest_info table tr {height: 45px; border-top: 1px solid #d0d5dd;}
+.p_main .g_area .pest_info table tr td {border-bottom: none;}
 
 .p_main .g_area .manual {position: relative; height: 100px; margin-top: 20px; padding: 40px 50px 0 50px; border-radius: 27px; background: #fff;}
 .p_main .g_area .manual::after {content: ""; display: block;}
