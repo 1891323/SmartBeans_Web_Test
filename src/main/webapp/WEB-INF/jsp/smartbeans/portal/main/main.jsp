@@ -268,8 +268,9 @@
                         <%--곡물별 가격 현황--%>
                         <div class="price">
                             <h2>곡물별 가격 현황</h2>
+                            <%--<h4>${midname}</h4>--%>
                             <a href="/user/farminfo/GrainPriceStatus.do" class="more">더보기</a>
-                            <canvas id="myChart" width="400" height="250"></canvas>
+                            <canvas id="myChart" width="300" height="200"></canvas>
                             <%--<div id="carouselExample" class="carousel carousel-dark slide">
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
@@ -297,22 +298,22 @@
                             const myChart = new Chart(context, {
                                 type: 'bar',
                                 data: {
-                                    labels: ['6일전', '5일전', '4일전', '3일전', '2일전', '1일전', '오늘'],
+                                    labels: ['6일전', '5일전', '4일전', '3일전', '2일전', '1일전'],
                                     datasets: [
                                         {
                                             type: 'line',
                                             label: '평균가격',
-                                            borderColor: 'rgb(255, 99, 132)',
+                                            borderColor: 'rgb(255, 165, 0)',
                                             borderWidth: 2,
                                             fill: false,
-                                            data: ['140', '500', '1200', '390', '800', '130', '250'],
+                                            data: [${avebfr6}, ${avebfr5}, ${avebfr4}, ${avebfr3}, ${avebfr2}, ${avebfr1}],
                                             yAxisID: 'y',
                                         },
                                         {
                                             type: 'bar',
                                             label: '거래물량',
-                                            backgroundColor: 'rgb(75, 192, 192)',
-                                            data: ['100', '150', '200', '110', '80', '50', '180'],
+                                            backgroundColor: 'rgb(70, 162, 142)',
+                                            data: [${amt6}, ${amt5}, ${amt4}, ${amt3}, ${amt2}, ${amt1}],
                                             borderColor: 'white',
                                             borderWidth: 2,
                                             yAxisID: 'y1',
@@ -351,7 +352,7 @@
 
                                                     return context.parsed.y !== null &&
                                                     label === '평균가격' ? label + ': ' + context.parsed.y + '원/kg'
-                                                        : label + ': ' + context.parsed.y + '톤'
+                                                        : label + ': ' + context.parsed.y + 'kg'
                                                 },
                                             },
                                         }
