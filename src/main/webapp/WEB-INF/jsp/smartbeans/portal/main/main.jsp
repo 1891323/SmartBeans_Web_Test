@@ -268,19 +268,19 @@
                         <%--곡물별 가격 현황--%>
                         <div class="price">
                             <h2>곡물별 가격 현황</h2>
-                            <%--<h4>${midname}</h4>--%>
+                            <p>콩</p>
                             <a href="/user/farminfo/GrainPriceStatus.do" class="more">더보기</a>
-                            <canvas id="myChart" width="300" height="200"></canvas>
+                            <canvas id="myChart" width="300" height="170"></canvas>
                             <%--<div id="carouselExample" class="carousel carousel-dark slide">
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
-                                        <canvas id="myChart" width="200" height="250"></canvas>
+                                        <canvas id="myChart" width="300" height="170"></canvas>
                                     </div>
                                     <div class="carousel-item">
-                                        <img src="..." class="d-block w-100" alt="...">
+                                        <canvas id="myChart" width="300" height="170"></canvas>
                                     </div>
                                     <div class="carousel-item">
-                                        <img src="..." class="d-block w-100" alt="...">
+                                        <canvas id="myChart" width="300" height="170"></canvas>
                                     </div>
                                 </div>
                                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
