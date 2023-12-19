@@ -52,15 +52,15 @@ public class EgovSessionMapping extends EgovUsersByUsernameMapping {
 
         String strUserId    = rs.getString("user_id");
         String strPassWord  = rs.getString("password");
-        boolean strEnabled  = rs.getBoolean("enabled");
+//        boolean strEnabled  = rs.getBoolean("enabled");
         
         String strUserNm    = rs.getString("user_nm");
-        String strUserSe    = rs.getString("user_se");
-        String strUserEmail = rs.getString("user_email");
-        String strOrgnztId  = rs.getString("orgnzt_id");
-        String strUniqId    = rs.getString("esntl_id");
+//        String strUserSe    = rs.getString("user_se");
+//        String strUserEmail = rs.getString("user_email");
+//        String strOrgnztId  = rs.getString("orgnzt_id");
+//        String strUniqId    = rs.getString("esntl_id");
         /**2010.06.30 *이용   *조직명 추가  */
-        String strOrgnztNm    = rs.getString("orgnzt_nm");
+//        String strOrgnztNm    = rs.getString("orgnzt_nm");
 
         
 
@@ -69,14 +69,15 @@ public class EgovSessionMapping extends EgovUsersByUsernameMapping {
         loginVO.setId(strUserId);
         loginVO.setPassword(strPassWord);
         loginVO.setName(strUserNm);
-        loginVO.setUserSe(strUserSe);
-        loginVO.setEmail(strUserEmail);
-        loginVO.setOrgnztId(strOrgnztId);
-        loginVO.setUniqId(strUniqId);
+//        loginVO.setUserSe(strUserSe);
+//        loginVO.setEmail(strUserEmail);
+//        loginVO.setOrgnztId(strOrgnztId);
+//        loginVO.setUniqId(strUniqId);
         /**2010.06.30 *이용   *조직명 추가  */
-        loginVO.setOrgnztNm(strOrgnztNm);
+//        loginVO.setOrgnztNm(strOrgnztNm);
         
-        return new EgovUserDetails(strUserId, strPassWord, strEnabled, loginVO);
+//        return new EgovUserDetails(strUserId, strPassWord, strEnabled, loginVO);
+        return new EgovUserDetails(strUserId, strPassWord, true, loginVO);
     }
 }
 

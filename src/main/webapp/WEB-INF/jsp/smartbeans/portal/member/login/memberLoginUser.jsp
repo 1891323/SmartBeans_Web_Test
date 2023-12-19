@@ -37,7 +37,7 @@
         } else if (document.loginForm.password.value =="") {                               // 비밀번호를 입력하지 않았을 때
             alert("비밀번호를 입력하세요");
         } else {                                                                           // 아이디와 비밀번호가 모두 입력되었을 때
-            document.loginForm.action="<c:url value='/member/login/actionLogin'/>";
+            document.loginForm.action="<c:url value='/member/login/actionLogin.do'/>";
             // document.loginForm.j_username.value = document.loginForm.userSe.value + document.loginForm.username.value;
             //document.loginForm.action="<c:url value='/j_spring_security_check'/>";
             document.loginForm.submit();

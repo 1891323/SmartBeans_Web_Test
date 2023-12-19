@@ -1,8 +1,11 @@
 package smartbeans.boot.web;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import smartbeans.cmmn.web.EgovBindingInitializer;
 import smartbeans.cmmn.web.EgovImgPaginationRenderer;
 import smartbeans.config.interceptor.AccessInterceptor;
+import smartbeans.portal.member.login.service.MemberLoginService;
 import smartbeans.portal.sec.security.filter.EgovSpringSecurityLoginFilter;
 import smartbeans.portal.sec.security.filter.EgovSpringSecurityLogoutFilter;
 import org.egovframe.rte.ptl.mvc.tags.ui.pagination.DefaultPaginationManager;
@@ -34,6 +37,9 @@ import java.util.Properties;
 
 @Configuration
 public class DatahubWebMvcConfiguration extends WebMvcConfigurationSupport {
+
+    @Autowired
+    private MemberLoginService memberLoginService;
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
@@ -149,12 +155,11 @@ public class DatahubWebMvcConfiguration extends WebMvcConfigurationSupport {
 
 
     @Bean
-    public FilterRegistrationBean securityLoginFilter() {
+    public FilterRegistrationBean securityLoginFilter(@Qualifier("smartbeansLoginService") MemberLoginService memberLoginService) {
         FilterRegistrationBean registrationBean = new FilterRegistrationBean();
-
-        EgovSpringSecurityLoginFilter filter = new EgovSpringSecurityLoginFilter();
-        registrationBean.addInitParameter("loginURL", "/uat/uia/egovLoginUsr.do");
-        registrationBean.addInitParameter("loginProcessURL", "/uat/uia/actionLogin.do");
+        EgovSpringSecurityLoginFilter filter = new EgovSpringSecurityLoginFilter(memberLoginService);
+        registrationBean.addInitParameter("loginURL", "/member/login.do");
+        registrationBean.addInitParameter("loginProcessURL", "/member/login/actionLogin.do");
         registrationBean.setFilter(filter);
         registrationBean.addUrlPatterns("*.do");
         registrationBean.addUrlPatterns("/*");

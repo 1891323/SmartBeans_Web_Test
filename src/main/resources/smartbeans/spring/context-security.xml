@@ -26,19 +26,19 @@
  	<security:http pattern="\A/WEB-INF/jsp/.*\Z" request-matcher="regex" security="none"/>
 
     <egov-security:config id="securityConfig"
-		loginUrl="/uat/uia/egovLoginUsr.do"
+		loginUrl="/member/login.do"
 		logoutSuccessUrl="/EgovContent.do"
 		loginFailureUrl="/uat/uia/egovLoginUsr.do?login_error=1"
 		accessDeniedUrl="/sec/ram/accessDenied.do"
 
 		dataSource="egov.dataSource"
-		jdbcUsersByUsernameQuery="SELECT USER_ID, ESNTL_ID AS PASSWORD, 1 ENABLED, USER_NM, USER_ZIP,
-                                                              USER_ADRES, USER_EMAIL, USER_SE, ORGNZT_ID, ESNTL_ID,
-                                                              (select a.ORGNZT_NM from COMTNORGNZTINFO a where a.ORGNZT_ID = m.ORGNZT_ID) ORGNZT_NM
-                                                       FROM COMVNUSERMASTER m WHERE CONCAT(USER_SE, USER_ID) = ?"
-		jdbcAuthoritiesByUsernameQuery="SELECT A.SCRTY_DTRMN_TRGET_ID USER_ID, A.AUTHOR_CODE AUTHORITY
-                                                             FROM COMTNEMPLYRSCRTYESTBS A, COMVNUSERMASTER B
-                                                             WHERE A.SCRTY_DTRMN_TRGET_ID = B.ESNTL_ID AND B.USER_ID = ?"
+	  	jdbcUsersByUsernameQuery="SELECT user_id, CONCAT(CAST(mbr_id AS VARCHAR), user_id) AS password , user_nm
+								  FROM tb_member
+								  WHERE CONCAT(CAST(mbr_id AS VARCHAR), user_id) = ?"
+		jdbcAuthoritiesByUsernameQuery="SELECT A.scrty_estbstrget_id AS user_id, A.AUTHOR_CODE AS AUTHORITY
+										FROM COMTNEMPLYRSCRTYESTBS A, tb_member B
+										WHERE A.scrty_estbstrget_id = concat(CAST(B.mbr_id AS VARCHAR), B.user_id)
+										AND B.user_id = ?"
 		jdbcMapClass="smartbeans.portal.sec.security.common.EgovSessionMapping"
 
 		requestMatcherType="regex"
