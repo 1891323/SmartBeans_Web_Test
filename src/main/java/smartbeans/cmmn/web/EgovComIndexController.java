@@ -89,6 +89,8 @@ public class EgovComIndexController {
 	@Value("${AT_API_KEY_VER2}")
 	private String AT_API_KEY_VER2;
 
+	private static final String F_YMD = "yyyyMMdd";
+	private static final String F_MD = "yyMMdd";
 	public String dateFormat() {
 		Date nowDate = new Date();
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
@@ -192,7 +194,11 @@ public class EgovComIndexController {
 		return item;
 	}
 
-	public JSONArray getWhalPumSale(String API_kEY, String date) throws IOException, ParseException {
+	/*
+	aT 도매시장 통합홈페이지 OpenAPI
+	-현재 일일 트래픽 : 100건 / 운영계정 신청 시 트래픽 증가 가능
+	*/
+	public JSONArray getWhalPumSale(String API_kEY, String date, String large, String mid) throws IOException, ParseException {
 		StringBuilder urlBuilder = new StringBuilder("https://at.agromarket.kr/openApi/price/dateWhsalPumSale.do");
 		urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=" + API_kEY); /*서비스키*/
 		urlBuilder.append("&" + URLEncoder.encode("apiType","UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); /*API유형*/
@@ -200,8 +206,8 @@ public class EgovComIndexController {
 		urlBuilder.append("&" + URLEncoder.encode("strDate","UTF-8") + "=" + URLEncoder.encode(date, "UTF-8")); /*시작일자*/
 		urlBuilder.append("&" + URLEncoder.encode("endDate","UTF-8") + "=" + URLEncoder.encode(date, "UTF-8")); /*종료일자*/
 		urlBuilder.append("&" + URLEncoder.encode("whsalCd","UTF-8") + "=" + URLEncoder.encode("110001", "UTF-8")); /*도매시장코드*/
-		urlBuilder.append("&" + URLEncoder.encode("large","UTF-8") + "=" + URLEncoder.encode("03", "UTF-8")); /*부류코드*/
-		urlBuilder.append("&" + URLEncoder.encode("mid","UTF-8") + "=" + URLEncoder.encode("01", "UTF-8")); /*품목코드*/
+		urlBuilder.append("&" + URLEncoder.encode("large","UTF-8") + "=" + URLEncoder.encode(large, "UTF-8")); /*부류코드*/
+		urlBuilder.append("&" + URLEncoder.encode("mid","UTF-8") + "=" + URLEncoder.encode(mid, "UTF-8")); /*품목코드*/
 		URL url = new URL(urlBuilder.toString());
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		conn.setRequestMethod("GET");
@@ -228,11 +234,11 @@ public class EgovComIndexController {
 		return item;
 	}
 
-	private String getDate(int add) {
+	private String getDate(int add, String f_type) {
 		Calendar cal = Calendar.getInstance();
 		cal.add(cal.DATE, add);
 
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat sdf = new SimpleDateFormat(f_type);
 		return sdf.format(cal.getTime());
 	}
 
@@ -337,10 +343,10 @@ public class EgovComIndexController {
 		model.addAttribute("wsd", wsd_arr);
 
 		int addNum = -1;
-		JSONArray priceItem1 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum));
+		JSONArray priceItem1 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum, F_YMD), "03", "01");
 		if (priceItem1.isEmpty()) {
 			addNum -= 1;
-			priceItem1 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum));
+			priceItem1 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum, F_YMD), "03", "01");
 		}
 		JSONObject priceObj = (JSONObject) priceItem1.get(0);
 		int totqty = Integer.parseInt(priceObj.get("totqty").toString());
@@ -348,12 +354,13 @@ public class EgovComIndexController {
 		int avebfr1 = totamt / totqty;
 		model.addAttribute("avebfr1", avebfr1);
 		model.addAttribute("amt1", totqty);
+		model.addAttribute("date1", getDate(addNum, F_MD));
 
 		addNum -= 1;
-		JSONArray priceItem2 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum));
+		JSONArray priceItem2 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum, F_YMD), "03", "01");
 		if (priceItem2.isEmpty()) {
 			addNum -= 1;
-			priceItem2 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum));
+			priceItem2 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum, F_YMD), "03", "01");
 		}
 		priceObj = (JSONObject) priceItem2.get(0);
 		totqty = Integer.parseInt(priceObj.get("totqty").toString());
@@ -361,12 +368,13 @@ public class EgovComIndexController {
 		int avebfr2 = totamt / totqty;
 		model.addAttribute("avebfr2", avebfr2);
 		model.addAttribute("amt2", totqty);
+		model.addAttribute("date2", getDate(addNum, F_MD));
 
 		addNum -= 1;
-		JSONArray priceItem3 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum));
+		JSONArray priceItem3 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum, F_YMD), "03", "01");
 		if (priceItem3.isEmpty()) {
 			addNum -= 1;
-			priceItem3 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum));
+			priceItem3 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum, F_YMD), "03", "01");
 		}
 		priceObj = (JSONObject) priceItem3.get(0);
 		totqty = Integer.parseInt(priceObj.get("totqty").toString());
@@ -374,12 +382,13 @@ public class EgovComIndexController {
 		int avebfr3 = totamt / totqty;
 		model.addAttribute("avebfr3", avebfr3);
 		model.addAttribute("amt3", totqty);
+		model.addAttribute("date3", getDate(addNum, F_MD));
 
 		addNum -= 1;
-		JSONArray priceItem4 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum));
+		JSONArray priceItem4 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum, F_YMD), "03", "01");
 		if (priceItem4.isEmpty()) {
 			addNum -= 1;
-			priceItem4 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum));
+			priceItem4 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum, F_YMD), "03", "01");
 		}
 		priceObj = (JSONObject) priceItem4.get(0);
 		totqty = Integer.parseInt(priceObj.get("totqty").toString());
@@ -387,12 +396,13 @@ public class EgovComIndexController {
 		int avebfr4 = totamt / totqty;
 		model.addAttribute("avebfr4", avebfr4);
 		model.addAttribute("amt4", totqty);
+		model.addAttribute("date4", getDate(addNum, F_MD));
 
 		addNum -= 1;
-		JSONArray priceItem5 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum));
+		JSONArray priceItem5 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum, F_YMD), "03", "01");
 		if (priceItem5.isEmpty()) {
 			addNum -= 1;
-			priceItem5 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum));
+			priceItem5 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum, F_YMD), "03", "01");
 		}
 		priceObj = (JSONObject) priceItem5.get(0);
 		totqty = Integer.parseInt(priceObj.get("totqty").toString());
@@ -400,12 +410,13 @@ public class EgovComIndexController {
 		int avebfr5 = totamt / totqty;
 		model.addAttribute("avebfr5", avebfr5);
 		model.addAttribute("amt5", totqty);
+		model.addAttribute("date5", getDate(addNum, F_MD));
 
 		addNum -= 1;
-		JSONArray priceItem6 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum));
+		JSONArray priceItem6 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum, F_YMD), "03", "01");
 		if (priceItem6.isEmpty()) {
 			addNum -= 1;
-			priceItem6 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum));
+			priceItem6 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum, F_YMD), "03", "01");
 		}
 		priceObj = (JSONObject) priceItem6.get(0);
 		totqty = Integer.parseInt(priceObj.get("totqty").toString());
@@ -413,6 +424,7 @@ public class EgovComIndexController {
 		int avebfr6 = totamt / totqty;
 		model.addAttribute("avebfr6", avebfr6);
 		model.addAttribute("amt6", totqty);
+		model.addAttribute("date6", getDate(addNum, F_MD));
 
 		return "main/main.index";
 	}

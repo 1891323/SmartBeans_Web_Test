@@ -298,7 +298,7 @@
                             const myChart = new Chart(context, {
                                 type: 'bar',
                                 data: {
-                                    labels: ['6일전', '5일전', '4일전', '3일전', '2일전', '1일전'],
+                                    labels: [${date6}, ${date5}, ${date4}, ${date3}, ${date2}, ${date1}],
                                     datasets: [
                                         {
                                             type: 'line',
