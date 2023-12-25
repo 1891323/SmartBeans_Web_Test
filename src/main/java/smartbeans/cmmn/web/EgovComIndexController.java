@@ -30,6 +30,7 @@ package smartbeans.cmmn.web;
  * </pre>
  */
 
+import org.egovframe.rte.fdl.property.EgovPropertyService;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -42,11 +43,14 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import smartbeans.cmmn.IncludedCompInfoVO;
 import smartbeans.cmmn.annotation.IncludedInfo;
 import smartbeans.portal.uat.uia.service.EgovLoginService;
 import smartbeans.portal.user.farminfo.service.WeatherVO;
+import smartbeans.portal.user.notice.service.UserNoticeService;
+import smartbeans.portal.user.notice.service.UserNoticeVO;
 
 import javax.annotation.Resource;
 import java.io.BufferedReader;
@@ -242,8 +246,13 @@ public class EgovComIndexController {
 		return sdf.format(cal.getTime());
 	}
 
+	@Resource(name = "UserNoticeService")
+	private UserNoticeService userNoticeService;
+
+	@Resource(name = "propertiesService")
+	protected EgovPropertyService propertiesService;
 	@RequestMapping("/index.do")
-	public String index(ModelMap model) throws IOException, ParseException {
+	public String index(@ModelAttribute("UserNoticeVO") UserNoticeVO searchVO, ModelMap model) throws IOException, ParseException {
 		JSONArray item = getVilageFcst(WEATHER_API_KEY, dateFormat(), hourFormatforVilage());
 
 		JSONObject tmp_obj = (JSONObject) item.get(0); // 기온
@@ -425,6 +434,22 @@ public class EgovComIndexController {
 		model.addAttribute("avebfr6", avebfr6);
 		model.addAttribute("amt6", totqty);
 		model.addAttribute("date6", getDate(addNum, F_MD));
+
+		/*공지사항 목록*/
+		searchVO.setPageUnit(propertiesService.getInt("pageUnit"));
+		searchVO.setPageSize(propertiesService.getInt("pageSize"));
+
+		searchVO.setNoticeBoardType(4); // 알림마당
+		searchVO.setNoticeBoardSubType(1); // 공지사항
+
+		searchVO.setFirstIndex(1);
+		searchVO.setLastIndex(4);
+		searchVO.setRecordCountPerPage(4);
+
+		List<UserNoticeVO> boardList = userNoticeService.selectUserBoardList(searchVO);
+
+		System.out.println("공지사항 " + boardList);
+		//model.addAttribute("boardList", boardList);
 
 		return "main/main.index";
 	}

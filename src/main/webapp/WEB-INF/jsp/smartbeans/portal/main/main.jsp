@@ -263,6 +263,9 @@
                         <div class="notification">
                             <h2>공지사항</h2>
                             <a href="/user/noti/Announcement.do" class="more">더보기</a>
+                            <%--<c:forEach var="boardList" items="${boardList}">
+                                <p>${boardList}</p>
+                            </c:forEach>--%>
                         </div>
 
                         <%--곡물별 가격 현황--%>
