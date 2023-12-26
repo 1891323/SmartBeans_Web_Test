@@ -4,6 +4,8 @@ import org.egovframe.rte.fdl.property.EgovPropertyService;
 import org.egovframe.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 import smartbeans.cmmn.service.EgovFileMngService;
 import smartbeans.cmmn.service.EgovFileMngUtil;
 import smartbeans.cmmn.service.FileVO;
@@ -23,7 +26,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -45,7 +48,6 @@ public class UserNoticeController {
 
     @Resource(name = "EgovFileMngService")
     private EgovFileMngService fileMngService;
-
 
     /**
      * notice 게시판 글목록 출력
@@ -266,22 +268,13 @@ public class UserNoticeController {
      */
     @GetMapping(value = "/selectCmntList.do")
     @ResponseBody
-    public List<UserNoticeVO> selectCmntList(@ModelAttribute("searchVO") UserNoticeVO cmntVO) {
+    public List<UserNoticeVO> selectCmntList(@ModelAttribute("cmntVO") UserNoticeVO cmntVO) {
         List<UserNoticeVO> cmntList = userNoticeService.selectCmntList(cmntVO);
-        return cmntList;
-    }
 
-    /**
-     * 댓글 상세 조회
-     * @param cmntNo
-     * @param model
-     * @return
-     */
-    @GetMapping(value = "/selectCmntDetail.do")
-    public String selectCmntDetail(@RequestParam("cmntNo") int cmntNo, ModelMap model) {
-        UserNoticeVO cmntVO = userNoticeService.selectCmntDetail(cmntNo);
-        model.addAttribute("cmntVO", cmntVO);
-        return "user/notice/UserCmntDetail.lnb";
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("cmntList", cmntList);
+        modelAndView.setViewName("user/notice/UserNoticeDetail");
+        return cmntList;
     }
 
     /**
@@ -299,9 +292,14 @@ public class UserNoticeController {
         boardVO.setNoticeWrtr("임시 회원");
         cmntVO.setMbrId("2");
 
+        Date LocalDateTime = new Date();
+        cmntVO.setCmntFirstRegistDtm(LocalDateTime);
+
         userNoticeService.userinsertComment(cmntVO);
 
         List<UserNoticeVO> cmntList = userNoticeService.selectCmntList(cmntVO);
+
+        model.addAttribute("cmntVO", cmntVO);
 
         // 화면에 댓글 목록 전달
         return cmntList;

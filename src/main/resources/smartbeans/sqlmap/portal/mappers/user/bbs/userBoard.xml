@@ -45,6 +45,7 @@
     </resultMap>
 
     <resultMap id="UserCmntList" type="smartbeans.portal.user.notice.service.UserNoticeVO">
+        <result property="noticeBoardNo" column="notice_board_no"/>
         <result property="cmntNo" column="cmnt_no"/>
         <result property="cmntCn" column="cmnt_cn"/>
         <result property="cmntFirstRegistDtm" column="cmnt_first_regist_dtm"/>
@@ -154,10 +155,21 @@
             notice_board_no = #{noticeBoardNo}
     </select>
 
-    <select id="selectCmntList" parameterType="int" resultMap="UserCmntList">
-        SELECT *
-        FROM tb_cmnt
-        WHERE notice_board_no = #{noticeBoardNo};
+    <select id="selectCmntList" parameterType="NoticeBoardVO" resultMap="UserCmntList">
+        SELECT
+            cmnt_no,
+            cmnt_cn,
+            cmnt_first_regist_dtm,
+            cmnt_parent_no,
+            mbr_id,
+            notice_board_no,
+            cmnt_st,
+            cmnt_depth,
+            cmnt_order
+        FROM
+            tb_cmnt
+        WHERE
+            notice_board_no = #{noticeBoardNo}
     </select>
 
     <insert id="userinsertBoard" parameterType="NoticeBoardVO">
@@ -188,7 +200,6 @@
 
     <insert id="userinsertComment" parameterType="NoticeBoardVO">
         INSERT INTO tb_cmnt (
-            cmnt_no,
             cmnt_cn,
             cmnt_first_regist_dtm,
             cmnt_parent_no,
@@ -198,7 +209,6 @@
             cmnt_depth,
             cmnt_order
         ) VALUES (
-                  #{cmntNo},
                   #{cmntCn},
                   TO_TIMESTAMP(#{cmntFirstRegistDtm}, 'YYYY-MM-DD HH24:MI:SS'),
                   #{cmntParentNo},

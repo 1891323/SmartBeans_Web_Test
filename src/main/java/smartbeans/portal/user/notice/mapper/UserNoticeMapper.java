@@ -21,8 +21,6 @@ public interface UserNoticeMapper {
 
     public List<UserNoticeVO> selectCmntList(UserNoticeVO cmntVO);
 
-    UserNoticeVO selectCmntDetail(int cmntVO);
-
     int userinsertComment(UserNoticeVO cmntVO);
 
     int userupdateComment(UserNoticeVO cmntVO);

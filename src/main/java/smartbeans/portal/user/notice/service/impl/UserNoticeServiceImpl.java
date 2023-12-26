@@ -47,14 +47,10 @@ public class UserNoticeServiceImpl implements UserNoticeService {
     public int userupdateTopFixedStatus(int noticeBoardNo) { return usernoticeMapper.userupdateTopFixedStatus(noticeBoardNo);   }
 
     @Override
-    public  List<UserNoticeVO> selectCmntList(UserNoticeVO searchVO){
-        return usernoticeMapper.selectCmntList(searchVO);
+    public  List<UserNoticeVO> selectCmntList(UserNoticeVO cmntVO){
+        return usernoticeMapper.selectCmntList(cmntVO);
     }
 
-    @Override
-    public UserNoticeVO selectCmntDetail(int cmntNo) {
-        return usernoticeMapper.selectCmntDetail(cmntNo);
-    }
 
     public int userinsertComment(UserNoticeVO cmntVO) {
         try {

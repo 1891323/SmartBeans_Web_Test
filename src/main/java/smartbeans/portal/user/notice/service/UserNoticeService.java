@@ -19,8 +19,6 @@ public interface UserNoticeService {
 
     List<UserNoticeVO> selectCmntList(UserNoticeVO cmntVO);
 
-    UserNoticeVO selectCmntDetail(int cmntNo);
-
     int userinsertComment(UserNoticeVO cmntVO);
 
     int userupdateComment(UserNoticeVO cmntVO);

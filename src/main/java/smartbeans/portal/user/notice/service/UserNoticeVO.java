@@ -6,6 +6,7 @@ package smartbeans.portal.user.notice.service;
 import lombok.Data;
 import org.egovframe.rte.fdl.cryptography.EgovEnvCryptoService;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springmodules.validation.bean.conf.loader.annotation.handler.CascadeValidation;
 import smartbeans.cmmn.ComDefaultVO;
 
 import java.util.Date;
