@@ -354,8 +354,11 @@ public class EgovComIndexController {
 		int addNum = -1;
 		JSONArray priceItem1 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum, F_YMD), "03", "01");
 		if (priceItem1.isEmpty()) {
-			addNum -= 1;
-			priceItem1 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum, F_YMD), "03", "01");
+			while (true) {
+				addNum -= 1;
+				priceItem1 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum, F_YMD), "03", "01");
+				if (!priceItem1.isEmpty()) break;
+			}
 		}
 		JSONObject priceObj = (JSONObject) priceItem1.get(0);
 		int totqty = Integer.parseInt(priceObj.get("totqty").toString());
@@ -368,8 +371,11 @@ public class EgovComIndexController {
 		addNum -= 1;
 		JSONArray priceItem2 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum, F_YMD), "03", "01");
 		if (priceItem2.isEmpty()) {
-			addNum -= 1;
-			priceItem2 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum, F_YMD), "03", "01");
+			while (true) {
+				addNum -= 1;
+				priceItem2 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum, F_YMD), "03", "01");
+				if (!priceItem2.isEmpty()) break;
+			}
 		}
 		priceObj = (JSONObject) priceItem2.get(0);
 		totqty = Integer.parseInt(priceObj.get("totqty").toString());
@@ -382,8 +388,11 @@ public class EgovComIndexController {
 		addNum -= 1;
 		JSONArray priceItem3 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum, F_YMD), "03", "01");
 		if (priceItem3.isEmpty()) {
-			addNum -= 1;
-			priceItem3 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum, F_YMD), "03", "01");
+			while (true) {
+				addNum -= 1;
+				priceItem3 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum, F_YMD), "03", "01");
+				if (!priceItem3.isEmpty()) break;
+			}
 		}
 		priceObj = (JSONObject) priceItem3.get(0);
 		totqty = Integer.parseInt(priceObj.get("totqty").toString());
@@ -396,8 +405,11 @@ public class EgovComIndexController {
 		addNum -= 1;
 		JSONArray priceItem4 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum, F_YMD), "03", "01");
 		if (priceItem4.isEmpty()) {
-			addNum -= 1;
-			priceItem4 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum, F_YMD), "03", "01");
+			while (true) {
+				addNum -= 1;
+				priceItem4 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum, F_YMD), "03", "01");
+				if (!priceItem4.isEmpty()) break;
+			}
 		}
 		priceObj = (JSONObject) priceItem4.get(0);
 		totqty = Integer.parseInt(priceObj.get("totqty").toString());
@@ -410,8 +422,11 @@ public class EgovComIndexController {
 		addNum -= 1;
 		JSONArray priceItem5 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum, F_YMD), "03", "01");
 		if (priceItem5.isEmpty()) {
-			addNum -= 1;
-			priceItem5 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum, F_YMD), "03", "01");
+			while (true) {
+				addNum -= 1;
+				priceItem5 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum, F_YMD), "03", "01");
+				if (!priceItem5.isEmpty()) break;
+			}
 		}
 		priceObj = (JSONObject) priceItem5.get(0);
 		totqty = Integer.parseInt(priceObj.get("totqty").toString());
@@ -424,8 +439,11 @@ public class EgovComIndexController {
 		addNum -= 1;
 		JSONArray priceItem6 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum, F_YMD), "03", "01");
 		if (priceItem6.isEmpty()) {
-			addNum -= 1;
-			priceItem6 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum, F_YMD), "03", "01");
+			while (true) {
+				addNum -= 1;
+				priceItem6 = getWhalPumSale(AT_API_KEY_VER2, getDate(addNum, F_YMD), "03", "01");
+				if (!priceItem6.isEmpty()) break;
+			}
 		}
 		priceObj = (JSONObject) priceItem6.get(0);
 		totqty = Integer.parseInt(priceObj.get("totqty").toString());
