@@ -7,6 +7,7 @@
 <%@page import="javax.xml.parsers.DocumentBuilderFactory"%>
 <%@page import="org.w3c.dom.Document"%>
 <%@page import="java.net.URL"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -263,9 +264,23 @@
                         <div class="notification">
                             <h2>공지사항</h2>
                             <a href="/user/noti/Announcement.do" class="more">더보기</a>
-                            <%--<c:forEach var="boardList" items="${boardList}">
-                                <p>${boardList}</p>
-                            </c:forEach>--%>
+                            <table width="100%">
+                                <c:forEach var="boardList" items="${boardList}">
+                                    <tr>
+                                        <td><a href="#" onclick="goDetail('detail', '${boardList.noticeBoardNo}')"><c:out value="${boardList.noticeTitle}" /></a></td>
+                                        <td><fmt:formatDate value="${boardList.noticeFirstRegistDtm}" pattern="yyyy.MM.dd" /></td>
+                                    </tr>
+                                </c:forEach>
+                            </table>
+                            <script>
+                                var contextPath = "${pageContext.request.contextPath}";
+                                function goDetail(select, noticeBoardNo) {
+                                    if (select === "detail") {
+                                        var newUrl = contextPath + "/user/noti/selectUserDetailNoticeBoard.do?noticeBoardNo=" + noticeBoardNo;
+                                        window.location.href = newUrl;
+                                    }
+                                }
+                            </script>
                         </div>
 
                         <%--곡물별 가격 현황--%>
@@ -274,27 +289,6 @@
                             <p>콩</p>
                             <a href="/user/farminfo/GrainPriceStatus.do" class="more">더보기</a>
                             <canvas id="myChart" width="300" height="170"></canvas>
-                            <%--<div id="carouselExample" class="carousel carousel-dark slide">
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <canvas id="myChart" width="300" height="170"></canvas>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <canvas id="myChart" width="300" height="170"></canvas>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <canvas id="myChart" width="300" height="170"></canvas>
-                                    </div>
-                                </div>
-                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Previous</span>
-                                </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Next</span>
-                                </button>
-                            </div>--%>
                         </div>
                         <script type="text/javascript">
                             const context = document.getElementById('myChart').getContext('2d');

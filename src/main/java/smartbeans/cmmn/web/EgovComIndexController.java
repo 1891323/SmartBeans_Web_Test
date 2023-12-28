@@ -466,8 +466,7 @@ public class EgovComIndexController {
 
 		List<UserNoticeVO> boardList = userNoticeService.selectUserBoardList(searchVO);
 
-		System.out.println("공지사항 " + boardList);
-		//model.addAttribute("boardList", boardList);
+		model.addAttribute("boardList", boardList);
 
 		return "main/main.index";
 	}
